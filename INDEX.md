@@ -10,7 +10,7 @@
 | [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 51 |
 | `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Draft 51 |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
-| [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Scratch document for material profiles before graduating to WORLD.md. | Working |
+| [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
 | `artifacts/materials_taxonomy_v4.html` | Interactive materials taxonomy — conductivity bars, expandable profiles, filter buttons. | Working |
 | `artifacts/coalition_capability_arc_v2.html` | Arc grid with axis coupling marked per cell. | Working |
 | `artifacts/refinement_profile_builder.html` | Interactive radar tool, eight presets, axis sliders, profile interpretation. | Working |
@@ -28,7 +28,7 @@
 | [[WORLD#The Vein — physical nature and the two forms\|The Vein — physical nature and the two forms]] | Draft 48 | Four refinement axes, grade profiles, weight anomaly, thermal/field residual clarified |
 | [[WORLD#The Vein — states of matter and faction mastery\|The Vein — states of matter and faction mastery]] | Stable | Order ceiling, Coalition arc, permanent asymmetry |
 | [[WORLD#The Vein — visual language of field manipulation\|The Vein — visual language of field manipulation]] | Stable | Color system established |
-| [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 48 | Quartz indirect perception clarified, metal residual distinction added |
+| [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 51 | Quartz indirect perception clarified, metal residual distinction added; link to MATERIALS_BASELINE added |
 | [[WORLD#Attunement and the Vein — the biological relationship\|Attunement and the Vein — the biological relationship]] | Stable | Two-component mechanism, overexposure model |
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 40 | Probabilistic heritability added to bloodline consolidation |
 | [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 51 | Order and Coalition structures, institutional descriptions; demographics subsection added |
@@ -55,7 +55,7 @@
 
 ## Decisions
 
-### Decided (14)
+### Decided (15)
 
 | ID | Title |
 |----|-------|
@@ -63,6 +63,7 @@
 | D015 | Coalition apparatus — core mechanism (four layers, three phases) |
 | D017 | Tech timeline — early industrial to inter-war baseline, Vein track ahead |
 | D018 | Materials — Vein-adjacent mineral phases |
+| D019 | Materials — full Vein effect taxonomy by material category |
 | D021 | Vein first discovery — development population observations |
 | D026 | Quartz / crystalline transducer — bidirectional, only such material |
 | D027 | Bone piezoelectricity — physical antenna mechanism for attunement |
@@ -75,11 +76,7 @@
 | D034 | Cross-faction encounters — occupation, prisoners, interrogation, indoctrination pipeline, folk psychology |
 | D035 | Order population demographics — 30/70 att/non-att pre-liberation; 70/30 current Order; 5/95 att/non-att current Coalition; ~70-80% lineage transmission |
 
-### In progress (1)
-
-| ID | Title | Notes |
-|----|-------|-------|
-| D019 | Materials — full Vein effect taxonomy by material category | Framework established, blocked on populating |
+### In progress (0)
 
 ### Open — high priority
 
