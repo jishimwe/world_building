@@ -121,6 +121,8 @@ Candidates (not committed):
 
 **Failure mode:** Gradual and readable. Iron gives warning through color change and visible deformation before catastrophic failure. This is why it is the workhorse apparatus metal — it fails slowly enough to be managed by an attentive operator.
 
+**Geometry note (D029):** Conduction efficiency degrades at geometric complexity, not with distance. A straight iron run carries field energy cleanly at any practical apparatus length. Joints, bends, welds, and thin cross-sections are where intensity drops and failure initiates — this is why medium-intensity stress concentrates at geometry changes rather than distributing uniformly along a run.
+
 **Apparatus role:** Primary structural and conduction material. Most early Coalition apparatus is iron-based. Replaced by steel in precision components as Coalition metallurgy advances, but never fully displaced at infrastructure scale.
 
 **Story texture:** An iron apparatus component under sustained field exposure smells like a forge even when no fire is present. The expression end is always the hot end. Operators learn to read iron color the way smiths do — the difference between black, dull red, bright red, and orange maps directly onto field intensity levels.
@@ -138,6 +140,8 @@ Candidates (not committed):
 **High intensity:** Transition threshold approached faster than iron with a compressed warning window. Color change from functional to near-transition is rapid — seconds rather than minutes. When the liquid transition comes it is clean: copper melts at the expression end without the deformation phase iron shows. The expression end simply becomes liquid.
 
 **Failure mode:** Fast and concentrated. Short readable window compared to iron. An operator has seconds to respond to a copper component approaching failure, not minutes. Copper does not deform gracefully — it holds and then fails.
+
+**Geometry note (D029):** Same geometry-dependence as iron — losses concentrate at bends, junctions, and thin cross-sections rather than degrading with distance. Copper's higher conductivity amplifies this: a geometry fault in a copper run produces a more intense hotspot than the equivalent fault in iron, which is part of why copper component failures are faster and more localized.
 
 **Apparatus role:** Precision expression points, instrument tips, final delivery components. Paired with iron infrastructure — iron carries the field along the structure, copper delivers it at the target location. Most story-present apparatus is iron frame with copper terminals. Supply chain control over copper is apparatus supply chain control.
 
@@ -238,6 +242,23 @@ Moderate conductivity, low threshold. On its own, unremarkable — transitions t
 
 **The structural argument:** White → red → black phosphorus mirrors the carbon argument exactly. Same element, three structural configurations, radically different properties. White: reactive, glowing, dangerous. Red: stable, ordinary. Black: semi-conductive, layered like graphite — the frontier form. Phosphorus independently confirms that structure governs field behavior as much as composition does. Black phosphorus at the research frontier is another route toward the semiconductor question and the fuel-to-electricity transition.
 
+
+---
+
+### Mercury
+**Conductivity:** med (surface)
+**Threshold:** none — surface responds below state change, no bulk threshold
+**Role:** primary field-detection and measurement material
+
+Mercury does not conduct field energy through its bulk. The field interaction is entirely at the surface — field intensity changes mercury's surface tension, producing visible, proportional, directional deformation without any state change or bulk thermal effect. A small field input produces a measurable surface response. The surface is the readout.
+
+The directional property is what makes mercury unique in the taxonomy. Warm-register field addition and cold-register removal produce distinguishable surface behaviors — mercury passively differentiates between the two directions of field manipulation, which no other instrument material can do. An instrument incorporating mercury near a practitioner or active apparatus reads not just field intensity but field direction.
+
+Mercury vapor above the liquid surface provides a second simultaneous readout: vapor concentration scales with field intensity through vapor pressure changes. The vapor is also an invisible toxic hazard. Early apparatus work with open mercury instruments had a real physical cost — practitioners and operators who spent extended time with unvented instruments accumulated toxicity before the connection was understood. Current-era Coalition practice uses contained instruments in most precision contexts; open-surface mercury readout still appears in expedient and old field apparatus.
+
+**Apparatus role:** Primary field-detection and measurement material at story-present. Mercury instruments are in use across Coalition extraction infrastructure — the field-detection property was exploited before it was fully understood, and the instruments were refined as understanding developed. The directional reading capability makes mercury irreplaceable for detecting field source orientation, which no threshold indicator (tin, lead) or transducer (quartz) provides.
+
+**Story texture:** A mercury instrument near active substrate behaves differently from the same instrument in an ordinary environment — the surface is too active, or strangely still, in ways that experienced operators learn to read before they can explain. New operators describe the instruments as "alive." Operators who have worked with them long enough stop seeing the surface as mercury and start seeing it as field.
 
 ---
 
@@ -429,9 +450,6 @@ This property derives from asymmetric crystalline structure — the same physica
 
 **The quartz spectrum:**
 The property exists across a family of crystalline minerals at different intensities. Quartz is the democratized version — present everywhere, in sand, in granite, in most rock formations. The development-period population was accidentally interacting with the field through quartz tools and quartz-rich stone long before they understood what they were doing. Tourmaline is the high-performance rare version — stronger effect, sought out once the principle is understood. Beryl shows the effect weakly — hints at it without confirming it alone.
-
-**REFACTOR FLAG — WORLD.md attunement section:**
-The attunement mechanism as currently written describes coupling structures as almost certainly neurological. The bone piezoelectricity decision complicates this. See bone entry below. Requires a dedicated revision pass on the attunement section once this session is complete.
 
 ---
 

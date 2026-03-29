@@ -1,6 +1,6 @@
 {
   "meta": {
-    "project": "world — unnamed",
+    "project": "world \u2014 unnamed",
     "doc_version": "draft 50",
     "schema_version": "1.0",
     "status_values": [
@@ -43,7 +43,7 @@
     },
     {
       "id": "D002",
-      "title": "Depletion crisis — who knows the causal mechanism",
+      "title": "Depletion crisis \u2014 who knows the causal mechanism",
       "status": "open",
       "category": "story-structure",
       "priority": "high",
@@ -56,7 +56,7 @@
     },
     {
       "id": "D003",
-      "title": "Depletion crisis — public acknowledgment level",
+      "title": "Depletion crisis \u2014 public acknowledgment level",
       "status": "open",
       "category": "story-structure",
       "priority": "high",
@@ -69,7 +69,7 @@
     },
     {
       "id": "D004",
-      "title": "Substrate recovery — observed by anyone?",
+      "title": "Substrate recovery \u2014 observed by anyone?",
       "status": "open",
       "category": "story-structure",
       "priority": "medium",
@@ -86,7 +86,7 @@
       "priority": "high",
       "world_md_line": 67,
       "summary": "Coalition processing produces a grade range across four independent axes: concentration (Vein per unit volume), size (element scale and form), shape (internal mirror face coherence), and matter form (resting phase state before activation). Each axis has its own development history and advances independently. Weight anomaly is the one visual tell consistent across all grades.",
-      "decided_text": "Four independent refinement axes. (1) Concentration: energy density per unit mass. Advances fastest — economically obvious, industry giants invest heavily. (2) Size: scale of substrate elements from bulk grain through formed geometry to colloidal suspension. Determines apparatus architecture. Drops out as a field variable at personal scale — fixed by component housing at manufacture. (3) Shape: internal geometric coherence of mirror faces within each element. Omnidirectional at primitive end, composite architecture at apex. Degrades under use — two modes: temporary coherence drop under load recovering at rest (rate-of-fire mechanic), permanent accumulation over cycles requiring reprocessing. (4) Matter form: resting phase state before apparatus activation. Solid strained crystal → superheated liquid → supercompressed gas → pre-plasma confinement. Each phase has its own strain equivalent — energy stored in a configuration the material would not naturally occupy, released on apparatus trigger. Orthogonal to the capability arc: affects activation cost and cycle time at any scale but does not determine what scale is reachable. Develops in the refinery, not the apparatus. GRADE PROFILES: Installation bulk — C7 S5 Sh2 MF1, granular fill, mirror flash when disturbed, identifiable by weight and flash. Vehicle precision — C7 S6 Sh6 MF2, formed rods/discs, mirror faces on end surfaces, geometric regularity identifiable to Order operatives. Personal composite — C8 S7 Sh8 MF3, ceramic-like carrier plus sealed liquid ampoule, no exterior mirror faces, defeats casual identification. WEIGHT ANOMALY: consistent across all grades, the one universal tell. FLAGGED: biological barrier interaction at gas phase grades; exotic state convergence as horizon concern.",
+      "decided_text": "Four independent refinement axes. (1) Concentration: energy density per unit mass. Advances fastest \u2014 economically obvious, industry giants invest heavily. (2) Size: scale of substrate elements from bulk grain through formed geometry to colloidal suspension. Determines apparatus architecture. Drops out as a field variable at personal scale \u2014 fixed by component housing at manufacture. (3) Shape: internal geometric coherence of mirror faces within each element. Omnidirectional at primitive end, composite architecture at apex. Degrades under use \u2014 two modes: temporary coherence drop under load recovering at rest (rate-of-fire mechanic), permanent accumulation over cycles requiring reprocessing. (4) Matter form: resting phase state before apparatus activation. Solid strained crystal \u2192 superheated liquid \u2192 supercompressed gas \u2192 pre-plasma confinement. Each phase has its own strain equivalent \u2014 energy stored in a configuration the material would not naturally occupy, released on apparatus trigger. Orthogonal to the capability arc: affects activation cost and cycle time at any scale but does not determine what scale is reachable. Develops in the refinery, not the apparatus. GRADE PROFILES: Installation bulk \u2014 C7 S5 Sh2 MF1, granular fill, mirror flash when disturbed, identifiable by weight and flash. Vehicle precision \u2014 C7 S6 Sh6 MF2, formed rods/discs, mirror faces on end surfaces, geometric regularity identifiable to Order operatives. Personal composite \u2014 C8 S7 Sh8 MF3, ceramic-like carrier plus sealed liquid ampoule, no exterior mirror faces, defeats casual identification. WEIGHT ANOMALY: consistent across all grades, the one universal tell. FLAGGED: biological barrier interaction at gas phase grades; exotic state convergence as horizon concern.",
       "depends_on": [
         "D015",
         "D031",
@@ -94,7 +94,7 @@
         "D033"
       ],
       "blocks": [],
-      "session_notes": "Four axes developed across multiple sessions this session. Matter form reframed from openness metaphor to phase-state physics — each phase has a strain equivalent. Shape defined as internal face coherence, not orientation relative to apparatus. Size decoupled from shape as independent axis. Matter form held orthogonal to capability arc. Two new open questions flagged: biological barrier at gas phase, exotic state convergence as horizon."
+      "session_notes": "Four axes developed across multiple sessions this session. Matter form reframed from openness metaphor to phase-state physics \u2014 each phase has a strain equivalent. Shape defined as internal face coherence, not orientation relative to apparatus. Size decoupled from shape as independent axis. Matter form held orthogonal to capability arc. Two new open questions flagged: biological barrier at gas phase, exotic state convergence as horizon."
     },
     {
       "id": "D006",
@@ -111,7 +111,7 @@
     },
     {
       "id": "D007",
-      "title": "Animal attunement — extent and mechanism",
+      "title": "Animal attunement \u2014 extent and mechanism",
       "status": "open",
       "category": "world-physics",
       "priority": "low",
@@ -122,7 +122,7 @@
     },
     {
       "id": "D008",
-      "title": "Attuned founding figures — revelation timing",
+      "title": "Attuned founding figures \u2014 revelation timing",
       "status": "open",
       "category": "story-structure",
       "priority": "high",
@@ -144,7 +144,7 @@
     },
     {
       "id": "D010",
-      "title": "Coalition buried history — has anyone looked?",
+      "title": "Coalition buried history \u2014 has anyone looked?",
       "status": "open",
       "category": "story-structure",
       "priority": "high",
@@ -166,7 +166,7 @@
     },
     {
       "id": "D012",
-      "title": "Attunement latent breadth — revelation timing",
+      "title": "Attunement latent breadth \u2014 revelation timing",
       "status": "open",
       "category": "story-structure",
       "priority": "high",
@@ -177,7 +177,7 @@
     },
     {
       "id": "D013",
-      "title": "Geography — site distribution and physical landscape",
+      "title": "Geography \u2014 site distribution and physical landscape",
       "status": "open",
       "category": "geography",
       "priority": "high",
@@ -193,7 +193,7 @@
       "category": "faction",
       "priority": "medium",
       "world_md_line": null,
-      "summary": "Are there people or groups outside the two main factions — neutral territories, a third party, displaced populations within each faction's borders?",
+      "summary": "Are there people or groups outside the two main factions \u2014 neutral territories, a third party, displaced populations within each faction's borders?",
       "depends_on": [
         "D013"
       ],
@@ -201,7 +201,7 @@
     },
     {
       "id": "D015",
-      "title": "Coalition apparatus — core mechanism",
+      "title": "Coalition apparatus \u2014 core mechanism",
       "status": "decided",
       "category": "apparatus",
       "priority": "load-bearing",
@@ -214,8 +214,8 @@
       "blocks": [
         "D005"
       ],
-      "decided_text": "CORE ARCHITECTURE: Four-layer structure. (1) Substrate chamber: inner lining of silicate or oxide Vein-phase (holds substrate in high-energy state, performs containment and partial conduction simultaneously); outer housing of granite at site scale, porcelain at component scale (active field resistance). Mechanical pressure system holds substrate open against closure tendency — this is the founding engineering problem of early apparatus, the hardest component to build, and the thing the Order cannot replicate because attunement does it directly. Chamber geometry designed for controlled fracture propagation. (2) Thermal extraction: copper conduit network drawing field-induced heat from chamber; bronze damping stages between high-intensity and low-intensity sections; lead thermal fuses at critical overload points. (3) Useful work output: two apparatus configurations serving different purposes, neither primary. Steam-pressure configuration (apparatus as boiler — field energy heats water in copper conduit network, steam drives mechanical work, factory aesthetic). Direct-heat configuration (apparatus as forge — field energy delivered as concentrated heat to specific location via copper conduit, processing and smelting aesthetic). Both configurations use identical core architecture; the difference is what the copper conduit network terminates into. (4) Operator interface: quartz transducer array for field intensity measurement; indicator panel (tin for threshold crossing, pyrite for accumulation, glass for time-to-failure, mercury for field direction and intensity); mechanical controls for pressure, cooling rate, extraction rate. No direct field manipulation — all controls are material-state controls. Operators read material behavior, not field state. OPERATING PRINCIPLE: The apparatus does not control the field directly. It creates material conditions where substrate is held open mechanically, field energy conducts into metal and expresses as heat, heat is extracted as useful work, excess energy bleeds into Vein-phase linings, and the system fails gracefully through lead fuses under overload. OPERATOR EXPERTISE: Indicator literacy is the Coalition's mastery gradient. A novice reads individual indicators. An expert reads the full array — quartz transducer output, tin threshold state, pyrite accumulation, glass progression, mercury surface — as a unified field-state picture. The gap between novice and expert operator is the same structural gap as between novice and master Order practitioner, expressed through a completely different medium. WHY INFERIOR TO ORDER (Phase 1-2): Slow (mechanical response times vs. instant attunement), coarse (bulk extraction only, no fine-grained manipulation), scale-dependent (apparatus grows huge at high intensity), inflexible (changing operation requires rebuilding geometry — cannot pivot mid-operation). DEVELOPMENT ARC: Phase 1 — passive (development period). Substrate held open by mechanical pressure. Energy harvested purely through thermal extraction. Indicators empirically discovered through material failure patterns. Mercury as the measurement breakthrough — converts empirical tinkering into a readable, controllable system; the transition from craft to systematic science. Phase 2 — active (liberation war era). Quartz transducer arrays added for real-time field measurement. Feedback-controlled mechanical systems responding to transducer readings. Still no direct field manipulation, but active response to field state. Phase 3 — combined (current era research frontier). The transducer array achieves both forward and reverse transduction simultaneously: forward (quartz receiving field energy as mechanical signal — perception), reverse (mechanical stress on quartz producing directed field perturbation — expression). The system measures, perturbs, measures the response, and adjusts — a feedback loop that approaches attunement through a completely different mechanism. HARD CEILING: The Coalition combined system operates at the speed of mechanical systems, not biological ones. An Order master perceives the field continuously and adjusts in real time. The Coalition system samples, computes, and actuates in discrete steps. At low intensity and large scale the gap is negligible — Coalition apparatus matches or exceeds Order capability. At high intensity and fine grain it is the difference between surgery and a sledgehammer. The Coalition excels at industrial scale. The Order excels at human scale. Neither obsoletes the other. STRATEGIC CONSEQUENCE: The Phase 3 system does not make extraction infrastructure obsolete in the way distributed electricity would — you still need the sites, still need the substrate, still interact with it through apparatus. What it makes obsolete is uncontrolled passive extraction infrastructure specifically. The industry giants are not protecting against replacement; they are protecting against restructuring, which is a subtler and more defensible position. The Coalition is on a path to matching Order capability at scale while remaining permanently inferior at the individual human level — which reframes the war from 'can we ever match them' to 'we already match them where it matters strategically, and they know it.'",
-      "session_notes": "Useful work output decided as both-equal with different apparatus configurations. Phase 3 decided as dual-mode transducer feedback loop with mechanical speed as the hard ceiling. The ceiling is load-bearing — it is what prevents either side from achieving permanent decisive advantage and what makes the current war unresolvable by capability alone. The founding engineering problem (mechanical pressure system) should be foregrounded in WORLD.md as the hardest problem, not listed as one component among equals. Refactor flag: write Coalition apparatus section into WORLD.md before next session."
+      "decided_text": "CORE ARCHITECTURE: Four-layer structure. (1) Substrate chamber: inner lining of silicate or oxide Vein-phase (holds substrate in high-energy state, performs containment and partial conduction simultaneously); outer housing of granite at site scale, porcelain at component scale (active field resistance). Mechanical pressure system holds substrate open against closure tendency \u2014 this is the founding engineering problem of early apparatus, the hardest component to build, and the thing the Order cannot replicate because attunement does it directly. Chamber geometry designed for controlled fracture propagation. (2) Thermal extraction: copper conduit network drawing field-induced heat from chamber; bronze damping stages between high-intensity and low-intensity sections; lead thermal fuses at critical overload points. (3) Useful work output: two apparatus configurations serving different purposes, neither primary. Steam-pressure configuration (apparatus as boiler \u2014 field energy heats water in copper conduit network, steam drives mechanical work, factory aesthetic). Direct-heat configuration (apparatus as forge \u2014 field energy delivered as concentrated heat to specific location via copper conduit, processing and smelting aesthetic). Both configurations use identical core architecture; the difference is what the copper conduit network terminates into. (4) Operator interface: quartz transducer array for field intensity measurement; indicator panel (tin for threshold crossing, pyrite for accumulation, glass for time-to-failure, mercury for field direction and intensity); mechanical controls for pressure, cooling rate, extraction rate. No direct field manipulation \u2014 all controls are material-state controls. Operators read material behavior, not field state. OPERATING PRINCIPLE: The apparatus does not control the field directly. It creates material conditions where substrate is held open mechanically, field energy conducts into metal and expresses as heat, heat is extracted as useful work, excess energy bleeds into Vein-phase linings, and the system fails gracefully through lead fuses under overload. OPERATOR EXPERTISE: Indicator literacy is the Coalition's mastery gradient. A novice reads individual indicators. An expert reads the full array \u2014 quartz transducer output, tin threshold state, pyrite accumulation, glass progression, mercury surface \u2014 as a unified field-state picture. The gap between novice and expert operator is the same structural gap as between novice and master Order practitioner, expressed through a completely different medium. WHY INFERIOR TO ORDER (Phase 1-2): Slow (mechanical response times vs. instant attunement), coarse (bulk extraction only, no fine-grained manipulation), scale-dependent (apparatus grows huge at high intensity), inflexible (changing operation requires rebuilding geometry \u2014 cannot pivot mid-operation). DEVELOPMENT ARC: Phase 1 \u2014 passive (development period). Substrate held open by mechanical pressure. Energy harvested purely through thermal extraction. Indicators empirically discovered through material failure patterns. Mercury as the measurement breakthrough \u2014 converts empirical tinkering into a readable, controllable system; the transition from craft to systematic science. Phase 2 \u2014 active (liberation war era). Quartz transducer arrays added for real-time field measurement. Feedback-controlled mechanical systems responding to transducer readings. Still no direct field manipulation, but active response to field state. Phase 3 \u2014 combined (current era research frontier). The transducer array achieves both forward and reverse transduction simultaneously: forward (quartz receiving field energy as mechanical signal \u2014 perception), reverse (mechanical stress on quartz producing directed field perturbation \u2014 expression). The system measures, perturbs, measures the response, and adjusts \u2014 a feedback loop that approaches attunement through a completely different mechanism. HARD CEILING: The Coalition combined system operates at the speed of mechanical systems, not biological ones. An Order master perceives the field continuously and adjusts in real time. The Coalition system samples, computes, and actuates in discrete steps. At low intensity and large scale the gap is negligible \u2014 Coalition apparatus matches or exceeds Order capability. At high intensity and fine grain it is the difference between surgery and a sledgehammer. The Coalition excels at industrial scale. The Order excels at human scale. Neither obsoletes the other. STRATEGIC CONSEQUENCE: The Phase 3 system does not make extraction infrastructure obsolete in the way distributed electricity would \u2014 you still need the sites, still need the substrate, still interact with it through apparatus. What it makes obsolete is uncontrolled passive extraction infrastructure specifically. The industry giants are not protecting against replacement; they are protecting against restructuring, which is a subtler and more defensible position. The Coalition is on a path to matching Order capability at scale while remaining permanently inferior at the individual human level \u2014 which reframes the war from 'can we ever match them' to 'we already match them where it matters strategically, and they know it.'",
+      "session_notes": "Useful work output decided as both-equal with different apparatus configurations. Phase 3 decided as dual-mode transducer feedback loop with mechanical speed as the hard ceiling. The ceiling is load-bearing \u2014 it is what prevents either side from achieving permanent decisive advantage and what makes the current war unresolvable by capability alone. The founding engineering problem (mechanical pressure system) should be foregrounded in WORLD.md as the hardest problem, not listed as one component among equals. Refactor flag: write Coalition apparatus section into WORLD.md before next session."
     },
     {
       "id": "D016",
@@ -232,7 +232,7 @@
     },
     {
       "id": "D017",
-      "title": "Tech timeline — normal branch vs Vein branch",
+      "title": "Tech timeline \u2014 normal branch vs Vein branch",
       "status": "decided",
       "category": "timeline",
       "priority": "high",
@@ -244,17 +244,17 @@
       "blocks": [
         "D006"
       ],
-      "session_notes": "Decision 2 — not yet answered. Pending after materials session. Decided. Flagged for revisit.",
-      "decided_text": "Part A: general Coalition technology sits between early industrial and inter-war. Iron/steel construction, coal-dominant, early internal combustion emerging, rail as backbone, bolt-action military, no antibiotics, telegraph/early telephone. Part B: Vein track is ahead in materials science, energy, and precision instrumentation — concentrated at extraction sites, not distributed. Vein currently functions as located depletable fuel not distributed power. The research frontier is pursuing a transition toward something electricity-like but that transition is a threat hanging over the story, not an event within it. Part C: gap is visible and partially legible — ordinary citizens experience texture difference, Order observers see it clearly, industry giants and researchers experience it as active political fault line. REVISIT: all three parts flagged for eventual revision as world develops."
+      "session_notes": "Decision 2 \u2014 not yet answered. Pending after materials session. Decided. Flagged for revisit.",
+      "decided_text": "Part A: general Coalition technology sits between early industrial and inter-war. Iron/steel construction, coal-dominant, early internal combustion emerging, rail as backbone, bolt-action military, no antibiotics, telegraph/early telephone. Part B: Vein track is ahead in materials science, energy, and precision instrumentation \u2014 concentrated at extraction sites, not distributed. Vein currently functions as located depletable fuel not distributed power. The research frontier is pursuing a transition toward something electricity-like but that transition is a threat hanging over the story, not an event within it. Part C: gap is visible and partially legible \u2014 ordinary citizens experience texture difference, Order observers see it clearly, industry giants and researchers experience it as active political fault line. REVISIT: all three parts flagged for eventual revision as world develops."
     },
     {
       "id": "D018",
-      "title": "Materials — Vein-adjacent mineral phases",
+      "title": "Materials \u2014 Vein-adjacent mineral phases",
       "status": "decided",
       "category": "materials",
       "priority": "high",
       "world_md_line": 347,
-      "summary": "Vein sites contain real-world mineral compounds in unusual structural phases formed under persistent field conditions. Not new elements — same periodic table. These phases are stable only in field proximity and transition toward ordinary stable phases when removed. Substrate remains singular. This is Decision 1 from the materials session.",
+      "summary": "Vein sites contain real-world mineral compounds in unusual structural phases formed under persistent field conditions. Not new elements \u2014 same periodic table. These phases are stable only in field proximity and transition toward ordinary stable phases when removed. Substrate remains singular. This is Decision 1 from the materials session.",
       "depends_on": [],
       "blocks": [
         "D015",
@@ -264,19 +264,19 @@
     },
     {
       "id": "D019",
-      "title": "Materials — full Vein effect taxonomy by material category",
-      "status": "in-progress",
+      "title": "Materials \u2014 full Vein effect taxonomy by material category",
+      "status": "decided",
       "category": "materials",
       "priority": "load-bearing",
       "world_md_line": null,
-      "summary": "How the field interacts with each major material category, with variation along material properties within each category. Current session focus — blocked on tech timeline decision.",
+      "summary": "How the field interacts with each major material category, with variation along material properties within each category. Current session focus \u2014 blocked on tech timeline decision.",
       "depends_on": [
         "D017"
       ],
       "blocks": [
         "D015"
       ],
-      "session_notes": "Framework established: conductivity, state-change threshold, secondary effects as the three axes. Real-world material taxonomy as skeleton. Tech timeline decision (D017) needed before populating."
+      "decided_text": "Framework: three axes \u2014 conductivity, state-change threshold, failure mode/role. Full profiles decided for all story-present materials across seven categories: metals (ferrous and non-ferrous, including mercury as primary detection material), Vein-adjacent phases (silicate, oxide, sulfide, carbonate), insulators (granite, porcelain, terracotta, rubber, tar), transducer materials (quartz, tourmaline, beryl, bone), detection/indicator materials (glass, obsidian, pyrite), carbon forms (charcoal, graphite, diamond), and one-liner entries for all remaining story-present materials. Content lives in working/MATERIALS_BASELINE.md; WORLD.md links out to it. Write-debt into WORLD.md resolved by keeping MATERIALS_BASELINE as the canonical material reference with links from the three relevant WORLD.md sections."
     },
     {
       "id": "D020",
@@ -293,7 +293,7 @@
     },
     {
       "id": "D021",
-      "title": "Vein first discovery — what did the development population observe",
+      "title": "Vein first discovery \u2014 what did the development population observe",
       "status": "decided",
       "category": "world-physics",
       "priority": "high",
@@ -305,8 +305,8 @@
       "blocks": [
         "D015"
       ],
-      "decided_text": "Three-stage discovery arc. (1) First signal — phosphorus glow. White phosphorus compounds near active substrate produce cold light at night: field-accelerated oxidation, no combustion, no instruments, no attunement required. Passive and geographic — it happens whether or not anyone acts. Will-o-the-wisp phenomena concentrated near Vein sites draw the development-period population to investigate specific locations. The 'something is here.' (2) First manipulation — metal behavior. Metal tools and structures near substrate behave anomalously: warming without fire, conducting heat in the wrong direction, responding to proximity to the ground. Crude field direction becomes possible before anyone has theory. Empirical tinkering with metal rods as field directors. The 'I can do something with it.' (3) Measurement breakthrough — mercury. Someone already working with early apparatus notices mercury behaves anomalously near active substrate: surface tension response, directional behavior. Mercury converts early apparatus from directed thermal effect into a readable, controllable system. The transition from empirical tinkering to systematic science. This stage is a development-period discovery, not a pre-framework one — it requires already knowing something is worth working with.",
-      "session_notes": "Mercury considered as co-discovery candidate for first signal but rejected: mercury behavior requires already having mercury in the right configuration and watching it carefully. It is a mining product, not common surface geology. Wrong order for a first signal. Mercury is instead the measurement-layer unlock — the material that makes the field legible as a system rather than a phenomenon."
+      "decided_text": "Three-stage discovery arc. (1) First signal \u2014 phosphorus glow. White phosphorus compounds near active substrate produce cold light at night: field-accelerated oxidation, no combustion, no instruments, no attunement required. Passive and geographic \u2014 it happens whether or not anyone acts. Will-o-the-wisp phenomena concentrated near Vein sites draw the development-period population to investigate specific locations. The 'something is here.' (2) First manipulation \u2014 metal behavior. Metal tools and structures near substrate behave anomalously: warming without fire, conducting heat in the wrong direction, responding to proximity to the ground. Crude field direction becomes possible before anyone has theory. Empirical tinkering with metal rods as field directors. The 'I can do something with it.' (3) Measurement breakthrough \u2014 mercury. Someone already working with early apparatus notices mercury behaves anomalously near active substrate: surface tension response, directional behavior. Mercury converts early apparatus from directed thermal effect into a readable, controllable system. The transition from empirical tinkering to systematic science. This stage is a development-period discovery, not a pre-framework one \u2014 it requires already knowing something is worth working with.",
+      "session_notes": "Mercury considered as co-discovery candidate for first signal but rejected: mercury behavior requires already having mercury in the right configuration and watching it carefully. It is a mining product, not common surface geology. Wrong order for a first signal. Mercury is instead the measurement-layer unlock \u2014 the material that makes the field legible as a system rather than a phenomenon."
     },
     {
       "id": "D022",
@@ -321,7 +321,7 @@
     },
     {
       "id": "D023",
-      "title": "Daily life — ordinary people on each side",
+      "title": "Daily life \u2014 ordinary people on each side",
       "status": "open",
       "category": "story-structure",
       "priority": "low",
@@ -335,7 +335,7 @@
     },
     {
       "id": "D024",
-      "title": "Industry giants — full operational picture",
+      "title": "Industry giants \u2014 full operational picture",
       "status": "open",
       "category": "faction",
       "priority": "medium",
@@ -346,7 +346,7 @@
     },
     {
       "id": "D025",
-      "title": "Secret societies — full operational picture",
+      "title": "Secret societies \u2014 full operational picture",
       "status": "open",
       "category": "faction",
       "priority": "medium",
@@ -362,8 +362,8 @@
       "category": "world-physics",
       "priority": "high",
       "world_md_line": null,
-      "summary": "The field-mechanical bidirectional transducer property exists in this world as an analogue to real-world piezoelectricity. Quartz and the crystalline gem family convert between field energy and mechanical energy in both directions. Quartz is the democratized version (everywhere), tourmaline the high-performance rare version. This is the only bidirectional transducer in the taxonomy — all other materials are one-way.",
-      "decided_text": "Field-mechanical transduction property confirmed. Quartz vibrates in response to field energy; mechanical stress on quartz near active substrate perturbs the field. Effect scales with crystalline order — quartz baseline, tourmaline stronger, beryl weak. Development-period population interacted with field through quartz accidentally before any framework existed.",
+      "summary": "The field-mechanical bidirectional transducer property exists in this world as an analogue to real-world piezoelectricity. Quartz and the crystalline gem family convert between field energy and mechanical energy in both directions. Quartz is the democratized version (everywhere), tourmaline the high-performance rare version. This is the only bidirectional transducer in the taxonomy \u2014 all other materials are one-way.",
+      "decided_text": "Field-mechanical transduction property confirmed. Quartz vibrates in response to field energy; mechanical stress on quartz near active substrate perturbs the field. Effect scales with crystalline order \u2014 quartz baseline, tourmaline stronger, beryl weak. Development-period population interacted with field through quartz accidentally before any framework existed.",
       "depends_on": [],
       "blocks": []
     },
@@ -374,8 +374,8 @@
       "category": "world-physics",
       "priority": "high",
       "world_md_line": null,
-      "summary": "Real-world bone piezoelectricity carries into the world. Living bone in attuned practitioners is part of the attunement mechanism — not just neurological coupling structures but physical skeletal resonance. The body is the antenna; the neurology is the interpreter. Non-attuned people have the same piezoelectric bone but no neurological coupling to read the signal.",
-      "decided_text": "Attunement is not purely neurological. Skeletal and connective tissue participate as the physical antenna — piezoelectric structures that resonate with the field. Neurological structures interpret the signal. Non-attuned people receive the mechanical signal without translation. Weak latent attunement is partial neurological coupling — signal arrives, nothing translates it.",
+      "summary": "Real-world bone piezoelectricity carries into the world. Living bone in attuned practitioners is part of the attunement mechanism \u2014 not just neurological coupling structures but physical skeletal resonance. The body is the antenna; the neurology is the interpreter. Non-attuned people have the same piezoelectric bone but no neurological coupling to read the signal.",
+      "decided_text": "Attunement is not purely neurological. Skeletal and connective tissue participate as the physical antenna \u2014 piezoelectric structures that resonate with the field. Neurological structures interpret the signal. Non-attuned people receive the mechanical signal without translation. Weak latent attunement is partial neurological coupling \u2014 signal arrives, nothing translates it.",
       "depends_on": [
         "D026"
       ],
@@ -383,25 +383,25 @@
     },
     {
       "id": "D028",
-      "title": "Blood composite field pathway — overexposure mechanism",
+      "title": "Blood composite field pathway \u2014 overexposure mechanism",
       "status": "decided",
       "category": "world-physics",
       "priority": "medium",
       "world_md_line": null,
       "summary": "Blood carries two simultaneous field pathways: water (thermal) and iron via hemoglobin (metal conduction). At low intensity water pathway dominates. At medium intensity iron pathway becomes significant, affecting hemoglobin's oxygen-carrying function directly. This is the material-level account of overexposure damage in attuned practitioners.",
-      "decided_text": "Blood has composite field behavior — water thermal pathway and iron metal-conduction pathway active simultaneously. Healing at low intensity works through water pathway. Higher intensity activates iron pathway, affecting hemoglobin directly. The threshold between healing and a specific form of internal damage is an intensity distinction experienced practitioners learn and novices often don't know exists.",
+      "decided_text": "Blood has composite field behavior \u2014 water thermal pathway and iron metal-conduction pathway active simultaneously. Healing at low intensity works through water pathway. Higher intensity activates iron pathway, affecting hemoglobin directly. The threshold between healing and a specific form of internal damage is an intensity distinction experienced practitioners learn and novices often don't know exists.",
       "depends_on": [],
       "blocks": []
     },
     {
       "id": "D029",
-      "title": "Metal field conduction — storage, distance, and geometry",
+      "title": "Metal field conduction \u2014 storage, distance, and geometry",
       "status": "decided",
       "category": "world-physics",
       "priority": "high",
       "world_md_line": null,
       "summary": "Three open questions on metal field conduction settled as pre-apparatus baseline. Metal is a pure conductor with no field storage; conduction losses are geometry-dependent rather than distance-dependent; geometry is the primary variable governing conduction efficiency and failure point location.",
-      "decided_text": "(1) Metal stores no field energy. It conducts and releases while the source is active; remove the source and the conduction stops. No portable charge, no residual field in worked metal. Preserves the located-fuel model. (2) Conduction does not degrade linearly with distance. It degrades at geometric complexity: joints, bends, welds, thin cross-sections, and direction changes are where intensity drops and failure initiates. A straight run conducts efficiently at any practical apparatus length; a complex path loses intensity at each geometric transition. (3) Geometry is the primary conduction variable. Cross-section, bend angle, junction type, and surface area all affect field efficiency through a metal structure. This is why Vein-phase oxide mineral — which can be formed into geometries wrought metal cannot achieve — is the source of the site apparatus precision gap: complex internal routing that copper and iron cannot form at this tech level.",
+      "decided_text": "(1) Metal stores no field energy. It conducts and releases while the source is active; remove the source and the conduction stops. No portable charge, no residual field in worked metal. Preserves the located-fuel model. (2) Conduction does not degrade linearly with distance. It degrades at geometric complexity: joints, bends, welds, thin cross-sections, and direction changes are where intensity drops and failure initiates. A straight run conducts efficiently at any practical apparatus length; a complex path loses intensity at each geometric transition. (3) Geometry is the primary conduction variable. Cross-section, bend angle, junction type, and surface area all affect field efficiency through a metal structure. This is why Vein-phase oxide mineral \u2014 which can be formed into geometries wrought metal cannot achieve \u2014 is the source of the site apparatus precision gap: complex internal routing that copper and iron cannot form at this tech level.",
       "depends_on": [
         "D019"
       ],
@@ -411,13 +411,13 @@
     },
     {
       "id": "D030",
-      "title": "Material-state intelligence — apparatus condition as tradecraft",
+      "title": "Material-state intelligence \u2014 apparatus condition as tradecraft",
       "status": "decided",
       "category": "world-physics",
       "priority": "medium",
       "world_md_line": null,
       "summary": "Apparatus installations cannot conceal their operational history from anyone who knows how to read material condition. Indicator wear patterns, thermal stress accumulation, and replacement traces are intelligence. Both Coalition inspection doctrine and Order field operative training are built on this principle.",
-      "decided_text": "Material condition is harder to falsify than documentation because every replacement leaves its own trace. Glass indicators accumulate a continuous stress record readable as operational history. Pyrite accumulation inconsistent with logs means either falsification or unreported activity. Replaced lead fuses more recent than maintenance records indicate overload events being concealed. Coalition formal inspection protocols are built on this principle. Order field operatives read Coalition site material condition as tactical intelligence — indicator wear maps operational priorities, recently pushed installations are distinguishable from idle ones, and discrepancies between expected and actual wear reveal either inactive sites or active concealment. The glass indicator panel is the most readable because its failure mode is progressive rather than threshold-crossing: it records a continuous history rather than flipping states. Absence of expected wear on old components is as informative as presence of unexpected wear on new ones.",
+      "decided_text": "Material condition is harder to falsify than documentation because every replacement leaves its own trace. Glass indicators accumulate a continuous stress record readable as operational history. Pyrite accumulation inconsistent with logs means either falsification or unreported activity. Replaced lead fuses more recent than maintenance records indicate overload events being concealed. Coalition formal inspection protocols are built on this principle. Order field operatives read Coalition site material condition as tactical intelligence \u2014 indicator wear maps operational priorities, recently pushed installations are distinguishable from idle ones, and discrepancies between expected and actual wear reveal either inactive sites or active concealment. The glass indicator panel is the most readable because its failure mode is progressive rather than threshold-crossing: it records a continuous history rather than flipping states. Absence of expected wear on old components is as informative as presence of unexpected wear on new ones.",
       "depends_on": [
         "D015"
       ],
@@ -430,8 +430,8 @@
       "category": "world-physics",
       "priority": "load-bearing",
       "world_md_line": null,
-      "summary": "The Vein does not generate energy. It is a finite geological concentration of energy that accumulated over vast timescales. Every interaction with the Vein is energy moving — between states, between locations, between the stored concentration and the world drawing from it. Energy is never created or destroyed, only moved, concentrated, or dispersed. Both factions draw from the same finite reservoir; both contribute to its depletion, the Coalition faster and at greater volume, the Order more slowly and precisely, neither exempt from the physics.",
-      "decided_text": "The Vein does not generate energy. It is a finite geological concentration of energy that accumulated over vast timescales. Every interaction with the Vein is energy moving — between states, between locations, between the stored concentration and the world drawing from it. Energy is never created or destroyed, only moved, concentrated, or dispersed. Both factions draw from the same finite reservoir; both contribute to its depletion, the Coalition faster and at greater volume, the Order more slowly and precisely, neither exempt from the physics.",
+      "summary": "The Vein does not generate energy. It is a finite geological concentration of energy that accumulated over vast timescales. Every interaction with the Vein is energy moving \u2014 between states, between locations, between the stored concentration and the world drawing from it. Energy is never created or destroyed, only moved, concentrated, or dispersed. Both factions draw from the same finite reservoir; both contribute to its depletion, the Coalition faster and at greater volume, the Order more slowly and precisely, neither exempt from the physics.",
+      "decided_text": "The Vein does not generate energy. It is a finite geological concentration of energy that accumulated over vast timescales. Every interaction with the Vein is energy moving \u2014 between states, between locations, between the stored concentration and the world drawing from it. Energy is never created or destroyed, only moved, concentrated, or dispersed. Both factions draw from the same finite reservoir; both contribute to its depletion, the Coalition faster and at greater volume, the Order more slowly and precisely, neither exempt from the physics.",
       "depends_on": [],
       "blocks": []
     },
@@ -442,8 +442,8 @@
       "category": "world-physics",
       "priority": "load-bearing",
       "world_md_line": null,
-      "summary": "The Coalition's capability is always infrastructural — it requires apparatus, supply chains, installation, and support. The Order's capability is always embodied — it lives in the practitioner's biology and moves with them. The Coalition can eventually approximate any capability the Order has, but always at greater size, weight, logistical cost, and deployment time. The Order's advantage is not what they can do but where they can do it and how fast. Neither makes the other obsolete. This asymmetry is permanent — not a current gap but a structural consequence of how each faction accesses the Vein.",
-      "decided_text": "The Coalition's capability is always infrastructural — it requires apparatus, supply chains, installation, and support. The Order's capability is always embodied — it lives in the practitioner's biology and moves with them. The Coalition can eventually approximate any capability the Order has, but always at greater size, weight, logistical cost, and deployment time. The Order's advantage is not what they can do but where they can do it and how fast. Neither makes the other obsolete. This asymmetry is permanent — not a current gap but a structural consequence of how each faction accesses the Vein.",
+      "summary": "The Coalition's capability is always infrastructural \u2014 it requires apparatus, supply chains, installation, and support. The Order's capability is always embodied \u2014 it lives in the practitioner's biology and moves with them. The Coalition can eventually approximate any capability the Order has, but always at greater size, weight, logistical cost, and deployment time. The Order's advantage is not what they can do but where they can do it and how fast. Neither makes the other obsolete. This asymmetry is permanent \u2014 not a current gap but a structural consequence of how each faction accesses the Vein.",
+      "decided_text": "The Coalition's capability is always infrastructural \u2014 it requires apparatus, supply chains, installation, and support. The Order's capability is always embodied \u2014 it lives in the practitioner's biology and moves with them. The Coalition can eventually approximate any capability the Order has, but always at greater size, weight, logistical cost, and deployment time. The Order's advantage is not what they can do but where they can do it and how fast. Neither makes the other obsolete. This asymmetry is permanent \u2014 not a current gap but a structural consequence of how each faction accesses the Vein.",
       "depends_on": [],
       "blocks": []
     },
@@ -454,32 +454,32 @@
       "category": "faction",
       "priority": "high",
       "world_md_line": null,
-      "summary": "Coalition capabilities tend to develop in sequence from fixed installation through vehicular to personal scale. The stationary installation is typically the most powerful instance; the personal version is the least powerful but most deployable. This is a strong tendency, not an absolute rule — exceptions exist and are valid when they have good reasons. Every contradiction of the arc should be examined: if a Coalition capability reaches personal scale before installation scale, or skips a stage, that needs an explanation grounded in the specific physics or economics of that capability. The arc reflects the Coalition's fundamental infrastructural nature and the weight-budget problem that miniaturization always imposes.",
-      "decided_text": "Coalition capabilities tend to develop in sequence from fixed installation through vehicular to personal scale. The stationary installation is typically the most powerful instance; the personal version is the least powerful but most deployable. This is a strong tendency, not an absolute rule — exceptions exist and are valid when they have good reasons. Every contradiction of the arc should be examined: if a Coalition capability reaches personal scale before installation scale, or skips a stage, that needs an explanation grounded in the specific physics or economics of that capability. The arc reflects the Coalition's fundamental infrastructural nature and the weight-budget problem that miniaturization always imposes.",
+      "summary": "Coalition capabilities tend to develop in sequence from fixed installation through vehicular to personal scale. The stationary installation is typically the most powerful instance; the personal version is the least powerful but most deployable. This is a strong tendency, not an absolute rule \u2014 exceptions exist and are valid when they have good reasons. Every contradiction of the arc should be examined: if a Coalition capability reaches personal scale before installation scale, or skips a stage, that needs an explanation grounded in the specific physics or economics of that capability. The arc reflects the Coalition's fundamental infrastructural nature and the weight-budget problem that miniaturization always imposes.",
+      "decided_text": "Coalition capabilities tend to develop in sequence from fixed installation through vehicular to personal scale. The stationary installation is typically the most powerful instance; the personal version is the least powerful but most deployable. This is a strong tendency, not an absolute rule \u2014 exceptions exist and are valid when they have good reasons. Every contradiction of the arc should be examined: if a Coalition capability reaches personal scale before installation scale, or skips a stage, that needs an explanation grounded in the specific physics or economics of that capability. The arc reflects the Coalition's fundamental infrastructural nature and the weight-budget problem that miniaturization always imposes.",
       "depends_on": [],
       "blocks": []
     },
     {
       "id": "D034",
-      "title": "Cross-faction encounters — Order occupation and prisoner doctrine",
+      "title": "Cross-faction encounters \u2014 Order occupation and prisoner doctrine",
       "status": "decided",
       "category": "culture",
       "priority": "high",
       "world_md_line": 415,
-      "summary": "Full cross-faction encounter doctrine for both sides — occupation priorities, prisoner handling, interrogation culture, indoctrination pipeline, and folk encounter psychology. Contact prohibition scope resolved by D035: prohibition targets Order non-attuned civilians primarily; stayers are self-selected so risk is confirmation of suppressed doubt, not first exposure.",
-      "decided_text": "ORDER OCCUPATION: Priority is apparatus dismantling — felt as restoration, not conquest. Three institutional interests compete over detained apparatus operators without coordinating: military (tactical intel), secret societies (deep Vein knowledge), families/religious arm (destroy the machines). KILLING OF APPARATUS ARCHITECTS: varies by political compass — doctrinal commanders kill as righteous or policy action, pragmatic commanders delay for extraction. Gap between capture and death is character territory. CONTACT PROHIBITION: doctrinal goal is total prohibition between Order non-attuned and Coalition civilians. Feasibility blocked on D035 (Order demographics). COALITION INTERROGATION: no single character — varies by which institution has custody. Military: operational intel, time-pressured, coercion when clock runs out, collapses on witnessing capability. Scientific: technical debriefing register, fascination over anxiety, susceptible to practitioner managing the exchange. Industrial: site knowledge, transactional, sustained pressure over time. Senior practitioners are contested across all three institutions, mirroring Order's three-institution conflict over apparatus operators. COALITION PRISONER DOCTRINE: attuned prisoners are long-term intelligence assets. Non-attuned prisoners get indoctrination pipeline — pitch is 'wrong side of the same divide we fought to end,' contact prohibition becomes evidence within the pitch. Success rate ~1 in 5, tracks with whether prisoner experienced the prohibition as active constraint and whether they hit the attunement ceiling. Converts absorbed at lower institutional tiers, permanently monitored, generational trust. Non-converts split: exchange, detention, or deliberately released carrying their exposure. FOLK ENCOUNTER PSYCHOLOGY: Order non-attuned vs Coalition civilians — ordinary humanity doesn't fit the abstraction, what leaks is evidence not argument. Order attuned vs Coalition infrastructure — scale produces cognitive dissonance the Order's doctrine provides no script for. Coalition vs practitioners — inferiority register intensifies on contact, not resolves; Coalition has no official vocabulary for what witnesses come back with. Coalition vs Order non-attuned — most disorienting; person doesn't fit the liberation-narrative role they were supposed to occupy.",
+      "summary": "Full cross-faction encounter doctrine for both sides \u2014 occupation priorities, prisoner handling, interrogation culture, indoctrination pipeline, and folk encounter psychology. Contact prohibition scope resolved by D035: prohibition targets Order non-attuned civilians primarily; stayers are self-selected so risk is confirmation of suppressed doubt, not first exposure.",
+      "decided_text": "ORDER OCCUPATION: Priority is apparatus dismantling \u2014 felt as restoration, not conquest. Three institutional interests compete over detained apparatus operators without coordinating: military (tactical intel), secret societies (deep Vein knowledge), families/religious arm (destroy the machines). KILLING OF APPARATUS ARCHITECTS: varies by political compass \u2014 doctrinal commanders kill as righteous or policy action, pragmatic commanders delay for extraction. Gap between capture and death is character territory. CONTACT PROHIBITION: doctrinal goal is total prohibition between Order non-attuned and Coalition civilians. Feasibility blocked on D035 (Order demographics). COALITION INTERROGATION: no single character \u2014 varies by which institution has custody. Military: operational intel, time-pressured, coercion when clock runs out, collapses on witnessing capability. Scientific: technical debriefing register, fascination over anxiety, susceptible to practitioner managing the exchange. Industrial: site knowledge, transactional, sustained pressure over time. Senior practitioners are contested across all three institutions, mirroring Order's three-institution conflict over apparatus operators. COALITION PRISONER DOCTRINE: attuned prisoners are long-term intelligence assets. Non-attuned prisoners get indoctrination pipeline \u2014 pitch is 'wrong side of the same divide we fought to end,' contact prohibition becomes evidence within the pitch. Success rate ~1 in 5, tracks with whether prisoner experienced the prohibition as active constraint and whether they hit the attunement ceiling. Converts absorbed at lower institutional tiers, permanently monitored, generational trust. Non-converts split: exchange, detention, or deliberately released carrying their exposure. FOLK ENCOUNTER PSYCHOLOGY: Order non-attuned vs Coalition civilians \u2014 ordinary humanity doesn't fit the abstraction, what leaks is evidence not argument. Order attuned vs Coalition infrastructure \u2014 scale produces cognitive dissonance the Order's doctrine provides no script for. Coalition vs practitioners \u2014 inferiority register intensifies on contact, not resolves; Coalition has no official vocabulary for what witnesses come back with. Coalition vs Order non-attuned \u2014 most disorienting; person doesn't fit the liberation-narrative role they were supposed to occupy.",
       "depends_on": [],
       "blocks": []
     },
     {
       "id": "D035",
-      "title": "Order population demographics — attuned vs non-attuned ratio",
+      "title": "Order population demographics \u2014 attuned vs non-attuned ratio",
       "status": "decided",
       "category": "faction",
       "priority": "high",
       "world_md_line": 311,
-      "summary": "Population demographics decided for three time points. Pre-liberation Order: 30% attuned / 70% non-attuned — classic minority rule, the non-attuned majority provided the liberation's demographic base. Current Order: 70% attuned / 30% non-attuned — the departure inverted the composition; attuned majority is produced by selective retention, not a pre-existing condition. Current Coalition: 5% attuned / 95% non-attuned — founding identity holds demographically; 5% traces to liberation-era Order defectors plus accumulated spontaneous emergence. Attuned lineage transmission within established Order families: ~70-80%.",
-      "decided_text": "Pre-liberation Order: ~30% attuned / 70% non-attuned. Classic minority-rule structure — the conditions for the liberation were produced by this demographic. Current Order: ~70% attuned / 30% non-attuned. The liberation's mass departure transformed composition. The non-attuned 30% who remain are self-selected stayers — embedded in attuned families, ideologically captured, or born after the split. Not naive about the Coalition; contact prohibition risk is confirmation of suppressed doubt, not first exposure. The Order narrativizes the shift as clarification. Current Coalition: ~5% attuned / 95% non-attuned. Coalition founding identity holds demographically. The 5% attuned traces to liberation-era Order defectors plus accumulating spontaneous emergence. Outskirts communities at this scale have their own culture and grievances; geographic marginalization strategy built for smaller numbers is under pressure. Attuned lineage transmission within established Order families: ~70-80%. High enough that the bloodline narrative feels internally accurate — attuned parents produce attuned children as the reliable outcome, non-attuned children as the exception requiring management. Transmission failures are the source population for the internal underclass.",
+      "summary": "Population demographics decided for three time points. Pre-liberation Order: 30% attuned / 70% non-attuned \u2014 classic minority rule, the non-attuned majority provided the liberation's demographic base. Current Order: 70% attuned / 30% non-attuned \u2014 the departure inverted the composition; attuned majority is produced by selective retention, not a pre-existing condition. Current Coalition: 5% attuned / 95% non-attuned \u2014 founding identity holds demographically; 5% traces to liberation-era Order defectors plus accumulated spontaneous emergence. Attuned lineage transmission within established Order families: ~70-80%.",
+      "decided_text": "Pre-liberation Order: ~30% attuned / 70% non-attuned. Classic minority-rule structure \u2014 the conditions for the liberation were produced by this demographic. Current Order: ~70% attuned / 30% non-attuned. The liberation's mass departure transformed composition. The non-attuned 30% who remain are self-selected stayers \u2014 embedded in attuned families, ideologically captured, or born after the split. Not naive about the Coalition; contact prohibition risk is confirmation of suppressed doubt, not first exposure. The Order narrativizes the shift as clarification. Current Coalition: ~5% attuned / 95% non-attuned. Coalition founding identity holds demographically. The 5% attuned traces to liberation-era Order defectors plus accumulating spontaneous emergence. Outskirts communities at this scale have their own culture and grievances; geographic marginalization strategy built for smaller numbers is under pressure. Attuned lineage transmission within established Order families: ~70-80%. High enough that the bloodline narrative feels internally accurate \u2014 attuned parents produce attuned children as the reliable outcome, non-attuned children as the exception requiring management. Transmission failures are the source population for the internal underclass.",
       "depends_on": [],
       "blocks": []
     }
