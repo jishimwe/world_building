@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coalition capability arc v2</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: #fff; color: #1a1a1a; padding: 24px; max-width: 960px; margin: 0 auto; }
+@media (prefers-color-scheme: dark) { body { background: #1a1a1a; color: #e8e8e8; } }
+
+h1 { font-size: 13px; font-weight: 500; color: #888; margin-bottom: 16px; }
+
+.era-row { display: grid; grid-template-columns: 130px repeat(3, 1fr); gap: 2px; margin-bottom: 2px; }
+.era-label { font-size: 10px; color: #888; padding: 2px 10px; text-align: center; }
+
+.arc-grid { display: grid; grid-template-columns: 130px repeat(3, 1fr); gap: 2px; }
+.arc-header { font-size: 11px; font-weight: 500; color: #666; padding: 6px 10px; text-align: center; }
+.arc-label { font-size: 11px; font-weight: 500; color: #666; padding: 6px 6px; display: flex; align-items: center; line-height: 1.3; }
+
+.cell { border-radius: 6px; padding: 7px 9px; min-height: 68px; display: flex; flex-direction: column; justify-content: space-between; gap: 4px; }
+.cell-title { font-size: 11px; font-weight: 500; }
+.cell-sub { font-size: 10px; margin-top: 1px; }
+.cell-axes { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 4px; }
+.ax { font-size: 9px; font-weight: 500; padding: 1px 5px; border-radius: 3px; }
+
+.ax-c  { background: #FAEEDA; color: #854F0B; }
+.ax-s  { background: #E1F5EE; color: #085041; }
+.ax-sh { background: #EEEDFE; color: #3C3489; }
+
+.c-inst { background: #EEEDFE; }
+.c-inst .cell-title { color: #3C3489; }
+.c-inst .cell-sub  { color: #534AB7; }
+
+.c-veh { background: #E1F5EE; }
+.c-veh .cell-title { color: #085041; }
+.c-veh .cell-sub  { color: #0F6E56; }
+
+.c-pers { background: #FAEEDA; }
+.c-pers .cell-title { color: #633806; }
+.c-pers .cell-sub  { color: #854F0B; }
+
+.c-none { background: #f5f5f2; }
+.c-none .cell-title { color: #aaa; }
+.c-none .cell-sub  { color: #bbb; }
+
+.c-frontier { background: #FAECE7; }
+.c-frontier .cell-title { color: #712B13; }
+.c-frontier .cell-sub  { color: #993C1D; }
+
+@media (prefers-color-scheme: dark) {
+  .ax-c  { background: #412402; color: #FAC775; }
+  .ax-s  { background: #04342C; color: #9FE1CB; }
+  .ax-sh { background: #26215C; color: #CECBF6; }
+  .c-inst { background: #26215C; }
+  .c-inst .cell-title { color: #CECBF6; }
+  .c-inst .cell-sub  { color: #AFA9EC; }
+  .c-veh { background: #04342C; }
+  .c-veh .cell-title { color: #9FE1CB; }
+  .c-veh .cell-sub  { color: #5DCAA5; }
+  .c-pers { background: #412402; }
+  .c-pers .cell-title { color: #FAC775; }
+  .c-pers .cell-sub  { color: #EF9F27; }
+  .c-none { background: #2a2a2a; }
+  .c-none .cell-title { color: #555; }
+  .c-none .cell-sub  { color: #444; }
+  .c-frontier { background: #4A1B0C; }
+  .c-frontier .cell-title { color: #F5C4B3; }
+  .c-frontier .cell-sub  { color: #F0997B; }
+}
+
+.divider { border: none; border-top: 0.5px solid #ddd; margin: 14px 0; }
+@media (prefers-color-scheme: dark) { .divider { border-color: #333; } }
+
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+.leg { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #666; }
+.leg-pill { font-size: 9px; font-weight: 500; padding: 1px 6px; border-radius: 3px; }
+
+.mf-note { font-size: 10px; color: #888; line-height: 1.6; padding: 8px 10px; border-left: 2px solid #ddd; margin-top: 4px; }
+@media (prefers-color-scheme: dark) { .mf-note { border-color: #444; } }
+</style>
+</head>
+<body>
+
+<h1>coalition capability arc — v2 · axis coupling per cell · matter form orthogonal</h1>
+
+<div class="legend">
+  <div class="leg"><span class="leg-pill ax-c">C</span> concentration — energy budget per gram, determines viable scale</div>
+  <div class="leg"><span class="leg-pill ax-s">S</span> size — apparatus architecture fit</div>
+  <div class="leg"><span class="leg-pill ax-sh">Sh</span> shape — expression efficiency, critical at small scale</div>
+</div>
+
+<div class="era-row">
+  <div></div>
+  <div class="era-label">dev period → liberation war</div>
+  <div class="era-label">liberation war → current</div>
+  <div class="era-label">current → frontier</div>
+</div>
+
+<div class="arc-grid">
+
+  <div></div>
+  <div class="arc-header">installation</div>
+  <div class="arc-header">vehicle</div>
+  <div class="arc-header">personal</div>
+
+  <div class="arc-label">extraction</div>
+  <div class="cell c-inst">
+    <div><div class="cell-title">site apparatus</div><div class="cell-sub">phase 1–3, bulk substrate</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span></div>
+  </div>
+  <div class="cell c-none"><div class="cell-title">not applicable</div><div class="cell-sub">Vein is located</div></div>
+  <div class="cell c-none"><div class="cell-title">not applicable</div><div class="cell-sub">Vein is located</div></div>
+
+  <div class="arc-label">weapons / force</div>
+  <div class="cell c-inst">
+    <div><div class="cell-title">siege apparatus</div><div class="cell-sub">site destabilisation</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span></div>
+  </div>
+  <div class="cell c-veh">
+    <div><div class="cell-title">vehicle-mounted</div><div class="cell-sub">directed force at range</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+  <div class="cell c-pers">
+    <div><div class="cell-title">carried apparatus</div><div class="cell-sub">pressure wave, phase transition</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+
+  <div class="arc-label">flight / mobility</div>
+  <div class="cell c-inst">
+    <div><div class="cell-title">levitating fortress</div><div class="cell-sub">high cost, low payload</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span></div>
+  </div>
+  <div class="cell c-veh">
+    <div><div class="cell-title">single-seat aircraft</div><div class="cell-sub">apparatus + wing hybrid</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+  <div class="cell c-pers">
+    <div><div class="cell-title">wingpack</div><div class="cell-sub">weight budget apex</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+
+  <div class="arc-label">healing</div>
+  <div class="cell c-inst">
+    <div><div class="cell-title">field hospital</div><div class="cell-sub">high throughput</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span></div>
+  </div>
+  <div class="cell c-veh">
+    <div><div class="cell-title">mobile medical unit</div><div class="cell-sub">forward deployable</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+  <div class="cell c-pers">
+    <div><div class="cell-title">field medkit</div><div class="cell-sub">buys time, limits damage</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+
+  <div class="arc-label">enhancement</div>
+  <div class="cell c-inst">
+    <div><div class="cell-title">pre-deployment</div><div class="cell-sub">deep, durable, days–weeks</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span></div>
+  </div>
+  <div class="cell c-veh">
+    <div><div class="cell-title">mobile resupply</div><div class="cell-sub">maintain campaign enhancement</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+  <div class="cell c-pers">
+    <div><div class="cell-title">combat kit</div><div class="cell-sub">short burn, high exposure cost</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+
+  <div class="arc-label">concealment</div>
+  <div class="cell c-inst">
+    <div><div class="cell-title">concealed installation</div><div class="cell-sub">static low observability</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-s">S</span></div>
+  </div>
+  <div class="cell c-veh">
+    <div><div class="cell-title">active camouflage</div><div class="cell-sub">works at distance</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+  <div class="cell c-pers">
+    <div><div class="cell-title">low-obs suit</div><div class="cell-sub">surface treatment only</div></div>
+    <div class="cell-axes"><span class="ax ax-sh">Sh</span></div>
+  </div>
+
+  <div class="arc-label">dynamic invisibility</div>
+  <div class="cell c-none"><div class="cell-title">not applicable</div></div>
+  <div class="cell c-frontier">
+    <div><div class="cell-title">vehicle-scale</div><div class="cell-sub">computation-dependent, frontier</div></div>
+    <div class="cell-axes"><span class="ax ax-c">C</span><span class="ax ax-sh">Sh</span></div>
+  </div>
+  <div class="cell c-frontier">
+    <div><div class="cell-title">probably unreachable</div><div class="cell-sub">processing lag exploitable</div></div>
+    <div class="cell-axes"></div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<div class="mf-note">matter form is orthogonal to the arc. it affects activation cost and cycle time at any scale but does not determine what scale is reachable. a personal kit can run on solid-phase substrate slowly; matter form refinement makes it faster and more efficient, not possible in the first place. matter form develops in the refinery, not in the apparatus. it is not marked on cells because it applies uniformly as a multiplier across all of them.</div>
+
+<hr class="divider">
+
+<div style="font-size:10px; color:#aaa;">pattern: installation uses C+S. vehicle adds Sh. personal drops S, keeps C+Sh. size becomes irrelevant at personal scale because weight budget forces precision formed components — size is already decided by the component housing, not the operator.</div>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coalition Political Compass</title>
+<style>
+  body { font-family: system-ui, sans-serif; padding: 2rem; background: white; color: #1a1a1a; }
+  .grid-wrap { padding: 1rem 0; font-size: 13px; }
+  .col-header { display: grid; grid-template-columns: 160px repeat(4, 1fr); gap: 4px; margin-bottom: 2px; }
+  .col-sub { font-size: 10px; color: #5F5E5A; text-align: center; padding: 2px 4px; line-height: 1.4; }
+  .row-label { font-size: 11px; font-weight: 500; color: #5F5E5A; display: flex; align-items: center; padding: 4px 8px 4px 0; line-height: 1.4; flex: 1; }
+  .cell { border-radius: 6px; padding: 8px; border: 0.5px solid transparent; }
+  .cell-name { font-weight: 500; font-size: 12px; margin-bottom: 4px; line-height: 1.3; }
+  .cell-note { font-size: 11px; line-height: 1.4; opacity: 0.85; }
+  .cell.viable { background: #E1F5EE; border-color: #1D9E75; }
+  .cell.viable .cell-name { color: #085041; }
+  .cell.viable .cell-note { color: #0F6E56; }
+  .cell.contradiction { background: #FAEEDA; border-color: #BA7517; }
+  .cell.contradiction .cell-name { color: #412402; }
+  .cell.contradiction .cell-note { color: #854F0B; }
+  .cell.interest { background: #E6F1FB; border-color: #185FA5; }
+  .cell.interest .cell-name { color: #042C53; }
+  .cell.interest .cell-note { color: #0C447C; }
+  .cell.dead { background: #F1EFE8; border-color: #B4B2A9; opacity: 0.5; }
+  .cell.dead .cell-name { color: #444441; }
+  .cell.dead .cell-note { color: #5F5E5A; }
+  .badge { display: inline-block; font-size: 9px; font-weight: 500; padding: 2px 6px; border-radius: 4px; margin-bottom: 4px; }
+  .badge.dominant { background: #3C3489; color: #EEEDFE; }
+  .badge.partner { background: #0F6E56; color: #E1F5EE; }
+  .badge.growing { background: #854F0B; color: #FAEEDA; }
+  .axis-header { font-size: 10px; font-weight: 500; color: #888780; text-align: center; margin-bottom: 6px; letter-spacing: 0.03em; text-transform: uppercase; }
+  .legend { display: flex; gap: 12px; margin-top: 12px; font-size: 11px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; color: #5F5E5A; }
+  .swatch { width: 12px; height: 12px; border-radius: 3px; border: 0.5px solid transparent; }
+  .swatch.viable { background: #E1F5EE; border-color: #1D9E75; }
+  .swatch.contradiction { background: #FAEEDA; border-color: #BA7517; }
+  .swatch.interest { background: #E6F1FB; border-color: #185FA5; }
+  .swatch.dead { background: #F1EFE8; border-color: #B4B2A9; opacity: 0.5; }
+  .gov-key { display: flex; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+  .gov-key-item { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #5F5E5A; }
+  h1 { font-size: 16px; font-weight: 500; margin-bottom: 4px; color: #1a1a1a; }
+  .subtitle { font-size: 11px; color: #888780; margin-bottom: 1.5rem; }
+
+  @media (prefers-color-scheme: dark) {
+    body { background: #1a1a1a; color: #e0e0e0; }
+    .cell.viable { background: #085041; border-color: #1D9E75; }
+    .cell.viable .cell-name { color: #9FE1CB; }
+    .cell.viable .cell-note { color: #5DCAA5; }
+    .cell.contradiction { background: #412402; border-color: #BA7517; }
+    .cell.contradiction .cell-name { color: #FAC775; }
+    .cell.contradiction .cell-note { color: #EF9F27; }
+    .cell.interest { background: #042C53; border-color: #185FA5; }
+    .cell.interest .cell-name { color: #B5D4F4; }
+    .cell.interest .cell-note { color: #378ADD; }
+    .cell.dead { background: #2C2C2A; border-color: #444441; }
+    .cell.dead .cell-name { color: #888780; }
+    .cell.dead .cell-note { color: #5F5E5A; }
+    .swatch.viable { background: #085041; border-color: #1D9E75; }
+    .swatch.contradiction { background: #412402; border-color: #BA7517; }
+    .swatch.interest { background: #042C53; border-color: #185FA5; }
+    .swatch.dead { background: #2C2C2A; border-color: #444441; }
+    .badge.dominant { background: #EEEDFE; color: #26215C; }
+    .badge.partner { background: #E1F5EE; color: #04342C; }
+    .badge.growing { background: #FAEEDA; color: #412402; }
+    .row-label { color: #888780; }
+    .col-sub { color: #888780; }
+    .axis-header { color: #5F5E5A; }
+    .legend-item { color: #888780; }
+    .gov-key-item { color: #888780; }
+    h1 { color: #e0e0e0; }
+    .subtitle { color: #5F5E5A; }
+  }
+</style>
+</head>
+<body>
+<h1>Coalition political compass</h1>
+<p class="subtitle">Draft — working reference. Subject to revision as the world develops.</p>
+
+<div class="grid-wrap">
+  <div style="display:grid; grid-template-columns: 160px 1fr; gap: 4px; margin-bottom: 4px;">
+    <div></div>
+    <div class="axis-header">axis 1 — order relationship + science speed</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 160px 1fr; gap: 4px; margin-bottom: 8px;">
+    <div></div>
+    <div class="gov-key">
+      <div class="gov-key-item"><span class="badge dominant">dominant</span> current government</div>
+      <div class="gov-key-item"><span class="badge partner">partner</span> coalition partners</div>
+      <div class="gov-key-item"><span class="badge growing">growing</span> rising pressure</div>
+    </div>
+  </div>
+
+  <div class="col-header">
+    <div></div>
+    <div class="col-sub">hawk + fast science</div>
+    <div class="col-sub">hawk + slow science</div>
+    <div class="col-sub">dove + fast science</div>
+    <div class="col-sub">dove + slow science</div>
+  </div>
+
+  <div style="display:grid; grid-template-columns: 12px 148px repeat(4,1fr); gap:4px; align-items:stretch;">
+    <div style="writing-mode:vertical-lr; transform:rotate(180deg); font-size:10px; color:#888780; text-align:center; letter-spacing:0.03em; padding: 4px 0; text-transform:uppercase;">axis 2 — identity + extraction</div>
+
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div class="row-label" style="flex:1">integrate attuned + expand industry</div>
+      <div class="row-label" style="flex:1">integrate attuned + slow industry</div>
+      <div class="row-label" style="flex:1">expel attuned + expand industry</div>
+      <div class="row-label" style="flex:1">expel attuned + slow industry</div>
+    </div>
+
+    <!-- col: hawk + fast science -->
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div class="cell viable">
+        <div><span class="badge growing">growing</span></div>
+        <div class="cell-name">Expansionists</div>
+        <div class="cell-note">Growing capability is the argument for finishing the war decisively, not just leveraging it.</div>
+      </div>
+      <div class="cell contradiction">
+        <div class="cell-name">Pragmatic hawks</div>
+        <div class="cell-note">Win with attuned capability but protect workers from extraction costs.</div>
+      </div>
+      <div class="cell interest">
+        <div class="cell-name">Industry giants</div>
+        <div class="cell-note">Cross-cutting lobby. Expand industry, stay hawk, fund against science that obsoletes their holdings.</div>
+      </div>
+      <div class="cell dead">
+        <div class="cell-name">—</div>
+        <div class="cell-note">No coherent strategy.</div>
+      </div>
+    </div>
+
+    <!-- col: hawk + slow science -->
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div class="cell contradiction">
+        <div class="cell-name">Cautious expansionists</div>
+        <div class="cell-note">Integrate attuned, expand industry, stay hawk — but distrust research risk. Unstable.</div>
+      </div>
+      <div class="cell viable">
+        <div class="cell-name">Consolidators</div>
+        <div class="cell-note">Hold what we have. Integrate attuned quietly. Win without gambling on research.</div>
+      </div>
+      <div class="cell viable">
+        <div class="cell-name">Orthodox</div>
+        <div class="cell-note">Win through apparatus alone. Expel attuned. Expand industry. No science risk.</div>
+      </div>
+      <div class="cell viable">
+        <div><span class="badge partner">partner</span></div>
+        <div class="cell-name">Founding purists</div>
+        <div class="cell-note">Honor the liberation. Expel attuned. Don't repeat Order mistakes with science.</div>
+      </div>
+    </div>
+
+    <!-- col: dove + fast science -->
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div class="cell contradiction">
+        <div class="cell-name">Progressive doves</div>
+        <div class="cell-note">Integrate attuned, fast science, negotiate. Tension if science provokes the conflict they want to end.</div>
+      </div>
+      <div class="cell viable">
+        <div class="cell-name">Researchers</div>
+        <div class="cell-note">Integrate attuned as research assets. Science-first, knowledge frontier before industrial application.</div>
+      </div>
+      <div class="cell viable">
+        <div><span class="badge dominant">dominant</span></div>
+        <div class="cell-name">Technocrats</div>
+        <div class="cell-note">Coalition science needs no attuned. Fast industry + science — capability is leverage for settlement.</div>
+      </div>
+      <div class="cell dead">
+        <div class="cell-name">—</div>
+        <div class="cell-note">No consistent agenda.</div>
+      </div>
+    </div>
+
+    <!-- col: dove + slow science -->
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div class="cell contradiction">
+        <div class="cell-name">Moderates</div>
+        <div class="cell-note">Protect workers, integrate attuned, negotiate — pulled in all directions.</div>
+      </div>
+      <div class="cell viable">
+        <div><span class="badge partner">partner</span></div>
+        <div class="cell-name">Isolationists</div>
+        <div class="cell-note">End the war through negotiation before costs accumulate past recovery.</div>
+      </div>
+      <div class="cell contradiction">
+        <div class="cell-name">Nativist doves</div>
+        <div class="cell-note">Expel attuned, expand industry, avoid war. Stable position, uncomfortable implications.</div>
+      </div>
+      <div class="cell viable">
+        <div class="cell-name">Indigenous conservatives</div>
+        <div class="cell-note">Territory is sufficient. Industry and science draw the Order closer. Leave us alone.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="swatch viable"></div>coherent tendency</div>
+    <div class="legend-item"><div class="swatch contradiction"></div>internally contradicted</div>
+    <div class="legend-item"><div class="swatch interest"></div>interest group / lobby</div>
+    <div class="legend-item"><div class="swatch dead"></div>non-viable</div>
+  </div>
+</div>
+</body>
+</html>

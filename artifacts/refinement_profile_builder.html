@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refinement profile builder</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, sans-serif; background: #fff; color: #1a1a1a; padding: 24px; max-width: 900px; margin: 0 auto; }
+  @media (prefers-color-scheme: dark) { body { background: #1a1a1a; color: #e8e8e8; } }
+
+  h1 { font-size: 15px; font-weight: 500; color: #888; margin-bottom: 16px; }
+
+  .pb-preset-label { font-size: 11px; color: #888; margin-bottom: 6px; }
+  .pb-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .pb-presets button { font-size: 11px; padding: 4px 10px; border: 0.5px solid #ccc; border-radius: 6px; background: transparent; cursor: pointer; color: inherit; }
+  .pb-presets button:hover { background: rgba(128,128,128,0.1); }
+
+  .pb-layout { display: grid; grid-template-columns: 280px 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 600px) { .pb-layout { grid-template-columns: 1fr; } }
+
+  .pb-controls { display: flex; flex-direction: column; gap: 18px; }
+  .pb-axis { display: flex; flex-direction: column; gap: 4px; }
+  .pb-axis-header { display: flex; justify-content: space-between; align-items: baseline; }
+  .pb-axis-name { font-size: 12px; font-weight: 500; }
+  .pb-axis-val { font-size: 13px; font-weight: 500; min-width: 20px; text-align: right; }
+  .pb-axis-desc { font-size: 11px; color: #888; line-height: 1.4; }
+
+  input[type=range] { width: 100%; accent-color: #534AB7; }
+
+  .pb-radar { display: flex; flex-direction: column; gap: 12px; }
+
+  .pb-profile { background: #f5f5f2; border-radius: 8px; padding: 10px 12px; }
+  @media (prefers-color-scheme: dark) { .pb-profile { background: #2a2a2a; } }
+  .pb-profile-title { font-size: 11px; font-weight: 500; color: #888; margin-bottom: 6px; }
+  .pb-profile-text { font-size: 11px; color: inherit; line-height: 1.6; }
+
+  .pb-warning { font-size: 11px; color: #993C1D; background: #FAECE7; border-radius: 6px; padding: 8px 12px; line-height: 1.5; display: none; margin-top: 4px; }
+  @media (prefers-color-scheme: dark) { .pb-warning { color: #F5C4B3; background: #3a1a0a; } }
+
+  .pb-table { width: 100%; border-collapse: collapse; font-size: 11px; margin-top: 24px; }
+  .pb-table th { text-align: left; padding: 6px 8px; border-bottom: 0.5px solid #ccc; color: #888; font-weight: 500; }
+  .pb-table td { padding: 6px 8px; border-bottom: 0.5px solid #eee; vertical-align: top; line-height: 1.4; }
+  @media (prefers-color-scheme: dark) { .pb-table th { border-color: #444; } .pb-table td { border-color: #333; } }
+</style>
+</head>
+<body>
+
+<h1>refinement profile builder — D005 working tool</h1>
+
+<div class="pb-preset-label">presets</div>
+<div class="pb-presets" id="presets"></div>
+
+<div class="pb-layout">
+  <div class="pb-controls" id="controls"></div>
+  <div class="pb-radar">
+    <svg id="radar-svg" viewBox="0 0 240 240" width="100%" style="display:block; max-width:300px;"></svg>
+    <div class="pb-profile">
+      <div class="pb-profile-title">profile interpretation</div>
+      <div class="pb-profile-text" id="profile-text">—</div>
+    </div>
+    <div class="pb-warning" id="warning"></div>
+  </div>
+</div>
+
+<table class="pb-table" id="axis-table">
+  <thead><tr><th>axis</th><th>score</th><th>state</th></tr></thead>
+  <tbody id="table-body"></tbody>
+</table>
+
+<script>
+const AXES = [
+  { key: 'concentration', label: 'concentration', color: '#BA7517',
+    descs: ['mixed ore, crude sort', 'basic beneficiation', 'industrial grade', 'high purity', 'near-complete, minimal waste'] },
+  { key: 'size', label: 'size control', color: '#1D9E75',
+    descs: ['irregular chunks', 'rough grading', 'systematic grain control', 'precision powder grades', 'colloidal range achievable'] },
+  { key: 'shape', label: 'shape', color: '#534AB7',
+    descs: ['random orientation', 'crude fracture control', 'platelet aggregate', 'formed geometry', 'composite architecture'] },
+  { key: 'matter', label: 'matter form', color: '#D85A30',
+    descs: ['raw closed state', 'slight activation noted', 'pre-activation understood', 'controlled partial activation', 'metastable intermediate'] },
+];
+
+const PRESETS = [
+  { label: 'development bulk',           v: { concentration: 2, size: 3, shape: 1, matter: 1 } },
+  { label: 'liberation war installation',v: { concentration: 5, size: 5, shape: 3, matter: 1 } },
+  { label: 'current installation',       v: { concentration: 7, size: 6, shape: 2, matter: 2 } },
+  { label: 'current precision',          v: { concentration: 6, size: 6, shape: 7, matter: 2 } },
+  { label: 'frontier personal',          v: { concentration: 9, size: 8, shape: 9, matter: 6 } },
+  { label: 'concentration spike',        v: { concentration: 9, size: 1, shape: 1, matter: 1 } },
+  { label: 'shape only',                 v: { concentration: 3, size: 4, shape: 9, matter: 1 } },
+  { label: 'matter form research',       v: { concentration: 5, size: 4, shape: 4, matter: 7 } },
+];
+
+let vals = { concentration: 5, size: 5, shape: 5, matter: 3 };
+
+function descFor(axis, v) {
+  return axis.descs[Math.min(4, Math.floor((v - 1) / 2))];
+}
+
+function buildControls() {
+  const el = document.getElementById('controls');
+  el.innerHTML = '';
+  AXES.forEach(ax => {
+    const div = document.createElement('div');
+    div.className = 'pb-axis';
+    div.innerHTML = `
+      <div class="pb-axis-header">
+        <span class="pb-axis-name" style="color:${ax.color}">${ax.label}</span>
+        <span class="pb-axis-val" id="val-${ax.key}" style="color:${ax.color}">${vals[ax.key]}</span>
+      </div>
+      <input type="range" min="1" max="10" step="1" value="${vals[ax.key]}" id="slider-${ax.key}">
+      <div class="pb-axis-desc" id="desc-${ax.key}">${descFor(ax, vals[ax.key])}</div>
+    `;
+    el.appendChild(div);
+    div.querySelector('input').addEventListener('input', e => {
+      vals[ax.key] = parseInt(e.target.value);
+      document.getElementById('val-' + ax.key).textContent = vals[ax.key];
+      document.getElementById('desc-' + ax.key).textContent = descFor(ax, vals[ax.key]);
+      render();
+    });
+  });
+}
+
+function buildPresets() {
+  const el = document.getElementById('presets');
+  PRESETS.forEach(p => {
+    const btn = document.createElement('button');
+    btn.textContent = p.label;
+    btn.addEventListener('click', () => {
+      vals = { ...p.v };
+      AXES.forEach(ax => {
+        const s = document.getElementById('slider-' + ax.key);
+        if (s) {
+          s.value = vals[ax.key];
+          document.getElementById('val-' + ax.key).textContent = vals[ax.key];
+          document.getElementById('desc-' + ax.key).textContent = descFor(ax, vals[ax.key]);
+        }
+      });
+      render();
+    });
+    el.appendChild(btn);
+  });
+}
+
+function polarXY(angle, r, cx, cy, radius) {
+  const a = angle - Math.PI / 2;
+  return [cx + radius * r * Math.cos(a), cy + radius * r * Math.sin(a)];
+}
+
+function drawRadar() {
+  const svg = document.getElementById('radar-svg');
+  const cx = 120, cy = 124, radius = 80;
+  const angles = AXES.map((_, i) => (2 * Math.PI * i) / AXES.length);
+  let html = '';
+
+  for (let ring = 1; ring <= 5; ring++) {
+    const r = ring / 5;
+    const pts = angles.map(a => polarXY(a, r, cx, cy, radius));
+    const d = pts.map((p, i) => (i === 0 ? `M${p[0].toFixed(1)},${p[1].toFixed(1)}` : `L${p[0].toFixed(1)},${p[1].toFixed(1)}`)).join(' ') + 'Z';
+    html += `<path d="${d}" fill="none" stroke="rgba(128,128,128,0.2)" stroke-width="0.5"/>`;
+    if (ring % 2 === 0) {
+      const lx = cx + radius * (ring/5) * Math.cos(-Math.PI/2) + 4;
+      const ly = cy + radius * (ring/5) * Math.sin(-Math.PI/2);
+      html += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="8" fill="rgba(128,128,128,0.5)" font-family="system-ui">${ring * 2}</text>`;
+    }
+  }
+
+  angles.forEach(a => {
+    const [x, y] = polarXY(a, 1, cx, cy, radius);
+    html += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(128,128,128,0.2)" stroke-width="0.5"/>`;
+  });
+
+  AXES.forEach((ax, i) => {
+    const [x, y] = polarXY(angles[i], 1.28, cx, cy, radius);
+    const anchor = x < cx - 6 ? 'end' : x > cx + 6 ? 'start' : 'middle';
+    html += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle" font-size="10" fill="${ax.color}" font-family="system-ui" font-weight="500">${ax.label}</text>`;
+  });
+
+  const pts = AXES.map((ax, i) => polarXY(angles[i], vals[ax.key] / 10, cx, cy, radius));
+  const d = pts.map((p, i) => (i === 0 ? `M${p[0].toFixed(1)},${p[1].toFixed(1)}` : `L${p[0].toFixed(1)},${p[1].toFixed(1)}`)).join(' ') + 'Z';
+  html += `<path d="${d}" fill="rgba(83,74,183,0.13)" stroke="#534AB7" stroke-width="1.5"/>`;
+  AXES.forEach((ax, i) => {
+    const [x, y] = polarXY(angles[i], vals[ax.key] / 10, cx, cy, radius);
+    html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="3" fill="${ax.color}"/>`;
+  });
+
+  svg.innerHTML = html;
+}
+
+function updateTable() {
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = AXES.map(ax => `
+    <tr>
+      <td style="color:${ax.color}; font-weight:500;">${ax.label}</td>
+      <td style="font-weight:500;">${vals[ax.key]}</td>
+      <td style="color:#888;">${descFor(ax, vals[ax.key])}</td>
+    </tr>
+  `).join('');
+}
+
+function interpret() {
+  const c = vals.concentration, si = vals.size, sh = vals.shape, m = vals.matter;
+  const lines = [];
+
+  if (c >= 8 && sh <= 2) lines.push('high purity, uncontrolled orientation — strong omnidirectional bleed, installation scale only');
+  else if (c >= 7 && sh >= 7) lines.push('dense and directional — vehicle or personal grade viable');
+  else if (c <= 3) lines.push('low fuel density — large volume required for useful output');
+
+  if (sh >= 8 && si <= 3) lines.push('precise orientation on large elements — directional but low spatial density');
+  else if (sh <= 2 && si >= 7) lines.push('fine grain, random orientation — high surface area, omnidirectional bleed, good installation fill');
+  else if (sh >= 7 && si >= 6) lines.push('directional and high surface area — approaching composite territory');
+
+  if (m >= 6) lines.push('pre-primed matter form — lower apparatus activation cost, spontaneous release risk under damage or thermal shock');
+  else if (m >= 3 && m <= 5) lines.push('partially understood activation state — inconsistent performance batch to batch, D005 open');
+  else lines.push('raw closed state — full apparatus work required, matter form undeveloped');
+
+  if (c >= 8 && m >= 6) lines.push('INTERACTION FLAG: high concentration in metastable state — handling protocols undefined');
+
+  const combined = Math.round((c + si + sh + m) / 4);
+  const scaleLabel = combined <= 3 ? 'installation only' : combined <= 6 ? 'installation and vehicle' : 'installation, vehicle, and personal';
+  lines.push(`overall level ${combined}/10 — ${scaleLabel}`);
+
+  return lines.join('. ');
+}
+
+function checkWarning() {
+  const w = document.getElementById('warning');
+  if (vals.concentration >= 8 && vals.matter >= 6) {
+    w.style.display = 'block';
+    w.textContent = 'extreme interaction: concentration ' + vals.concentration + ' + matter form ' + vals.matter + ' — metastable high-density substrate. handling protocols undefined. spontaneous release possible under mechanical stress or thermal shock.';
+  } else {
+    w.style.display = 'none';
+  }
+}
+
+function render() {
+  drawRadar();
+  document.getElementById('profile-text').textContent = interpret();
+  updateTable();
+  checkWarning();
+}
+
+buildPresets();
+buildControls();
+render();
+</script>
+</body>
+</html>
