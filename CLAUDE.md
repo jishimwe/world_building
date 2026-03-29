@@ -11,15 +11,19 @@ Two factions fight over territory whose value is determined by concentration of 
 
 ## Files
 
+This is an Obsidian vault. Files use `[[wiki-links]]` for navigation; use `[[file#heading|display text]]` for section links.
+
 ### Canonical
-- `WORLD.md` — Prose document. **The source of truth.** Currently at draft 49. Claude Code may edit this directly with user approval.
-- `decisions.json` — Structured registry of all decisions (open, in-progress, decided). 35 decisions as of draft 49. Update via code, verify after every edit.
-- `INDEX.md` — File registry, section map, decision tables, priority queue, key invariants, process notes. Keep in sync with WORLD.md and decisions.json after each significant update.
+- [[WORLD]] — Prose document. **The source of truth.** Currently at draft 53. Claude Code may edit this directly with user approval.
+- `decisions.json` — Structured registry of all decisions (open, in-progress, decided). Update via code, verify after every edit.
+- [[INDEX]] — File registry, section map, decision tables, priority queue, key invariants, process notes. Keep in sync with WORLD.md and decisions.json after each significant update.
 
 ### Reference
-- `GAME_DESIGN.md` — Game design concerns as future audit checklist. Not active blockers for worldbuilding.
-- `working/MATERIALS_BASELINE.md` — Scratch document for material profiles before graduating to WORLD.md.
-- `working/refinement_axes.md` — Refined substrate four-axis development by era.
+- [[GAME_DESIGN]] — Game design concerns as future audit checklist. Not active blockers for worldbuilding.
+- [[working/MATERIALS_BASELINE|MATERIALS_BASELINE]] — Canonical material reference. Full profiles for all story-present materials. WORLD.md links out to it.
+- [[working/refinement_axis|refinement_axis]] — Refined substrate four-axis development by era.
+
+Working documents either graduate to WORLD.md (content merged in, file removed) or become standalone reference docs that WORLD.md links to. MATERIALS_BASELINE is an example of the latter.
 
 ### Artifacts (HTML interactives — open in browser or embed in Obsidian)
 - `artifacts/materials_taxonomy_v4.html` — Interactive materials taxonomy
@@ -46,39 +50,37 @@ Two factions fight over territory whose value is determined by concentration of 
 ## Edit rules
 
 - **WORLD.md**: Edit directly with user approval. Increment draft number in the document when making changes. Write in the analytical register used throughout the document — not narrative, not flowery.
-- **decisions.json**: Edit via code. Always verify the file parses after editing. When adding decisions, follow the existing schema (id, title, status, category, priority, world_md_line, summary, depends_on, blocks). Use `decided_text` for decided items, `session_notes` for in-progress context.
+- **decisions.json**: Edit via code. Always verify the file parses after editing. When adding decisions, follow the existing schema (id, title, status, category, priority, world_md_line, summary, depends_on, blocks). Use `decided_text` for decided items, `session_notes` for in-progress context. Some decided entries carry `refactor_flags` — these point to WORLD.md sections that need updating. Check and clear them when writing that content into WORLD.md.
 - **INDEX.md**: Keep in sync after WORLD.md or decisions.json changes. Update section map, decision tables, and priority queue.
 - **Git**: Commit after each significant update. Use draft number in commit message (e.g. "draft 50 — wartime distortion section").
+
+## Formatting Conventions
+- Maintain Obsidian-compatible wiki-links ([[Page Name]]) when editing Markdown files. Preserve existing cross-links and add new ones when content references other documents.
 
 ## Working style
 
 - **Diagnostic before drafting**: Resolve decisions in dependency order before writing prose. Small decisions preferred over large text blocks.
-- **Parallel faction development**: Both factions developed simultaneously, not sequentially.
+- **Parallel faction development**: When adding to one faction, check the other for parity. Both sides should stay at comparable depth.
 - **Consistency matters**: Before adding new content, check it against key invariants and existing WORLD.md content. Flag contradictions immediately.
 - **Story utility as criterion**: Worldbuilding decisions evaluated against whether they can function in narrative, not just internal consistency.
 - **Defer when complex**: Genuinely complex gaps get flagged for dedicated sessions rather than resolved piecemeal.
 
 ## Current state and priorities
 
-### Active work: Culture layer (D034 in-progress)
-Cross-faction encounter section written into WORLD.md. Remaining threads:
-- Coalition interrogation culture specifics
-- Coalition indoctrination pipeline (success rate, what the pitch looks like in practice)
-- Folk-level encounter psychology (what happens to ambient assumptions on contact with actual enemy civilians)
-- Contact prohibition scope — blocked on D035 (Order demographics)
+### Recently completed
+- Culture layer (D034): cross-faction encounters, interrogation, indoctrination pipeline, folk psychology — all written into WORLD.md
+- Wartime folk culture distortion (draft 52–53): performance pressure, death belief, non-attuned calcification, secret society tension (Order); borrowed clarity, meritocracy/death, veteran dissonance (Coalition)
+- D019 decided: materials taxonomy complete, lives in MATERIALS_BASELINE
+- D035 decided: Order demographics (30/70 att/non-att pre-liberation; 70/30 current Order)
 
-### Open blocker: D035 — Order population demographics
-What % of Order is attuned vs non-attuned? Determines contact prohibition feasibility, occupation staffing, liberation war moral weight. Preliminary analysis favours attuned-minority model.
-
-### Next after culture layer
-1. Wartime folk culture distortion (how war pressures each faction's ambient assumptions)
-2. Geography and site distribution (D013)
-3. Story structure decisions: D002/D003, D008, D011, D012
-4. Industry giants full operational picture (D024)
+### Priority queue
+1. Geography and site distribution (D013)
+2. Story structure decisions: D002/D003, D008, D011, D012
+3. Industry giants full operational picture (D024)
 
 ## What not to do
 
-- Do not make game design decisions. Flag game-relevant implications in GAME_DESIGN.md.
+- Do not make game design decisions. Flag game-relevant implications in [[GAME_DESIGN]].
 - Do not resolve deferred decisions without being asked. They were deferred for a reason.
 - Do not write narrative prose. WORLD.md is analytical and descriptive.
 - Do not invent proper nouns. Faction names, character names, place names are all open decisions.
