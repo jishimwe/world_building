@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 51 · decisions D001–D035*
+*Generated from draft 52 · decisions D001–D035*
 
 ---
 
@@ -7,7 +7,7 @@
 
 | File | Purpose | State |
 |------|---------|-------|
-| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 51 |
+| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 52 |
 | `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Draft 51 |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
 | [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
@@ -32,7 +32,7 @@
 | [[WORLD#Attunement and the Vein — the biological relationship\|Attunement and the Vein — the biological relationship]] | Stable | Two-component mechanism, overexposure model |
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 40 | Probabilistic heritability added to bloodline consolidation |
 | [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 51 | Order and Coalition structures, institutional descriptions; demographics subsection added |
-| [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 49 | **New this session** — eight subsections (see below) |
+| [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 52 | Nine subsections — wartime distortion added |
 | [[WORLD#The historical sequence\|The historical sequence]] | Stable | Pre-conflict, development, liberation war, aftermath |
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Stable | Current war framing |
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
@@ -50,6 +50,7 @@
 7. The conflict's ideological root
 8. Cross-faction encounters — occupation and prisoners *(draft 50, D034)*
 9. Folk encounter psychology *(draft 50, D034)*
+10. Wartime distortion of folk culture *(draft 52)*
 
 ---
 
