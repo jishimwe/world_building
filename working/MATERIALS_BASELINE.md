@@ -48,34 +48,28 @@ Variety of effects comes from variety of matter, not from the field doing differ
 
 ---
 
-## What is NOT yet established (OPEN — this session)
+## Remaining open questions
 
-### Metal — depth unknown
-- FIXED: conducts field energy, expresses at far end
-- OPEN: does metal *store* any field energy, or purely conduct and release?
-- OPEN: does the conduction degrade with distance, or is it lossless within a structure?
-- OPEN: does metal geometry (shape, thickness, alloy) affect conduction behavior?
-- OPEN: does metal near active substrate show any *passive* anomalous behavior without active manipulation?
-- OPEN: what did the development-period population observe in metal near high-concentration sites that triggered investigation?
+### Metal
+- DECIDED: no field storage — conduction stops when source is removed, no residual field charge
+- DECIDED: lossless with distance, degrades at geometric complexity (joints, bends, welds, thin cross-sections)
+- DECIDED: geometry governs failure point location and intensity drop — see D029 note in individual profiles
+- OPEN: does metal near active substrate show passive anomalous behavior without active manipulation? Mercury does (surface tension). Iron and copper not addressed.
+- OPEN: what specifically did the development-period population observe in metal near substrate that triggered investigation? (See discovery path below.)
 
-### Stone — depth unknown
-- FIXED: thermal/mechanical responses to energy addition and removal
-- OPEN: does stone interact differently at different geological depths / pressures?
-- OPEN: is there a stone type that resists field energy transmission more than others? (Would matter for shielding)
-- OPEN: does fractured stone behave differently from solid stone near active substrate?
+### Stone
+- DECIDED: granite is the primary field-resistant stone — dense crystalline structure, no grain pathways
+- OPEN: does stone interact differently at geological depth / pressure? Not yet addressed.
+- OPEN: does fractured stone behave differently from solid stone? Granite profile addresses crack propagation but not as a general stone question.
 
-### Water — depth unknown
-- FIXED: state transitions, volume expansion, intermediary role
+### Water
+- DECIDED: water in tissue vs. free water — same transition physics, constrained by cellular structure
 - OPEN: does field-induced steam differ from thermally-induced steam in any detectable way?
-- OPEN: water in living tissue vs. free water — same response?
-- OPEN: does field energy persist in water after the source is removed, or dissipate immediately?
+- OPEN: does field energy persist in water after source is removed? Probably no by extension of the no-storage rule, but not explicitly decided.
 
-### Materials not mentioned at all (OPEN)
-- Wood / organic non-living matter
-- Glass / ceramic / fired materials
-- Processed/refined substrate itself (downstream of apparatus question)
+### Still unaddressed
+- Processed/refined substrate downstream behavior (blocked on apparatus decisions)
 - Soil composition variation near Vein sites
-- Composite or alloyed materials
 
 ---
 
@@ -97,11 +91,12 @@ Must be:
 - Produced by secondary effects of the diffuse field expression, not substrate directly
 - Plausible as an accidental discovery during ordinary life in Vein-dense territory
 
-Candidates (not committed):
-- Metal tools behaving anomalously (losing temper, conducting heat differently, magnetism-like effects)
-- Water near substrate sites boiling at wrong temperatures, or steam appearing with no heat source
-- Structural materials (stone, fired brick) cracking or shifting without cause
-- Agricultural effects — Vein ecology producing measurably different yields that prompted investigation of the soil
+**Strong candidate: phosphorus glow.** Vein sites with phosphorus in local geology are faintly luminescent at night — field-accelerated oxidation of white phosphorus compounds, cold light without heat or flame. Visible at a distance before any framework for the Vein existed. The will-o'-the-wisp as the founding observation. Not yet committed.
+
+Other candidates (not committed):
+- Sulfide phase encountered while mining copper/iron — anomalous mineral behavior before anomalous mineral framework
+- Metal tools behaving anomalously near substrate (losing temper, conducting heat differently)
+- Structural materials cracking or shifting without cause
 
 
 ---
