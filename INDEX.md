@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 52 · decisions D001–D035*
+*Generated from draft 53 · decisions D001–D035*
 
 ---
 
@@ -7,7 +7,7 @@
 
 | File | Purpose | State |
 |------|---------|-------|
-| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 52 |
+| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 53 |
 | `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Draft 51 |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
 | [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
