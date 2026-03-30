@@ -170,13 +170,14 @@
     {
       "id": "D012",
       "title": "Attunement latent breadth \u2014 revelation timing",
-      "status": "open",
+      "status": "decided",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": null,
       "summary": "When does the revelation that attunement is latent in the broader population occur relative to the story, and who controls that knowledge?",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "At the story start, attunement latent breadth is not formally known by either faction. The Coalition holds the detectable signal indirectly: attuned people move away from Vein-intense zones as their attunement wakes up, producing migration patterns and demographic flows tracked by regional and local administrators as population movement data. The attunement connection is not labelled in these records. Assembly requires cross-referencing migration patterns against Vein concentration maps and making the interpretive leap that movement away from high-concentration zones is an attunement signal \u2014 a cross-disciplinary analytical act nobody has yet performed. The data is distributed across multiple administrative tiers with no single owner. The very top of Coalition leadership may know this analysis is possible without having the assembled picture. A secondary political incentive reinforces the inertia: a formal finding that attunement is broadly distributed would destabilize the Coalition government by undermining the founding purists and the non-attuned identity that holds their coalition together. The Order has no picture at all \u2014 their framework attributes attunement to specific bloodlines and their myth structure makes contrary evidence invisible. The revelation path is investigative: the evidence exists, but finding it requires someone with the right framework, access to multiple data sets, and the analytical disposition to make the connection."
     },
     {
       "id": "D013",

@@ -52,7 +52,7 @@ Working documents either graduate to WORLD.md (content merged in, file removed) 
 - **WORLD.md**: Edit directly with user approval. Increment draft number in the document when making changes. Write in the analytical register used throughout the document — not narrative, not flowery.
 - **decisions.json**: Edit via code. Always verify the file parses after editing. When adding decisions, follow the existing schema (id, title, status, category, priority, world_md_line, summary, depends_on, blocks). Use `decided_text` for decided items, `session_notes` for in-progress context. Some decided entries carry `refactor_flags` — these point to WORLD.md sections that need updating. Check and clear them when writing that content into WORLD.md.
 - **INDEX.md**: Keep in sync after WORLD.md or decisions.json changes. Update section map, decision tables, and priority queue.
-- **Git**: Commit after each significant update. Use draft number in commit message (e.g. "draft 50 — wartime distortion section").
+- **Git**: Commit after each significant update. Use draft number in commit message (e.g. "draft 50 — wartime distortion section"). **When a decision is locked, write it into all affected files first, then commit — before moving to the next decision or topic.**
 
 ## Formatting Conventions
 - Maintain Obsidian-compatible wiki-links ([[Page Name]]) when editing Markdown files. Preserve existing cross-links and add new ones when content references other documents.

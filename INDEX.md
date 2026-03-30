@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 56 · decisions D001–D035, D013, D002, D003, D008*
+*Generated from draft 57 · decisions D001–D035, D013, D002, D003, D008, D012*
 
 ---
 
@@ -30,7 +30,7 @@
 | [[WORLD#The Vein — visual language of field manipulation\|The Vein — visual language of field manipulation]] | Stable | Color system established |
 | [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 51 | Quartz indirect perception clarified, metal residual distinction added; link to MATERIALS_BASELINE added |
 | [[WORLD#Attunement and the Vein — the biological relationship\|Attunement and the Vein — the biological relationship]] | Stable | Two-component mechanism, overexposure model |
-| [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 40 | Probabilistic heritability added to bloodline consolidation |
+| [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 57 | Probabilistic heritability added to bloodline consolidation; latent breadth knowledge state decided |
 | [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 56 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 52 | Nine subsections — wartime distortion added |
 | [[WORLD#The historical sequence\|The historical sequence]] | Stable | Pre-conflict, development, liberation war, aftermath |
@@ -82,6 +82,7 @@
 | D002 | Depletion crisis — pure institutional blind spot; handful of frontier-knowledge individuals on both sides hold mechanism privately |
 | D003 | Depletion crisis — no public acknowledgment; effects rationalized within existing frameworks on both sides |
 | D008 | Founding figures mythologized selectively; secret societies hold unsanctioned remainder; religious arm may hold founding-era records via fracture settlement |
+| D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture |
 
 ### In progress (0)
 
@@ -120,8 +121,8 @@
 ## Priority queue (next sessions)
 
 **1. Story structure decisions**
-D011 (current war trigger) · D012 (latent breadth revelation timing)
-D002/D003/D008 decided. Culture and geography layers now sufficiently developed to support remaining decisions.
+D011 (current war trigger)
+D002/D003/D008/D012 decided. Culture and geography layers now sufficiently developed to support remaining decisions.
 
 **2. Industry giants full operational picture (D024)**
 Load-bearing for character work. Most other Coalition apparatus questions resolved.
