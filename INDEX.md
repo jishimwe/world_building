@@ -7,8 +7,8 @@
 
 | File | Purpose | State |
 |------|---------|-------|
-| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 54 |
-| `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Draft 51 |
+| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 59 |
+| `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Current |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
 | [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
 | `artifacts/materials_taxonomy_v4.html` | Interactive materials taxonomy — conductivity bars, expandable profiles, filter buttons. | Working |
@@ -24,7 +24,7 @@
 | Section | Status | Notes |
 |---------|--------|-------|
 | [[WORLD#What this document is for\|What this document is for]] | Stable | — |
-| [[WORLD#The resource\|The resource]] | Draft 48 | Epistemic gap paragraph added (Order had no depletion framework) |
+| [[WORLD#The resource\|The resource]] | Draft 55 | Epistemic gap paragraph added; depletion knowledge state decided — pure institutional blind spot, handful of frontier-knowledge individuals on both sides hold it privately |
 | [[WORLD#The Vein — physical nature and the two forms\|The Vein — physical nature and the two forms]] | Draft 48 | Four refinement axes, grade profiles, weight anomaly, thermal/field residual clarified |
 | [[WORLD#The Vein — states of matter and faction mastery\|The Vein — states of matter and faction mastery]] | Stable | Order ceiling, Coalition arc, permanent asymmetry |
 | [[WORLD#The Vein — visual language of field manipulation\|The Vein — visual language of field manipulation]] | Stable | Color system established |
@@ -38,7 +38,6 @@
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
 | [[WORLD#Geography — the continent\|Geography — the continent]] | Draft 54 | Seven regions, Vein layer model, faction territory logic, the front as depletion boundary |
-| [[WORLD#The resource\|The resource]] | Draft 55 | Depletion knowledge state decided: pure institutional blind spot, handful of frontier-knowledge individuals on both sides hold it privately |
 | [[WORLD#The Coalition's apparatus\|The Coalition's apparatus]] | Stable | Four-layer architecture, three-phase development, hard ceiling |
 | [[WORLD#What is not yet decided\|What is not yet decided]] | Living | Updated as decisions resolve |
 
@@ -99,7 +98,6 @@
 
 | ID   | Title                                       |
 | ---- | ------------------------------------------- |
-| D004 | Substrate recovery — observed by anyone?    |
 | D006 | Exotic states of matter beyond plasma       |
 | D014 | Third parties and neutral populations       |
 | D020 | Bloodline consolidation mechanism           |
@@ -122,9 +120,6 @@
 
 **1. Industry giants full operational picture (D024)**
 All story structure decisions resolved. Load-bearing for character work.
-
-**2. Industry giants full operational picture (D024)**
-Load-bearing for character work. Most other Coalition apparatus questions resolved.
 
 ---
 
