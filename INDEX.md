@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 59 · 23 of 35 decisions decided*
+*Generated from draft 60 · 24 of 35 decisions decided*
 
 ---
 
@@ -31,7 +31,7 @@
 | [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 51 | Quartz indirect perception clarified, metal residual distinction added; link to MATERIALS_BASELINE added |
 | [[WORLD#Attunement and the Vein — the biological relationship\|Attunement and the Vein — the biological relationship]] | Stable | Two-component mechanism, overexposure model |
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 57 | Probabilistic heritability added to bloodline consolidation; latent breadth knowledge state decided |
-| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 56 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added |
+| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 60 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 59 | Nine subsections — wartime distortion added; Order death doctrine expanded with two-tier structure and recovery connection |
 | [[WORLD#The historical sequence\|The historical sequence]] | Stable | Pre-conflict, development, liberation war, aftermath |
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 58 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge |
@@ -57,7 +57,7 @@
 
 ## Decisions
 
-### Decided (23)
+### Decided (24)
 
 | ID   | Title                                                                                                                                                                      |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -83,7 +83,8 @@
 | D008 | Founding figures mythologized selectively; secret societies hold unsanctioned remainder; religious arm may hold founding-era records via fracture settlement               |
 | D004 | Substrate recovery unobserved empirically; Order death doctrine encodes it as metaphysics — all return to Vein, attuned to a better place; Coalition has no equivalent |
 | D011 | War triggered by apparatus accident killing two attuned children; Order frames as sacred violation, Coalition frames as encroachment; buried truth held by three survivors |
-| D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture   |
+| D010 | Coalition buried history — distributed fragments, unassembled; individual suppression of specific pieces, no coordinating mechanism; Order holds corroborating liberation-era records |
+| D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture |
 
 ### In progress (0)
 
@@ -91,7 +92,6 @@
 
 | ID | Title | Blocks |
 |----|-------|--------|
-| D010 | Coalition buried history — has anyone looked? | — |
 | D016 | Order institutional age and deep history timeline | D020 |
 | D024 | Industry giants — full operational picture | — |
 

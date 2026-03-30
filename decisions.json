@@ -149,13 +149,14 @@
     {
       "id": "D010",
       "title": "Coalition buried history \u2014 has anyone looked?",
-      "status": "open",
+      "status": "decided",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": 251,
       "summary": "Coalition documentary record shows signs of editing. Has anyone in a position to act looked carefully enough to find the inconsistencies?",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "The Coalition buried history is not institutionally suppressed \u2014 no coordinating mechanism exists and no single institution has assembled the full picture. The inconsistencies exist in distributed Coalition records: technical accounts with attribution mismatches, commemorative histories contradicting operational records, founding-era figures who appear and quietly vanish from later documents. No single person or institution has cross-referenced these fragments into a coherent account. The primary barrier is institutional inertia and the wrong questions not being asked, with a secondary layer of political disincentive (a finding that attuned people built the Coalition would destabilize the founding identity). However, important individuals \u2014 people connected to celebrated founding figures or powerful families \u2014 do quietly protect and suppress specific pieces of the history that touch them, independently and without coordination. The suppression is therefore uneven: some fragments are actively guarded, others sit in archives untouched. This parallels the Order protecting its own history through ambient distortion plus individual interest rather than conspiracy. The Order holds corroborating liberation-era records as military intelligence \u2014 documentation of attuned Coalition operatives from the conflict \u2014 without framing it as Coalition buried history or knowing the Coalition erased it. Post-liberation, the Order has minimal visibility into Coalition internal life. Cross-referencing Order and Coalition archives would be definitive but requires cross-faction access, which is its own story problem."
     },
     {
       "id": "D011",
