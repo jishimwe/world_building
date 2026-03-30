@@ -125,13 +125,14 @@
     {
       "id": "D008",
       "title": "Attuned founding figures \u2014 revelation timing",
-      "status": "open",
+      "status": "decided",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": 211,
       "summary": "Attuned Coalition members erased from founding records. When does this become known, and to whom? Most consequential narrative revelation.",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "Founding figures are mythologized in person, deed, and as the attributed source of all institutionally-sanctioned knowledge. The myth absorbs only what the Order chooses to legitimize \u2014 selective, not total. New discoveries get retroactively attributed to the founders only when the Order wants to institutionalize them; knowledge that stays in the secret societies or contradicts founding doctrine never enters the myth. Secret societies hold the remainder: unsanctioned accumulated knowledge including material that would erode the myth. The religious arm may hold founding-era records as a possible outcome of its fracture from the families \u2014 a negotiated acquisition, not a given; content and completeness uncertain. No single keeper, no active suppression conspiracy \u2014 structural distortion accumulated over time through institutional incentives. Discoverable through fragments; no clean revelation required. The gap between what the secret societies know and what the myth contains is itself a map of what the Order declined to legitimize."
     },
     {
       "id": "D009",

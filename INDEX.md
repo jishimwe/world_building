@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 55 · decisions D001–D035, D013, D002, D003*
+*Generated from draft 56 · decisions D001–D035, D013, D002, D003, D008*
 
 ---
 
@@ -31,7 +31,7 @@
 | [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 51 | Quartz indirect perception clarified, metal residual distinction added; link to MATERIALS_BASELINE added |
 | [[WORLD#Attunement and the Vein — the biological relationship\|Attunement and the Vein — the biological relationship]] | Stable | Two-component mechanism, overexposure model |
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 40 | Probabilistic heritability added to bloodline consolidation |
-| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 51 | Order and Coalition structures, institutional descriptions; demographics subsection added |
+| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 56 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 52 | Nine subsections — wartime distortion added |
 | [[WORLD#The historical sequence\|The historical sequence]] | Stable | Pre-conflict, development, liberation war, aftermath |
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Stable | Current war framing |
@@ -81,6 +81,7 @@
 | D013 | Geography — seven regions, Vein layer model, L-shaped contested corridor, SW coastal enclave |
 | D002 | Depletion crisis — pure institutional blind spot; handful of frontier-knowledge individuals on both sides hold mechanism privately |
 | D003 | Depletion crisis — no public acknowledgment; effects rationalized within existing frameworks on both sides |
+| D008 | Founding figures mythologized selectively; secret societies hold unsanctioned remainder; religious arm may hold founding-era records via fracture settlement |
 
 ### In progress (0)
 
@@ -88,7 +89,6 @@
 
 | ID | Title | Blocks |
 |----|-------|--------|
-| D008 | Attuned founding figures — revelation timing | — |
 | D010 | Coalition buried history — has anyone looked? | — |
 | D011 | Current war trigger | — |
 | D012 | Attunement latent breadth — revelation timing | — |
@@ -120,8 +120,8 @@
 ## Priority queue (next sessions)
 
 **1. Story structure decisions**
-D008 (attuned founding figures revelation) · D011 (current war trigger) · D012 (latent breadth revelation timing)
-D002/D003 decided. Culture and geography layers now sufficiently developed to support remaining decisions.
+D011 (current war trigger) · D012 (latent breadth revelation timing)
+D002/D003/D008 decided. Culture and geography layers now sufficiently developed to support remaining decisions.
 
 **2. Industry giants full operational picture (D024)**
 Load-bearing for character work. Most other Coalition apparatus questions resolved.
