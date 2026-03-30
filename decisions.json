@@ -159,13 +159,14 @@
     {
       "id": "D011",
       "title": "Current war trigger",
-      "status": "open",
+      "status": "decided",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": 311,
       "summary": "The current war has a specific cause. What triggered the latest ceasefire collapse?",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "The current war was triggered by an incident involving five children playing with a degraded Coalition apparatus in genuinely ambiguous territory \u2014 implicitly Order-claimed through repeated military dominance, but with Coalition operational history evidenced by the apparatus itself. Three children were Coalition-registered; two were Order-side with no equivalent documentation (the Order has no population census mechanism). Two children were killed: one Coalition, one Order. Both were attuned. The cause was an unknown interaction between the attuned children and the degraded equipment \u2014 not an attack, not a patrol encounter, no intent from either side. The Coalition knows exactly who their dead child was through registry records; the Order has no equivalent documentation for theirs. Order amplification: Coalition technology killed attuned children \u2014 the religious arm has maximum purchase on this framing. Coalition amplification: Order children (attuned) were present in contested territory \u2014 an encroachment narrative that sidesteps the apparatus and their own dead child entirely. The Coalition never officially acknowledged their dead child was attuned; it became a folk rumor in border communities, institutionally invisible but popularly known. The three surviving children hold the buried account: apparatus accident, cross-faction play, no attack. Who seized the opportunity to escalate \u2014 founding families, a field commander acting on field autonomy, or the religious arm \u2014 is a character-level decision left open. Note: the Order winning confrontations in this territory progressively less easily refers to Coalition apparatus improving, not to the depletion dynamic \u2014 these are separate phenomena."
     },
     {
       "id": "D012",

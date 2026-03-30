@@ -1,5 +1,5 @@
 # WORLD.md
-*Last updated: world building phase — draft 57*
+*Last updated: world building phase — draft 58*
 *This document captures what is known. Gaps are marked [OPEN] and are not blockers — they will be resolved as the world develops. Do not invent details to fill gaps prematurely.*
 
 ---
@@ -530,7 +530,13 @@ Both factions have fractured internally across this period. The original ideolog
 
 The founding liberation war is three to four generations past — historical rather than living memory for most characters. Veterans do not exist. What exists instead are grandchildren and great-grandchildren who were taught what it meant, which means both factions have had generations to mythologize, revise, and argue over what the founding conflict actually was and whether the current situation honors it.
 
-The current war has a specific beginning that characters can remember or have been told about directly. It is not eternal — it has a cause, a trigger, and a shape that the characters relate to personally. What that trigger was is [OPEN: story structure decision].
+The current war has a specific beginning that characters can remember or have been told about directly. It is not eternal — it has a cause, a trigger, and a shape that the characters relate to personally.
+
+The trigger was an accident. Five children — three Coalition-registered, two Order-side with no equivalent documentation — were playing with a degraded Coalition apparatus left in genuinely ambiguous territory: ground the Order had claimed implicitly through repeated military dominance, but where Coalition operational history was evidenced by the apparatus itself. Two children died: one from each side, both attuned. The cause was an unknown interaction between the attuned children and the deteriorated equipment. No patrol was involved. No attack was ordered. No one intended it.
+
+Neither faction's public account reflects this. The Order amplified the attuned deaths — Coalition technology killed attuned children, a framing the religious arm carried with full institutional weight. The Coalition amplified the territorial dimension — Order children, and attuned ones at that, present in contested ground — an encroachment narrative that displaced the question of who left dangerous materiel there and avoided the more difficult fact that their own dead child was attuned. That detail was never officially acknowledged. It became a folk rumor in border communities: known informally, institutionally invisible, never confirmed. The three surviving children hold the account that neither side's version contains. What happens to that account — and to them — is unresolved.
+
+The escalation that followed the incident was institutional rather than inevitable. Someone saw the opportunity the incident created and moved. Who that was — a founding family, a field commander acting on field autonomy, the religious arm — is not settled history.
 
 Both factions contain overlapping fractures: ideological disputes about the war's prosecution, generational divisions between those who remember the current war's beginning and those born into it, and opportunistic power struggles that use the war as cover. The conflict is not simply bilateral — it is several overlapping conflicts wearing factional colors.
 
@@ -688,7 +694,6 @@ These are genuine open questions, not oversights. They will be resolved as the w
 - What is the Order's institutional age and the world's deep history timeline? The desensitization mechanism established in the attunement section — whether it is biological, cultural, or both — depends on this decision. Biological evolutionary pressure requires deep time; cultural and technical loss can operate across centuries. Do not resolve the desensitization mechanism's nature until the timeline is established.
 - What was the mechanism of the bloodline consolidation — specifically, how was genealogical rewriting coordinated at the scale required to make attunement appear hereditary across the whole Order? This implies organizational continuity and capability that sits in tension with the founding families' current description as a shifting coalition. Whether the consolidation was performed by a predecessor institution, an earlier and more unified family bloc, or something else has implications for the Order's deep institutional history and should be resolved alongside the timeline question.
 - What are the final names of the factions, the resource, and attunement?
-- What triggered the current war specifically?
 - Are there people or groups outside the two main factions — neutral territories, a third party, displaced populations within each faction's borders?
 - What specific atrocities has each side committed, and how does each faction officially relate to them?
 - What does daily life look like for ordinary people on each side, beneath the level of the elite?

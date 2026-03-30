@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 57 · decisions D001–D035, D013, D002, D003, D008, D012*
+*Generated from draft 58 · decisions D001–D035, D013, D002, D003, D008, D011, D012*
 
 ---
 
@@ -34,7 +34,7 @@
 | [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 56 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 52 | Nine subsections — wartime distortion added |
 | [[WORLD#The historical sequence\|The historical sequence]] | Stable | Pre-conflict, development, liberation war, aftermath |
-| [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Stable | Current war framing |
+| [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 58 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge |
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
 | [[WORLD#Geography — the continent\|Geography — the continent]] | Draft 54 | Seven regions, Vein layer model, faction territory logic, the front as depletion boundary |
@@ -82,6 +82,7 @@
 | D002 | Depletion crisis — pure institutional blind spot; handful of frontier-knowledge individuals on both sides hold mechanism privately |
 | D003 | Depletion crisis — no public acknowledgment; effects rationalized within existing frameworks on both sides |
 | D008 | Founding figures mythologized selectively; secret societies hold unsanctioned remainder; religious arm may hold founding-era records via fracture settlement |
+| D011 | War triggered by apparatus accident killing two attuned children; Order frames as sacred violation, Coalition frames as encroachment; buried truth held by three survivors |
 | D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture |
 
 ### In progress (0)
@@ -120,9 +121,8 @@
 
 ## Priority queue (next sessions)
 
-**1. Story structure decisions**
-D011 (current war trigger)
-D002/D003/D008/D012 decided. Culture and geography layers now sufficiently developed to support remaining decisions.
+**1. Industry giants full operational picture (D024)**
+All story structure decisions resolved. Load-bearing for character work.
 
 **2. Industry giants full operational picture (D024)**
 Load-bearing for character work. Most other Coalition apparatus questions resolved.
