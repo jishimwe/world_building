@@ -93,6 +93,7 @@
 |----|-------|--------|
 | D010 | Coalition buried history — has anyone looked? | — |
 | D016 | Order institutional age and deep history timeline | D020 |
+| D024 | Industry giants — full operational picture | — |
 
 ### Open — medium priority
 
@@ -102,7 +103,6 @@
 | D014 | Third parties and neutral populations       |
 | D020 | Bloodline consolidation mechanism           |
 | D022 | Specific faction atrocities                 |
-| D024 | Industry giants — full operational picture  |
 | D025 | Secret societies — full operational picture |
 
 ### Open — low priority
@@ -133,5 +133,4 @@ See [[CLAUDE#Key invariants (never contradict)|CLAUDE.md]] for the canonical inv
 
 - Game design concerns do not gate worldbuilding decisions. Complete world first, audit against game requirements after.
 - Consistency audits run directly in chat.
-- Draft numbers increment per edit. Push WORLD.md and decisions.json to outputs after each significant update.
-- WORLD.md edits go through Claude Code with user approval. Increment draft number per edit.
+- Draft numbers increment per edit. Commit after each decision is locked and written into all affected files.
