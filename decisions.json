@@ -72,13 +72,14 @@
     {
       "id": "D004",
       "title": "Substrate recovery \u2014 observed by anyone?",
-      "status": "open",
+      "status": "decided",
       "category": "story-structure",
       "priority": "medium",
       "world_md_line": 61,
       "summary": "Geological re-saturation of depleted substrate is mechanically established. Has anyone kept records long enough to observe it, and what did they do with that knowledge?",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "Substrate recovery is real but not empirically observed by anyone \u2014 timescales are too long and no site has been left fully undisturbed long enough to test it. The Order holds a general death doctrine: all Order people return to the Vein in death. Attuned practitioners carry a layered version \u2014 they believe they go to a better place within that return, intuited from their lived connection to the Vein; the depth of their felt relationship to the field in life makes reunion feel qualitatively different to them. Neither tier is a physical hypothesis. Both are belief structures that inadvertently encode the recovery mechanism as spiritual doctrine without recognizing it as such. The religious arm carries this as death doctrine. The Order hierarchy reinforces it naturally: deep attunement in life maps to elevated return in death, which supports the entire social order. The Coalition has no equivalent intuition \u2014 their extractive framework has never produced a concept of recovery."
     },
     {
       "id": "D005",
