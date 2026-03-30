@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 54 · decisions D001–D035, D013*
+*Generated from draft 55 · decisions D001–D035, D013, D002, D003*
 
 ---
 
@@ -38,6 +38,7 @@
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
 | [[WORLD#Geography — the continent\|Geography — the continent]] | Draft 54 | Seven regions, Vein layer model, faction territory logic, the front as depletion boundary |
+| [[WORLD#The resource\|The resource]] | Draft 55 | Depletion knowledge state decided: pure institutional blind spot, handful of frontier-knowledge individuals on both sides hold it privately |
 | [[WORLD#The Coalition's apparatus\|The Coalition's apparatus]] | Stable | Four-layer architecture, three-phase development, hard ceiling |
 | [[WORLD#What is not yet decided\|What is not yet decided]] | Living | Updated as decisions resolve |
 
@@ -78,6 +79,8 @@
 | D034 | Cross-faction encounters — occupation, prisoners, interrogation, indoctrination pipeline, folk psychology |
 | D035 | Order population demographics — 30/70 att/non-att pre-liberation; 70/30 current Order; 5/95 att/non-att current Coalition; ~70-80% lineage transmission |
 | D013 | Geography — seven regions, Vein layer model, L-shaped contested corridor, SW coastal enclave |
+| D002 | Depletion crisis — pure institutional blind spot; handful of frontier-knowledge individuals on both sides hold mechanism privately |
+| D003 | Depletion crisis — no public acknowledgment; effects rationalized within existing frameworks on both sides |
 
 ### In progress (0)
 
@@ -85,8 +88,6 @@
 
 | ID | Title | Blocks |
 |----|-------|--------|
-| D002 | Depletion crisis — who knows the causal mechanism | D003 |
-| D003 | Depletion crisis — public acknowledgment level | — |
 | D008 | Attuned founding figures — revelation timing | — |
 | D010 | Coalition buried history — has anyone looked? | — |
 | D011 | Current war trigger | — |
@@ -119,8 +120,8 @@
 ## Priority queue (next sessions)
 
 **1. Story structure decisions**
-D002/D003 (depletion crisis knowledge) · D008 (attuned founding figures revelation) · D011 (current war trigger) · D012 (latent breadth revelation timing)
-Culture and geography layers now sufficiently developed to support these.
+D008 (attuned founding figures revelation) · D011 (current war trigger) · D012 (latent breadth revelation timing)
+D002/D003 decided. Culture and geography layers now sufficiently developed to support remaining decisions.
 
 **2. Industry giants full operational picture (D024)**
 Load-bearing for character work. Most other Coalition apparatus questions resolved.

@@ -44,7 +44,7 @@
     {
       "id": "D002",
       "title": "Depletion crisis \u2014 who knows the causal mechanism",
-      "status": "open",
+      "status": "decided",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": 23,
@@ -52,12 +52,13 @@
       "depends_on": [],
       "blocks": [
         "D003"
-      ]
+      ],
+      "decided_text": "The causal mechanism is not understood institutionally by either faction. The Order experiences depletion as instinctual range-expansion pressure \u2014 practitioners must seek viable concentrations further afield \u2014 without a causal account of why. The Coalition understands site depletion operationally (yield curves, diminishing returns) but has not connected extraction to barrier erosion on the Order side. A handful of frontier-knowledge individuals on both sides have independently arrived at a more complete picture and hold it privately; neither institution has surfaced it. The crisis is slow and not yet acute. This latent distributed knowledge makes the mechanism discoverable by story characters without requiring institutional acknowledgment or first-discovery as a plot event."
     },
     {
       "id": "D003",
       "title": "Depletion crisis \u2014 public acknowledgment level",
-      "status": "open",
+      "status": "decided",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": 25,
@@ -65,7 +66,8 @@
       "depends_on": [
         "D002"
       ],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "Neither faction has publicly named the depletion problem. No official position exists because no institution has formed one. Citizens on both sides experience effects \u2014 Order practitioners ranging further, Coalition sites yielding less \u2014 and attribute them to war conditions, natural variation, or expansion opportunity. The crisis is a pure institutional blind spot at the public level. The handful of frontier-knowledge individuals established in D002 hold their understanding privately; it has not surfaced into any public discourse on either side."
     },
     {
       "id": "D004",
