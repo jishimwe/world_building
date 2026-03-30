@@ -118,14 +118,11 @@
 
 ## Priority queue (next sessions)
 
-**1. Wartime folk culture distortion**
-How war pressures each faction's ambient assumptions. Natural follow-on to culture layer now that D034 is complete.
-
-**3. Story structure decisions**
+**1. Story structure decisions**
 D002/D003 (depletion crisis knowledge) · D008 (attuned founding figures revelation) · D011 (current war trigger) · D012 (latent breadth revelation timing)
-Culture layer now sufficiently developed to support these.
+Culture and geography layers now sufficiently developed to support these.
 
-**5. Industry giants full operational picture (D024)**
+**2. Industry giants full operational picture (D024)**
 Load-bearing for character work. Most other Coalition apparatus questions resolved.
 
 ---
