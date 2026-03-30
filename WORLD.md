@@ -1,5 +1,5 @@
 # WORLD.md
-*Last updated: world building phase — draft 53*
+*Last updated: world building phase — draft 54*
 *This document captures what is known. Gaps are marked [OPEN] and are not blockers — they will be resolved as the world develops. Do not invent details to fill gaps prematurely.*
 
 ---
@@ -536,6 +536,36 @@ The protagonist and their companions exist somewhere in this fracture landscape.
 
 ---
 
+## Geography — the continent
+
+The world is Earth-sized. One continent is relevant to the story's conflict; other landmasses exist but are outside the scope of the current war.
+
+**The Vein layer.** The Vein exists as a geological stratum within the planet's crust, present across the continent at variable depth. It becomes accessible — surfaces, in practical terms — where tectonic processes, erosion, or glaciation have brought it within workable depth. The mechanism by which it surfaces is independent of mountain ranges: mountains are one exposure mechanism among several. Rift valleys, ancient erosion surfaces, glacially scoured shield terrain, coastal cliff erosion, river gorges, and impact structures all produce surfacing zones. Mountains correlate with Vein exposure only where the layer is also shallow in that region; mountains in areas where the layer runs deep produce no significant Vein exposure regardless of their height.
+
+Field concentration at any surfacing zone is a function of depth. Where the layer surfaces shallow, concentration is high — biologically hostile to attuned practitioners, and the primary zone of Coalition economic and military advantage. Where the layer surfaces deeper, concentration is lower and Order practitioners can work it. This is the geological basis of faction territory: the Coalition holds the high-concentration zones the Order cannot safely enter; the Order holds the lower-concentration zones and the stable interior where the layer does not surface at workable depth at all.
+
+**Climate.** The continent's north-south axis runs from arctic and subarctic conditions in the north through temperate zones to Mediterranean and equatorial conditions in the south. The west-east axis runs from maritime conditions on the western coast — ocean-moderated, wetter, milder — to continental conditions in the east, with more extreme seasonal temperature swings and drier climate. These gradients are independent of faction territory but shape the character of each region.
+
+**The seven regions.**
+
+*Western margin.* Coalition safe zone. The continent's active geological margin, facing the western ocean. High Vein concentration where the layer surfaces along coastal uplifts, fault zones, and associated features. Maritime climate. The Coalition's most defensible core: field concentration remains hostile enough to Order practitioners that the biological barrier has not significantly eroded here, and the terrain has been Coalition-settled over generations.
+
+*Southern belt.* Coalition safe zone. Elevated terrain running east-west across the continent's southern extent, where the Vein layer surfaces extensively across mountain uplifts and related geological features. Highest field concentrations on the continent overall. Equatorial climate at lower elevations, Mediterranean at the approaches. Order operational presence is negligible — the biological barrier here is the strongest remaining on the continent.
+
+*Contested corridor.* The active war zone. L-shaped: a vertical arm running north-south along the eastern edge of the western margin, and a horizontal arm running east-west along the northern edge of the southern belt. This is the territory where Coalition extraction has lowered field concentration enough for Order practitioners to operate — the original geographic lock is gone. The front runs through this corridor. Its boundaries are not fixed political lines but depletion boundaries that advance inward as extraction continues at worked sites. Where the front is at any given time depends on when the concentration at a given site crossed the threshold; the corridor's shape maps the history of Coalition extraction.
+
+*Order interior.* Order operational range. The continental heartland: stable geology, deep Vein layer inaccessible without major infrastructure, agricultural land, established cities. The Order works Vein sites in its eastern mountain ranges, where the layer surfaces at moderate concentration — workable by practitioners, not hostile. The founding families' political authority is strongest here. This is the Order's administrative and cultural core.
+
+*Northern territories.* Order-claimed, thinly administered. Arctic and subarctic terrain; ancient glacially-scoured shield geology with low Vein concentration where the layer surfaces. The Order claims this territory and maintains nominal infrastructure but does not govern it seriously — too remote, too marginal, insufficient Vein yield to justify the investment. The consequence of thin administration is predictable: religious arm outposts, independent communities, and organizations that require distance from central Order authority have established themselves here. The territory functions simultaneously as a strategic reserve — fallback ground if the front collapses significantly.
+
+*Eastern seaboard.* Order operational range, conventionally administered. The continent's eastern coastal margin, facing the eastern sea. Continental to Mediterranean climate running south. The Order maintains scattered settlements here — fishing towns, minor ports, provincial outposts — but has not invested in maritime infrastructure. The coast is economically marginal within the Order's hierarchy. Isolationist policy means that what could be a significant trade coast is instead lightly occupied and lightly administered.
+
+*SW coastal enclave.* Order-claimed, effectively autonomous. A significant settlement on the continent's southwestern coast, separated from Order interior territory by the Coalition's southern mountain belt. Unreachable overland without crossing Coalition or contested ground; accessible from the rest of the Order only by sea around the continent's southern tip. The Order's largest coastal settlement by population, but not by institutional priority. Its size is a consequence of neglect: the founding families never invested serious administrative attention in a city they could not easily reach, which created conditions for growth outside their framework. Lower attuned population density than Order interior cities. Informal power structures the Order's formal hierarchy does not govern. The coastal strip at the base of the southern mountain belt — if navigable at sea level — is one of the most strategically significant routes in the current war, connecting the enclave to the contested corridor.
+
+**The front.** The active front follows the inner boundary of the contested corridor — the depletion threshold at which field concentration has dropped enough for Order practitioners to operate. It is not a static political line but a depletion boundary that advances inward as Coalition extraction continues at worked sites. The war is fought along this boundary; the Coalition's peacetime economy has been, through its ordinary operation, continuously generating new front.
+
+---
+
 ## The world's technology — two tracks
 
 The Coalition and the Order exist at a technology level that maps roughly to the band between early industrial and inter-war in real-world terms. Iron and steel construction. Coal as the dominant energy source, with internal combustion beginning to appear at the margins. Rail as the backbone of long-distance movement, horses still common for local transport and military logistics. Bolt-action or early semi-automatic weapons. Artillery as the dominant battlefield force. Telegraph and early telephone for communication. Surgery with anaesthetic but no antibiotics — infection kills more soldiers than wounds. Cities have gas or early electric lighting and running water in wealthier districts; the countryside lags a generation behind.
@@ -657,7 +687,6 @@ These are genuine open questions, not oversights. They will be resolved as the w
 - What are the final names of the factions, the resource, and attunement?
 - When does the revelation of attunement's latent breadth occur relative to the story, and who controls that knowledge?
 - What triggered the current war specifically?
-- What does the geography look like — where are the Vein sites, what separates the factions' territories, what does the physical landscape of the war look like?
 - Are there people or groups outside the two main factions — neutral territories, a third party, displaced populations within each faction's borders?
 - What specific atrocities has each side committed, and how does each faction officially relate to them?
 - What does daily life look like for ordinary people on each side, beneath the level of the elite?

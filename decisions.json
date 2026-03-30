@@ -178,13 +178,14 @@
     {
       "id": "D013",
       "title": "Geography \u2014 site distribution and physical landscape",
-      "status": "open",
+      "status": "decided",
       "category": "geography",
       "priority": "high",
-      "world_md_line": null,
+      "world_md_line": 539,
       "summary": "Where are the Vein sites? What separates faction territories? What does the physical landscape of the war look like?",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "Earth-sized world, one continent in scope. The Vein exists as a geological stratum that surfaces where tectonic uplift, rifting, erosion, or glaciation brings it within workable depth \u2014 independent of mountain placement. Concentration at surfacing zones is a function of depth: shallow = high concentration = Coalition territory (biologically hostile to Order); deeper = lower concentration = Order-workable. Seven regions: (1) Western margin \u2014 Coalition safe zone, active geology, maritime, high Vein; (2) Southern belt \u2014 Coalition safe zone, highest Vein on continent, equatorial/Mediterranean; (3) Contested corridor \u2014 L-shaped active war zone (vertical arm NW-SW, horizontal arm SW-SE), depletion boundary that advances as Coalition extracts; (4) Order interior \u2014 continental heartland, stable geology, agricultural, Order Vein sites in eastern mountain ranges; (5) Northern territories \u2014 arctic/subarctic, Order-claimed but thinly held, religious arm outposts and independent communities fill the vacuum, strategic reserve function; (6) Eastern seaboard \u2014 Order-administered scattered coastal settlements, maritimely marginal; (7) SW coastal enclave \u2014 Order-claimed but effectively autonomous, largest Order coastal settlement by population but lowest institutional priority, isolated from Order interior by Coalition mountain belt, reaches Order only by sea, faces the Southern Sea. Territory model: blue = Coalition safe zone (not necessarily all governed); orange = Order operational range (not necessarily all governed). The front is a depletion boundary, not a static political line."
     },
     {
       "id": "D014",

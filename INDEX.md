@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 53 · decisions D001–D035*
+*Generated from draft 54 · decisions D001–D035, D013*
 
 ---
 
@@ -7,7 +7,7 @@
 
 | File | Purpose | State |
 |------|---------|-------|
-| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 53 |
+| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 54 |
 | `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Draft 51 |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
 | [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
@@ -37,6 +37,7 @@
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Stable | Current war framing |
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
+| [[WORLD#Geography — the continent\|Geography — the continent]] | Draft 54 | Seven regions, Vein layer model, faction territory logic, the front as depletion boundary |
 | [[WORLD#The Coalition's apparatus\|The Coalition's apparatus]] | Stable | Four-layer architecture, three-phase development, hard ceiling |
 | [[WORLD#What is not yet decided\|What is not yet decided]] | Living | Updated as decisions resolve |
 
@@ -56,7 +57,7 @@
 
 ## Decisions
 
-### Decided (15)
+### Decided (16)
 
 | ID | Title |
 |----|-------|
@@ -76,6 +77,7 @@
 | D033 | Coalition capability arc — installation → vehicle → personal |
 | D034 | Cross-faction encounters — occupation, prisoners, interrogation, indoctrination pipeline, folk psychology |
 | D035 | Order population demographics — 30/70 att/non-att pre-liberation; 70/30 current Order; 5/95 att/non-att current Coalition; ~70-80% lineage transmission |
+| D013 | Geography — seven regions, Vein layer model, L-shaped contested corridor, SW coastal enclave |
 
 ### In progress (0)
 
@@ -89,7 +91,6 @@
 | D010 | Coalition buried history — has anyone looked? | — |
 | D011 | Current war trigger | — |
 | D012 | Attunement latent breadth — revelation timing | — |
-| D013 | Geography — site distribution and physical landscape | — |
 | D016 | Order institutional age and deep history timeline | D020 |
 
 ### Open — medium priority
@@ -120,10 +121,7 @@
 **1. Wartime folk culture distortion**
 How war pressures each faction's ambient assumptions. Natural follow-on to culture layer now that D034 is complete.
 
-**3. Geography and site distribution (D013)**
-Needed before scene-level writing, military strategy, or story structure decisions that depend on physical distance.
-
-**4. Story structure decisions**
+**3. Story structure decisions**
 D002/D003 (depletion crisis knowledge) · D008 (attuned founding figures revelation) · D011 (current war trigger) · D012 (latent breadth revelation timing)
 Culture layer now sufficiently developed to support these.
 

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>D013 — Continent Geography Workshop</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #131320;
+    color: #ddd;
+    font-family: Georgia, serif;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  h1 {
+    font-size: 1em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .subtitle { font-size: 0.74em; color: #444; margin-bottom: 20px; }
+  .workspace { display: flex; gap: 18px; align-items: flex-start; }
+  .sidebar { width: 175px; display: flex; flex-direction: column; gap: 9px; }
+  .group {
+    background: #1a1a2e;
+    border: 1px solid #252535;
+    border-radius: 4px;
+    padding: 10px 10px 6px;
+  }
+  .group-title {
+    font-size: 0.6em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 7px;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid #2a2a3a;
+    color: #666;
+    padding: 5px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.72em;
+    font-family: Georgia, serif;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 4px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .btn:last-child { margin-bottom: 0; }
+  .btn.on { border-color: #3a8a6a; color: #ccc; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; opacity: 0.9; }
+  .map-wrap { border: 1px solid #252535; line-height: 0; }
+  .status {
+    margin-top: 14px;
+    max-width: 1010px;
+    background: #1a1a2e;
+    border: 1px solid #252535;
+    border-radius: 4px;
+    padding: 11px 16px;
+    font-size: 0.73em;
+    line-height: 1.8;
+    color: #666;
+  }
+  .status strong { color: #bbb; }
+  .status .op { color: #a06ad4; }
+</style>
+</head>
+<body>
+
+<h1>D013 — Continent Geography · Draft 54</h1>
+<p class="subtitle">Toggle layers · Zones approximate · Continent shape placeholder</p>
+
+<div class="workspace">
+<div class="sidebar">
+
+  <div class="group">
+    <div class="group-title">Climate</div>
+    <button class="btn on" id="btn-climate" onclick="tog('climate')">
+      <span class="dot" style="background:linear-gradient(#354f80,#2e6a44,#b88a18)"></span>
+      Climate Zones
+    </button>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Territory</div>
+    <button class="btn on" id="btn-territory" onclick="tog('territory')">
+      <span class="dot" style="background:linear-gradient(90deg,#1a52a0,#b84818)"></span>
+      Coalition / Order
+    </button>
+    <button class="btn on" id="btn-contested" onclick="tog('contested')">
+      <span class="dot" style="background:#666"></span>
+      Contested L-zone
+    </button>
+    <button class="btn on" id="btn-coast" onclick="tog('coast')">
+      <span class="dot" style="background:#3a88a8"></span>
+      Order Sea Access
+    </button>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Vein Layer</div>
+    <button class="btn on" id="btn-vein" onclick="tog('vein')">
+      <span class="dot" style="background:#7a2a9d"></span>
+      Surfacing Zones
+    </button>
+    <button class="btn" id="btn-depth" onclick="tog('depth')">
+      <span class="dot" style="background:#3a1060"></span>
+      Depth Gradient
+    </button>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Geology</div>
+    <button class="btn" id="btn-mountains" onclick="tog('mountains')">
+      <span class="dot" style="background:#907020"></span>
+      Mountain Ranges
+    </button>
+    <button class="btn" id="btn-features" onclick="tog('features')">
+      <span class="dot" style="background:#604810"></span>
+      Other Features
+    </button>
+  </div>
+
+  <div class="group">
+    <div class="group-title">The Front</div>
+    <button class="btn on" id="btn-front" onclick="tog('front')">
+      <span class="dot" style="background:#c02010"></span>
+      Front Line
+    </button>
+  </div>
+
+  <div class="group">
+    <div class="group-title">Labels</div>
+    <button class="btn on" id="btn-labels" onclick="tog('labels')">
+      <span class="dot" style="background:#888"></span>
+      Zone Labels
+    </button>
+  </div>
+
+</div><!-- /sidebar -->
+
+<div class="map-wrap">
+<svg width="820" height="670" viewBox="0 0 820 670">
+<defs>
+  <!-- Main continent clip -->
+  <clipPath id="cc">
+    <path d="M 115,32 C 194,14 308,12 408,18 C 514,24 596,46 652,80
+             C 690,110 714,160 720,218 C 726,274 720,334 706,390
+             C 692,444 666,486 630,522 C 593,558 542,581 483,594
+             C 422,607 358,608 296,597 C 234,586 182,563 146,530
+             C 117,504 96,465 79,422 C 63,380 55,336 55,290
+             C 55,244 63,200 79,160 C 94,122 103,76 115,32 Z"/>
+  </clipPath>
+
+  <!-- Cross-hatch for contested zone -->
+  <pattern id="xhatch" width="10" height="10" patternUnits="userSpaceOnUse">
+    <line x1="0" y1="0" x2="10" y2="10" stroke="#888" stroke-width="1.2" opacity="0.38"/>
+    <line x1="10" y1="0" x2="0" y2="10" stroke="#888" stroke-width="1.2" opacity="0.38"/>
+  </pattern>
+
+  <!-- Diagonal hatch for Vein zones -->
+  <pattern id="vhatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <line x1="0" y1="0" x2="0" y2="9" stroke="#9a3abf" stroke-width="2.3" opacity="0.65"/>
+  </pattern>
+
+  <!-- Depth gradients (W and S lean) -->
+  <linearGradient id="dg-w" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%"   stop-color="#5a1888" stop-opacity="0.62"/>
+    <stop offset="100%" stop-color="#5a1888" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="dg-s" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%"   stop-color="#5a1888" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#5a1888" stop-opacity="0.62"/>
+  </linearGradient>
+</defs>
+
+<!-- Ocean -->
+<rect width="820" height="670" fill="#090e18"/>
+
+<!-- Continent base fill -->
+<path d="M 115,32 C 194,14 308,12 408,18 C 514,24 596,46 652,80
+         C 690,110 714,160 720,218 C 726,274 720,334 706,390
+         C 692,444 666,486 630,522 C 593,558 542,581 483,594
+         C 422,607 358,608 296,597 C 234,586 182,563 146,530
+         C 117,504 96,465 79,422 C 63,380 55,336 55,290
+         C 55,244 63,200 79,160 C 94,122 103,76 115,32 Z"
+      fill="#20201a"/>
+
+<!-- ===== CLIMATE ZONES ===== -->
+<g id="layer-climate" clip-path="url(#cc)">
+  <!-- Arctic -->
+  <rect x="0" y="0"   width="820" height="112" fill="#2a3862" opacity="0.62"/>
+  <!-- Subarctic -->
+  <rect x="0" y="112" width="820" height="90"  fill="#2a5480" opacity="0.44"/>
+  <!-- Temperate west (maritime) -->
+  <rect x="0" y="202" width="410" height="178" fill="#235e40" opacity="0.42"/>
+  <!-- Temperate east (continental) -->
+  <rect x="410" y="202" width="410" height="178" fill="#306030" opacity="0.30"/>
+  <!-- Mediterranean -->
+  <rect x="0" y="380" width="820" height="115" fill="#b89018" opacity="0.36"/>
+  <!-- Equatorial fringe -->
+  <rect x="0" y="495" width="820" height="200" fill="#b02810" opacity="0.27"/>
+  <!-- Maritime softening, far west -->
+  <rect x="0" y="0"   width="115" height="670" fill="#1a4a68" opacity="0.18"/>
+</g>
+
+<!-- ===== TERRITORY BASE ===== -->
+<g id="layer-territory" clip-path="url(#cc)">
+  <!-- Order operational range — fills everything first -->
+  <rect x="0" y="0" width="820" height="670" fill="#b84010" opacity="0.28"/>
+
+  <!-- Coalition western strip -->
+  <path d="M 115,32 C 103,76 94,122 79,160
+           C 63,200 55,244 55,290 C 55,336 63,380 79,422
+           C 96,465 117,504 146,530
+           L 182,512 C 162,488 144,454 130,414
+           C 116,376 108,336 108,290 C 108,244 116,202 130,163
+           C 142,126 153,80 166,46 Z"
+        fill="#0a3888" opacity="0.52"/>
+
+  <!-- Coalition SW mountain corner -->
+  <path d="M 146,530 C 182,563 234,586 296,597
+           C 334,604 372,608 406,604
+           L 406,560 L 338,546 L 270,534 L 212,520 L 182,512 Z"
+        fill="#0a3888" opacity="0.52"/>
+</g>
+
+<!-- ===== CONTESTED L-ZONE ===== -->
+<g id="layer-contested" clip-path="url(#cc)">
+  <!-- Vertical arm (NW → SW, east edge of Coalition western strip) -->
+  <path d="M 166,46 C 153,80 142,126 130,163
+           C 116,202 108,244 108,290 C 108,336 116,376 130,414
+           C 144,454 162,488 182,512
+           L 214,520 L 222,468 L 218,408 L 214,344
+           L 218,280 L 222,218 L 218,155 L 208,92 Z"
+        fill="url(#xhatch)"/>
+  <path d="M 166,46 C 153,80 142,126 130,163
+           C 116,202 108,244 108,290 C 108,336 116,376 130,414
+           C 144,454 162,488 182,512
+           L 214,520 L 222,468 L 218,408 L 214,344
+           L 218,280 L 222,218 L 218,155 L 208,92 Z"
+        fill="#555" opacity="0.10"/>
+
+  <!-- Horizontal arm (SW → SE, north edge of Coalition S.mountain belt) -->
+  <path d="M 182,512 L 214,520 L 270,534 L 338,546 L 406,560
+           L 498,558 L 578,546 L 592,516
+           L 498,514 L 406,516 L 338,510 L 270,500 L 220,492 Z"
+        fill="url(#xhatch)"/>
+  <path d="M 182,512 L 214,520 L 270,534 L 338,546 L 406,560
+           L 498,558 L 578,546 L 592,516
+           L 498,514 L 406,516 L 338,510 L 270,500 L 220,492 Z"
+        fill="#555" opacity="0.10"/>
+</g>
+
+<!-- ===== ORDER SEA ACCESS ===== -->
+<g id="layer-coast">
+  <!-- North coast tick -->
+  <path d="M 182,28 C 264,10 370,8 470,14 C 555,20 614,36 654,60"
+        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.55" stroke-linecap="round"/>
+  <!-- NE coast tick -->
+  <path d="M 654,60 C 692,90 716,142 722,202"
+        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.55" stroke-linecap="round"/>
+  <!-- East coast tick -->
+  <path d="M 722,202 C 728,260 722,322 708,380 C 694,434 668,476 632,512"
+        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.55" stroke-linecap="round"/>
+  <!-- SE coast tick -->
+  <path d="M 632,512 C 600,546 554,572 500,586 C 462,598 432,606 406,604"
+        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.48" stroke-linecap="round"/>
+  <!-- Anchor icons (simple circles) -->
+  <circle cx="400" cy="9"  r="4" fill="#2a80a8" opacity="0.5"/>
+  <circle cx="728" cy="290" r="4" fill="#2a80a8" opacity="0.5"/>
+</g>
+
+<!-- ===== VEIN SURFACING ZONES ===== -->
+<g id="layer-vein" clip-path="url(#cc)">
+  <!-- Western coastal margin — highest concentration -->
+  <path d="M 55,185 C 55,238 55,290 55,342 C 55,390 63,432 79,472
+           L 120,460 C 106,424 100,386 100,342 C 100,290 100,242 106,198 Z"
+        fill="url(#vhatch)" opacity="0.85"/>
+  <path d="M 55,185 C 55,238 55,290 55,342 C 55,390 63,432 79,472
+           L 120,460 C 106,424 100,386 100,342 C 100,290 100,242 106,198 Z"
+        fill="#8a28b8" opacity="0.12"/>
+
+  <!-- Southern mountain belt — highest concentration -->
+  <path d="M 151,530 C 185,560 234,584 296,596
+           C 356,608 420,608 480,595 C 535,582 575,558 602,526
+           L 568,508 C 542,536 506,555 464,566
+           C 414,578 356,578 300,567 C 248,557 205,535 170,510 Z"
+        fill="url(#vhatch)" opacity="0.85"/>
+  <path d="M 151,530 C 185,560 234,584 296,596
+           C 356,608 420,608 480,595 C 535,582 575,558 602,526
+           L 568,508 C 542,536 506,555 464,566
+           C 414,578 356,578 300,567 C 248,557 205,535 170,510 Z"
+        fill="#8a28b8" opacity="0.18"/>
+
+  <!-- Northern shield — low concentration -->
+  <path d="M 162,30 C 224,14 326,12 426,18 C 508,22 568,36 618,58
+           L 614,86 C 562,65 498,52 420,48 C 320,42 224,44 166,58 Z"
+        fill="url(#vhatch)" opacity="0.40"/>
+  <path d="M 162,30 C 224,14 326,12 426,18 C 508,22 568,36 618,58
+           L 614,86 C 562,65 498,52 420,48 C 320,42 224,44 166,58 Z"
+        fill="#8a28b8" opacity="0.06"/>
+
+  <!-- Central rift zone — moderate concentration -->
+  <path d="M 250,170 C 268,220 272,270 263,320 C 255,362 244,400 240,442
+           L 270,446 C 276,403 288,363 297,320 C 308,268 306,218 290,168 Z"
+        fill="url(#vhatch)" opacity="0.58"/>
+  <path d="M 250,170 C 268,220 272,270 263,320 C 255,362 244,400 240,442
+           L 270,446 C 276,403 288,363 297,320 C 308,268 306,218 290,168 Z"
+        fill="#8a28b8" opacity="0.09"/>
+
+  <!-- Eastern ranges — moderate, Order-workable -->
+  <path d="M 626,132 C 652,172 674,222 682,274 C 690,322 688,370 678,414
+           L 648,402 C 658,362 660,318 653,274 C 645,228 625,182 604,150 Z"
+        fill="url(#vhatch)" opacity="0.50"/>
+  <path d="M 626,132 C 652,172 674,222 682,274 C 690,322 688,370 678,414
+           L 648,402 C 658,362 660,318 653,274 C 645,228 625,182 604,150 Z"
+        fill="#8a28b8" opacity="0.08"/>
+</g>
+
+<!-- ===== DEPTH GRADIENT ===== -->
+<g id="layer-depth" clip-path="url(#cc)" style="display:none">
+  <rect x="0" y="0" width="820" height="670" fill="url(#dg-w)"/>
+  <rect x="0" y="0" width="820" height="670" fill="url(#dg-s)"/>
+</g>
+
+<!-- ===== MOUNTAIN RANGES ===== -->
+<g id="layer-mountains" style="display:none">
+  <!-- Southern belt: Coalition, Vein-intense -->
+  <g stroke="#d4a828" stroke-width="1.9" fill="none" opacity="0.82">
+    <polyline points="160,526 177,500 194,526"/>
+    <polyline points="212,516 231,488 250,516"/>
+    <polyline points="268,508 289,478 310,508"/>
+    <polyline points="332,500 355,470 378,500"/>
+    <polyline points="398,493 423,462 448,493"/>
+    <polyline points="468,494 494,463 520,494"/>
+    <polyline points="540,503 564,475 588,503"/>
+    <polyline points="600,516 620,494 640,516"/>
+  </g>
+  <!-- Western coastal ranges: Coalition, Vein-intense -->
+  <g stroke="#d4a828" stroke-width="1.5" fill="none" opacity="0.68">
+    <polyline points="62,172 78,150 94,172"/>
+    <polyline points="57,242 74,220 91,242"/>
+    <polyline points="55,310 72,288 89,310"/>
+    <polyline points="60,372 78,350 96,372"/>
+    <polyline points="74,430 93,408 112,430"/>
+  </g>
+  <!-- Northern mountains: Order side, lower/moderate Vein -->
+  <g stroke="#907838" stroke-width="1.5" fill="none" opacity="0.62">
+    <polyline points="202,36 219,16 236,36"/>
+    <polyline points="262,28 280,8  298,28"/>
+    <polyline points="326,22 346,4  366,22"/>
+    <polyline points="392,20 413,2  434,20"/>
+    <polyline points="458,24 478,6  498,24"/>
+    <polyline points="518,32 537,14 556,32"/>
+  </g>
+  <!-- Eastern ranges: Order Vein sites, moderate concentration -->
+  <g stroke="#907838" stroke-width="1.5" fill="none" opacity="0.62">
+    <polyline points="653,92  670,68  687,92"/>
+    <polyline points="663,150 682,126 701,150"/>
+    <polyline points="672,210 691,186 710,210"/>
+    <polyline points="676,270 695,246 714,270"/>
+    <polyline points="672,328 691,304 710,328"/>
+    <polyline points="660,384 679,360 698,384"/>
+    <polyline points="642,434 661,410 680,434"/>
+  </g>
+  <!-- Central massif: no Vein significance, terrain only -->
+  <g stroke="#645a28" stroke-width="1.2" fill="none" opacity="0.45">
+    <polyline points="364,232 382,210 400,232"/>
+    <polyline points="400,220 420,197 440,220"/>
+    <polyline points="365,272 383,250 401,272"/>
+    <polyline points="420,260 441,237 462,260"/>
+  </g>
+  <!-- Mountain range legend note -->
+  <text x="750" y="580" font-size="9" fill="#907838" text-anchor="end" font-family="Georgia,serif" opacity="0.65">gold = Vein-intense range</text>
+  <text x="750" y="594" font-size="9" fill="#645a28" text-anchor="end" font-family="Georgia,serif" opacity="0.55">dim = Vein-poor range</text>
+</g>
+
+<!-- ===== OTHER FEATURES ===== -->
+<g id="layer-features" style="display:none">
+  <!-- Rift valley axis (central) -->
+  <path d="M 255,160 C 263,210 265,262 257,313 C 249,358 240,398 235,443"
+        stroke="#e06020" stroke-width="2.2" fill="none" stroke-dasharray="8,4" opacity="0.62"/>
+  <text x="240" y="300" font-size="10" fill="#e06020" font-family="Georgia,serif" font-style="italic" opacity="0.75">rift axis</text>
+  <!-- Shield boundary -->
+  <path d="M 170,72 C 244,55 336,51 426,57 C 500,62 558,72 610,88"
+        stroke="#4a5a68" stroke-width="1.5" fill="none" stroke-dasharray="5,4" opacity="0.48"/>
+  <text x="398" y="78" font-size="9" fill="#4a5a68" text-anchor="middle" font-family="Georgia,serif" font-style="italic" opacity="0.65">shield edge</text>
+  <!-- Major rivers (approximate) -->
+  <path d="M 355,142 C 362,200 356,260 342,320 C 330,370 312,412 297,452"
+        stroke="#284a6a" stroke-width="1.5" fill="none" opacity="0.42"/>
+  <path d="M 445,162 C 452,212 462,272 456,332 C 450,383 438,424 422,462"
+        stroke="#284a6a" stroke-width="1.2" fill="none" opacity="0.32"/>
+</g>
+
+<!-- ===== THE FRONT ===== -->
+<g id="layer-front">
+  <!-- Vertical portion of L-front -->
+  <path d="M 209,52 C 215,104 218,157 214,210
+           C 210,262 205,310 208,360 C 211,405 217,450 220,492"
+        stroke="#c01808" stroke-width="3" fill="none" stroke-dasharray="11,5.5" opacity="0.80"/>
+  <!-- Horizontal portion of L-front -->
+  <path d="M 220,492 C 276,500 342,508 406,512
+           C 456,515 512,513 572,505"
+        stroke="#c01808" stroke-width="3" fill="none" stroke-dasharray="11,5.5" opacity="0.80"/>
+  <!-- Small label -->
+  <text x="226" y="278" font-size="11" fill="#c01808" font-family="Georgia,serif" font-style="italic" opacity="0.72">front</text>
+</g>
+
+<!-- ===== LABELS ===== -->
+<g id="layer-labels" font-family="Georgia,serif">
+
+  <!-- Compass -->
+  <text x="782" y="46"  font-size="14" fill="#383848" text-anchor="middle">N</text>
+  <text x="782" y="650" font-size="14" fill="#383848" text-anchor="middle">S</text>
+  <text x="18"  y="342" font-size="14" fill="#383848" text-anchor="middle">W</text>
+  <text x="804" y="342" font-size="14" fill="#383848" text-anchor="middle">E</text>
+
+  <!-- Climate zone labels -->
+  <text x="402" y="70" font-size="12" fill="#5a7ab0" text-anchor="middle" letter-spacing="2" opacity="0.72">ARCTIC / SUBARCTIC</text>
+  <text x="148" y="296" font-size="10" fill="#3a9860" text-anchor="middle" font-style="italic" opacity="0.62">maritime</text>
+  <text x="625" y="296" font-size="10" fill="#5a9040" text-anchor="middle" font-style="italic" opacity="0.55">continental</text>
+  <text x="466" y="444" font-size="12" fill="#b09018" text-anchor="middle" letter-spacing="1.5" opacity="0.68">MEDITERRANEAN</text>
+  <text x="390" y="568" font-size="11" fill="#b04028" text-anchor="middle" letter-spacing="1" opacity="0.62">EQUATORIAL FRINGE</text>
+
+  <!-- Faction labels -->
+  <text x="110" y="285" font-size="13" fill="#2a68c8" text-anchor="middle" font-style="italic">Coalition</text>
+  <text x="110" y="301" font-size="9" fill="#2a68c8" text-anchor="middle" opacity="0.68">W. margin</text>
+  <text x="112" y="468" font-size="12" fill="#2a68c8" text-anchor="middle" font-style="italic">Coalition</text>
+  <text x="112" y="484" font-size="9"  fill="#2a68c8" text-anchor="middle" opacity="0.65">S. belt</text>
+
+  <text x="545" y="250" font-size="13" fill="#c05820" text-anchor="middle" font-style="italic">Order</text>
+  <text x="545" y="268" font-size="9.5" fill="#c05820" text-anchor="middle" opacity="0.68">interior</text>
+
+  <!-- Contested labels -->
+  <text x="182" y="258" font-size="10" fill="#aaa" text-anchor="middle" opacity="0.78">contested</text>
+  <text x="415" y="476" font-size="10" fill="#aaa" text-anchor="middle" opacity="0.72">contested</text>
+
+  <!-- SW coastal enclave marker -->
+  <circle cx="148" cy="555" r="7" fill="none" stroke="#c05820" stroke-width="2" opacity="0.8"/>
+  <circle cx="148" cy="555" r="3" fill="#c05820" opacity="0.7"/>
+  <text x="148" y="577" font-size="9" fill="#c05820" text-anchor="middle" opacity="0.85">SW enclave</text>
+  <text x="148" y="589" font-size="8" fill="#c05820" text-anchor="middle" opacity="0.6">Order-claimed</text>
+  <text x="148" y="600" font-size="8" fill="#c05820" text-anchor="middle" opacity="0.6">eff. autonomous</text>
+
+  <!-- Northern territories label -->
+  <text x="420" y="88" font-size="10" fill="#c05820" text-anchor="middle" opacity="0.58" font-style="italic">N. territories</text>
+  <text x="420" y="100" font-size="8.5" fill="#c05820" text-anchor="middle" opacity="0.45">Order-claimed · thinly held</text>
+
+  <!-- Eastern seaboard label -->
+  <text x="700" y="380" font-size="9.5" fill="#c05820" text-anchor="middle" opacity="0.6" font-style="italic" transform="rotate(90 700 380)">E. seaboard</text>
+
+  <!-- Vein zone labels -->
+  <text x="68" y="315" font-size="9" fill="#9848cc" text-anchor="middle" opacity="0.72"
+        transform="rotate(-90 68 315)" letter-spacing="0.8">VEIN — W. MARGIN</text>
+  <text x="385" y="586" font-size="10" fill="#9848cc" text-anchor="middle" opacity="0.72" letter-spacing="0.8">VEIN BELT — S. MOUNTAINS</text>
+  <text x="668" y="278" font-size="9" fill="#9848cc" text-anchor="middle" opacity="0.58"
+        transform="rotate(90 668 278)" letter-spacing="0.8">VEIN — E. RANGES</text>
+
+  <!-- Ocean labels -->
+  <text x="20" y="185" font-size="10" fill="#182a40" opacity="0.75" transform="rotate(-18 20 185)">W. Ocean</text>
+  <text x="800" y="198" font-size="10" fill="#182a40" opacity="0.65" transform="rotate(18 800 198)">E. Sea</text>
+  <text x="402" y="660" font-size="10" fill="#182a40" text-anchor="middle" opacity="0.62">Southern Sea</text>
+
+  <!-- Order coast labels -->
+  <text x="396" y="14" font-size="10" fill="#2a80a8" text-anchor="middle" opacity="0.72" letter-spacing="1">ORDER — N. COAST</text>
+  <text x="754" y="286" font-size="10" fill="#2a80a8" text-anchor="middle" opacity="0.65" letter-spacing="1"
+        transform="rotate(90 754 286)">ORDER — E. COAST</text>
+</g>
+
+<!-- Continent outline — top layer -->
+<path d="M 115,32 C 194,14 308,12 408,18 C 514,24 596,46 652,80
+         C 690,110 714,160 720,218 C 726,274 720,334 706,390
+         C 692,444 666,486 630,522 C 593,558 542,581 483,594
+         C 422,607 358,608 296,597 C 234,586 182,563 146,530
+         C 117,504 96,465 79,422 C 63,380 55,336 55,290
+         C 55,244 63,200 79,160 C 94,122 103,76 115,32 Z"
+      fill="none" stroke="#484858" stroke-width="2"/>
+
+</svg>
+</div>
+</div><!-- /workspace -->
+
+<div class="status">
+  <strong>Decided (D013 · draft 54):</strong>
+  Earth-sized · one continent · Vein = geological stratum, surfaces independently of mountain placement ·
+  7 regions: W. margin (Coalition core) · S. belt (Coalition core, highest Vein) ·
+  Contested corridor (L-shaped, depletion boundary = the front) · Order interior (heartland) ·
+  N. territories (Order-claimed, thinly held, extraneous orgs fill vacuum) ·
+  E. seaboard (Order, scattered settlements, conventionally administered) ·
+  SW coastal enclave (Order-claimed, effectively autonomous, isolated, largest Order coast settlement) ·
+  Blue = Coalition safe zone · Orange = Order operational range · neither = all governed
+  <br>
+  <span class="op"><strong>Downstream (not blocking):</strong>
+  Proper nouns for regions · Continent shape refinement · Site-level Vein distribution · Mountain range specifics
+  </span>
+</div>
+
+<script>
+function tog(id) {
+  const el = document.getElementById('layer-' + id);
+  const btn = document.getElementById('btn-' + id);
+  if (!el || !btn) return;
+  const show = el.style.display === 'none';
+  el.style.display = show ? '' : 'none';
+  btn.classList.toggle('on', show);
+}
+</script>
+
+</body>
+</html>
