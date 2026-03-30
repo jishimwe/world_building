@@ -93,8 +93,6 @@
 | ID | Title | Blocks |
 |----|-------|--------|
 | D010 | Coalition buried history — has anyone looked? | — |
-| D011 | Current war trigger | — |
-| D012 | Attunement latent breadth — revelation timing | — |
 | D016 | Order institutional age and deep history timeline | D020 |
 
 ### Open — medium priority
