@@ -42,15 +42,17 @@ Working document still flags D005 as open. D005 has been decided. Stale annotati
 
 ## Major ambiguities (gaps in causal logic)
 
-**10. Extraction intensity vs. barrier erosion timeline** (L19, L523)
+**10. Extraction intensity vs. barrier erosion timeline** (L19, L523) -> ✅
 Coalition extraction depletes field concentration; the biological barrier is tied to field concentration. But the timeline of "when did extraction get intensive enough to start eroding the barrier" is never established. The Order observes erosion without understanding it (L26–27), but the causal chain requires a timeframe.
+*Resolution: L19 qualified — "far faster" claim now applies specifically to industrial-scale extraction; incidental handling and small-scale experimentation produce no observable concentration change. Consistent with L531 (industrial extraction post-partition). Draft 63.*
 
-**11. Coalition 5% attunement — composition and detectability** (L235, L329)
+**11. Coalition 5% attunement — composition and detectability** (L235, L329) -> ✅
 The 5% figure is cited as demographic fact, but the Coalition has no Order-equivalent mechanism for systematic identification. The figure likely excludes undiscovered individuals. More significantly, the text presents emergence and defector ancestry as two co-equal sources, but the arithmetic shows defectors dominate:
 - If ~10% of pre-liberation attuned defected, the Coalition's founding attuned fraction was already ~5%
 - 1% emergence per generation adds only ~0.2-0.4% per generation to the cumulative fraction
 - After 3–4 generations, emergence accounts for roughly 0.6–1.2% of the total, not half
 The text's "traces to two sources" framing implies more balance between sources than the math supports.
+*Resolution: 5% is world ground truth (authorial layer), not a Coalition census — the Coalition's inability to measure it is already established at L235/L239. Added sentence at L329 clarifying defector lineages dominate numerically; emergence is the rising mechanism, not the dominant source. Draft 64.*
 
 **12. Quartz transduction mechanism** (L173, apparatus section)
 Quartz is established as the only bidirectional transducer — it can both receive and emit shaped field behavior. How a passive mineral produces directional/shaped output rather than isotropic scatter is the core of Coalition apparatus function and is never mechanistically explained. This may be acceptable as a physics-of-the-world primitive, but if so, it should be flagged as one rather than left as an implicit gap.
@@ -135,6 +137,6 @@ The Order has: founding families, religious arm, military, secret societies — 
 3. **Resolve #2** (exposure model variable count) — done (draft 62)
 4. **Resolve #13** ("full concentration range") — done (draft 62)
 5. **Resolve #16, #17** (desensitization/inversion separation, departure math) — done (draft 62)
-6. **Address #10** (extraction/barrier timeline) — needs decision before writing
-7. **Sharpen #11** (5% composition) — needs decision: name defector-dominance or leave ambiguous
+6. **Address #10** (extraction/barrier timeline) — done (draft 63)
+7. **Sharpen #11** (5% composition) — done (draft 64)
 8. **Address #22** (Coalition extraction paradox) — needs decision: most critical strategic omission
