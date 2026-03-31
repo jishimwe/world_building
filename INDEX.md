@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 60 · 24 of 35 decisions decided*
+*Generated from draft 61 · 24 of 35 decisions decided*
 
 ---
 
@@ -7,7 +7,7 @@
 
 | File | Purpose | State |
 |------|---------|-------|
-| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 59 |
+| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 61 |
 | `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Current |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
 | [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
@@ -25,7 +25,7 @@
 |---------|--------|-------|
 | [[WORLD#What this document is for\|What this document is for]] | Stable | — |
 | [[WORLD#The resource\|The resource]] | Draft 55 | Epistemic gap paragraph added; depletion knowledge state decided — pure institutional blind spot, handful of frontier-knowledge individuals on both sides hold it privately |
-| [[WORLD#The Vein — physical nature and the two forms\|The Vein — physical nature and the two forms]] | Draft 48 | Four refinement axes, grade profiles, weight anomaly, thermal/field residual clarified |
+| [[WORLD#The Vein — physical nature and the two forms\|The Vein — physical nature and the two forms]] | Draft 61 | Four refinement axes, grade profiles, weight anomaly, thermal/field residual clarified; substrate recovery [OPEN] resolved (D004) |
 | [[WORLD#The Vein — states of matter and faction mastery\|The Vein — states of matter and faction mastery]] | Stable | Order ceiling, Coalition arc, permanent asymmetry |
 | [[WORLD#The Vein — visual language of field manipulation\|The Vein — visual language of field manipulation]] | Stable | Color system established |
 | [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 51 | Quartz indirect perception clarified, metal residual distinction added; link to MATERIALS_BASELINE added |
@@ -34,7 +34,7 @@
 | [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 60 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 59 | Nine subsections — wartime distortion added; Order death doctrine expanded with two-tier structure and recovery connection |
 | [[WORLD#The historical sequence\|The historical sequence]] | Stable | Pre-conflict, development, liberation war, aftermath |
-| [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 58 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge |
+| [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 61 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge; stale [OPEN] at L527 removed |
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
 | [[WORLD#Geography — the continent\|Geography — the continent]] | Draft 54 | Seven regions, Vein layer model, faction territory logic, the front as depletion boundary |
