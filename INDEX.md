@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 61 · 24 of 35 decisions decided*
+*Generated from draft 62 · 25 of 35 decisions decided*
 
 ---
 
@@ -33,7 +33,7 @@
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 57 | Probabilistic heritability added to bloodline consolidation; latent breadth knowledge state decided |
 | [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 60 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 59 | Nine subsections — wartime distortion added; Order death doctrine expanded with two-tier structure and recovery connection |
-| [[WORLD#The historical sequence\|The historical sequence]] | Stable | Pre-conflict, development, liberation war, aftermath |
+| [[WORLD#The historical sequence\|The historical sequence]] | Draft 62 | Deep history added: Order ~2000 years, stagnation mechanics, biological desensitization; liberation retconned to 8-10 generations |
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 61 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge; stale [OPEN] at L527 removed |
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
@@ -57,7 +57,7 @@
 
 ## Decisions
 
-### Decided (24)
+### Decided (25)
 
 | ID   | Title                                                                                                                                                                      |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -84,6 +84,7 @@
 | D004 | Substrate recovery unobserved empirically; Order death doctrine encodes it as metaphysics — all return to Vein, attuned to a better place; Coalition has no equivalent |
 | D011 | War triggered by apparatus accident killing two attuned children; Order frames as sacred violation, Coalition frames as encroachment; buried truth held by three survivors |
 | D010 | Coalition buried history — distributed fragments, unassembled; individual suppression of specific pieces, no coordinating mechanism; Order holds corroborating liberation-era records |
+| D016 | Order ~2000 years old; desensitization biological (ceiling compounded across generations); stagnation via cyclical loss, no competitive pressure, innovation drain into secret societies |
 | D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture |
 
 ### In progress (0)
@@ -92,7 +93,6 @@
 
 | ID | Title | Blocks |
 |----|-------|--------|
-| D016 | Order institutional age and deep history timeline | D020 |
 | D024 | Industry giants — full operational picture | — |
 
 ### Open — medium priority
@@ -120,6 +120,9 @@
 
 **1. Industry giants full operational picture (D024)**
 All story structure decisions resolved. Load-bearing for character work.
+
+**2. Bloodline consolidation mechanism (D020)**
+Unblocked by D016. Resolve before character work involving Order founding families.
 
 ---
 

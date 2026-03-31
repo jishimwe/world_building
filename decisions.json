@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "world \u2014 unnamed",
-    "doc_version": "draft 50",
+    "doc_version": "draft 60",
     "schema_version": "1.0",
     "status_values": [
       "open",
@@ -228,7 +228,7 @@
     {
       "id": "D016",
       "title": "Order institutional age and deep history timeline",
-      "status": "open",
+      "status": "decided",
       "category": "timeline",
       "priority": "high",
       "world_md_line": null,
@@ -236,7 +236,8 @@
       "depends_on": [],
       "blocks": [
         "D020"
-      ]
+      ],
+      "decided_text": "The Order is approximately two thousand years old at the story start. The founding coincides with the founding catastrophe \u2014 the events that established the institutional ceiling. Stagnation across two millennia is produced by interlocking mechanisms: cyclical knowledge loss through embodied transmission failure (gains and losses roughly cancel across generations); founding families suppressing innovation that would redistribute power; the secret societies absorbing the most capable non-conformists into power maintenance rather than discovery; absence of competitive pressure for most of the Order history (the Coalition is the first serious threat in two thousand years). Desensitization is biological: the institutional ceiling has constrained practice for two thousand years, and heritable attunement capacity that is never exercised gradually reduces across enough generations through ordinary heritable trait dynamics. Founding-era practitioners had access to exotic states current practitioners cannot reliably reach \u2014 not because the founders were uniquely exceptional (as the myth claims) but because the ceiling has biologically compounded into reduced average capacity. Secret societies preserve exotic state knowledge as the institutional memory of capabilities the general Order population can no longer access without deliberate cultivation. Rough timeline: founding catastrophe and Order establishment ~2000 years ago; bloodline consolidation over several centuries in mid-history (specific era deferred to D020); pre-conflict era within the last several centuries; liberation 8-10 generations ago (~250-300 years); current era."
     },
     {
       "id": "D017",
