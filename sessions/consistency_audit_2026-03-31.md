@@ -54,8 +54,9 @@ The 5% figure is cited as demographic fact, but the Coalition has no Order-equiv
 The text's "traces to two sources" framing implies more balance between sources than the math supports.
 *Resolution: 5% is world ground truth (authorial layer), not a Coalition census — the Coalition's inability to measure it is already established at L235/L239. Added sentence at L329 clarifying defector lineages dominate numerically; emergence is the rising mechanism, not the dominant source. Draft 64.*
 
-**12. Quartz transduction mechanism** (L173, apparatus section)
+**12. Quartz transduction mechanism** (L173, apparatus section) -> ✅
 Quartz is established as the only bidirectional transducer — it can both receive and emit shaped field behavior. How a passive mineral produces directional/shaped output rather than isotropic scatter is the core of Coalition apparatus function and is never mechanistically explained. This may be acceptable as a physics-of-the-world primitive, but if so, it should be flagged as one rather than left as an implicit gap.
+*Resolution: crystal axis anisotropy added at L173 — reverse transduction follows the crystal's natural axis, not isotropic scatter. Geological quartz with random orientations produces incoherent noise; apparatus quartz requires controlled element orientation during construction, making it a precision craft. Draft 65.*
 
 ---
 
