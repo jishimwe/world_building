@@ -70,8 +70,9 @@ Attunement is described as sensitivity "across its full concentration range." Bu
 Rate has been "climbing across centuries" from "negligible" to ~1%. The transition curve is absent. This matters for Coalition attuned demographics: if the rate was near-zero at liberation, the 5% is almost entirely defector-seeded; if it was already 0.5%, emergence is a significant contributor.
 *Resolution: anchor added at L231 — rate was well below current level at liberation, defector lineages substantially outnumbered emergence contribution at founding; post-liberation climb has been steeper, driven by compounding Vein-proximity biological effects. No precise curve needed unless future arithmetic requires it. Draft 66.*
 
-**15. Genealogical rewriting scale** (L225–226, L327)
+**15. Genealogical rewriting scale** (L225–226, L327) -> ✅
 The 70–80% transmission rate produces a 20–30% failure rate. At scale, that's a 1-in-3 to 1-in-5 failure rate — statistically obvious. The text acknowledges "absorbing failures" but undersells how industrialized the rewriting process would need to be. The concealment mechanism needs more weight.
+*Resolution: class stratification added. L225 clarified that genealogical rewriting applied to families whose position depended on the hereditary claim. L327 extended to distinguish elite response (institutional cover: re-attribution, placement, record adjustment) from ordinary Order response (social shame, no machinery). The concealment apparatus is targeted, not universal. Shame handles the rest. Draft 67.*
 
 **16. Desensitization vs. demographic inversion** (L211, L321) -> ✅
 Biological desensitization ("across generations") and demographic inversion (liberation departure) are two separate mechanisms on different timescales, discussed in proximity in ways that risk conflation.
