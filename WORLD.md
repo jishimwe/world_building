@@ -1,5 +1,5 @@
 # WORLD.md
-*Last updated: world building phase — draft 62*
+*Last updated: world building phase — draft 63*
 *This document captures what is known. Gaps are marked [OPEN] and are not blockers — they will be resolved as the world develops. Do not invent details to fill gaps prematurely.*
 
 ---
@@ -16,7 +16,7 @@ Read this before writing any character, scene, or dialogue. If a detail you want
 
 At the centre of the world's history is a finite resource — call it **the Vein** for now [OPEN: rename when the world has more shape] — that exists at fixed physical sites scattered across the world: places where something in the deep geology of the land produces a concentration of resonant field energy and, over vast timescales, condenses that energy into physical matter. These sites can be mapped, contested, and controlled.
 
-The Vein depletes as it is extracted and used. The rate of depletion varies by extraction method, and the Coalition's systematic industrial approach extracts faster than the Order's more measured instinctual use. The asymmetry is not merely one of scale but of kind: the Coalition removes the condensed physical material that sustains the field, which reduces field intensity at extraction sites far faster than drawing on the field's energy directly ever would.
+The Vein depletes as it is extracted and used. The rate of depletion varies by extraction method, and the Coalition's systematic industrial approach extracts faster than the Order's more measured instinctual use. The asymmetry is not merely one of scale but of kind: the Coalition removes the condensed physical material that sustains the field, which reduces field intensity at worked sites far faster than drawing on the field's energy directly ever would — but this effect only becomes significant at the volumes of systematic industrial extraction. Incidental handling, construction, and small-scale experimentation produce no observable concentration change within a human lifetime.
 
 The consequence that matters in the current era is not resource extinction — there is enough substrate remaining across all sites to sustain both factions for generations. The consequence is territorial. Reduced field intensity at a site means that site's surrounding territory becomes progressively more habitable for attuned people. The biological barrier that historically kept the Order out of Coalition land — the overexposure sensitivity that made high-concentration territories genuinely hostile to attuned practitioners — is directly tied to field concentration. Every generation of Coalition extraction lowers that concentration at worked sites, and with it the barrier. The Coalition has been, through the ordinary operation of its economy, slowly converting its own territorial advantage into contested ground.
 
