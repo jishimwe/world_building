@@ -66,8 +66,9 @@ Quartz is established as the only bidirectional transducer — it can both recei
 Attunement is described as sensitivity "across its full concentration range." But the biological barrier and desensitization mechanics establish practitioners have an effective operational ceiling. "Full" overstates.
 *Resolution: rewritten to "from field-faint concentrations far below Coalition instrument thresholds up through the dangerous intensities that mark the biological barrier." Draft 62.*
 
-**14. Emergence rate timing** (L229–231)
+**14. Emergence rate timing** (L229–231) -> ✅
 Rate has been "climbing across centuries" from "negligible" to ~1%. The transition curve is absent. This matters for Coalition attuned demographics: if the rate was near-zero at liberation, the 5% is almost entirely defector-seeded; if it was already 0.5%, emergence is a significant contributor.
+*Resolution: anchor added at L231 — rate was well below current level at liberation, defector lineages substantially outnumbered emergence contribution at founding; post-liberation climb has been steeper, driven by compounding Vein-proximity biological effects. No precise curve needed unless future arithmetic requires it. Draft 66.*
 
 **15. Genealogical rewriting scale** (L225–226, L327)
 The 70–80% transmission rate produces a 20–30% failure rate. At scale, that's a 1-in-3 to 1-in-5 failure rate — statistically obvious. The text acknowledges "absorbing failures" but undersells how industrialized the rewriting process would need to be. The concealment mechanism needs more weight.
