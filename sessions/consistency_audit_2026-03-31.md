@@ -93,8 +93,9 @@ Both factions exhibit identical three-institution conflict dynamics when handlin
 **19. Contact prohibition is not contradictory** *(downgraded from original audit)* -> ✅ no action needed
 L447 establishes the prohibition targets non-attuned specifically. L475 confirms attuned are "not subject to the contact prohibition in the same protective register." These are consistent. The original audit flagged this as a contradiction; it is not.
 
-**20. Minor terminology drift — attunement/sensitivity/coupling** (L21, L197, L199, L201)
+**20. Minor terminology drift — attunement/sensitivity/coupling** (L21, L197, L199, L201) -> ✅
 "Sensitivity" is used both for the attunement trait itself (L197: "biological sensitivity") and for the reactive property that causes harm (L21: "overexposure sensitivity"). "Coupling" refers specifically to neurological structures (L199) but "attunement sense" (L201) is used for the trained perception. Context disambiguates in every case, but a reader encountering these terms cold could confuse the trait with the vulnerability. Not a contradiction — a tightening opportunity.
+*Resolution: L197 changed from "biological sensitivity" to "biological sense" — consistent with "This is a sense" two sentences later. Frees "sensitivity" to carry only the vulnerability meaning. Draft 70.*
 
 ---
 
