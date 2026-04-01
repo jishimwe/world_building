@@ -345,13 +345,14 @@
     {
       "id": "D024",
       "title": "Industry giants \u2014 full operational picture",
-      "status": "open",
+      "status": "decided",
       "category": "faction",
       "priority": "medium",
-      "world_md_line": null,
+      "world_md_line": 339,
       "summary": "Who leads them, how organized, relationship to constitutional court and regional governments, how sabotage operations function. Develop before character work involving them.",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "decided_text": "Industry giants operate through three conventional layers (trade association, dynasty family network, shared bank) and four unconventional mechanisms (negative coordination/veto network, time horizon mismatch as patience strategy, archive asymmetry from private operational records, mutual vulnerability equilibrium). Violence is not a standing capacity but is accessed through site security (gray-zone direct layer), a contractor chain (multiple steps removed), and a problem manager per major operation who interfaces between the two without letting them touch. Regional influence is structural through economic dependency; constitutional court influence is indirect through federalism questions (narrow federal authority, broad regional authority). Section written into WORLD.md draft 74."
     },
     {
       "id": "D025",

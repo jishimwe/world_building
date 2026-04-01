@@ -91,10 +91,6 @@
 
 ### Open — high priority
 
-| ID | Title | Blocks |
-|----|-------|--------|
-| D024 | Industry giants — full operational picture | — |
-
 ### Open — medium priority
 
 | ID   | Title                                       |
@@ -118,10 +114,7 @@
 
 ## Priority queue (next sessions)
 
-**1. Industry giants full operational picture (D024)**
-All story structure decisions resolved. Load-bearing for character work.
-
-**2. Bloodline consolidation mechanism (D020)**
+**1. Bloodline consolidation mechanism (D020)**
 Unblocked by D016. Resolve before character work involving Order founding families.
 
 ---
