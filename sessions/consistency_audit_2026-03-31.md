@@ -102,8 +102,9 @@ L447 establishes the prohibition targets non-attuned specifically. L475 confirms
 **21. Order response to barrier erosion**
 If the biological barrier is weakening due to Coalition extraction (L19, L203), the Order's military and territorial doctrine should be adapting — or visibly failing to adapt. WORLD.md describes the depletion blindness (L26–27) but never addresses whether frontier practitioners have noticed increased survivability in previously hostile territory, or whether tactical doctrine has changed. The absence is conspicuous.
 
-**22. Coalition extraction paradox — self-undermining defense**
+**22. Coalition extraction paradox — self-undermining defense** -> ✅
 The Coalition's continued extraction makes its own core territory less defensible against Order operations (L22–24, L525). The text identifies this dynamic but never addresses whether any Coalition institution has recognized it. Are there military voices arguing for extraction slowdowns to maintain the barrier? Industrial voices insisting extraction is non-negotiable? This is the Coalition's most dangerous strategic blind spot and the text leaves it entirely unaddressed.
+*Resolution: paragraph added at Coalition political landscape section. The blind spot is total — the military reads Order expansion as aggression (not changed conditions), extraction engineers read yield decline as logistics, and the synthesis connecting the two requires cross-domain vocabulary no institution possesses. The strategic variable is invisible as a strategic variable; being set by economic logic alone. Established as starting condition — can be pierced through story. Draft 68.*
 
 **23. Order response to Coalition-territory emergence**
 Spontaneous emergence at 1% applies to all populations. If it's happening in Coalition territory (L235), it's also happening in contested and Order-adjacent populations. Does the Order know? Do they care? The text covers Coalition's response (geographic marginalization) but is silent on whether the Order monitors, recruits from, or ignores emergence outside its borders.
