@@ -1,5 +1,5 @@
 # WORLD.md
-*Last updated: world building phase — draft 68*
+*Last updated: world building phase — draft 69*
 *This document captures what is known. Gaps are marked [OPEN] and are not blockers — they will be resolved as the world develops. Do not invent details to fill gaps prematurely.*
 
 ---
@@ -459,6 +459,8 @@ Scientific interrogators are closest to the technical debriefing register becaus
 Industrial interrogators — representatives of the extraction industry or the apparatus supply infrastructure — want site knowledge: what the Order knows about specific deposit characteristics, extraction behavior, substrate concentrations, site geology. This is the most transactional register and the least personal. Industrial interest in a prisoner does not expire on a military timeline; site knowledge retains value long after operational intelligence has dated, making industrial interrogators the most likely to push for sustained long-term detention. The practitioner's site knowledge also maps directly to Order territorial interests, which gives practitioners the clearest structural reason to withhold it — making industrial interrogation the most likely to settle into extended low-intensity pressure rather than acute crisis.
 
 A senior practitioner — one whose knowledge spans operational, Vein-science, and site dimensions — is a contested prisoner in the same structural sense that an Order institution finds a Coalition apparatus architect contested. Multiple Coalition interests want different things, on different timelines, using different methods, without a coordination mechanism that forces them to align. The practitioner in the middle has more room to maneuver than the Coalition intends to give.
+
+The structural rhyme between the two factions' prisoner conflicts is not coincidental and is not a product of shared values — it is what happens when any sufficiently complex institution builds multiple bodies with legitimate competing claims over the same resource and no mechanism that forces them to align. The Order's conflict is ideological; the Coalition's is jurisdictional. The coordination failure is identical.
 
 **Coalition prisoner doctrine.** The Coalition handles captured Order personnel through a sharp doctrinal split based on attunement status. Attuned prisoners are intelligence assets — sustained interrogation, technical debriefing, long-term detention. Their value is what they know about the Vein, and the Coalition's institutional interest in them does not expire quickly.
 
