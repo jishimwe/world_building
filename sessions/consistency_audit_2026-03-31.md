@@ -90,7 +90,7 @@ The 30/70→70/30 inversion via selective retention is plausible. Running the co
 Both factions exhibit identical three-institution conflict dynamics when handling prisoners. The structural parallel is never acknowledged. The causes do differ (Order: ideological; Coalition: jurisdictional), but the structural rhyme is worth naming.
 *Resolution: sentence added after L461 naming what the rhyme reveals — identical coordination failure from different institutional logics; Order conflict is ideological, Coalition conflict is jurisdictional. Draft 69.*
 
-**19. Contact prohibition is not contradictory** *(downgraded from original audit)*
+**19. Contact prohibition is not contradictory** *(downgraded from original audit)* -> ✅ no action needed
 L447 establishes the prohibition targets non-attuned specifically. L475 confirms attuned are "not subject to the contact prohibition in the same protective register." These are consistent. The original audit flagged this as a contradiction; it is not.
 
 **20. Minor terminology drift — attunement/sensitivity/coupling** (L21, L197, L199, L201)
