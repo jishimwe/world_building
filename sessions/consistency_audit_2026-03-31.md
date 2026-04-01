@@ -117,7 +117,7 @@ Spontaneous emergence at 1% applies to all populations. If it's happening in Coa
 The founding catastrophe is mythologized beyond recognition (L93–97). The secret societies preserve exotic state knowledge and operate outside institutional constraints. Has anyone in the societies attempted to reconstruct what actually happened? The text describes their capability and motivation but never addresses whether they've used it on this specific question.
 *Resolution: paragraph added after L99. Recent incidents are tractable; founding event harder (too old, too mythologized, documentation in religious arm archives which some societies have tried to access). Reconstruction is a live project — societies hold more accurate account than the institution, probably sufficient to identify the class of event, not sufficient for certainty, and not written where the institution can find it. Draft 73.*
 
-**25. Coalition counterparts at comparable depth**
+**25. Coalition counterparts at comparable depth** -> deferred
 The Order has: founding families, religious arm, military, secret societies — all described at institutional depth. The Coalition has: elected government, constitutional court, political tensions — described structurally but with less institutional texture. The military, scientific, and industrial institutions appear in the interrogation section (L451–457) but don't have standalone descriptions of their internal politics, recruitment, or failure modes. The industry giants get one paragraph (L315–316) where Order secret societies get multiple detailed sections. Parity gap.
 *Deferred to D024 (industry giants full operational picture) — the top priority decision. Working through D024 will naturally build out the Coalition's military, scientific, and industrial institutions at comparable depth. Not a gap to patch incrementally.*
 
@@ -135,7 +135,7 @@ The Order has: founding families, religious arm, military, secret societies — 
 - War trigger content (D011) is detailed and consistent with faction characterization (L537–539)
 - Wartime folk culture distortion section (L481–502) — every claim checked against earlier institutional and political sections; all consistent
 - MATERIALS_BASELINE and WORLD.md are aligned on substrate properties, grade names, and four-axis model — no material contradictions
-- Core terminology ("substrate," "field," "attunement," "depletion") is stable across all 60 drafts
+- Core terminology ("substrate," "field," "attunement," "depletion") is stable across all 73 drafts
 - All [OPEN] markers in WORLD.md have corresponding decisions in decisions.json — no orphaned markers
 
 ---
@@ -149,4 +149,14 @@ The Order has: founding families, religious arm, military, secret societies — 
 5. **Resolve #16, #17** (desensitization/inversion separation, departure math) — done (draft 62)
 6. **Address #10** (extraction/barrier timeline) — done (draft 63)
 7. **Sharpen #11** (5% composition) — done (draft 64)
-8. **Address #22** (Coalition extraction paradox) — needs decision: most critical strategic omission
+8. **Address #22** (Coalition extraction paradox) — done (draft 68)
+9. **Resolve #12** (quartz transduction mechanism) — done (draft 65)
+10. **Resolve #14** (emergence rate timing) — done (draft 66)
+11. **Resolve #15** (genealogical rewriting scale) — done (draft 67)
+12. **Resolve #18** (parallel three-institution conflict) — done (draft 69)
+13. **Close #19** (contact prohibition — not contradictory) — done
+14. **Resolve #20** (terminology drift) — done (draft 70)
+15. **Resolve #21** (Order response to barrier erosion) — done (draft 71)
+16. **Resolve #23** (Order response to Coalition-territory emergence) — done (draft 72)
+17. **Resolve #24** (secret society reconstruction) — done (draft 73)
+18. **Defer #25** (Coalition institutional depth) — to D024
