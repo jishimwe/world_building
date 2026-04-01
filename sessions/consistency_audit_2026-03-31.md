@@ -119,6 +119,7 @@ The founding catastrophe is mythologized beyond recognition (L93–97). The secr
 
 **25. Coalition counterparts at comparable depth**
 The Order has: founding families, religious arm, military, secret societies — all described at institutional depth. The Coalition has: elected government, constitutional court, political tensions — described structurally but with less institutional texture. The military, scientific, and industrial institutions appear in the interrogation section (L451–457) but don't have standalone descriptions of their internal politics, recruitment, or failure modes. The industry giants get one paragraph (L315–316) where Order secret societies get multiple detailed sections. Parity gap.
+*Deferred to D024 (industry giants full operational picture) — the top priority decision. Working through D024 will naturally build out the Coalition's military, scientific, and industrial institutions at comparable depth. Not a gap to patch incrementally.*
 
 ---
 
