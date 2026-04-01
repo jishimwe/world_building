@@ -101,8 +101,9 @@ L447 establishes the prohibition targets non-attuned specifically. L475 confirms
 
 ## Omission detection (logical entailments not addressed)
 
-**21. Order response to barrier erosion**
+**21. Order response to barrier erosion** -> ✅
 If the biological barrier is weakening due to Coalition extraction (L19, L203), the Order's military and territorial doctrine should be adapting — or visibly failing to adapt. WORLD.md describes the depletion blindness (L26–27) but never addresses whether frontier practitioners have noticed increased survivability in previously hostile territory, or whether tactical doctrine has changed. The absence is conspicuous.
+*Resolution: paragraph added after L271. Practitioners directly and accurately perceive reduced field concentration in the current war — attunement gives them that. What they lack is the causal framework: the Order has no concept of extraction depleting field concentration over time, so the change is attributed to natural variation or Coalition disturbance. The Order gains ground it can perceive but cannot explain, and therefore cannot reason about trajectory. Draft 71.*
 
 **22. Coalition extraction paradox — self-undermining defense** -> ✅
 The Coalition's continued extraction makes its own core territory less defensible against Order operations (L22–24, L525). The text identifies this dynamic but never addresses whether any Coalition institution has recognized it. Are there military voices arguing for extraction slowdowns to maintain the barrier? Industrial voices insisting extraction is non-negotiable? This is the Coalition's most dangerous strategic blind spot and the text leaves it entirely unaddressed.
