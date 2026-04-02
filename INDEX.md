@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 74 · 26 of 35 decisions decided*
+*Generated from draft 74 · 26 of 37 decisions decided*
 
 ---
 
@@ -101,6 +101,8 @@
 | D020 | Bloodline consolidation mechanism           |
 | D022 | Specific faction atrocities                 |
 | D025 | Secret societies — full operational picture |
+| D036 | Gas-phase substrate and biological barrier interaction |
+| D037 | Religious arm — full operational picture |
 
 ### Open — low priority
 
@@ -117,6 +119,12 @@
 
 **1. Bloodline consolidation mechanism (D020)**
 Unblocked by D016. Resolve before character work involving Order founding families.
+
+**2. Religious arm full operational picture (D037)**
+Least developed of the four Order institutional branches. Carried the war trigger framing (D011), maintains the institutional ceiling. Resolve alongside or after D020 and before character work involving Order religious figures.
+
+**3. Gas-phase substrate and biological barrier (D036)**
+Flagged in D005 and WORLD.md open questions. Resolve before writing personal-scale gas-phase substrate into active use or developing military doctrine for personal apparatus.
 
 ---
 

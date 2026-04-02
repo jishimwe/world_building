@@ -1,7 +1,7 @@
 {
   "meta": {
     "project": "world \u2014 unnamed",
-    "doc_version": "draft 60",
+    "doc_version": "draft 74",
     "schema_version": "1.0",
     "status_values": [
       "open",
@@ -205,7 +205,8 @@
       "depends_on": [
         "D013"
       ],
-      "blocks": []
+      "blocks": [],
+      "session_notes": "Scope should include the attuned outskirts communities within Coalition borders \u2014 their internal structure, whether leadership is emerging, political aims, and relationship to Order contact. These are the displaced population most developed in WORLD.md and the most story-relevant sub-topic within D014."
     },
     {
       "id": "D015",
@@ -347,9 +348,9 @@
       "title": "Industry giants \u2014 full operational picture",
       "status": "decided",
       "category": "faction",
-      "priority": "medium",
-      "world_md_line": 339,
-      "summary": "Who leads them, how organized, relationship to constitutional court and regional governments, how sabotage operations function. Develop before character work involving them.",
+      "priority": "high",
+      "world_md_line": 325,
+      "summary": "Three-layer organizational structure (trade association, dynasty family network, shared bank), negative coordination, generational time horizon, archive asymmetry, regional economic dependency as constitutional leverage, three-tier sabotage operations (soft/gray/dark), violence accessed through site security and contractor chains.",
       "depends_on": [],
       "blocks": [],
       "decided_text": "Industry giants operate through three conventional layers (trade association, dynasty family network, shared bank) and four unconventional mechanisms (negative coordination/veto network, time horizon mismatch as patience strategy, archive asymmetry from private operational records, mutual vulnerability equilibrium). Violence is not a standing capacity but is accessed through site security (gray-zone direct layer), a contractor chain (multiple steps removed), and a problem manager per major operation who interfaces between the two without letting them touch. Regional influence is structural through economic dependency; constitutional court influence is indirect through federalism questions (narrow federal authority, broad regional authority). Section written into WORLD.md draft 74."
@@ -491,6 +492,33 @@
       "summary": "Population demographics decided for three time points. Pre-liberation Order: 30% attuned / 70% non-attuned \u2014 classic minority rule, the non-attuned majority provided the liberation's demographic base. Current Order: 70% attuned / 30% non-attuned \u2014 the departure inverted the composition; attuned majority is produced by selective retention, not a pre-existing condition. Current Coalition: 5% attuned / 95% non-attuned \u2014 founding identity holds demographically; 5% traces to liberation-era Order defectors plus accumulated spontaneous emergence. Attuned lineage transmission within established Order families: ~70-80%.",
       "decided_text": "Pre-liberation Order: ~30% attuned / 70% non-attuned. Classic minority-rule structure \u2014 the conditions for the liberation were produced by this demographic. Current Order: ~70% attuned / 30% non-attuned. The liberation's mass departure transformed composition. The non-attuned 30% who remain are self-selected stayers \u2014 embedded in attuned families, ideologically captured, or born after the split. Not naive about the Coalition; contact prohibition risk is confirmation of suppressed doubt, not first exposure. The Order narrativizes the shift as clarification. Current Coalition: ~5% attuned / 95% non-attuned. Coalition founding identity holds demographically. The 5% attuned traces to liberation-era Order defectors plus accumulating spontaneous emergence. Outskirts communities at this scale have their own culture and grievances; geographic marginalization strategy built for smaller numbers is under pressure. Attuned lineage transmission within established Order families: ~70-80%. High enough that the bloodline narrative feels internally accurate \u2014 attuned parents produce attuned children as the reliable outcome, non-attuned children as the exception requiring management. Transmission failures are the source population for the internal underclass.",
       "depends_on": [],
+      "blocks": []
+    },
+    {
+      "id": "D036",
+      "title": "Gas-phase substrate and biological barrier interaction",
+      "status": "open",
+      "category": "world-physics",
+      "priority": "medium",
+      "world_md_line": 721,
+      "summary": "At high matter form grades (supercompressed gas phase and above), can refined substrate recreate ambient field intensity equivalent to a natural high-concentration site? If yes, Coalition personal apparatus could deny Order practitioners operational access at engagement range \u2014 potentially contradicting the Order-excels-at-human-scale invariant. If no, apparatus contains and directs field expression rather than radiating it ambiently. Flagged in D005 session notes and WORLD.md open questions. Related but distinct from D006 (exotic states): D006 asks what exotic states are and when the frontier reaches them; this asks whether gas-phase substrate affects the territorial logic that structures the war.",
+      "depends_on": [
+        "D005"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "D037",
+      "title": "Religious arm \u2014 full operational picture",
+      "status": "open",
+      "category": "faction",
+      "priority": "medium",
+      "world_md_line": null,
+      "summary": "Internal hierarchy, recruitment and advancement mechanics, what the arm actually holds from the founding era (D008 left this as 'possible' with content uncertain), what senior figures want independently of the founding families, how the arm operates in the northern territories. The religious arm is the least developed of the Order's four institutional branches and the one with the most direct story leverage \u2014 it carried the war trigger framing (D011) and maintains the institutional ceiling doctrine. Parallel to D025 (secret societies operational picture). Resolve before character work involving Order religious figures.",
+      "depends_on": [
+        "D008",
+        "D016"
+      ],
       "blocks": []
     }
   ]
