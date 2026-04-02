@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 62 · 25 of 35 decisions decided*
+*Generated from draft 74 · 26 of 35 decisions decided*
 
 ---
 
@@ -7,7 +7,7 @@
 
 | File | Purpose | State |
 |------|---------|-------|
-| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 61 |
+| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 74 |
 | `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Current |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
 | [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
@@ -31,7 +31,7 @@
 | [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 51 | Quartz indirect perception clarified, metal residual distinction added; link to MATERIALS_BASELINE added |
 | [[WORLD#Attunement and the Vein — the biological relationship\|Attunement and the Vein — the biological relationship]] | Stable | Two-component mechanism, overexposure model |
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 57 | Probabilistic heritability added to bloodline consolidation; latent breadth knowledge state decided |
-| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 60 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided |
+| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 74 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided; industry giants full operational picture (D024) |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 59 | Nine subsections — wartime distortion added; Order death doctrine expanded with two-tier structure and recovery connection |
 | [[WORLD#The historical sequence\|The historical sequence]] | Draft 62 | Deep history added: Order ~2000 years, stagnation mechanics, biological desensitization; liberation retconned to 8-10 generations |
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 61 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge; stale [OPEN] at L527 removed |
@@ -57,7 +57,7 @@
 
 ## Decisions
 
-### Decided (25)
+### Decided (26)
 
 | ID   | Title                                                                                                                                                                      |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -86,6 +86,7 @@
 | D010 | Coalition buried history — distributed fragments, unassembled; individual suppression of specific pieces, no coordinating mechanism; Order holds corroborating liberation-era records |
 | D016 | Order ~2000 years old; desensitization biological (ceiling compounded across generations); stagnation via cyclical loss, no competitive pressure, innovation drain into secret societies |
 | D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture |
+| D024 | Industry giants — three organizational layers (trade association, dynasty family network, shared bank), four unconventional mechanisms (negative coordination, time horizon mismatch, archive asymmetry, mutual vulnerability), three-tier sabotage with problem manager |
 
 ### In progress (0)
 
