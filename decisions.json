@@ -192,21 +192,22 @@
       "summary": "Where are the Vein sites? What separates faction territories? What does the physical landscape of the war look like?",
       "depends_on": [],
       "blocks": [],
-      "decided_text": "Earth-sized world, one continent in scope. The Vein exists as a geological stratum that surfaces where tectonic uplift, rifting, erosion, or glaciation brings it within workable depth \u2014 independent of mountain placement. Concentration at surfacing zones is a function of depth: shallow = high concentration = Coalition territory (biologically hostile to Order); deeper = lower concentration = Order-workable. Seven regions: (1) Western margin \u2014 Coalition safe zone, active geology, maritime, high Vein; (2) Southern belt \u2014 Coalition safe zone, highest Vein on continent, equatorial/Mediterranean; (3) Contested corridor \u2014 L-shaped active war zone (vertical arm NW-SW, horizontal arm SW-SE), depletion boundary that advances as Coalition extracts; (4) Order interior \u2014 continental heartland, stable geology, agricultural, Order Vein sites in eastern mountain ranges; (5) Northern territories \u2014 arctic/subarctic, Order-claimed but thinly held, religious arm outposts and independent communities fill the vacuum, strategic reserve function; (6) Eastern seaboard \u2014 Order-administered scattered coastal settlements, maritimely marginal; (7) SW coastal enclave \u2014 Order-claimed but effectively autonomous, largest Order coastal settlement by population but lowest institutional priority, isolated from Order interior by Coalition mountain belt, reaches Order only by sea, faces the Southern Sea. Territory model: blue = Coalition safe zone (not necessarily all governed); orange = Order operational range (not necessarily all governed). The front is a depletion boundary, not a static political line."
+      "decided_text": "Earth-sized world, one continent in scope. The Vein exists as a geological stratum that surfaces where tectonic uplift, rifting, erosion, or glaciation brings it within workable depth \u2014 independent of mountain placement. Concentration at surfacing zones is a function of depth: shallow = high concentration = Coalition territory (biologically hostile to Order); deeper = lower concentration = Order-workable. Seven regions: (1) Western margin \u2014 Coalition safe zone, active geology, maritime, high Vein; (2) Southern belt \u2014 Coalition safe zone, highest Vein on continent, equatorial/Mediterranean; (3) Contested corridor \u2014 L-shaped active war zone (vertical arm NW-SW, horizontal arm SW-SE), depletion boundary that advances as Coalition extracts; (4) Order interior \u2014 continental heartland, stable geology, agricultural, Order Vein sites in eastern mountain ranges; (5) Northern territories \u2014 arctic/subarctic, Order-claimed but thinly held, religious arm outposts and independent communities fill the vacuum, strategic reserve function; (6) Eastern seaboard \u2014 Order-administered scattered coastal settlements, maritimely marginal; (7) SW coastal enclave \u2014 Order-claimed but effectively autonomous, largest Order coastal settlement by population but lowest institutional priority, isolated from Order interior by Coalition mountain belt, reaches Order only by sea, faces the Southern Sea. Territory model: blue = Coalition safe zone (not necessarily all governed); orange = Order operational range (not necessarily all governed). The front is a depletion boundary, not a static political line.",
+      "session_notes": "Sites are not just locations \u2014 they produce social structures around them. The company-town dynamic from D024 is the model to extend. Geography should be built with environment-as-active-force in mind: Vein site concentration shapes settlement pattern, labor relations, folk culture, and military priority simultaneously."
     },
     {
       "id": "D014",
       "title": "Third parties and neutral populations",
       "status": "open",
       "category": "faction",
-      "priority": "medium",
+      "priority": "high",
       "world_md_line": null,
       "summary": "Are there people or groups outside the two main factions \u2014 neutral territories, a third party, displaced populations within each faction's borders?",
       "depends_on": [
         "D013"
       ],
       "blocks": [],
-      "session_notes": "Scope should include the attuned outskirts communities within Coalition borders \u2014 their internal structure, whether leadership is emerging, political aims, and relationship to Order contact. These are the displaced population most developed in WORLD.md and the most story-relevant sub-topic within D014."
+      "session_notes": "Third parties who complicate the binary are load-bearing for moral complexity (Gundam/AoT reference pattern). Attuned outskirts communities within Coalition borders are the most developed sub-topic and most story-relevant entry point."
     },
     {
       "id": "D015",
@@ -323,25 +324,27 @@
       "title": "Specific faction atrocities",
       "status": "open",
       "category": "story-structure",
-      "priority": "medium",
+      "priority": "high",
       "world_md_line": null,
       "summary": "What specific atrocities has each side committed, and how does each faction officially relate to them?",
       "depends_on": [],
-      "blocks": []
+      "blocks": [],
+      "session_notes": "Both sides need specific, symmetrical wounds for the no-clean-moral-sides quality to function \u2014 not just abstract moral complexity. Required before any story structure work."
     },
     {
       "id": "D023",
       "title": "Daily life \u2014 ordinary people on each side",
       "status": "open",
       "category": "story-structure",
-      "priority": "low",
+      "priority": "high",
       "world_md_line": null,
       "summary": "What does daily life look like beneath the level of the elite on each side?",
       "depends_on": [
         "D017",
         "D013"
       ],
-      "blocks": []
+      "blocks": [],
+      "session_notes": "The asymmetry with the Order is the key gap: Order has the Vein as intimate bodily infrastructure (religion, folk belief, social hierarchy all flow from attunement). Coalition has it at industrial and political scale but the ordinary person's daily relationship to the Vein is underdeveloped. D023 needs to close this \u2014 not just civilian routine but how the Vein is present or absent in Coalition daily experience."
     },
     {
       "id": "D024",
@@ -518,6 +521,19 @@
       "depends_on": [
         "D008",
         "D016"
+      ],
+      "blocks": []
+    },
+    {
+      "id": "D038",
+      "title": "Vein overexposure \u2014 external presentation",
+      "status": "open",
+      "category": "world-physics",
+      "priority": "medium",
+      "world_md_line": null,
+      "summary": "What do observers see when a practitioner is being harmed by the field? The internal mechanism (blood composite pathway, permanent vs temporary degradation) is established. The external presentation \u2014 visible symptoms, behavioral changes, what it looks like to bystanders \u2014 is not. Needed before writing scenes where overexposure is witnessed.",
+      "depends_on": [
+        "D028"
       ],
       "blocks": []
     }

@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 74 · 26 of 37 decisions decided*
+*Generated from draft 74 · 26 of 38 decisions decided*
 
 ---
 
@@ -92,17 +92,22 @@
 
 ### Open — high priority
 
+| ID   | Title                                       |
+| ---- | ------------------------------------------- |
+| D014 | Third parties and neutral populations       |
+| D022 | Specific faction atrocities                 |
+
 ### Open — medium priority
 
 | ID   | Title                                       |
 | ---- | ------------------------------------------- |
 | D006 | Exotic states of matter beyond plasma       |
-| D014 | Third parties and neutral populations       |
 | D020 | Bloodline consolidation mechanism           |
-| D022 | Specific faction atrocities                 |
+| D023 | Daily life — ordinary people on each side  |
 | D025 | Secret societies — full operational picture |
 | D036 | Gas-phase substrate and biological barrier interaction |
 | D037 | Religious arm — full operational picture |
+| D038 | Vein overexposure — external presentation |
 
 ### Open — low priority
 
@@ -111,7 +116,6 @@
 | D001 | Name of the resource (the Vein) |
 | D007 | Animal attunement — extent and mechanism |
 | D009 | Faction final names |
-| D023 | Daily life — ordinary people on each side |
 
 ---
 
