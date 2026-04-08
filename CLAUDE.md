@@ -14,7 +14,7 @@ Two factions fight over territory whose value is determined by concentration of 
 This is an Obsidian vault. Files use `[[wiki-links]]` for navigation; use `[[file#heading|display text]]` for section links.
 
 ### Canonical
-- [[WORLD]] — Prose document. **The source of truth.** Currently at draft 53. Claude Code may edit this directly with user approval.
+- [[WORLD]] — Prose document. **The source of truth.** Currently at draft 74. Claude Code may edit this directly with user approval.
 - `decisions.json` — Structured registry of all decisions (open, in-progress, decided). Update via code, verify after every edit.
 - [[INDEX]] — File registry, section map, decision tables, priority queue, key invariants, process notes. Keep in sync with WORLD.md and decisions.json after each significant update.
 
@@ -22,6 +22,8 @@ This is an Obsidian vault. Files use `[[wiki-links]]` for navigation; use `[[fil
 - [[GAME_DESIGN]] — Game design concerns as future audit checklist. Not active blockers for worldbuilding.
 - [[working/MATERIALS_BASELINE|MATERIALS_BASELINE]] — Canonical material reference. Full profiles for all story-present materials. WORLD.md links out to it.
 - [[working/refinement_axis|refinement_axis]] — Refined substrate four-axis development by era.
+- [[WORLDBUILDING_RULES]] — Quality checklist. Run against decisions and new content: Vein system laws, faction parity, narrative utility test, common failure modes.
+- [[REFERENCES]] — Tonal and structural references. The five threads at the top are worldbuilding constraints, not just tone.
 
 Working documents either graduate to WORLD.md (content merged in, file removed) or become standalone reference docs that WORLD.md links to. MATERIALS_BASELINE is an example of the latter.
 

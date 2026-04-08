@@ -15,7 +15,8 @@
 | `artifacts/coalition_capability_arc_v2.html` | Arc grid with axis coupling marked per cell. | Working |
 | `artifacts/refinement_profile_builder.html` | Interactive radar tool, eight presets, axis sliders, profile interpretation. | Working |
 | `artifacts/coalition_political_compass.html` | Coalition political compass visualization. | Working |
-
+| [[WORLDBUILDING_RULES]] | Worldbuilding quality checklist — Vein system laws, faction parity, narrative utility test, failure modes. Run against decisions and new content. | Current |
+| [[REFERENCES]] | Tonal and structural references — game, non-game, cross-media. Threads at the top are the most load-bearing worldbuilding constraints. | Current |
 
 ---
 
@@ -87,6 +88,7 @@
 | D016 | Order ~2000 years old; desensitization biological (ceiling compounded across generations); stagnation via cyclical loss, no competitive pressure, innovation drain into secret societies |
 | D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture |
 | D024 | Industry giants — three organizational layers (trade association, dynasty family network, shared bank), four unconventional mechanisms (negative coordination, time horizon mismatch, archive asymmetry, mutual vulnerability), three-tier sabotage with problem manager |
+| D014 | Third parties — six types (administratively abandoned, ideologically expelled, geographic ungoverned/proto-state, maritime communities, extractive networks, conflict entrepreneurs); Rauta relationship axis; placement deferred to D013 |
 
 ### In progress (0)
 
@@ -94,8 +96,8 @@
 
 | ID   | Title                                       |
 | ---- | ------------------------------------------- |
-| D014 | Third parties and neutral populations       |
 | D022 | Specific faction atrocities                 |
+| D023 | Daily life — ordinary people on each side  |
 
 ### Open — medium priority
 
@@ -103,11 +105,9 @@
 | ---- | ------------------------------------------- |
 | D006 | Exotic states of matter beyond plasma       |
 | D020 | Bloodline consolidation mechanism           |
-| D023 | Daily life — ordinary people on each side  |
 | D025 | Secret societies — full operational picture |
 | D036 | Gas-phase substrate and biological barrier interaction |
 | D037 | Religious arm — full operational picture |
-| D038 | Vein overexposure — external presentation |
 
 ### Open — low priority
 
@@ -121,14 +121,20 @@
 
 ## Priority queue (next sessions)
 
-**1. Bloodline consolidation mechanism (D020)**
+**1. Specific faction atrocities (D022)**
+Required for no-clean-moral-sides to function. Both sides need specific, symmetrical wounds — not just abstract moral complexity.
+
+**2. Daily life — ordinary people on each side (D023)**
+Coalition daily life relationship to the Vein is underdeveloped relative to the Order. Closes the Dune asymmetry before geography or story structure work.
+
+**3. Bloodline consolidation mechanism (D020)**
 Unblocked by D016. Resolve before character work involving Order founding families.
 
-**2. Religious arm full operational picture (D037)**
-Least developed of the four Order institutional branches. Carried the war trigger framing (D011), maintains the institutional ceiling. Resolve alongside or after D020 and before character work involving Order religious figures.
+**4. Religious arm full operational picture (D037)**
+Least developed Order branch. Resolve alongside or after D020 and before character work involving Order religious figures.
 
-**3. Gas-phase substrate and biological barrier (D036)**
-Flagged in D005 and WORLD.md open questions. Resolve before writing personal-scale gas-phase substrate into active use or developing military doctrine for personal apparatus.
+**5. Gas-phase substrate and biological barrier (D036)**
+Resolve before writing personal-scale gas-phase substrate into active use or developing military doctrine for personal apparatus.
 
 ---
 
