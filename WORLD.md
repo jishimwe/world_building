@@ -1,5 +1,5 @@
 # WORLD.md
-*Last updated: world building phase — draft 74*
+*Last updated: world building phase — draft 75*
 *This document captures what is known. Gaps are marked [OPEN] and are not blockers — they will be resolved as the world develops. Do not invent details to fill gaps prematurely.*
 
 ---
@@ -630,6 +630,30 @@ Field concentration at any surfacing zone is a function of depth. Where the laye
 
 ---
 
+## Peripheral actors — populations outside the faction framework
+
+True neutrality does not exist in this world. Any territory worth inhabiting is either Vein-adjacent or economically dependent on those that are. The ideological conflict between the two factions has no neutral position: the question of whether attunement confers custodianship — and who gets to use the Vein, on what terms — cannot be answered with indifference. A population that claims neutrality is making a claim both sides will eventually test against their strategic requirements.
+
+What exists instead are peripheral actors: populations that do not fit cleanly into either faction's framework, but whose position is implicated in the conflict regardless of their intentions. Their relationship to the major factions is not fixed — it is a live negotiation that shifts with the war's momentum, and the terms available to them change as each faction's strategic needs change.
+
+Peripheral populations are defined by their origin condition, not by faction attachment. The faction relationship is a starting point and a tension, not an identity. Six types of peripheral actor are present in this world; specific instances are anchored in the geography section above.
+
+**Administratively abandoned.** Populations inside a faction's claimed territory that the faction never seriously governed — too remote, too marginal, or too difficult to reach for the investment in administration to be worth making. Present on both sides. Over time, governance vacuums produce their own internal hierarchy: informal authority structures that fill the administrative absence, and that may resist reassertion of factional control when the faction's strategic situation changes. What a faction designates as strategic reserve may, on arrival, prove to have developed its own account of the territory.
+
+**Ideologically expelled.** Populations excluded by a faction's founding logic. The Coalition expels attuned individuals who contradict its identity as a non-attuned civilization; the Order marginalizes non-attuned populations whose existence complicates its hierarchy's justification. In both cases, the expelled population builds an identity in the gap — not inherited from the origin faction but constructed from the experience of exclusion itself. Their grievance is specific and achievable in principle: recognition, formal acknowledgment, return to civic standing. This distinguishes them from populations whose interests are structurally incompatible with either faction.
+
+**Geographic ungoverned / proto-state.** Populations whose position is maintained by terrain or distance rather than political strength. The difference from administratively abandoned populations is that no faction has ever had a plausible administrative claim — the governance vacuum exists because control was never viable, not because it lapsed. Given enough time, these populations develop coercive authority of their own. A region that has operated outside factional governance for generations is not empty political space waiting to be filled; it is a nascent polity with its own internal logic and its own response to encroachment.
+
+**Maritime communities.** Populations whose mobility makes them institutionally illegible to both factions. Neither faction has developed maritime infrastructure at a scale sufficient to govern open water; coastal and island communities operating primarily by sea exist outside both administrative maps by default. Their protection is the cost of suppressing them — neither faction has found it worth building the capacity to do so. War changes this calculation by creating demand for the routes they control and the institutional opacity they provide.
+
+**Extractive networks.** Operators in the shadow economy of both factions — moving material outside official channels. Refined substrate, apparatus components, exotic states, intelligence: anything whose value differential between faction territories the war's blockades and licensing restrictions create. Their structural interest in the conflict continuing is not ideological; it is economic. The war is the market condition that makes their operation viable. Peace collapses the price differentials they exploit. This is a network with a business model, not a community with a grievance — there is no population to protect, no territory to defend, no specific resolution that could address what they want, because what they want is the continuation of the conditions that produce their revenue.
+
+**Conflict entrepreneurs.** Distinguished from extractive networks by what they move: not material but conditions. Arms supply to underfunded peripheral actors, recruitment financing for organizations that cannot sustain themselves, information that activates existing grievances at useful moments. Conflict entrepreneurs do not require a commodity; they require the conflict to remain active. Their interest is in preventing the conditions that would allow the primary conflict to resolve — not because they support either side but because resolution is the only outcome that threatens their position.
+
+The structural consequence is that the war's continuation does not require any faction to choose it. Ideologically expelled and administratively abandoned populations act in their own interest toward specific achievable goals; those actions complicate resolution without being directed at it. Extractive networks and conflict entrepreneurs have a direct interest in non-resolution and act accordingly. Proto-state formations resist absorption on their own terms. Maritime communities complicate logistics and sovereignty in ways neither faction has the capacity to address. None of this requires coordination. The war continues in part because every peripheral actor's rational self-interest happens to obstruct the conditions that would end it — and because neither major faction has the margin to address peripheral complexity while fighting each other.
+
+---
+
 ## The world's technology — two tracks
 
 The Coalition and the Order exist at a technology level that maps roughly to the band between early industrial and inter-war in real-world terms. Iron and steel construction. Coal as the dominant energy source, with internal combustion beginning to appear at the margins. Rail as the backbone of long-distance movement, horses still common for local transport and military logistics. Bolt-action or early semi-automatic weapons. Artillery as the dominant battlefield force. Telegraph and early telephone for communication. Surgery with anaesthetic but no antibiotics — infection kills more soldiers than wounds. Cities have gas or early electric lighting and running water in wealthier districts; the countryside lags a generation behind.
@@ -745,7 +769,6 @@ These are genuine open questions, not oversights. They will be resolved as the w
 - What is the religious arm's full operational picture — its internal hierarchy, what it actually holds from the founding era, what senior figures want independently of the founding families, and how it operates in the northern territories? The arm is the least developed of the Order's four institutional branches and the one with the most direct story leverage — it carried the war trigger framing and maintains the institutional ceiling doctrine. Resolve before character work involving Order religious figures. (D037)
 - What was the mechanism of the bloodline consolidation — specifically, how was genealogical rewriting coordinated at the scale required to make attunement appear hereditary across the whole Order? This implies organizational continuity and capability that sits in tension with the founding families' current description as a shifting coalition. Whether the consolidation was performed by a predecessor institution, an earlier and more unified family bloc, or something else has implications for the Order's deep institutional history. (D020)
 - What are the final names of the factions, the resource, and attunement? (D001, D009)
-- Are there people or groups outside the two main factions — neutral territories, a third party, displaced populations within each faction's borders? (D014)
 - What specific atrocities has each side committed, and how does each faction officially relate to them? (D022)
 - What does daily life look like for ordinary people on each side, beneath the level of the elite? (D023)
 - What is the extent and mechanism of attunement in wildlife — the possibility is confirmed, the details are not yet established. (D007)

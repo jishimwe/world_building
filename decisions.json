@@ -198,16 +198,16 @@
     {
       "id": "D014",
       "title": "Third parties and neutral populations",
-      "status": "open",
+      "status": "decided",
       "category": "faction",
       "priority": "high",
-      "world_md_line": null,
+      "world_md_line": 633,
       "summary": "Are there people or groups outside the two main factions \u2014 neutral territories, a third party, displaced populations within each faction's borders?",
       "depends_on": [
         "D013"
       ],
       "blocks": [],
-      "session_notes": "Third parties who complicate the binary are load-bearing for moral complexity (Gundam/AoT reference pattern). Attuned outskirts communities within Coalition borders are the most developed sub-topic and most story-relevant entry point."
+      "decided_text": "True neutrality does not exist in this world. Any territory worth inhabiting is Vein-adjacent or dependent on those who are; the ideological conflict has no neutral position. What exists instead are six types of peripheral actors \u2014 none neutral, all implicated, none fitting cleanly into either faction's framework.\n\nTypes are defined by their origin condition, not by faction attachment. Faction relationship is a starting point and a live tension, not an identity.\n\n1. Administratively abandoned \u2014 populations inside a faction's claimed territory the faction never seriously governed. A governance vacuum that produces its own internal hierarchy over time. Present on both sides.\n\n2. Ideologically expelled \u2014 populations excluded by a faction's founding logic. The Coalition expels attuned who contradict its identity; the Order expels non-attuned who don't fit its hierarchy. Identity is built in the gap, not inherited from the origin faction.\n\n3. Geographic ungoverned / proto-state \u2014 terrain or distance makes administration unviable. Given enough time, governance vacuums develop their own coercive authority. The Order's 'strategic reserve' assumption about the north may be wrong.\n\n4. Maritime communities \u2014 neither faction built the infrastructure to govern them. Mobility and institutional illegibility are their protection, not strength.\n\n5. Extractive networks \u2014 operate in the shadow economy of both factions. Move material: Vein substrate, refined states, apparatus components outside official channels. Structural interest in the conflict continuing (war creates the price differentials they exploit).\n\n6. Conflict entrepreneurs \u2014 move conditions rather than material. Arms supply, recruitment financing, information that prolongs the war. Don't need a commodity; need the conflict to stay hot.\n\nRauta's axis (proxy / auxiliary / surrogate / affiliated) describes the relationship each type has to the main factions at any given moment \u2014 not a fixed property but a live negotiation that shifts with the war's momentum.\n\nStedman classification: types 1-2 are limited spoilers (specific achievable goals); type 3 is a potential total spoiler (existence depends on Order not reasserting control); types 4-6 are greedy spoilers (extract maximum value, structurally benefit from non-resolution).\n\nGeographic placement of specific instances is handled in D013 \u2014 sites produce social structures, and the map determines where each type can plausibly exist."
     },
     {
       "id": "D015",

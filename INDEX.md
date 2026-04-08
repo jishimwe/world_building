@@ -32,13 +32,14 @@
 | [[WORLD#The Vein — effects on the world\|The Vein — effects on the world]] | Draft 51 | Quartz indirect perception clarified, metal residual distinction added; link to MATERIALS_BASELINE added |
 | [[WORLD#Attunement and the Vein — the biological relationship\|Attunement and the Vein — the biological relationship]] | Stable | Two-component mechanism, overexposure model |
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 57 | Probabilistic heritability added to bloodline consolidation; latent breadth knowledge state decided |
-| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 74 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided; industry giants full operational picture (D024) |
+| [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 75 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided; industry giants full operational picture (D024) |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 59 | Nine subsections — wartime distortion added; Order death doctrine expanded with two-tier structure and recovery connection |
 | [[WORLD#The historical sequence\|The historical sequence]] | Draft 62 | Deep history added: Order ~2000 years, stagnation mechanics, biological desensitization; liberation retconned to 8-10 generations |
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 61 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge; stale [OPEN] at L527 removed |
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
 | [[WORLD#Geography — the continent\|Geography — the continent]] | Draft 54 | Seven regions, Vein layer model, faction territory logic, the front as depletion boundary |
+| [[WORLD#Peripheral actors — populations outside the faction framework\|Peripheral actors — populations outside the faction framework]] | Draft 75 | Six types: administratively abandoned, ideologically expelled, geographic ungoverned/proto-state, maritime communities, extractive networks, conflict entrepreneurs (D014) |
 | [[WORLD#The Coalition's apparatus\|The Coalition's apparatus]] | Stable | Four-layer architecture, three-phase development, hard ceiling |
 | [[WORLD#What is not yet decided\|What is not yet decided]] | Living | Updated as decisions resolve |
 
