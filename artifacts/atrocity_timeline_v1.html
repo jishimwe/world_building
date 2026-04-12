@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atrocity Timeline</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: #111116; color: #b0b0be; padding: 22px 26px; }
+
+h1 { font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: #555; margin-bottom: 4px; }
+.sub { font-size: 11px; color: #3a3a4a; margin-bottom: 16px; }
+
+.legend { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
+.leg { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #444; }
+.legbox { width: 18px; height: 7px; border-radius: 1px; }
+
+.controls { display: flex; gap: 5px; margin-bottom: 14px; align-items: center; flex-wrap: wrap; }
+.ctrl-lbl { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #333; }
+.btn { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border: 1px solid #1e1e28; background: transparent; color: #444; cursor: pointer; border-radius: 1px; }
+.btn:hover { border-color: #333; color: #666; }
+.btn.on { border-color: #484855; color: #aaa; background: #161620; }
+
+.tl-wrap { overflow-x: auto; border: 1px solid #1e1e28; }
+svg#tl { display: block; }
+
+/* detail panel */
+#det { margin-top: 12px; border: 1px solid #1e1e28; background: #0c0c12; padding: 16px 18px; min-height: 130px; }
+.det-empty { font-size: 11px; color: #2a2a38; font-style: italic; }
+.det-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 10px; }
+.det-name { font-size: 13px; color: #b0b0be; }
+.det-tag { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 1px; white-space: nowrap; flex-shrink: 0; }
+.det-tag.order { color: #c4922a; border: 1px solid #2c1e08; }
+.det-tag.coalition { color: #4a86d8; border: 1px solid #08182c; }
+.det-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px 14px; margin-bottom: 10px; }
+.det-f label { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: #2a2a38; display: block; margin-bottom: 2px; }
+.det-f p { font-size: 10px; color: #666; line-height: 1.4; }
+.det-desc { font-size: 10px; color: #505060; line-height: 1.65; border-top: 1px solid #161622; padding-top: 10px; }
+.int-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #161622; }
+.int-row .rl { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: #2a2a38; white-space: nowrap; }
+input[type=range] { flex: 1; height: 3px; cursor: pointer; outline: none; border: none; -webkit-appearance: none; background: #1e1e2c; border-radius: 1px; }
+input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; cursor: pointer; }
+.int-v { font-size: 16px; min-width: 22px; text-align: center; }
+.int-d { font-size: 9px; color: #2a2a40; min-width: 180px; }
+.stat-row { display: flex; gap: 4px; margin-top: 8px; align-items: center; }
+.sbtn { font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border: 1px solid #1a1a24; background: transparent; color: #2a2a38; cursor: pointer; border-radius: 1px; }
+.sbtn:hover { border-color: #333; color: #555; }
+.sbtn.on.decided  { color: #5a9a5a; border-color: #1a2c1a; }
+.sbtn.on.proposed { color: #9a7828; border-color: #2c2010; }
+.sbtn.on.open     { color: #555; border-color: #252535; }
+
+/* tooltip */
+#tip { position: fixed; background: #0e0e16; border: 1px solid #1e1e28; padding: 8px 11px; font-size: 10px; max-width: 240px; pointer-events: none; z-index: 999; display: none; line-height: 1.5; }
+#tip.on { display: block; }
+#tn { font-size: 11px; color: #888; margin-bottom: 2px; }
+#tm { font-size: 9px; color: #333; margin-bottom: 4px; }
+#td { font-size: 9px; color: #484858; }
+</style>
+</head>
+<body>
+
+<h1>Atrocity Timeline</h1>
+<p class="sub">~2100 years. Height = intensity (1–5). Piecewise scale — recent eras expanded. Click to inspect.</p>
+
+<div class="legend">
+  <div class="leg"><div class="legbox" style="background:#c4922a"></div>Order</div>
+  <div class="leg"><div class="legbox" style="background:#4a86d8"></div>Coalition</div>
+  <div class="leg"><div class="legbox" style="background:#666;opacity:.9"></div>Decided</div>
+  <div class="leg"><div class="legbox" style="border:1px dashed #555;background:transparent"></div>Proposed</div>
+  <div class="leg"><div class="legbox" style="background:repeating-linear-gradient(55deg,#555 0,#555 3px,transparent 3px,transparent 7px)"></div>Recurring</div>
+</div>
+
+<div class="controls">
+  <span class="ctrl-lbl">Show</span>
+  <button class="btn on" data-f="all">All</button>
+  <button class="btn" data-f="order">Order</button>
+  <button class="btn" data-f="coalition">Coalition</button>
+  <button class="btn" data-f="decided">Decided</button>
+  <button class="btn" data-f="high">Intensity ≥ 4</button>
+</div>
+
+<div class="tl-wrap">
+  <svg id="tl" width="2600" height="520" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="hp-order" patternUnits="userSpaceOnUse" width="9" height="9" patternTransform="rotate(50)">
+        <line x1="0" y1="0" x2="0" y2="9" stroke="rgba(0,0,0,0.35)" stroke-width="4.5"/>
+      </pattern>
+      <pattern id="hp-coal" patternUnits="userSpaceOnUse" width="9" height="9" patternTransform="rotate(50)">
+        <line x1="0" y1="0" x2="0" y2="9" stroke="rgba(0,0,0,0.35)" stroke-width="4.5"/>
+      </pattern>
+    </defs>
+  </svg>
+</div>
+
+<div id="det"><p class="det-empty">Click an event to inspect details and adjust intensity.</p></div>
+
+<div id="tip">
+  <div id="tn"></div>
+  <div id="tm"></div>
+  <div id="td"></div>
+</div>
+
+<script>
+// ── constants ────────────────────────────────────────────────────────────────
+const W = 2600, H = 520, CY = 248;
+const IU = 40; // px per intensity unit
+const NS = 'http://www.w3.org/2000/svg';
+
+// Piecewise year → x  (compresses 2000-year Order history; expands recent eras)
+// Zone A: 0–1700  →  0–380px   (18% for 1700 years)
+// Zone B: 1700–1970 → 380–1820px  (55% for 270 years: liberation + post-partition)
+// Zone C: 1970–2100 → 1820–2600px (30% for 130 years: current war)
+function xOf(yr) {
+  if (yr <= 1700) return (yr / 1700) * 380;
+  if (yr <= 1970) return 380 + ((yr - 1700) / 270) * 1440;
+  return 1820 + ((yr - 1970) / 130) * 780;
+}
+
+// ── content data ─────────────────────────────────────────────────────────────
+const IL = {
+  1: 'Minor — localized, few direct victims',
+  2: 'Moderate — regional, documented casualties',
+  3: 'Significant — population-level impact',
+  4: 'Major — defining historical wound',
+  5: 'Civilizational — epoch-defining, mythologized'
+};
+
+const ERAS = [
+  { name: 'Order Dominance',  s: 0,    e: 1600, fill: '#c47820', op: .06 },
+  { name: 'Pre-Conflict',     s: 1600, e: 1700, fill: '#888',    op: .04 },
+  { name: 'Liberation War',   s: 1700, e: 1760, fill: '#cc4030', op: .12 },
+  { name: 'Post-Partition',   s: 1760, e: 1970, fill: '#4070cc', op: .05 },
+  { name: 'Current War',      s: 1970, e: 2100, fill: '#cc7830', op: .11 },
+];
+
+const YTICKS = [0, 500, 1000, 1500, 1700, 1750, 1800, 1900, 2000];
+
+const EVENTS = [
+  {
+    id: 'founding',    faction: 'order',
+    ys: 0,    ye: 10,
+    name: 'Founding Catastrophe',
+    type: 'Internal — exotic state disaster',
+    intensity: 5, status: 'decided',
+    own: 'The Founding Lesson',   other: '—',
+    desc: 'Practitioners pushing into exotic states produced events catastrophic enough to become mythologized. Established the two-thousand-year institutional ceiling. Specific details retold until they function as parable — the factual account is not recoverable. The religious arm\'s founding authority derives from custody of this event.',
+  },
+  {
+    id: 'corrections', faction: 'order',
+    ys: 300,  ye: 1650,
+    name: 'Internal Corrections',
+    type: 'Periodic cleansing / population suppression',
+    intensity: 2, status: 'proposed', recurring: true,
+    own: 'Corrections / Restorations',  other: '—',
+    desc: 'Periodic suppression of non-attuned populations within Order territory that grew too organized or too clearly functional as a society. Not always violent — sometimes economic removal, administrative erasure, forced dispersal, sometimes more. Unrecorded in Order official history. Preserved in secret society archives.',
+  },
+  {
+    id: 'suppression', faction: 'order',
+    ys: 1705, ye: 1760,
+    name: 'The Suppression',
+    type: 'Scorched earth / destruction of a civilization',
+    intensity: 5, status: 'proposed',
+    own: 'The Suppression',  other: 'The Burning',
+    desc: 'Order military response to the liberation war. Attempted to destroy the non-attuned civilization in Vein-dense territories — settlements, food infrastructure, knowledge institutions. Practitioners deployed at overreach intensities produced excess propagation into civilian populations. The founding wound of Coalition mythology.',
+  },
+  {
+    id: 'architects',  faction: 'order',
+    ys: 1975, ye: 2000,
+    name: 'Killing of Apparatus Architects',
+    type: 'Targeted elimination',
+    intensity: 2, status: 'decided',
+    own: 'Policy Enforcement / Righteous Action',  other: '—',
+    desc: 'Systematic killing of Coalition engineers and senior apparatus operators in occupied territory. Not uniform policy — varies with commander political position. Both doctrinal and pragmatic commanders kill, but the timing, justification, and what happens in the gap between capture and death differs. That gap is where character stories live.',
+  },
+  {
+    id: 'quarantine',  faction: 'order',
+    ys: 1983, ye: 2000,
+    name: 'Contamination Processing',
+    type: 'Administrative disappearance',
+    intensity: 2, status: 'proposed',
+    own: 'Quarantine Protocol',  other: '—',
+    desc: 'Non-attuned Order citizens found to have had sustained Coalition contact are detained and transferred to founding family-controlled institutions. Procedures not subject to military oversight. Outcomes not tracked in any document a field commander can access. Individual cases; no single order names what happens at the end.',
+  },
+  {
+    id: 'site_clear',  faction: 'coalition',
+    ys: 1705, ye: 1760,
+    name: 'Site Clearance',
+    type: 'Infrastructure destruction / civilian casualties',
+    intensity: 4, status: 'proposed',
+    own: 'Military Infrastructure Targeting',  other: 'Desecration / Massacre',
+    desc: 'Apparatus used to rapidly destabilize inhabited Order Vein sites during the liberation war. Coalition doctrine classifies all Vein sites as military infrastructure. Rapid destabilization at inhabited sites produces energy release propagating through everything present. Casualties recorded as infrastructure targets neutralized — no separate civilian category exists in doctrine.',
+  },
+  {
+    id: 'verification',faction: 'coalition',
+    ys: 1762, ye: 1820,
+    name: 'Verification',
+    type: 'Founding-era attuned purge',
+    intensity: 4, status: 'proposed',
+    own: '— (period not discussed)',  other: '—',
+    desc: 'Post-liberation hardening of Coalition founding identity. Attuned people not from documented defector lineages were identified and removed to margins. Those who could not be contained, or were too visibly attuned to manage quietly, disappeared from the record with their documentation. Founding scientists\' attunement was erased from official history before history was set.',
+  },
+  {
+    id: 'extraction',  faction: 'coalition',
+    ys: 1770, ye: 2000,
+    name: 'Extraction Program',
+    type: 'Ongoing demographic engineering / slow atrocity',
+    intensity: 3, status: 'proposed', ongoing: true,
+    own: 'Economic Development',  other: '— (mechanism unnamed by either faction)',
+    desc: 'Industrial extraction continues despite internal data connecting rates to biological barrier drop. Decision made at every budget cycle for generations. Harm accumulates in Order-side populations experiencing the barrier change as something happening to them from outside, cause unknown to either faction institutionally. Coalition internal position: disputed causation.',
+  },
+  {
+    id: 'prisoners',   faction: 'coalition',
+    ys: 1979, ye: 2000,
+    name: 'Three-Institution Prisoner Handling',
+    type: 'Uncoordinated systemic harm',
+    intensity: 2, status: 'proposed',
+    own: 'Detention Protocol',  other: '—',
+    desc: 'Military, scientific, and industrial Coalition institutions compete for access to the same Order prisoners on different timelines with no coordination mechanism. Cumulative harm produced without any institution responsible for the whole. The structural mirror of the Order\'s three-institution conflict over apparatus architects.',
+  },
+];
+
+// ── state ────────────────────────────────────────────────────────────────────
+let sel = null;
+let filt = 'all';
+
+function shouldShow(ev) {
+  if (filt === 'order'     && ev.faction !== 'order')    return false;
+  if (filt === 'coalition' && ev.faction !== 'coalition') return false;
+  if (filt === 'decided'   && ev.status  !== 'decided')  return false;
+  if (filt === 'high'      && ev.intensity < 4)           return false;
+  return true;
+}
+
+// ── SVG builder ──────────────────────────────────────────────────────────────
+function el(tag, attrs, txt) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (txt !== undefined) e.textContent = txt;
+  return e;
+}
+
+function build() {
+  const svg = document.getElementById('tl');
+
+  // Keep defs, remove everything else
+  [...svg.children].forEach(c => { if (c.tagName !== 'defs') c.remove(); });
+  // Clear any accumulated linearGradient defs from previous builds
+  const defs = svg.querySelector('defs');
+  [...defs.children].forEach(c => { if (c.tagName === 'linearGradient') c.remove(); });
+
+  // ── background ──
+  svg.appendChild(el('rect', { x:0, y:0, width:W, height:H, fill:'#0c0c12' }));
+
+  // ── era bands ──
+  ERAS.forEach(era => {
+    const x1 = xOf(era.s), x2 = xOf(era.e);
+    svg.appendChild(el('rect', { x:x1, y:0, width:x2-x1, height:H, fill:era.fill, opacity:era.op }));
+    const lbl = el('text', { x:x1+5, y:14, 'font-size':8, 'font-family':'system-ui', fill:'#2a2a3a', 'letter-spacing':0.7 }, era.name.toUpperCase());
+    svg.appendChild(lbl);
+  });
+
+  // ── zone boundary markers ──
+  [1700, 1970].forEach(yr => {
+    svg.appendChild(el('line', { x1:xOf(yr), y1:0, x2:xOf(yr), y2:H, stroke:'#181824', 'stroke-width':1, 'stroke-dasharray':'3 5' }));
+  });
+
+  // ── center line ──
+  svg.appendChild(el('line', { x1:0, y1:CY, x2:W, y2:CY, stroke:'#2a2a3c', 'stroke-width':1 }));
+
+  // ── faction labels ──
+  svg.appendChild(el('text', { x:5, y:CY-64, 'font-size':8.5, 'font-family':'system-ui', fill:'#3a2e18', 'letter-spacing':2 }, 'ORDER'));
+  svg.appendChild(el('text', { x:5, y:CY+78, 'font-size':8.5, 'font-family':'system-ui', fill:'#182038', 'letter-spacing':2 }, 'COALITION'));
+
+  // ── year ticks & labels ──
+  YTICKS.forEach(yr => {
+    const x = xOf(yr);
+    svg.appendChild(el('line', { x1:x, y1:CY-5, x2:x, y2:CY+5, stroke:'#2a2a3c', 'stroke-width':1 }));
+    svg.appendChild(el('text', { x:x, y:CY+17, 'font-size':7.5, 'text-anchor':'middle', 'font-family':'system-ui', fill:'#2e2e40' }, yr===0?'Yr.0':`+${yr}`));
+  });
+
+  // ── events ──
+  EVENTS.forEach(ev => {
+    if (!shouldShow(ev)) return;
+
+    const color  = ev.faction === 'order' ? '#c4922a' : '#4a86d8';
+    const x      = xOf(ev.ys);
+    const xe     = xOf(ev.ye);
+    const w      = Math.max(18, xe - x);
+    const h      = ev.intensity * IU;
+    const rectY  = ev.faction === 'order' ? CY - h : CY + 1;
+    const opBase = ev.status === 'decided' ? 0.95 : ev.status === 'proposed' ? 0.65 : 0.28;
+
+    const g = document.createElementNS(NS, 'g');
+    g.style.cursor = 'pointer';
+
+    // main fill
+    g.appendChild(el('rect', { x, y:rectY, width:w, height:h, fill:color, opacity:opBase, rx:1 }));
+
+    // recurring stripe overlay
+    if (ev.recurring) {
+      const pid = `hp-${ev.faction === 'order' ? 'order' : 'coal'}`;
+      g.appendChild(el('rect', { x, y:rectY, width:w, height:h, fill:`url(#${pid})`, opacity:0.55, rx:1 }));
+    }
+
+    // ongoing: right-edge fade
+    if (ev.ongoing) {
+      const gid = `fade-${ev.id}`;
+      const grad = el('linearGradient', { id:gid, x1:'0%', y1:'0%', x2:'100%', y2:'0%' });
+      grad.appendChild(el('stop', { offset:'0%',   'stop-color':'#0c0c12', 'stop-opacity':'0' }));
+      grad.appendChild(el('stop', { offset:'65%',  'stop-color':'#0c0c12', 'stop-opacity':'0' }));
+      grad.appendChild(el('stop', { offset:'100%', 'stop-color':'#0c0c12', 'stop-opacity':'0.75' }));
+      defs.appendChild(grad);
+      g.appendChild(el('rect', { x, y:rectY, width:w, height:h, fill:`url(#${gid})`, rx:1 }));
+    }
+
+    // selected outline
+    if (sel?.id === ev.id) {
+      g.appendChild(el('rect', { x:x-2, y:rectY-2, width:w+4, height:h+4, fill:'none', stroke:'rgba(255,255,255,0.35)', 'stroke-width':1.5, rx:2 }));
+    }
+
+    // name label
+    g.appendChild(el('text', {
+      x: x + 3,
+      y: ev.faction === 'order' ? rectY - 4 : rectY + h + 11,
+      'font-size': 8.5, 'font-family': 'system-ui',
+      fill: 'rgba(255,255,255,0.38)', 'pointer-events': 'none'
+    }, ev.name));
+
+    // intensity tick marks on left edge
+    for (let i = 1; i < ev.intensity; i++) {
+      const ty = ev.faction === 'order' ? rectY + i * IU : rectY + h - i * IU;
+      g.appendChild(el('line', { x1:x, y1:ty, x2:x+6, y2:ty, stroke:'rgba(255,255,255,0.15)', 'stroke-width':1 }));
+    }
+
+    g.addEventListener('click',       () => { sel = ev; build(); renderDet(ev); });
+    g.addEventListener('mouseenter',  e  => showTip(ev, e));
+    g.addEventListener('mousemove',   e  => moveTip(e));
+    g.addEventListener('mouseleave',  ()  => hideTip());
+
+    svg.appendChild(g);
+  });
+}
+
+// ── tooltip ──────────────────────────────────────────────────────────────────
+const TIP = document.getElementById('tip');
+function showTip(ev, e) {
+  document.getElementById('tn').textContent = ev.name;
+  document.getElementById('tm').textContent =
+    `${ev.faction.toUpperCase()} · +${ev.ys}–+${ev.ye} · Intensity ${ev.intensity}/5 · ${ev.status}`;
+  document.getElementById('td').textContent = ev.desc.substring(0, 100) + '…';
+  TIP.classList.add('on');
+  moveTip(e);
+}
+function moveTip(e) { TIP.style.left = (e.clientX+14)+'px'; TIP.style.top = (e.clientY-6)+'px'; }
+function hideTip()  { TIP.classList.remove('on'); }
+
+// ── detail panel ─────────────────────────────────────────────────────────────
+function renderDet(ev) {
+  const p = document.getElementById('det');
+  const color = ev.faction === 'order' ? '#c4922a' : '#4a86d8';
+  p.innerHTML = `
+    <div class="det-top">
+      <div class="det-name">${ev.name}</div>
+      <div class="det-tag ${ev.faction}">${ev.faction==='order'?'The Attuned Order':'The Forge Coalition'}</div>
+    </div>
+    <div class="det-grid">
+      <div class="det-f"><label>Period</label><p>+${ev.ys}${ev.ye!==ev.ys?' – +'+ev.ye:''}${ev.ongoing?' (ongoing)':''}</p></div>
+      <div class="det-f"><label>Type</label><p>${ev.type}</p></div>
+      <div class="det-f"><label>Own faction's name</label><p>${ev.own}</p></div>
+      <div class="det-f"><label>Other faction's name</label><p>${ev.other||'—'}</p></div>
+    </div>
+    <div class="det-desc">${ev.desc}</div>
+    <div class="int-row">
+      <span class="rl">Intensity</span>
+      <input type="range" min="1" max="5" step="1" value="${ev.intensity}" id="isl" style="accent-color:${color}">
+      <div class="int-v" id="iv" style="color:${color}">${ev.intensity}</div>
+      <div class="int-d" id="id">${IL[ev.intensity]}</div>
+    </div>
+    <div class="stat-row">
+      <span class="ctrl-lbl">Status</span>
+      <button class="sbtn decided  ${ev.status==='decided'  ?'on':''}" data-s="decided" >Decided</button>
+      <button class="sbtn proposed ${ev.status==='proposed' ?'on':''}" data-s="proposed">Proposed</button>
+      <button class="sbtn open     ${ev.status==='open'     ?'on':''}" data-s="open"    >Open</button>
+    </div>
+  `;
+  document.getElementById('isl').addEventListener('input', function() {
+    ev.intensity = +this.value;
+    document.getElementById('iv').textContent = ev.intensity;
+    document.getElementById('id').textContent = IL[ev.intensity];
+    build();
+  });
+  p.querySelectorAll('.sbtn').forEach(b =>
+    b.addEventListener('click', () => { ev.status = b.dataset.s; build(); renderDet(ev); })
+  );
+}
+
+// ── filters ──────────────────────────────────────────────────────────────────
+document.querySelectorAll('.btn[data-f]').forEach(b =>
+  b.addEventListener('click', () => {
+    filt = b.dataset.f;
+    document.querySelectorAll('.btn[data-f]').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    build();
+  })
+);
+
+build();
+</script>
+</body>
+</html>
