@@ -322,14 +322,14 @@
     {
       "id": "D022",
       "title": "Specific faction atrocities",
-      "status": "open",
+      "status": "in-progress",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": null,
       "summary": "What specific atrocities has each side committed, and how does each faction officially relate to them?",
       "depends_on": [],
       "blocks": [],
-      "session_notes": "Both sides need specific, symmetrical wounds for the no-clean-moral-sides quality to function \u2014 not just abstract moral complexity. Required before any story structure work."
+      "session_notes": "Founding catastrophe layer written into WORLD.md (draft 76). Established: event was a period not a single event; staggered triggers (deliberate push, ignorant experimentation); victims were everyone in affected regions; consequences include famines/displacement/plagues/desertification/climate extremes. Five residual dimensions at abstraction level: (A) geological scarring of Vein expression in affected zones, (B) biological residue in survivor descendants possibly feeding attunement distribution, (C) knowledge contamination sealed in religious archives, (E) dead attunement zones on the map, (F) long-tail field exposure misread as disease. Still open: the three original questions (Suppression scale, Verification endpoint, inter-war period) plus the full atrocity registry beyond the founding event."
     },
     {
       "id": "D023",

@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 74 · 26 of 38 decisions decided*
+*Generated from draft 76 · 27 of 38 decisions decided*
 
 ---
 
@@ -93,11 +93,16 @@
 
 ### In progress (0)
 
-### Open — high priority
+### In progress
 
 | ID   | Title                                       |
 | ---- | ------------------------------------------- |
 | D022 | Specific faction atrocities                 |
+
+### Open — high priority
+
+| ID   | Title                                       |
+| ---- | ------------------------------------------- |
 | D023 | Daily life — ordinary people on each side  |
 
 ### Open — medium priority
@@ -122,8 +127,8 @@
 
 ## Priority queue (next sessions)
 
-**1. Specific faction atrocities (D022)**
-Required for no-clean-moral-sides to function. Both sides need specific, symmetrical wounds — not just abstract moral complexity.
+**1. Specific faction atrocities (D022)** *(in progress)*
+Founding catastrophe written (draft 76): period not single event, staggered triggers, civilizational scale. Five residual dimensions at abstraction level (geological scarring, biological residue, epistemic burial, dead attunement zones, long-tail field plague). Still open: Suppression scale, Verification endpoint, inter-war period, full atrocity registry beyond founding.
 
 **2. Daily life — ordinary people on each side (D023)**
 Coalition daily life relationship to the Vein is underdeveloped relative to the Order. Closes the Dune asymmetry before geography or story structure work.
