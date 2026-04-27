@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 77 · 27 of 38 decisions decided*
+*Generated from draft 77 · 28 of 38 decisions decided*
 
 ---
 
@@ -90,14 +90,7 @@
 | D012 | Latent breadth detectable via Coalition migration data (attuned people move from Vein-intense zones); data unassembled, cross-disciplinary to read; Order has no picture |
 | D024 | Industry giants — three organizational layers (trade association, dynasty family network, shared bank), four unconventional mechanisms (negative coordination, time horizon mismatch, archive asymmetry, mutual vulnerability), three-tier sabotage with problem manager |
 | D014 | Third parties — six types (administratively abandoned, ideologically expelled, geographic ungoverned/proto-state, maritime communities, extractive networks, conflict entrepreneurs); Rauta relationship axis; placement deferred to D013 |
-
-### In progress (0)
-
-### In progress
-
-| ID   | Title                                       |
-| ---- | ------------------------------------------- |
-| D022 | Specific faction atrocities                 |
+| D022 | Founding Catastrophe; The Suppression/Burning (Order — no Order name, correction-not-war); Verification/Structural Suppression (Coalition — liberation contributors erased, ambient ongoing). Inter-war: 3 wars + small conflicts noted, atrocities deferred. |
 
 ### Open — high priority
 
@@ -127,10 +120,7 @@
 
 ## Priority queue (next sessions)
 
-**1. Specific faction atrocities (D022)** *(in progress)*
-Three layers written (drafts 76–77). Founding catastrophe, The Suppression/Burning (Order — no Order name, correction-not-war framing, procedural aftermath), Verification (Coalition — founding-era removal of attuned including liberation contributors; calcified into permanent structural suppression). Still open: inter-war period (Q3), current-war entries, symmetry check.
-
-**2. Daily life — ordinary people on each side (D023)**
+**1. Daily life — ordinary people on each side (D023)**
 Coalition daily life relationship to the Vein is underdeveloped relative to the Order. Closes the Dune asymmetry before geography or story structure work.
 
 **3. Bloodline consolidation mechanism (D020)**

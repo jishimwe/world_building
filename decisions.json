@@ -322,14 +322,15 @@
     {
       "id": "D022",
       "title": "Specific faction atrocities",
-      "status": "in-progress",
+      "status": "decided",
       "category": "story-structure",
       "priority": "high",
       "world_md_line": null,
       "summary": "What specific atrocities has each side committed, and how does each faction officially relate to them?",
       "depends_on": [],
       "blocks": [],
-      "session_notes": "Three layers written into WORLD.md. Founding catastrophe (draft 76): period not event, staggered triggers, five residual dimensions. The Suppression/Burning (draft 77): Order deployed without calibration against a rebellion it did not treat as war \u2014 no Order name, procedural aftermath only, Coalition founding wound. Verification (draft 77): founding-era removal of prominent attuned people including liberation contributors; founding scientists erased from record; calcified into permanent structural suppression with navigation culture developing over generations. Still open: inter-war period (Q3), full atrocity registry symmetry check, current-war entries."
+      "session_notes": "Closed. Inter-war conflict history (3 wars + small conflicts) deferred for geography/story structure sessions.",
+      "decided_text": "Both factions have specific, asymmetric atrocities across three eras. Order: Founding Catastrophe (period of exotic state failures, civilizational scale, five residual dimensions); The Suppression/Burning (correction-not-war against the liberation, uncalibrated force, no Order name, Coalition founding wound). Coalition: Verification (founding-era removal of prominent attuned people including liberation contributors, founding scientists erased from record, calcified into permanent structural suppression with navigation culture). Inter-war period (+1760\u20131970): three significant wars and recurring smaller conflicts noted \u2014 no discrete atrocities registered yet, may flesh out later. Ongoing: Extraction Program (slow atrocity, both factions institutionally blind to cause)."
     },
     {
       "id": "D023",
