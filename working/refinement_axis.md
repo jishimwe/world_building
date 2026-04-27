@@ -48,7 +48,7 @@ Key discovery: fragment shape affects statistical face orientation during packin
 |---|---|---|
 | Shape | 6 | Formed geometry unlocked for vehicle-scale components. Cleave-along-natural-planes technique. Precision refining facilities exist at limited scale. |
 | Size | 7 | Full grading range in production. Powder grades for installation, formed grades for vehicle/personal. |
-| Matter form | 2 | Beginning to be investigated. Anomalous batch performance now attributed to pre-activation state differences. No controlled production yet. D005 open. |
+| Matter form | 2 | Beginning to be investigated. Anomalous batch performance now attributed to pre-activation state differences. No controlled production yet. (D005 decided.) |
 | Concentration | 7 | High-purity grades available. Tiered supply chain: bulk installation grade vs. precision personal grade. |
 
 Key question: is matter form the missing variable that explains why some refined substrate outperforms equivalent-grade material on the other three axes?
@@ -84,4 +84,4 @@ The visual signature of each grade:
 ---
 
 *Scale: 0 = undiscovered / primitive · 10 = apex / frontier*
-*Matter form score is estimated — D005 is open and this axis is the primary unresolved question*
+*Matter form score is estimated — D005 decided: solid strained crystal → superheated liquid → supercompressed gas → pre-plasma confinement, each phase storing energy in a configuration the material would not naturally occupy.*

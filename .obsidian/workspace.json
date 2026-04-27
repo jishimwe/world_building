@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f0064ac1a645fa32",
+            "id": "bcbd1146ff91e098",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "INDEX.md",
-                "mode": "source",
+                "file": "WORLD_ANALYSIS.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "INDEX"
+              "title": "WORLD_ANALYSIS"
             }
           }
         ]
@@ -95,8 +95,8 @@
               "type": "backlink",
               "state": {
                 "file": "INDEX.md",
-                "collapseAll": false,
-                "extraContext": false,
+                "collapseAll": true,
+                "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "INDEX.md",
+                "file": "working/MATERIALS_BASELINE.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from INDEX"
+              "title": "Outgoing links from MATERIALS_BASELINE"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "INDEX.md",
+                "file": "WORLD_ANALYSIS.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of INDEX"
+              "title": "Outline of WORLD_ANALYSIS"
             }
           }
         ],
@@ -170,7 +170,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 303.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -183,24 +183,30 @@
       "bases:Create new base": false
     }
   },
-  "active": "f0064ac1a645fa32",
+  "active": "bcbd1146ff91e098",
   "lastOpenFiles": [
+    "INDEX.md.tmp.1524.1777309466338",
+    "INDEX.md.tmp.1524.1777309457274",
+    "WORLD.md.tmp.1524.1777309442843",
+    "WORLD.md.tmp.1524.1777309424985",
+    "WORLD.md.tmp.1524.1777309412650",
+    "REFERENCES.md",
     "CLAUDE.md",
-    "WORLD.md",
-    "artifacts/materials_taxonomy_v4.html",
-    "artifacts/refinement_profile_builder.html",
-    "artifacts/coalition_political_compass_final.html",
-    "artifacts/coalition_political_compass.html",
-    "artifacts/coalition_capability_arc_v2.html",
-    "refinement_axis.md",
-    "working/refinement_axis.md",
-    "working/MATERIALS_BASELINE.md",
-    "sessions",
-    "artifacts",
-    "working",
+    "INDEX.md.tmp.7558.1776446749123",
+    "INDEX.md.tmp.7558.1776446741405",
+    "INDEX.md.tmp.7558.1776446737499",
+    "WORLD.md.tmp.7558.1776446701198",
+    "artifacts/atrocity_timeline_v1.html.tmp.1814.1776000186083",
+    "artifacts/timeline.png",
+    "artifacts/atrocity_timeline_v1.html",
     "INDEX.md",
-    "decisions.json",
-    "refinement_profile_builder.html",
+    "sessions/consistency_audit_2026-03-31.md",
+    "WORLDBUILDING_RULES.md",
+    "WORLD.md",
+    "working/MATERIALS_BASELINE.md",
+    "Page Name.md",
+    "working/refinement_axis.md",
+    "refinement_axis.md",
     "refinement_axes.md",
     "MATERIALS_BASELINE.md",
     "GAME_DESIGN.md"
