@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 76 · 27 of 38 decisions decided*
+*Generated from draft 77 · 27 of 38 decisions decided*
 
 ---
 
@@ -128,7 +128,7 @@
 ## Priority queue (next sessions)
 
 **1. Specific faction atrocities (D022)** *(in progress)*
-Founding catastrophe written (draft 76): period not single event, staggered triggers, civilizational scale. Five residual dimensions at abstraction level (geological scarring, biological residue, epistemic burial, dead attunement zones, long-tail field plague). Still open: Suppression scale, Verification endpoint, inter-war period, full atrocity registry beyond founding.
+Three layers written (drafts 76–77). Founding catastrophe, The Suppression/Burning (Order — no Order name, correction-not-war framing, procedural aftermath), Verification (Coalition — founding-era removal of attuned including liberation contributors; calcified into permanent structural suppression). Still open: inter-war period (Q3), current-war entries, symmetry check.
 
 **2. Daily life — ordinary people on each side (D023)**
 Coalition daily life relationship to the Vein is underdeveloped relative to the Order. Closes the Dune asymmetry before geography or story structure work.
