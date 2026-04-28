@@ -1,5 +1,5 @@
 # World index
-*Generated from draft 77 · 28 of 38 decisions decided*
+*Generated from draft 77 · 28 of 39 decisions decided*
 
 ---
 
@@ -107,6 +107,7 @@
 | D025 | Secret societies — full operational picture |
 | D036 | Gas-phase substrate and biological barrier interaction |
 | D037 | Religious arm — full operational picture |
+| D039 | Inter-war conflict history (+1760–1970) — 3 wars + small conflicts; territorial/political/atrocity outcomes; depends on D013, D022 |
 
 ### Open — low priority
 

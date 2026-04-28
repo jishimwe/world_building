@@ -537,6 +537,21 @@
         "D028"
       ],
       "blocks": []
+    },
+    {
+      "id": "D039",
+      "title": "Inter-war conflict history (+1760\u20131970)",
+      "status": "open",
+      "category": "story-structure",
+      "priority": "medium",
+      "world_md_line": null,
+      "summary": "Three significant wars and recurring smaller conflicts occurred in the 210 years between the liberation war partition and the current war. What were the major territorial, political, and atrocity outcomes of each? Which changed the border, which produced internal faction realignments, and did any generate atrocities worth registering in the D022 registry?",
+      "depends_on": [
+        "D013",
+        "D022"
+      ],
+      "blocks": [],
+      "session_notes": "Spun out of D022 closure. Existence of 3 wars + small conflicts established; detail deferred. Resolve alongside or after geography (D013) and before detailed story structure work."
     }
   ]
 }
