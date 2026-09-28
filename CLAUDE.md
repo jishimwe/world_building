@@ -14,7 +14,7 @@ Two factions fight over territory whose value is determined by concentration of 
 This is an Obsidian vault. Files use `[[wiki-links]]` for navigation; use `[[file#heading|display text]]` for section links.
 
 ### Canonical
-- [[WORLD]] — Prose document. **The source of truth.** Currently at draft 74. Claude Code may edit this directly with user approval.
+- [[WORLD]] — Prose document. **The source of truth.** Currently at draft 77. Claude Code may edit this directly with user approval.
 - `decisions.json` — Structured registry of all decisions (open, in-progress, decided). Update via code, verify after every edit.
 - [[INDEX]] — File registry, section map, decision tables, priority queue, key invariants, process notes. Keep in sync with WORLD.md and decisions.json after each significant update.
 
@@ -72,15 +72,19 @@ Working documents either graduate to WORLD.md (content merged in, file removed) 
 ## Current state and priorities
 
 ### Recently completed
+- D022 (founding catastrophe, Suppression, Verification), D014 (peripheral actors), D024 (industry giants): written into WORLD.md, drafts 74–77
 - Culture layer (D034): cross-faction encounters, interrogation, indoctrination pipeline, folk psychology — all written into WORLD.md
 - Wartime folk culture distortion (draft 52–53): performance pressure, death belief, non-attuned calcification, secret society tension (Order); borrowed clarity, meritocracy/death, veteran dissonance (Coalition)
 - D019 decided: materials taxonomy complete, lives in MATERIALS_BASELINE
 - D035 decided: Order demographics (30/70 att/non-att pre-liberation; 70/30 current Order)
 
 ### Priority queue
-1. Geography and site distribution (D013)
-2. Story structure decisions: D002/D003, D008, D011, D012
-3. Industry giants full operational picture (D024)
+1. Daily life — ordinary people on each side (D023)
+2. Inter-war conflict history (D039)
+3. Bloodline consolidation (D020), then religious arm operational picture (D037)
+4. Gas-phase substrate and biological barrier (D036); overexposure external presentation (D038)
+
+(See [[INDEX]] for the full decision tables.)
 
 ## What not to do
 
