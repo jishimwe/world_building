@@ -12,7 +12,7 @@ Audits INDEX.md, WORLD.md, and decisions.json for sync issues, then fixes all pr
    - Present in both but with mismatched status
 
 3. **Check counts and draft numbers** — verify:
-   - INDEX.md header "N of 38 decisions decided" matches the actual decided count in decisions.json
+   - INDEX.md header "N of M decisions decided" (M = total entries in decisions.json) matches the actual decided count in decisions.json
    - INDEX.md `### Decided (N)` count matches the decided table row count
    - INDEX.md header draft number matches WORLD.md's draft number
    - decisions.json `meta.doc_version` matches WORLD.md's draft number

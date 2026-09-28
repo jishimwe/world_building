@@ -18,6 +18,10 @@
 | `artifacts/continent_geography_workshop.html` | D013 continent map — climate, territory, Vein layer, front, indicative D014 markers. | Working |
 | `artifacts/atrocity_timeline_v1.html` | D022 atrocity timeline — both factions, decided/proposed events. Needs D039 content. | Working |
 | [[WORLDBUILDING_RULES]] | Worldbuilding quality checklist — Vein system laws, faction parity, narrative utility test, failure modes. Run against decisions and new content. | Current |
+| [[working/refinement_axis\|refinement_axis]] | Refined substrate four-axis development by era. | Current |
+| [[RE-ENTRY]] | Re-entry guide after a break — map of the project, not a source of truth. | Draft 77 |
+| [[WORLD_ANALYSIS]] | Last full consistency and gap analysis. | Draft 76 |
+| `sessions/` | Past audit logs (e.g. consistency_audit_2026-03-31). | Archive |
 | [[REFERENCES]] | Tonal and structural references — game, non-game, cross-media. Threads at the top are the most load-bearing worldbuilding constraints. | Current |
 
 ---
@@ -36,7 +40,7 @@
 | [[WORLD#How attunement works — the three phases\|How attunement works — the three phases]] | Draft 57 | Probabilistic heritability added to bloodline consolidation; latent breadth knowledge state decided |
 | [[WORLD#The two factions — overview\|The two factions — overview]] | Draft 75 | Order and Coalition structures, institutional descriptions; demographics subsection added; founding figures myth structure added; Coalition buried history knowledge state decided; industry giants full operational picture (D024) |
 | [[WORLD#The two factions — relationship to the Vein as culture\|The two factions — relationship to the Vein as culture]] | Draft 59 | Nine subsections — wartime distortion added; Order death doctrine expanded with two-tier structure and recovery connection |
-| [[WORLD#The historical sequence\|The historical sequence]] | Draft 62 | Deep history added: Order ~2000 years, stagnation mechanics, biological desensitization; liberation retconned to 8-10 generations |
+| [[WORLD#The historical sequence\|The historical sequence]] | Draft 77 | Deep history added: Order ~2000 years, stagnation mechanics, biological desensitization; liberation retconned to 8-10 generations; founding catastrophe as period (D022, draft 76); the Burning and Coalition founding-era removals / structural suppression (D022, draft 77) |
 | [[WORLD#The state of the world at the story's beginning\|The state of the world at the story's beginning]] | Draft 61 | Current war trigger decided: five children, Coalition apparatus accident, two attuned killed, institutional narratives diverge; stale [OPEN] at L527 removed |
 | [[WORLD#The world's technology — two tracks\|The world's technology — two tracks]] | Stable | Early industrial to inter-war baseline, Vein track ahead |
 | [[WORLD#Vein-adjacent minerals\|Vein-adjacent minerals]] | Stable | Full taxonomy |
@@ -45,17 +49,15 @@
 | [[WORLD#The Coalition's apparatus\|The Coalition's apparatus]] | Stable | Four-layer architecture, three-phase development, hard ceiling |
 | [[WORLD#What is not yet decided\|What is not yet decided]] | Living | Updated as decisions resolve |
 
-### Culture section subsections (draft 48–49)
+### Culture section subsections (draft 48–53)
 1. The Order — the Vein as intimate infrastructure
 2. The Coalition — the Vein as industrial infrastructure
 3. What success feels like — the two material hierarchies
 4. What each side considers shameful
 5. How each side relates to progress and change
-6. What each side is actually fighting for
-7. The conflict's ideological root
-8. Cross-faction encounters — occupation and prisoners *(draft 50, D034)*
-9. Folk encounter psychology *(draft 50, D034)*
-10. Wartime distortion of folk culture *(draft 52)*
+6. What each side is actually fighting for *(includes the stated vs actual gap; no separate "ideological root" heading)*
+7. Cross-faction encounters — occupation and prisoners *(draft 50, D034; includes folk encounter psychology)*
+8. Wartime distortion of folk culture *(draft 52)*
 
 ---
 
@@ -109,6 +111,7 @@
 | D025 | Secret societies — full operational picture |
 | D036 | Gas-phase substrate and biological barrier interaction |
 | D037 | Religious arm — full operational picture |
+| D038 | Vein overexposure — external presentation |
 | D039 | Inter-war conflict history (+1760–1970) — 3 wars + small conflicts; territorial/political/atrocity outcomes; depends on D013, D022 |
 
 ### Open — low priority
