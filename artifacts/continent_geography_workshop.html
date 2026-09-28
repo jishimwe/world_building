@@ -2,542 +2,774 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>D013 — Continent Geography Workshop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>D013 Continent Geography</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #131320;
-    color: #ddd;
-    font-family: Georgia, serif;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Layout: atlas plate. Map sheet on the left, a reading column (detail, layers, legend) on the right; stacks below 900px. */
+:root {
+  --bg: #eef1f2; --panel: #f8fafa; --ink: #1d2528; --muted: #5b686d; --rule: #cfd7da; --accent: #2d5f73;
+  --ocean: #c9d8df; --land: #e4e1d3; --coastline: #4a5559; --label: #3a4448; --halo: #e4e1d3;
+  --coal: #2f5fa8; --order: #b5552a; --contested: #4f575c; --vein: #7b3fb0; --depth: #5a1f8a;
+  --access: #1f7f9e; --front: #c0271a; --mtn-hi: #a8801a; --mtn-mid: #7d6a3a; --mtn-lo: #9a9280;
+  --rift: #c9601f; --shield: #56687a; --river: #3f6f95; --periph: #9a7300;
+  --c-arctic: #7f9cc4; --c-sub: #8fb2cf; --c-tw: #7fb08f; --c-te: #a3b07a; --c-med: #d4b25a; --c-eq: #d0775a; --c-mar: #5f8fae;
+  --f-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --f-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --f-mono: ui-monospace, "Cascadia Mono", "SF Mono", Consolas, Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1418; --panel: #161d22; --ink: #dde3e5; --muted: #8d9aa0; --rule: #2a353b; --accent: #7fb7cc;
+    --ocean: #0a121b; --land: #23251f; --coastline: #8a959a; --label: #b3bdc1; --halo: #1c1f1a;
+    --coal: #4f86d6; --order: #d06a3a; --contested: #a5aeb3; --vein: #b27ae0; --depth: #7a3ab8;
+    --access: #3aa6c8; --front: #ef4a3a; --mtn-hi: #d4a828; --mtn-mid: #a08a50; --mtn-lo: #6f6a58;
+    --rift: #e0772f; --shield: #7a8c9c; --river: #4f7ea6; --periph: #e0bd40;
+    --c-arctic: #3a4f86; --c-sub: #2f5f8a; --c-tw: #2e6a48; --c-te: #3e6a36; --c-med: #9c7c1c; --c-eq: #9a3218; --c-mar: #1a4a68;
+    color-scheme: dark;
   }
-  h1 {
-    font-size: 1em;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #888;
-    margin-bottom: 4px;
-  }
-  .subtitle { font-size: 0.74em; color: #444; margin-bottom: 20px; }
-  .workspace { display: flex; gap: 18px; align-items: flex-start; }
-  .sidebar { width: 175px; display: flex; flex-direction: column; gap: 9px; }
-  .group {
-    background: #1a1a2e;
-    border: 1px solid #252535;
-    border-radius: 4px;
-    padding: 10px 10px 6px;
-  }
-  .group-title {
-    font-size: 0.6em;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #555;
-    margin-bottom: 7px;
-  }
-  .btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: transparent;
-    border: 1px solid #2a2a3a;
-    color: #666;
-    padding: 5px 8px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.72em;
-    font-family: Georgia, serif;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 4px;
-    transition: border-color 0.15s, color 0.15s;
-  }
-  .btn:last-child { margin-bottom: 0; }
-  .btn.on { border-color: #3a8a6a; color: #ccc; }
-  .dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; opacity: 0.9; }
-  .map-wrap { border: 1px solid #252535; line-height: 0; }
-  .status {
-    margin-top: 14px;
-    max-width: 1010px;
-    background: #1a1a2e;
-    border: 1px solid #252535;
-    border-radius: 4px;
-    padding: 11px 16px;
-    font-size: 0.73em;
-    line-height: 1.8;
-    color: #666;
-  }
-  .status strong { color: #bbb; }
-  .status .op { color: #a06ad4; }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1418; --panel: #161d22; --ink: #dde3e5; --muted: #8d9aa0; --rule: #2a353b; --accent: #7fb7cc;
+  --ocean: #0a121b; --land: #23251f; --coastline: #8a959a; --label: #b3bdc1; --halo: #1c1f1a;
+  --coal: #4f86d6; --order: #d06a3a; --contested: #a5aeb3; --vein: #b27ae0; --depth: #7a3ab8;
+  --access: #3aa6c8; --front: #ef4a3a; --mtn-hi: #d4a828; --mtn-mid: #a08a50; --mtn-lo: #6f6a58;
+  --rift: #e0772f; --shield: #7a8c9c; --river: #4f7ea6; --periph: #e0bd40;
+  --c-arctic: #3a4f86; --c-sub: #2f5f8a; --c-tw: #2e6a48; --c-te: #3e6a36; --c-med: #9c7c1c; --c-eq: #9a3218; --c-mar: #1a4a68;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--f-body); }
+[hidden] { display: none !important; }
+.page { max-width: 1260px; margin: 0 auto; padding-block: 20px 40px; padding-inline: 16px; display: grid; gap: 16px; }
+
+header.top { display: grid; gap: 4px; }
+.eyebrow { font: 600 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 14px; }
+h1 { font: 500 clamp(22px, 3.2vw, 30px)/1.15 var(--f-display); margin: 0; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 68ch; }
+
+.work { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 16px; align-items: start; }
+@media (max-width: 900px) { .work { grid-template-columns: minmax(0, 1fr); } }
+
+.sheet { display: grid; gap: 10px; min-width: 0; }
+.map-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--ocean); line-height: 0; }
+#map { display: block; width: 100%; min-width: 560px; height: auto; font-family: var(--f-display); }
+.caption { font-size: 12px; color: var(--muted); margin: 0; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip-btn {
+  font: 13px/1.2 var(--f-body); color: var(--ink); background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 6px 11px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.chip-btn:hover { border-color: var(--muted); }
+.chip-btn[aria-pressed="true"] { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.chip-btn .k { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+button:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+aside { display: grid; gap: 14px; min-width: 0; }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 4px; padding: 14px; display: grid; gap: 10px; min-width: 0; }
+.panel h2 { font: 600 11px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+
+#detail h3 { font: 500 20px/1.2 var(--f-display); margin: 0; text-wrap: balance; }
+#detail p { margin: 0; }
+#detail .body { display: grid; gap: 8px; max-width: 65ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font: 600 10.5px/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; padding: 4px 7px; border-radius: 3px; border: 1px solid var(--muted); color: var(--muted); }
+.tag.decided { border-style: solid; border-color: var(--ink); color: var(--ink); }
+.tag.indicative { border-style: dashed; border-color: var(--periph); color: var(--periph); }
+.tag.side { border-color: transparent; color: var(--panel); }
+dl.facts { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 4px 12px; font-size: 13px; }
+dl.facts dt { color: var(--muted); font: 600 11px/1.6 var(--f-mono); text-transform: uppercase; letter-spacing: .05em; }
+dl.facts dd { margin: 0; }
+.src { font: 11px/1.4 var(--f-mono); color: var(--muted); }
+.hint { font-size: 12px; color: var(--muted); }
+#clear { justify-self: start; font: 12px var(--f-body); background: none; border: 1px solid var(--rule); color: var(--ink); border-radius: 3px; padding: 4px 9px; cursor: pointer; }
+.list { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+
+.layer-group { display: grid; gap: 4px; }
+.layer-group + .layer-group { border-top: 1px solid var(--rule); padding-top: 8px; }
+.lg-title { font: 600 10.5px/1.2 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.layer {
+  display: grid; grid-template-columns: 16px 14px minmax(0, 1fr) auto; align-items: center; gap: 8px;
+  width: 100%; text-align: left; background: none; border: 1px solid transparent; border-radius: 3px;
+  padding: 5px 6px; font: 13px/1.3 var(--f-body); color: var(--muted); cursor: pointer;
+}
+.layer:hover { border-color: var(--rule); }
+.layer .box { width: 14px; height: 14px; border: 1.5px solid var(--muted); border-radius: 3px; display: grid; place-items: center; }
+.layer[aria-pressed="true"] { color: var(--ink); }
+.layer[aria-pressed="true"] .box { background: var(--accent); border-color: var(--accent); }
+.layer[aria-pressed="true"] .box::after { content: ""; width: 7px; height: 4px; border: 2px solid var(--panel); border-top: 0; border-right: 0; transform: translateY(-1px) rotate(-45deg); }
+.layer .sw { width: 14px; height: 14px; border-radius: 2px; }
+.layer .st { font: 10px/1 var(--f-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+.layer .st.ind { color: var(--periph); }
+
+.legend { display: grid; gap: 6px; }
+.lrow { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; align-items: center; font-size: 12.5px; }
+.lrow svg { width: 34px; height: 16px; display: block; }
+.status-key { display: grid; gap: 8px; font-size: 12.5px; }
+.status-key .tag { justify-self: start; }
+
+/* ---- SVG classes (all colors via tokens) ---- */
+.ocean { fill: var(--ocean); }
+.land { fill: var(--land); }
+.coast { fill: none; stroke: var(--coastline); stroke-width: 1.6; stroke-linejoin: round; }
+.cl-arctic { fill: var(--c-arctic); opacity: .5; } .cl-sub { fill: var(--c-sub); opacity: .4; }
+.cl-tw { fill: var(--c-tw); opacity: .38; } .cl-te { fill: var(--c-te); opacity: .3; }
+.cl-med { fill: var(--c-med); opacity: .34; } .cl-eq { fill: var(--c-eq); opacity: .26; } .cl-mar { fill: var(--c-mar); opacity: .18; }
+.t-coalition { fill: var(--coal); opacity: .5; }
+.t-order { fill: var(--order); opacity: .26; }
+.t-order-thin { fill: var(--order); opacity: .12; }
+.t-order-auto { fill: var(--order); opacity: .38; }
+.boundary { fill: none; stroke: var(--ink); stroke-opacity: .28; stroke-width: .8; stroke-dasharray: 2 3; }
+.hatch-line { stroke: var(--contested); stroke-width: 1.2; opacity: .55; }
+.contested-fill { fill: url(#xhatch); }
+.contested-tint { fill: var(--contested); opacity: .1; }
+.vein-line { stroke: var(--vein); stroke-width: 2.3; }
+.vein-fill { fill: url(#vhatch); }
+.vein-tint { fill: var(--vein); }
+.depth-stop { stop-color: var(--depth); }
+.access { fill: none; stroke: var(--access); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; opacity: .75; }
+.front { fill: none; stroke: var(--front); stroke-width: 3; stroke-dasharray: 11 5.5; stroke-linejoin: round; }
+.mtn { fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.mtn-intense { stroke: var(--mtn-hi); stroke-width: 1.9; }
+.mtn-moderate { stroke: var(--mtn-mid); stroke-width: 1.5; }
+.mtn-poor { stroke: var(--mtn-lo); stroke-width: 1.2; }
+.f-rift { fill: none; stroke: var(--rift); stroke-width: 2.2; stroke-dasharray: 8 4; opacity: .8; }
+.f-shield { fill: none; stroke: var(--shield); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: .8; }
+.f-river { fill: none; stroke: var(--river); stroke-width: 1.5; opacity: .7; }
+.periph-ring { fill: none; stroke: var(--periph); stroke-width: 2; stroke-dasharray: 3 2.5; }
+.periph-path { fill: none; stroke: var(--periph); stroke-width: 2.2; stroke-dasharray: 3 4; }
+.enclave-dot { fill: var(--order); }
+.enclave-ring { fill: none; stroke: var(--order); stroke-width: 2; }
+.hit { fill: transparent; stroke: none; cursor: pointer; pointer-events: all; }
+.hit:focus { outline: none; }
+.hit:focus-visible { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
+.hit-line { fill: none; stroke: transparent; stroke-width: 16; cursor: pointer; pointer-events: stroke; }
+.hit-line:focus-visible { stroke: var(--accent); stroke-opacity: .35; }
+.sel-shape { fill: var(--accent); fill-opacity: .14; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; }
+.sel-line { fill: none; stroke: var(--accent); stroke-width: 7; stroke-opacity: .45; stroke-linecap: round; stroke-linejoin: round; }
+.nohit { pointer-events: none; }
+.off { display: none; }
+
+.lbl { paint-order: stroke; stroke: var(--halo); stroke-width: 3px; stroke-linejoin: round; }
+.lbl-region { font-size: 12px; letter-spacing: .12em; font-weight: 600; fill: var(--label); }
+.lbl-sub { font-family: var(--f-body); font-size: 9.5px; fill: var(--muted); }
+.lbl-sea { font-style: italic; font-size: 11px; fill: var(--muted); stroke: var(--ocean); }
+.lbl-climate { font-family: var(--f-mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; fill: var(--muted); stroke: var(--ocean); }
+.lbl-climate-in { font-style: italic; font-size: 10.5px; fill: var(--muted); }
+.lbl-vein { font-family: var(--f-mono); font-size: 9px; letter-spacing: .06em; fill: var(--vein); }
+.lbl-access { font-family: var(--f-mono); font-size: 9px; letter-spacing: .06em; fill: var(--access); stroke: var(--ocean); }
+.lbl-front { font-style: italic; font-size: 11px; fill: var(--front); }
+.lbl-feature { font-style: italic; font-size: 10px; }
+.lbl-rift { fill: var(--rift); } .lbl-shield { fill: var(--shield); }
+.lbl-periph { font-family: var(--f-mono); font-size: 9px; fill: var(--periph); }
+.lbl-periph-sea { stroke: var(--ocean); }
+.compass { fill: var(--muted); stroke: none; }
+.compass-t { font-family: var(--f-mono); font-size: 11px; fill: var(--muted); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sel-shape, .sel-line { transition: opacity .15s; }
+}
 </style>
 </head>
 <body>
+<div class="page">
 
-<h1>D013 — Continent Geography · Draft 54</h1>
-<p class="subtitle">Toggle layers · Zones approximate · Continent shape placeholder</p>
+<header class="top">
+  <div class="eyebrow"><span>D013 · decided</span><span>WORLD.md draft 77</span><span>Geography section content: draft 54</span></div>
+  <h1>Continent Geography</h1>
+  <p class="lede">One continent carries the war. Faction territory follows Vein depth: the Coalition holds the shallow, high-concentration zones; the Order holds the lower-concentration zones and the deep-layer interior. Select a region or marker to read its decided description.</p>
+</header>
 
-<div class="workspace">
-<div class="sidebar">
+<div class="work">
+  <section class="sheet" aria-label="Map">
+    <div class="map-scroll">
+      <svg id="map" viewBox="0 -24 840 700" role="img" aria-label="Continent map: Coalition western margin and southern belt, L-shaped contested corridor along their inner edges, Order interior, northern territories, eastern seaboard, and the Order-claimed SW coastal enclave."></svg>
+    </div>
+    <p class="caption">Regions, territory logic and the front are decided (D013). The coastline, mountain specifics, river courses and peripheral markers are indicative placements, not decided geography. Territory designates operational range and biological access, not administrative control.</p>
+    <div class="chips" id="region-chips" role="group" aria-label="Regions"></div>
+  </section>
 
-  <div class="group">
-    <div class="group-title">Climate</div>
-    <button class="btn on" id="btn-climate" onclick="tog('climate')">
-      <span class="dot" style="background:linear-gradient(#354f80,#2e6a44,#b88a18)"></span>
-      Climate Zones
-    </button>
-  </div>
-
-  <div class="group">
-    <div class="group-title">Territory</div>
-    <button class="btn on" id="btn-territory" onclick="tog('territory')">
-      <span class="dot" style="background:linear-gradient(90deg,#1a52a0,#b84818)"></span>
-      Coalition / Order
-    </button>
-    <button class="btn on" id="btn-contested" onclick="tog('contested')">
-      <span class="dot" style="background:#666"></span>
-      Contested L-zone
-    </button>
-    <button class="btn on" id="btn-coast" onclick="tog('coast')">
-      <span class="dot" style="background:#3a88a8"></span>
-      Order Sea Access
-    </button>
-  </div>
-
-  <div class="group">
-    <div class="group-title">Vein Layer</div>
-    <button class="btn on" id="btn-vein" onclick="tog('vein')">
-      <span class="dot" style="background:#7a2a9d"></span>
-      Surfacing Zones
-    </button>
-    <button class="btn" id="btn-depth" onclick="tog('depth')">
-      <span class="dot" style="background:#3a1060"></span>
-      Depth Gradient
-    </button>
-  </div>
-
-  <div class="group">
-    <div class="group-title">Geology</div>
-    <button class="btn" id="btn-mountains" onclick="tog('mountains')">
-      <span class="dot" style="background:#907020"></span>
-      Mountain Ranges
-    </button>
-    <button class="btn" id="btn-features" onclick="tog('features')">
-      <span class="dot" style="background:#604810"></span>
-      Other Features
-    </button>
-  </div>
-
-  <div class="group">
-    <div class="group-title">The Front</div>
-    <button class="btn on" id="btn-front" onclick="tog('front')">
-      <span class="dot" style="background:#c02010"></span>
-      Front Line
-    </button>
-  </div>
-
-  <div class="group">
-    <div class="group-title">Peripheral (D014)</div>
-    <button class="btn" id="btn-peripheral" onclick="tog('peripheral')">
-      <span class="dot" style="background:#d4b030"></span>
-      Indicative actors
-    </button>
-  </div>
-
-  <div class="group">
-    <div class="group-title">Labels</div>
-    <button class="btn on" id="btn-labels" onclick="tog('labels')">
-      <span class="dot" style="background:#888"></span>
-      Zone Labels
-    </button>
-  </div>
-
-</div><!-- /sidebar -->
-
-<div class="map-wrap">
-<svg width="820" height="670" viewBox="0 0 820 670">
-<defs>
-  <!-- Main continent clip -->
-  <clipPath id="cc">
-    <path d="M 115,32 C 194,14 308,12 408,18 C 514,24 596,46 652,80
-             C 690,110 714,160 720,218 C 726,274 720,334 706,390
-             C 692,444 666,486 630,522 C 593,558 542,581 483,594
-             C 422,607 358,608 296,597 C 234,586 182,563 146,530
-             C 117,504 96,465 79,422 C 63,380 55,336 55,290
-             C 55,244 63,200 79,160 C 94,122 103,76 115,32 Z"/>
-  </clipPath>
-
-  <!-- Cross-hatch for contested zone -->
-  <pattern id="xhatch" width="10" height="10" patternUnits="userSpaceOnUse">
-    <line x1="0" y1="0" x2="10" y2="10" stroke="#888" stroke-width="1.2" opacity="0.38"/>
-    <line x1="10" y1="0" x2="0" y2="10" stroke="#888" stroke-width="1.2" opacity="0.38"/>
-  </pattern>
-
-  <!-- Diagonal hatch for Vein zones -->
-  <pattern id="vhatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-    <line x1="0" y1="0" x2="0" y2="9" stroke="#9a3abf" stroke-width="2.3" opacity="0.65"/>
-  </pattern>
-
-  <!-- Depth gradients (W and S lean) -->
-  <linearGradient id="dg-w" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0%"   stop-color="#5a1888" stop-opacity="0.62"/>
-    <stop offset="100%" stop-color="#5a1888" stop-opacity="0"/>
-  </linearGradient>
-  <linearGradient id="dg-s" x1="0" y1="0" x2="0" y2="1">
-    <stop offset="0%"   stop-color="#5a1888" stop-opacity="0"/>
-    <stop offset="100%" stop-color="#5a1888" stop-opacity="0.62"/>
-  </linearGradient>
-</defs>
-
-<!-- Ocean -->
-<rect width="820" height="670" fill="#090e18"/>
-
-<!-- Continent base fill -->
-<path d="M 115,32 C 194,14 308,12 408,18 C 514,24 596,46 652,80
-         C 690,110 714,160 720,218 C 726,274 720,334 706,390
-         C 692,444 666,486 630,522 C 593,558 542,581 483,594
-         C 422,607 358,608 296,597 C 234,586 182,563 146,530
-         C 117,504 96,465 79,422 C 63,380 55,336 55,290
-         C 55,244 63,200 79,160 C 94,122 103,76 115,32 Z"
-      fill="#20201a"/>
-
-<!-- ===== CLIMATE ZONES ===== -->
-<g id="layer-climate" clip-path="url(#cc)">
-  <!-- Arctic -->
-  <rect x="0" y="0"   width="820" height="112" fill="#2a3862" opacity="0.62"/>
-  <!-- Subarctic -->
-  <rect x="0" y="112" width="820" height="90"  fill="#2a5480" opacity="0.44"/>
-  <!-- Temperate west (maritime) -->
-  <rect x="0" y="202" width="410" height="178" fill="#235e40" opacity="0.42"/>
-  <!-- Temperate east (continental) -->
-  <rect x="410" y="202" width="410" height="178" fill="#306030" opacity="0.30"/>
-  <!-- Mediterranean -->
-  <rect x="0" y="380" width="820" height="115" fill="#b89018" opacity="0.36"/>
-  <!-- Equatorial fringe -->
-  <rect x="0" y="495" width="820" height="200" fill="#b02810" opacity="0.27"/>
-  <!-- Maritime softening, far west -->
-  <rect x="0" y="0"   width="115" height="670" fill="#1a4a68" opacity="0.18"/>
-</g>
-
-<!-- ===== TERRITORY BASE ===== -->
-<g id="layer-territory" clip-path="url(#cc)">
-  <!-- Order operational range — fills everything first -->
-  <rect x="0" y="0" width="820" height="670" fill="#b84010" opacity="0.28"/>
-
-  <!-- Coalition western strip -->
-  <path d="M 115,32 C 103,76 94,122 79,160
-           C 63,200 55,244 55,290 C 55,336 63,380 79,422
-           C 96,465 117,504 146,530
-           L 182,512 C 162,488 144,454 130,414
-           C 116,376 108,336 108,290 C 108,244 116,202 130,163
-           C 142,126 153,80 166,46 Z"
-        fill="#0a3888" opacity="0.52"/>
-
-  <!-- Coalition SW mountain corner -->
-  <path d="M 146,530 C 182,563 234,586 296,597
-           C 334,604 372,608 406,604
-           L 406,560 L 338,546 L 270,534 L 212,520 L 182,512 Z"
-        fill="#0a3888" opacity="0.52"/>
-</g>
-
-<!-- ===== CONTESTED L-ZONE ===== -->
-<g id="layer-contested" clip-path="url(#cc)">
-  <!-- Vertical arm (NW → SW, east edge of Coalition western strip) -->
-  <path d="M 166,46 C 153,80 142,126 130,163
-           C 116,202 108,244 108,290 C 108,336 116,376 130,414
-           C 144,454 162,488 182,512
-           L 214,520 L 222,468 L 218,408 L 214,344
-           L 218,280 L 222,218 L 218,155 L 208,92 Z"
-        fill="url(#xhatch)"/>
-  <path d="M 166,46 C 153,80 142,126 130,163
-           C 116,202 108,244 108,290 C 108,336 116,376 130,414
-           C 144,454 162,488 182,512
-           L 214,520 L 222,468 L 218,408 L 214,344
-           L 218,280 L 222,218 L 218,155 L 208,92 Z"
-        fill="#555" opacity="0.10"/>
-
-  <!-- Horizontal arm (SW → SE, north edge of Coalition S.mountain belt) -->
-  <path d="M 182,512 L 214,520 L 270,534 L 338,546 L 406,560
-           L 498,558 L 578,546 L 592,516
-           L 498,514 L 406,516 L 338,510 L 270,500 L 220,492 Z"
-        fill="url(#xhatch)"/>
-  <path d="M 182,512 L 214,520 L 270,534 L 338,546 L 406,560
-           L 498,558 L 578,546 L 592,516
-           L 498,514 L 406,516 L 338,510 L 270,500 L 220,492 Z"
-        fill="#555" opacity="0.10"/>
-</g>
-
-<!-- ===== ORDER SEA ACCESS ===== -->
-<g id="layer-coast">
-  <!-- North coast tick -->
-  <path d="M 182,28 C 264,10 370,8 470,14 C 555,20 614,36 654,60"
-        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.55" stroke-linecap="round"/>
-  <!-- NE coast tick -->
-  <path d="M 654,60 C 692,90 716,142 722,202"
-        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.55" stroke-linecap="round"/>
-  <!-- East coast tick -->
-  <path d="M 722,202 C 728,260 722,322 708,380 C 694,434 668,476 632,512"
-        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.55" stroke-linecap="round"/>
-  <!-- SE coast tick -->
-  <path d="M 632,512 C 600,546 554,572 500,586 C 462,598 432,606 406,604"
-        stroke="#2a80a8" stroke-width="3.5" fill="none" opacity="0.48" stroke-linecap="round"/>
-  <!-- Anchor icons (simple circles) -->
-  <circle cx="400" cy="9"  r="4" fill="#2a80a8" opacity="0.5"/>
-  <circle cx="728" cy="290" r="4" fill="#2a80a8" opacity="0.5"/>
-</g>
-
-<!-- ===== VEIN SURFACING ZONES ===== -->
-<g id="layer-vein" clip-path="url(#cc)">
-  <!-- Western coastal margin — highest concentration -->
-  <path d="M 55,185 C 55,238 55,290 55,342 C 55,390 63,432 79,472
-           L 120,460 C 106,424 100,386 100,342 C 100,290 100,242 106,198 Z"
-        fill="url(#vhatch)" opacity="0.85"/>
-  <path d="M 55,185 C 55,238 55,290 55,342 C 55,390 63,432 79,472
-           L 120,460 C 106,424 100,386 100,342 C 100,290 100,242 106,198 Z"
-        fill="#8a28b8" opacity="0.12"/>
-
-  <!-- Southern mountain belt — highest concentration -->
-  <path d="M 151,530 C 185,560 234,584 296,596
-           C 356,608 420,608 480,595 C 535,582 575,558 602,526
-           L 568,508 C 542,536 506,555 464,566
-           C 414,578 356,578 300,567 C 248,557 205,535 170,510 Z"
-        fill="url(#vhatch)" opacity="0.85"/>
-  <path d="M 151,530 C 185,560 234,584 296,596
-           C 356,608 420,608 480,595 C 535,582 575,558 602,526
-           L 568,508 C 542,536 506,555 464,566
-           C 414,578 356,578 300,567 C 248,557 205,535 170,510 Z"
-        fill="#8a28b8" opacity="0.18"/>
-
-  <!-- Northern shield — low concentration -->
-  <path d="M 162,30 C 224,14 326,12 426,18 C 508,22 568,36 618,58
-           L 614,86 C 562,65 498,52 420,48 C 320,42 224,44 166,58 Z"
-        fill="url(#vhatch)" opacity="0.40"/>
-  <path d="M 162,30 C 224,14 326,12 426,18 C 508,22 568,36 618,58
-           L 614,86 C 562,65 498,52 420,48 C 320,42 224,44 166,58 Z"
-        fill="#8a28b8" opacity="0.06"/>
-
-  <!-- Central rift zone — moderate concentration -->
-  <path d="M 250,170 C 268,220 272,270 263,320 C 255,362 244,400 240,442
-           L 270,446 C 276,403 288,363 297,320 C 308,268 306,218 290,168 Z"
-        fill="url(#vhatch)" opacity="0.58"/>
-  <path d="M 250,170 C 268,220 272,270 263,320 C 255,362 244,400 240,442
-           L 270,446 C 276,403 288,363 297,320 C 308,268 306,218 290,168 Z"
-        fill="#8a28b8" opacity="0.09"/>
-
-  <!-- Eastern ranges — moderate, Order-workable -->
-  <path d="M 626,132 C 652,172 674,222 682,274 C 690,322 688,370 678,414
-           L 648,402 C 658,362 660,318 653,274 C 645,228 625,182 604,150 Z"
-        fill="url(#vhatch)" opacity="0.50"/>
-  <path d="M 626,132 C 652,172 674,222 682,274 C 690,322 688,370 678,414
-           L 648,402 C 658,362 660,318 653,274 C 645,228 625,182 604,150 Z"
-        fill="#8a28b8" opacity="0.08"/>
-</g>
-
-<!-- ===== DEPTH GRADIENT ===== -->
-<g id="layer-depth" clip-path="url(#cc)" style="display:none">
-  <rect x="0" y="0" width="820" height="670" fill="url(#dg-w)"/>
-  <rect x="0" y="0" width="820" height="670" fill="url(#dg-s)"/>
-</g>
-
-<!-- ===== MOUNTAIN RANGES ===== -->
-<g id="layer-mountains" style="display:none">
-  <!-- Southern belt: Coalition, Vein-intense -->
-  <g stroke="#d4a828" stroke-width="1.9" fill="none" opacity="0.82">
-    <polyline points="160,526 177,500 194,526"/>
-    <polyline points="212,516 231,488 250,516"/>
-    <polyline points="268,508 289,478 310,508"/>
-    <polyline points="332,500 355,470 378,500"/>
-    <polyline points="398,493 423,462 448,493"/>
-    <polyline points="468,494 494,463 520,494"/>
-    <polyline points="540,503 564,475 588,503"/>
-    <polyline points="600,516 620,494 640,516"/>
-  </g>
-  <!-- Western coastal ranges: Coalition, Vein-intense -->
-  <g stroke="#d4a828" stroke-width="1.5" fill="none" opacity="0.68">
-    <polyline points="62,172 78,150 94,172"/>
-    <polyline points="57,242 74,220 91,242"/>
-    <polyline points="55,310 72,288 89,310"/>
-    <polyline points="60,372 78,350 96,372"/>
-    <polyline points="74,430 93,408 112,430"/>
-  </g>
-  <!-- Northern mountains: Order side, lower/moderate Vein -->
-  <g stroke="#907838" stroke-width="1.5" fill="none" opacity="0.62">
-    <polyline points="202,36 219,16 236,36"/>
-    <polyline points="262,28 280,8  298,28"/>
-    <polyline points="326,22 346,4  366,22"/>
-    <polyline points="392,20 413,2  434,20"/>
-    <polyline points="458,24 478,6  498,24"/>
-    <polyline points="518,32 537,14 556,32"/>
-  </g>
-  <!-- Eastern ranges: Order Vein sites, moderate concentration -->
-  <g stroke="#907838" stroke-width="1.5" fill="none" opacity="0.62">
-    <polyline points="653,92  670,68  687,92"/>
-    <polyline points="663,150 682,126 701,150"/>
-    <polyline points="672,210 691,186 710,210"/>
-    <polyline points="676,270 695,246 714,270"/>
-    <polyline points="672,328 691,304 710,328"/>
-    <polyline points="660,384 679,360 698,384"/>
-    <polyline points="642,434 661,410 680,434"/>
-  </g>
-  <!-- Central massif: no Vein significance, terrain only -->
-  <g stroke="#645a28" stroke-width="1.2" fill="none" opacity="0.45">
-    <polyline points="364,232 382,210 400,232"/>
-    <polyline points="400,220 420,197 440,220"/>
-    <polyline points="365,272 383,250 401,272"/>
-    <polyline points="420,260 441,237 462,260"/>
-  </g>
-  <!-- Mountain range legend note -->
-  <text x="750" y="580" font-size="9" fill="#907838" text-anchor="end" font-family="Georgia,serif" opacity="0.65">gold = Vein-intense range</text>
-  <text x="750" y="594" font-size="9" fill="#645a28" text-anchor="end" font-family="Georgia,serif" opacity="0.55">dim = Vein-poor range</text>
-</g>
-
-<!-- ===== OTHER FEATURES ===== -->
-<g id="layer-features" style="display:none">
-  <!-- Rift valley axis (central) -->
-  <path d="M 255,160 C 263,210 265,262 257,313 C 249,358 240,398 235,443"
-        stroke="#e06020" stroke-width="2.2" fill="none" stroke-dasharray="8,4" opacity="0.62"/>
-  <text x="240" y="300" font-size="10" fill="#e06020" font-family="Georgia,serif" font-style="italic" opacity="0.75">rift axis</text>
-  <!-- Shield boundary -->
-  <path d="M 170,72 C 244,55 336,51 426,57 C 500,62 558,72 610,88"
-        stroke="#4a5a68" stroke-width="1.5" fill="none" stroke-dasharray="5,4" opacity="0.48"/>
-  <text x="398" y="78" font-size="9" fill="#4a5a68" text-anchor="middle" font-family="Georgia,serif" font-style="italic" opacity="0.65">shield edge</text>
-  <!-- Major rivers (approximate) -->
-  <path d="M 355,142 C 362,200 356,260 342,320 C 330,370 312,412 297,452"
-        stroke="#284a6a" stroke-width="1.5" fill="none" opacity="0.42"/>
-  <path d="M 445,162 C 452,212 462,272 456,332 C 450,383 438,424 422,462"
-        stroke="#284a6a" stroke-width="1.2" fill="none" opacity="0.32"/>
-</g>
-
-<!-- ===== THE FRONT ===== -->
-<g id="layer-front">
-  <!-- Vertical portion of L-front -->
-  <path d="M 209,52 C 215,104 218,157 214,210
-           C 210,262 205,310 208,360 C 211,405 217,450 220,492"
-        stroke="#c01808" stroke-width="3" fill="none" stroke-dasharray="11,5.5" opacity="0.80"/>
-  <!-- Horizontal portion of L-front -->
-  <path d="M 220,492 C 276,500 342,508 406,512
-           C 456,515 512,513 572,505"
-        stroke="#c01808" stroke-width="3" fill="none" stroke-dasharray="11,5.5" opacity="0.80"/>
-  <!-- Small label -->
-  <text x="226" y="278" font-size="11" fill="#c01808" font-family="Georgia,serif" font-style="italic" opacity="0.72">front</text>
-</g>
-
-<!-- ===== PERIPHERAL ACTORS (D014) — indicative only ===== -->
-<g id="layer-peripheral" style="display:none" font-family="Georgia,serif">
-  <!-- N. territories: administratively abandoned; religious arm outposts and independent communities (WORLD geography) -->
-  <circle cx="330" cy="118" r="6" fill="none" stroke="#d4b030" stroke-width="2"/>
-  <text x="330" y="136" font-size="8.5" fill="#d4b030" text-anchor="middle">admin. abandoned</text>
-  <!-- SW enclave: informal power structures outside the Order's formal hierarchy -->
-  <circle cx="196" cy="570" r="6" fill="none" stroke="#d4b030" stroke-width="2"/>
-  <text x="212" y="574" font-size="8.5" fill="#d4b030">informal power</text>
-  <!-- Maritime: neither faction governs open water -->
-  <path d="M 738,120 C 748,160 752,210 752,250" stroke="#d4b030" stroke-width="2" fill="none" stroke-dasharray="3,4"/>
-  <text x="770" y="150" font-size="8.5" fill="#d4b030" text-anchor="middle" transform="rotate(90 770 150)">maritime communities</text>
-  <!-- Legend -->
-  <text x="750" y="620" font-size="8.5" fill="#d4b030" text-anchor="end" opacity="0.8">indicative — anchored only where WORLD.md names a location</text>
-  <text x="750" y="632" font-size="8.5" fill="#d4b030" text-anchor="end" opacity="0.8">unplaced: ideologically expelled · proto-state · extractive · entrepreneurs</text>
-</g>
-
-<!-- ===== LABELS ===== -->
-<g id="layer-labels" font-family="Georgia,serif">
-
-  <!-- Compass -->
-  <text x="782" y="46"  font-size="14" fill="#383848" text-anchor="middle">N</text>
-  <text x="782" y="650" font-size="14" fill="#383848" text-anchor="middle">S</text>
-  <text x="18"  y="342" font-size="14" fill="#383848" text-anchor="middle">W</text>
-  <text x="804" y="342" font-size="14" fill="#383848" text-anchor="middle">E</text>
-
-  <!-- Climate zone labels -->
-  <text x="402" y="70" font-size="12" fill="#5a7ab0" text-anchor="middle" letter-spacing="2" opacity="0.72">ARCTIC / SUBARCTIC</text>
-  <text x="148" y="296" font-size="10" fill="#3a9860" text-anchor="middle" font-style="italic" opacity="0.62">maritime</text>
-  <text x="625" y="296" font-size="10" fill="#5a9040" text-anchor="middle" font-style="italic" opacity="0.55">continental</text>
-  <text x="466" y="444" font-size="12" fill="#b09018" text-anchor="middle" letter-spacing="1.5" opacity="0.68">MEDITERRANEAN</text>
-  <text x="390" y="568" font-size="11" fill="#b04028" text-anchor="middle" letter-spacing="1" opacity="0.62">EQUATORIAL FRINGE</text>
-
-  <!-- Faction labels -->
-  <text x="110" y="285" font-size="13" fill="#2a68c8" text-anchor="middle" font-style="italic">Coalition</text>
-  <text x="110" y="301" font-size="9" fill="#2a68c8" text-anchor="middle" opacity="0.68">W. margin</text>
-  <text x="112" y="468" font-size="12" fill="#2a68c8" text-anchor="middle" font-style="italic">Coalition</text>
-  <text x="112" y="484" font-size="9"  fill="#2a68c8" text-anchor="middle" opacity="0.65">S. belt</text>
-
-  <text x="545" y="250" font-size="13" fill="#c05820" text-anchor="middle" font-style="italic">Order</text>
-  <text x="545" y="268" font-size="9.5" fill="#c05820" text-anchor="middle" opacity="0.68">interior</text>
-
-  <!-- Contested labels -->
-  <text x="182" y="258" font-size="10" fill="#aaa" text-anchor="middle" opacity="0.78">contested</text>
-  <text x="415" y="476" font-size="10" fill="#aaa" text-anchor="middle" opacity="0.72">contested</text>
-
-  <!-- SW coastal enclave marker -->
-  <circle cx="148" cy="555" r="7" fill="none" stroke="#c05820" stroke-width="2" opacity="0.8"/>
-  <circle cx="148" cy="555" r="3" fill="#c05820" opacity="0.7"/>
-  <text x="148" y="577" font-size="9" fill="#c05820" text-anchor="middle" opacity="0.85">SW enclave</text>
-  <text x="148" y="589" font-size="8" fill="#c05820" text-anchor="middle" opacity="0.6">Order-claimed</text>
-  <text x="148" y="600" font-size="8" fill="#c05820" text-anchor="middle" opacity="0.6">eff. autonomous</text>
-
-  <!-- Northern territories label -->
-  <text x="420" y="88" font-size="10" fill="#c05820" text-anchor="middle" opacity="0.58" font-style="italic">N. territories</text>
-  <text x="420" y="100" font-size="8.5" fill="#c05820" text-anchor="middle" opacity="0.45">Order-claimed · thinly held</text>
-
-  <!-- Eastern seaboard label -->
-  <text x="700" y="380" font-size="9.5" fill="#c05820" text-anchor="middle" opacity="0.6" font-style="italic" transform="rotate(90 700 380)">E. seaboard</text>
-
-  <!-- Vein zone labels -->
-  <text x="68" y="315" font-size="9" fill="#9848cc" text-anchor="middle" opacity="0.72"
-        transform="rotate(-90 68 315)" letter-spacing="0.8">VEIN — W. MARGIN</text>
-  <text x="385" y="586" font-size="10" fill="#9848cc" text-anchor="middle" opacity="0.72" letter-spacing="0.8">VEIN BELT — S. MOUNTAINS</text>
-  <text x="668" y="278" font-size="9" fill="#9848cc" text-anchor="middle" opacity="0.58"
-        transform="rotate(90 668 278)" letter-spacing="0.8">VEIN — E. RANGES</text>
-
-  <!-- Ocean labels -->
-  <text x="20" y="185" font-size="10" fill="#182a40" opacity="0.75" transform="rotate(-18 20 185)">W. Ocean</text>
-  <text x="800" y="198" font-size="10" fill="#182a40" opacity="0.65" transform="rotate(18 800 198)">E. Sea</text>
-  <text x="402" y="660" font-size="10" fill="#182a40" text-anchor="middle" opacity="0.62">Southern Sea</text>
-
-  <!-- Order coast labels -->
-  <text x="396" y="14" font-size="10" fill="#2a80a8" text-anchor="middle" opacity="0.72" letter-spacing="1">ORDER — N. COAST</text>
-  <text x="754" y="286" font-size="10" fill="#2a80a8" text-anchor="middle" opacity="0.65" letter-spacing="1"
-        transform="rotate(90 754 286)">ORDER — E. COAST</text>
-</g>
-
-<!-- Continent outline — top layer -->
-<path d="M 115,32 C 194,14 308,12 408,18 C 514,24 596,46 652,80
-         C 690,110 714,160 720,218 C 726,274 720,334 706,390
-         C 692,444 666,486 630,522 C 593,558 542,581 483,594
-         C 422,607 358,608 296,597 C 234,586 182,563 146,530
-         C 117,504 96,465 79,422 C 63,380 55,336 55,290
-         C 55,244 63,200 79,160 C 94,122 103,76 115,32 Z"
-      fill="none" stroke="#484858" stroke-width="2"/>
-
-</svg>
+  <aside>
+    <section class="panel" id="detail" aria-live="polite"></section>
+    <section class="panel" aria-labelledby="layers-h">
+      <h2 id="layers-h">Layers</h2>
+      <div id="layers"></div>
+    </section>
+    <section class="panel" aria-labelledby="legend-h">
+      <h2 id="legend-h">Legend</h2>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="panel" aria-labelledby="status-h">
+      <h2 id="status-h">Decided vs indicative</h2>
+      <div class="status-key">
+        <span class="tag decided">Decided</span>
+        <span>Seven regions and their relative positions; territory logic (concentration determines access); L-shaped contested corridor; the front as the corridor's inner depletion boundary; climate gradients; Vein surfacing logic.</span>
+        <span class="tag indicative">Indicative</span>
+        <span>Exact coastline and region shapes; mountain range specifics; river courses; D014 peripheral markers (three placed, four types unplaced).</span>
+      </div>
+    </section>
+  </aside>
 </div>
-</div><!-- /workspace -->
 
-<div class="status">
-  <strong>Decided (D013 · draft 54):</strong>
-  Earth-sized · one continent · Vein = geological stratum, surfaces independently of mountain placement ·
-  7 regions: W. margin (Coalition core) · S. belt (Coalition core, highest Vein) ·
-  Contested corridor (L-shaped, depletion boundary = the front) · Order interior (heartland) ·
-  N. territories (Order-claimed, thinly held, extraneous orgs fill vacuum) ·
-  E. seaboard (Order, scattered settlements, conventionally administered) ·
-  SW coastal enclave (Order-claimed, effectively autonomous, isolated, largest Order coast settlement) ·
-  Blue = Coalition safe zone · Orange = Order operational range · neither = all governed
-  <br>
-  <span class="op"><strong>Downstream (not blocking):</strong>
-  Proper nouns for regions · Continent shape refinement · Site-level Vein distribution · Mountain range specifics · Peripheral actor placement beyond the three indicative markers (D014)
-  </span>
 </div>
 
 <script>
-function tog(id) {
-  const el = document.getElementById('layer-' + id);
-  const btn = document.getElementById('btn-' + id);
-  if (!el || !btn) return;
-  const show = el.style.display === 'none';
-  el.style.display = show ? '' : 'none';
-  btn.classList.toggle('on', show);
-}
-</script>
+/* =====================================================================
+   DATA — edit here. Drawing code below reads only from these objects.
+   Coordinates are in map units (viewBox 0 -24 840 700).
+   ===================================================================== */
 
+const META = { decision: "D013", worldDraft: 77, sectionDraft: 54, source: "WORLD.md § Geography — the continent" };
+
+/* Coastline: coarse anchor points (clockwise from NW), roughened with a
+   seeded midpoint displacement so the outline is stable across loads.
+   Shape is indicative; change anchors, not the drawing code. */
+const COAST = {
+  seed: 13, levels: 3, roughness: 0.16,
+  anchors: [
+    [112,36],[150,24],[196,18],[240,26],[282,16],[330,12],[372,20],[408,14],[452,22],[500,20],[546,32],[590,40],[628,58],[656,78],
+    [684,104],[700,136],[716,170],[712,196],[726,226],[724,262],[730,296],[720,330],[714,364],[704,398],[692,430],[676,462],[656,490],[632,518],
+    [604,540],[572,560],[536,576],[496,590],[456,598],[418,608],[380,604],[340,602],[300,596],[262,588],[226,576],[196,568],
+    [170,580],[142,578],[120,562],[106,534],[100,506],[90,478],[80,450],[70,420],[62,390],[58,356],[54,320],[56,288],[52,252],
+    [58,218],[66,186],[78,154],[88,120],[98,86],[104,58]
+  ]
+};
+
+/* Shared boundaries. The front is the inner edge of the contested corridor. */
+const EDGE_WEST = [[166,-30],[166,46],[150,92],[138,132],[124,182],[112,240],[108,290],[112,345],[122,395],[138,440],[160,482],[180,506]];
+const EDGE_BELT = [[180,506],[214,520],[270,534],[338,546],[406,560],[498,558],[578,546],[650,548]];
+const FRONT     = [[212,-30],[209,52],[215,104],[216,135],[218,157],[214,210],[210,262],[205,310],[208,360],[211,405],[217,450],[220,492],
+                   [276,500],[342,508],[406,512],[456,515],[512,513],[572,505],[650,498]];
+const EDGE_NORTH = [[216,135],[300,142],[400,136],[500,146],[600,132],[686,140]];
+const EDGE_EAST  = [[686,140],[694,220],[700,300],[690,390],[670,450],[650,498]];
+
+const fi = FRONT.findIndex(p => p[0] === EDGE_NORTH[0][0] && p[1] === EDGE_NORTH[0][1]);
+
+const REGIONS = [
+  { id: "western", name: "Western margin", side: "coalition", fill: "t-coalition", status: "decided",
+    control: "Coalition safe zone",
+    poly: [[-30,-30], ...EDGE_WEST, [160,528], [-30,528]],
+    facts: [["Climate", "Maritime: ocean-moderated, wetter, milder"], ["Vein", "High concentration where the layer surfaces along coastal uplifts, fault zones and associated features"]],
+    body: [
+      "The continent's active geological margin, facing the western ocean.",
+      "The Coalition's most defensible core. Field concentration remains hostile enough to Order practitioners that the biological barrier has not significantly eroded here, and the terrain has been Coalition-settled over generations."
+    ] },
+  { id: "belt", name: "Southern belt", side: "coalition", fill: "t-coalition", status: "decided",
+    control: "Coalition safe zone",
+    poly: [[160,528], ...EDGE_BELT, [650,700], [-30,700], [-30,528]],
+    facts: [["Climate", "Equatorial at lower elevations, Mediterranean at the approaches"], ["Vein", "Highest field concentrations on the continent; the layer surfaces extensively across mountain uplifts and related features"]],
+    body: [
+      "Elevated terrain running east-west across the continent's southern extent.",
+      "Order operational presence is negligible. The biological barrier here is the strongest remaining on the continent."
+    ] },
+  { id: "corridor", name: "Contested corridor", side: "contested", fill: null, status: "decided",
+    control: "Active war zone",
+    poly: [...EDGE_WEST, ...EDGE_BELT.slice(1), ...FRONT.slice().reverse()],
+    facts: [["Shape", "L-shaped. Vertical arm along the eastern edge of the western margin; horizontal arm along the northern edge of the southern belt"], ["Vein", "Concentration lowered by Coalition extraction to where Order practitioners can operate"]],
+    body: [
+      "The original geographic lock is gone. The front runs through this corridor.",
+      "Its boundaries are depletion boundaries, not fixed political lines. They advance inward as extraction continues at worked sites. Where the front sits depends on when concentration at a given site crossed the threshold, so the corridor's shape maps the history of Coalition extraction."
+    ] },
+  { id: "interior", name: "Order interior", side: "order", fill: "t-order", status: "decided",
+    control: "Order operational range",
+    poly: [...FRONT.slice(fi), ...EDGE_EAST.slice().reverse().slice(1), ...EDGE_NORTH.slice().reverse().slice(1, -1)],
+    facts: [["Geology", "Stable; deep Vein layer, inaccessible without major infrastructure"], ["Vein", "Worked in the eastern mountain ranges, where the layer surfaces at moderate concentration: workable by practitioners, not hostile"]],
+    body: [
+      "The continental heartland: agricultural land and established cities.",
+      "The founding families' political authority is strongest here. This is the Order's administrative and cultural core."
+    ] },
+  { id: "north", name: "Northern territories", side: "order", fill: "t-order-thin", status: "decided",
+    control: "Order-claimed, thinly administered",
+    poly: [...FRONT.slice(0, fi), ...EDGE_NORTH, [800,110], [800,-30]],
+    facts: [["Climate", "Arctic and subarctic"], ["Geology", "Ancient glacially scoured shield; low Vein concentration where the layer surfaces"], ["Coast", "Cold arctic sea: harsh, barely navigable. A defensive flank, not a trade or projection route"]],
+    body: [
+      "The Order claims this territory and maintains nominal infrastructure but does not govern it seriously: too remote, too marginal, insufficient Vein yield to justify the investment.",
+      "Religious arm outposts, independent communities, and organizations that require distance from central Order authority have established themselves here. The territory also functions as a strategic reserve: fallback ground if the front collapses significantly."
+    ] },
+  { id: "seaboard", name: "Eastern seaboard", side: "order", fill: "t-order", status: "decided",
+    control: "Order operational range, conventionally administered",
+    poly: [...EDGE_EAST, [650,548], [650,700], [860,700], [860,110], [800,110]],
+    facts: [["Climate", "Continental to Mediterranean running south"], ["Coast", "Faces the eastern sea"]],
+    body: [
+      "Scattered settlements: fishing towns, minor ports, provincial outposts. The Order has not invested in maritime infrastructure.",
+      "Economically marginal within the Order's hierarchy. Isolationist policy means a coast that could carry significant trade is instead lightly occupied and lightly administered."
+    ] },
+  { id: "enclave", name: "SW coastal enclave", side: "order", fill: "t-order-auto", status: "decided",
+    control: "Order-claimed, effectively autonomous",
+    poly: ellipse(146, 556, 30, 22, 20),
+    marker: [146, 556],
+    facts: [["Access", "Unreachable overland without crossing Coalition or contested ground; reached from the rest of the Order only by sea around the southern tip"], ["Population", "The Order's largest coastal settlement; lower attuned density than interior cities"]],
+    body: [
+      "A significant settlement on the southwestern coast, separated from the Order interior by the Coalition's southern mountain belt. Largest by population, not by institutional priority.",
+      "Its size is a consequence of neglect: the founding families never gave serious administrative attention to a city they could not easily reach. Informal power structures operate that the Order's formal hierarchy does not govern.",
+      "The coastal strip at the base of the southern belt, if navigable at sea level, is one of the most strategically significant routes in the current war, connecting the enclave to the contested corridor."
+    ] }
+];
+
+const FRONT_ITEM = {
+  id: "front", name: "The front", status: "decided", control: "Depletion boundary",
+  facts: [["Position", "Inner boundary of the contested corridor"]],
+  body: [
+    "The front follows the depletion threshold at which field concentration has dropped enough for Order practitioners to operate.",
+    "It is not a static political line. It advances inward as Coalition extraction continues at worked sites. The Coalition's peacetime economy has been, through its ordinary operation, continuously generating new front."
+  ]
+};
+
+const OVERVIEW = {
+  name: "The continent", status: "decided", control: null,
+  facts: [["Scale", "Earth-sized world; one continent relevant to the war"], ["Vein", "A crustal stratum at variable depth. Surfaces independently of mountain placement"], ["Climate", "Arctic north to equatorial south; maritime west to continental east"]],
+  body: [
+    "Concentration at a surfacing zone is a function of depth. Shallow surfacing gives high concentration, hostile to attuned practitioners; deeper surfacing gives lower concentration the Order can work.",
+    "Neither faction's territory is uniformly settled or governed. Designations describe operational range and biological access, not administrative control."
+  ],
+  downstream: ["Proper nouns for regions", "Continent shape refinement", "Site-level Vein distribution", "Mountain range specifics", "Peripheral actor placement beyond the three indicative markers (D014)", "Inter-war conflict history overlay (D039)"]
+};
+
+const CLIMATE = [
+  { cls: "cl-arctic", x: 0,   y: -30, w: 840, h: 142 },
+  { cls: "cl-sub",    x: 0,   y: 112, w: 840, h: 90 },
+  { cls: "cl-tw",     x: 0,   y: 202, w: 410, h: 178 },
+  { cls: "cl-te",     x: 410, y: 202, w: 430, h: 178 },
+  { cls: "cl-med",    x: 0,   y: 380, w: 840, h: 115 },
+  { cls: "cl-eq",     x: 0,   y: 495, w: 840, h: 205 },
+  { cls: "cl-mar",    x: 0,   y: -30, w: 115, h: 730 }
+];
+
+/* Order coastal access (north and east coasts). Coastline is stroked only inside these windows. */
+const SEA_ACCESS = [
+  [[214,-40],[760,-40],[760,112],[214,112]],
+  [[660,112],[860,112],[860,505],[640,505]]
+];
+
+/* Vein surfacing zones. level sets opacity: high / moderate / low. */
+const VEIN = [
+  { id: "v-west",  level: "high",     name: "Western margin coastal uplifts",
+    d: "M 40,185 C 40,238 40,290 40,342 C 40,390 50,432 66,472 L 120,460 C 106,424 100,386 100,342 C 100,290 100,242 106,198 Z" },
+  { id: "v-belt",  level: "high",     name: "Southern belt uplifts",
+    d: "M 151,530 C 185,560 234,590 296,604 C 356,616 420,616 480,603 C 535,590 575,566 602,534 L 568,508 C 542,536 506,555 464,566 C 414,578 356,578 300,567 C 248,557 205,535 170,510 Z" },
+  { id: "v-shield", level: "low",     name: "Northern shield",
+    d: "M 150,0 C 224,0 326,0 426,4 C 508,8 568,26 618,50 L 614,86 C 562,65 498,52 420,48 C 320,42 224,44 166,58 Z" },
+  { id: "v-rift",  level: "moderate", name: "Central rift",
+    d: "M 250,170 C 268,220 272,270 263,320 C 255,362 244,400 240,442 L 270,446 C 276,403 288,363 297,320 C 308,268 306,218 290,168 Z" },
+  { id: "v-east",  level: "moderate", name: "Eastern ranges (Order-worked)",
+    d: "M 626,132 C 652,172 674,222 682,274 C 690,322 688,370 678,414 L 648,402 C 658,362 660,318 653,274 C 645,228 625,182 604,150 Z" }
+];
+const VEIN_LEVEL = { high: { hatch: 0.85, tint: 0.16 }, moderate: { hatch: 0.55, tint: 0.08 }, low: { hatch: 0.4, tint: 0.05 } };
+
+/* Mountain ranges — indicative. peaks: [x, baseY]; each drawn as a chevron. */
+const MOUNTAINS = [
+  { name: "Southern belt",   vein: "intense",  w: 18, h: 26, peaks: [[200,560],[250,570],[310,578],[490,588],[545,568]] },
+  { name: "Western coastal", vein: "intense",  w: 15, h: 21, peaks: [[86,172],[80,242],[78,310],[84,372],[98,430]] },
+  { name: "Northern",        vein: "moderate", w: 16, h: 19, peaks: [[236,60],[290,54],[350,50],[430,50],[496,54],[552,64]] },
+  { name: "Eastern ranges",  vein: "moderate", w: 17, h: 23, peaks: [[664,112],[676,160],[684,212],[688,266],[684,322],[674,378],[658,430]] },
+  { name: "Central massif",  vein: "poor",     w: 18, h: 22, peaks: [[382,232],[420,220],[383,272],[441,260]] }
+];
+
+/* Other features — indicative courses. */
+const FEATURES = [
+  { kind: "f-rift",   d: "M 255,160 C 263,210 265,262 257,313 C 249,358 240,398 235,443", label: { t: "rift axis", x: 262, y: 380, cls: "lbl-rift" } },
+  { kind: "f-shield", d: "M 170,80 C 244,70 336,66 426,72 C 500,77 558,86 610,100",   label: { t: "shield edge", x: 520, y: 98, cls: "lbl-shield" } },
+  { kind: "f-river",  d: "M 355,142 C 362,200 356,260 342,320 C 330,370 312,412 297,452" },
+  { kind: "f-river",  d: "M 445,162 C 452,212 462,272 456,332 C 450,383 438,424 422,462" }
+];
+
+/* D014 peripheral actors — indicative. Anchored only where WORLD.md names a location. */
+const PERIPHERAL = [
+  { id: "p-north", name: "Administratively abandoned", kind: "ring", at: [330, 102], r: 7, label: { t: "admin. abandoned", x: 330, y: 122 },
+    region: "Northern territories",
+    body: [
+      "Populations inside a faction's claimed territory that the faction never seriously governed. Governance vacuums produce informal authority structures that may resist reassertion of factional control.",
+      "Anchor: the northern territories text names religious arm outposts, independent communities and organizations that require distance from central Order authority. What a faction designates as strategic reserve may, on arrival, prove to have developed its own account of the territory."
+    ] },
+  { id: "p-sw", name: "Informal power structures", kind: "ring", at: [146, 556], r: 15, label: { t: "informal power", x: 146, y: 630, sea: true },
+    region: "SW coastal enclave",
+    body: [
+      "Anchor: the enclave text names informal power structures the Order's formal hierarchy does not govern, grown under neglect.",
+      "WORLD.md does not assign this instance to one of the six D014 types."
+    ] },
+  { id: "p-east", name: "Maritime communities", kind: "path", d: "M 748,118 C 758,160 762,210 760,252", at: [756, 185],
+    label: { t: "maritime communities", x: 776, y: 185, rot: 90, sea: true },
+    region: "Eastern sea, off the eastern seaboard",
+    body: [
+      "Populations whose mobility makes them institutionally illegible to both factions. Neither faction has maritime infrastructure at a scale that could govern open water.",
+      "Placement is indicative: the eastern seaboard is the coast where the Order has not invested in maritime infrastructure. War changes the calculation by creating demand for the routes these communities control."
+    ] }
+];
+const PERIPHERAL_UNPLACED = ["Ideologically expelled", "Geographic ungoverned / proto-state", "Extractive networks", "Conflict entrepreneurs"];
+
+/* Map labels. layer: shown only when that layer is also on. */
+const LABELS = [
+  { t: "WESTERN MARGIN", x: 78, y: 300, rot: -90, cls: "lbl-region" },
+  { t: "Coalition", x: 92, y: 300, rot: -90, cls: "lbl-sub" },
+  { t: "SOUTHERN BELT", x: 400, y: 584, cls: "lbl-region" },
+  { t: "Coalition", x: 400, y: 597, cls: "lbl-sub" },
+  { t: "CONTESTED CORRIDOR", x: 166, y: 262, rot: -90, cls: "lbl-region" },
+  { t: "contested", x: 420, y: 537, cls: "lbl-sub" },
+  { t: "ORDER INTERIOR", x: 470, y: 300, cls: "lbl-region" },
+  { t: "Order operational range", x: 470, y: 314, cls: "lbl-sub" },
+  { t: "NORTHERN TERRITORIES", x: 450, y: 118, cls: "lbl-region" },
+  { t: "Order-claimed · thinly administered", x: 450, y: 131, cls: "lbl-sub" },
+  { t: "EASTERN SEABOARD", x: 710, y: 330, rot: 90, cls: "lbl-region" },
+  { t: "SW ENCLAVE", x: 146, y: 604, cls: "lbl-region lbl-sea" },
+  { t: "Order-claimed · effectively autonomous", x: 150, y: 617, cls: "lbl-sub lbl-sea" },
+  { t: "western ocean", x: 22, y: 470, rot: -90, cls: "lbl-sea" },
+  { t: "arctic sea", x: 300, y: -8, cls: "lbl-sea" },
+  { t: "eastern sea", x: 760, y: 600, cls: "lbl-sea" },
+  { t: "southern sea", x: 420, y: 652, cls: "lbl-sea" },
+  { t: "arctic",        x: 834, y: 70,  anchor: "end", cls: "lbl-climate", layer: "climate" },
+  { t: "subarctic",     x: 834, y: 158, anchor: "end", cls: "lbl-climate", layer: "climate" },
+  { t: "temperate",     x: 834, y: 292, anchor: "end", cls: "lbl-climate", layer: "climate" },
+  { t: "mediterranean", x: 834, y: 440, anchor: "end", cls: "lbl-climate", layer: "climate" },
+  { t: "equatorial",    x: 834, y: 560, anchor: "end", cls: "lbl-climate", layer: "climate" },
+  { t: "maritime",      x: 22,  y: 200, rot: -90, cls: "lbl-climate", layer: "climate" },
+  { t: "continental",   x: 560, y: 380, cls: "lbl-climate-in", layer: "climate" },
+  { t: "VEIN · W. MARGIN", x: 60, y: 450, rot: -90, cls: "lbl-vein", layer: "vein" },
+  { t: "VEIN · S. BELT", x: 250, y: 560, cls: "lbl-vein", layer: "vein" },
+  { t: "VEIN · E. RANGES", x: 664, y: 278, rot: 90, cls: "lbl-vein", layer: "vein" },
+  { t: "Order sea access", x: 560, y: -8, cls: "lbl-access", layer: "coast" },
+  { t: "Order sea access", x: 752, y: 400, rot: 90, cls: "lbl-access", layer: "coast" }
+];
+
+/* Layers: order here is the order of toggles. status: decided / indicative. */
+const LAYERS = [
+  { id: "climate",    group: "Base",       label: "Climate zones",         on: true,  status: "decided",    swatch: "linear-gradient(var(--c-arctic),var(--c-tw),var(--c-med),var(--c-eq))" },
+  { id: "territory",  group: "Territory",  label: "Coalition / Order",     on: true,  status: "decided",    swatch: "linear-gradient(90deg,var(--coal) 50%,var(--order) 50%)" },
+  { id: "contested",  group: "Territory",  label: "Contested corridor",    on: true,  status: "decided",    swatch: "repeating-linear-gradient(45deg,var(--contested) 0 1.5px,transparent 1.5px 4px)" },
+  { id: "coast",      group: "Territory",  label: "Order sea access",      on: true,  status: "decided",    swatch: "var(--access)" },
+  { id: "vein",       group: "Vein",       label: "Surfacing zones",       on: true,  status: "decided",    swatch: "repeating-linear-gradient(45deg,var(--vein) 0 2px,transparent 2px 5px)" },
+  { id: "depth",      group: "Vein",       label: "Depth gradient",        on: false, status: "decided",    swatch: "linear-gradient(90deg,var(--depth),transparent)" },
+  { id: "mountains",  group: "Terrain",    label: "Mountain ranges",       on: false, status: "indicative", swatch: "var(--mtn-hi)" },
+  { id: "features",   group: "Terrain",    label: "Rift, shield edge, rivers", on: false, status: "indicative", swatch: "var(--rift)" },
+  { id: "front",      group: "War",        label: "Front line",            on: true,  status: "decided",    swatch: "var(--front)" },
+  { id: "peripheral", group: "War",        label: "Peripheral actors (D014)", on: false, status: "indicative", swatch: "var(--periph)" },
+  { id: "labels",     group: "Display",    label: "Labels",                on: true,  status: null,         swatch: "var(--muted)" }
+];
+
+/* =====================================================================
+   DRAWING
+   ===================================================================== */
+function ellipse(cx, cy, rx, ry, n) {
+  const out = [];
+  for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2; out.push([cx + Math.cos(a) * rx, cy + Math.sin(a) * ry]); }
+  return out;
+}
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const f1 = n => Math.round(n * 10) / 10;
+const polyD = pts => "M" + pts.map(p => f1(p[0]) + "," + f1(p[1])).join("L") + "Z";
+const lineD = pts => "M" + pts.map(p => f1(p[0]) + "," + f1(p[1])).join("L");
+
+function rng(seed) { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; }
+function roughen(pts, levels, k, seed) {
+  const r = rng(seed); let p = pts;
+  for (let l = 0; l < levels; l++) {
+    const out = [];
+    for (let i = 0; i < p.length; i++) {
+      const a = p[i], b = p[(i + 1) % p.length];
+      const dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1;
+      const off = (r() * 2 - 1) * len * k;
+      out.push(a, [(a[0] + b[0]) / 2 - dy / len * off, (a[1] + b[1]) / 2 + dx / len * off]);
+    }
+    p = out;
+  }
+  return p;
+}
+function smoothClosed(p) {
+  const n = p.length; let d = "M" + f1(p[0][0]) + "," + f1(p[0][1]);
+  for (let i = 0; i < n; i++) {
+    const p0 = p[(i - 1 + n) % n], p1 = p[i], p2 = p[(i + 1) % n], p3 = p[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + "," + f1(p1[1] + (p2[1] - p0[1]) / 6) + " "
+             + f1(p2[0] - (p3[0] - p1[0]) / 6) + "," + f1(p2[1] - (p3[1] - p1[1]) / 6) + " "
+             + f1(p2[0]) + "," + f1(p2[1]);
+  }
+  return d + "Z";
+}
+function chevron(x, base, w, h) { return "M" + (x - w) + "," + base + "L" + x + "," + (base - h) + "L" + (x + w) + "," + base; }
+
+const svg = document.getElementById("map");
+const COAST_D = smoothClosed(roughen(COAST.anchors, COAST.levels, COAST.roughness, COAST.seed));
+const LAYER_G = {};
+const ITEMS = {};
+
+function build() {
+  const defs = el("defs", {}, svg);
+  el("path", { d: COAST_D }, el("clipPath", { id: "cc" }, defs));
+  const ac = el("clipPath", { id: "access-clip" }, defs);
+  SEA_ACCESS.forEach(p => el("path", { d: polyD(p) }, ac));
+  const xh = el("pattern", { id: "xhatch", width: 10, height: 10, patternUnits: "userSpaceOnUse" }, defs);
+  el("line", { x1: 0, y1: 0, x2: 10, y2: 10, class: "hatch-line" }, xh);
+  el("line", { x1: 10, y1: 0, x2: 0, y2: 10, class: "hatch-line" }, xh);
+  const vh = el("pattern", { id: "vhatch", width: 9, height: 9, patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" }, defs);
+  el("line", { x1: 0, y1: 0, x2: 0, y2: 9, class: "vein-line" }, vh);
+  [["dg-w", 0, 0, 1, 0, [.62, 0]], ["dg-s", 0, 0, 0, 1, [0, .62]]].forEach(([id, x1, y1, x2, y2, o]) => {
+    const g = el("linearGradient", { id, x1, y1, x2, y2 }, defs);
+    el("stop", { offset: "0%", class: "depth-stop", "stop-opacity": o[0] }, g);
+    el("stop", { offset: "100%", class: "depth-stop", "stop-opacity": o[1] }, g);
+  });
+
+  el("rect", { x: 0, y: -24, width: 840, height: 700, class: "ocean" }, svg);
+  el("path", { d: COAST_D, class: "land" }, svg);
+
+  const layer = (id, clip) => (LAYER_G[id] = el("g", { id: "L-" + id, "clip-path": clip ? "url(#cc)" : null, class: "nohit" }, svg));
+
+  const gc = layer("climate", true);
+  CLIMATE.forEach(c => el("rect", { x: c.x, y: c.y, width: c.w, height: c.h, class: c.cls }, gc));
+
+  const gt = layer("territory", true);
+  REGIONS.filter(r => r.fill).forEach(r => el("path", { d: polyD(r.poly), class: r.fill }, gt));
+  REGIONS.filter(r => r.fill).forEach(r => el("path", { d: polyD(r.poly), class: "boundary" }, gt));
+
+  const gx = layer("contested", true);
+  const corr = REGIONS.find(r => r.id === "corridor");
+  el("path", { d: polyD(corr.poly), class: "contested-fill" }, gx);
+  el("path", { d: polyD(corr.poly), class: "contested-tint" }, gx);
+
+  const gv = layer("vein", true);
+  VEIN.forEach(v => {
+    const L = VEIN_LEVEL[v.level];
+    el("path", { d: v.d, class: "vein-fill", opacity: L.hatch }, gv);
+    el("path", { d: v.d, class: "vein-tint", opacity: L.tint }, gv);
+  });
+
+  const gd = layer("depth", true);
+  el("rect", { x: 0, y: -24, width: 840, height: 700, fill: "url(#dg-w)" }, gd);
+  el("rect", { x: 0, y: -24, width: 840, height: 700, fill: "url(#dg-s)" }, gd);
+
+  const gm = layer("mountains", false);
+  MOUNTAINS.forEach(m => m.peaks.forEach(([x, b]) => el("path", { d: chevron(x, b, m.w, m.h), class: "mtn mtn-" + m.vein }, gm)));
+
+  const gf = layer("features", false);
+  FEATURES.forEach(f => {
+    el("path", { d: f.d, class: f.kind }, gf);
+    if (f.label) el("text", { x: f.label.x, y: f.label.y, class: "lbl lbl-feature " + f.label.cls }, gf).textContent = f.label.t;
+  });
+
+  const gs = layer("coast", false);
+  el("path", { d: COAST_D, class: "access", "clip-path": "url(#access-clip)" }, gs);
+
+  el("path", { d: COAST_D, class: "coast nohit" }, svg);
+
+  const gfr = layer("front", true);
+  el("path", { d: lineD(FRONT), class: "front" }, gfr);
+  el("text", { x: 224, y: 280, class: "lbl lbl-front" }, gfr).textContent = "front";
+
+  // Selection highlight sits under the hit targets.
+  const sel = el("g", { id: "sel", class: "nohit", "clip-path": "url(#cc)" }, svg);
+  const selFree = el("g", { id: "sel-free", class: "nohit" }, svg);
+
+  // Region hit targets (always active).
+  const hits = el("g", { id: "hits", "clip-path": "url(#cc)" }, svg);
+  REGIONS.forEach(r => {
+    ITEMS[r.id] = Object.assign({ type: "region" }, r);
+    const h = el("path", { d: polyD(r.poly), class: "hit", tabindex: 0, role: "button", "aria-label": r.name + ": " + r.control }, hits);
+    wire(h, r.id);
+  });
+  ITEMS.front = Object.assign({ type: "front" }, FRONT_ITEM);
+  const fh = el("path", { d: lineD(FRONT), class: "hit-line", tabindex: 0, role: "button", "aria-label": "The front" }, hits);
+  fh.dataset.layer = "front";
+  wire(fh, "front");
+
+  // Labels layer (enclave marker lives here, as a settlement symbol).
+  const gl = layer("labels", false);
+  const enc = REGIONS.find(r => r.id === "enclave");
+  el("circle", { cx: enc.marker[0], cy: enc.marker[1], r: 7, class: "enclave-ring" }, gl);
+  el("circle", { cx: enc.marker[0], cy: enc.marker[1], r: 3, class: "enclave-dot" }, gl);
+  LABELS.forEach(l => {
+    const t = el("text", {
+      x: l.x, y: l.y, class: "lbl " + l.cls, "text-anchor": l.anchor || "middle",
+      transform: l.rot ? "rotate(" + l.rot + " " + l.x + " " + l.y + ")" : null
+    }, gl);
+    t.textContent = l.t;
+    if (l.layer) t.dataset.layer = l.layer;
+  });
+  const cp = el("g", { transform: "translate(812 -2)" }, gl);
+  el("path", { d: "M0,-14 L5,4 L0,0 L-5,4 Z", class: "compass" }, cp);
+  el("text", { x: 0, y: 17, "text-anchor": "middle", class: "compass-t" }, cp).textContent = "N";
+
+  // Peripheral markers (indicative) on top so they stay clickable.
+  const gp = layer("peripheral", false);
+  gp.classList.remove("nohit");
+  PERIPHERAL.forEach(p => {
+    ITEMS[p.id] = Object.assign({ type: "marker", status: "indicative", control: "D014 · " + p.region }, p);
+    let h;
+    if (p.kind === "ring") {
+      el("circle", { cx: p.at[0], cy: p.at[1], r: p.r, class: "periph-ring nohit" }, gp);
+      h = el("circle", { cx: p.at[0], cy: p.at[1], r: p.r + 6, class: "hit" }, gp);
+    } else {
+      el("path", { d: p.d, class: "periph-path nohit" }, gp);
+      h = el("path", { d: p.d, class: "hit-line" }, gp);
+    }
+    h.setAttribute("tabindex", 0); h.setAttribute("role", "button"); h.setAttribute("aria-label", p.name + " (indicative)");
+    wire(h, p.id);
+    const l = p.label;
+    el("text", {
+      x: l.x, y: l.y, "text-anchor": "middle", class: "lbl lbl-periph nohit" + (l.sea ? " lbl-periph-sea" : ""),
+      transform: l.rot ? "rotate(" + l.rot + " " + l.x + " " + l.y + ")" : null
+    }, gp).textContent = l.t;
+  });
+  const lp = el("text", { x: 834, y: 668, "text-anchor": "end", class: "lbl lbl-periph lbl-periph-sea nohit" }, gp);
+  lp.textContent = "indicative · unplaced: " + PERIPHERAL_UNPLACED.length + " of 6 D014 types (see legend)";
+
+  ITEMS._sel = sel; ITEMS._selFree = selFree;
+}
+
+/* =====================================================================
+   STATE + INTERACTION
+   ===================================================================== */
+const state = { layers: {}, pinned: null, hovered: null };
+LAYERS.forEach(l => (state.layers[l.id] = l.on));
+
+function wire(node, id) {
+  node.addEventListener("mouseenter", () => { state.hovered = id; update(); });
+  node.addEventListener("mouseleave", () => { state.hovered = null; update(); });
+  node.addEventListener("focus", () => { state.hovered = id; update(); });
+  node.addEventListener("blur", () => { state.hovered = null; update(); });
+  node.addEventListener("click", () => pin(id));
+  node.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pin(id); } });
+}
+function pin(id) { state.pinned = state.pinned === id ? null : id; update(); }
+
+function applyLayers() {
+  LAYERS.forEach(l => {
+    const g = LAYER_G[l.id];
+    if (g) g.classList.toggle("off", !state.layers[l.id]);
+    const b = document.getElementById("layer-" + l.id);
+    if (b) { b.setAttribute("aria-pressed", String(state.layers[l.id])); b.querySelector(".stt").textContent = state.layers[l.id] ? "on" : "off"; }
+  });
+  svg.querySelectorAll("[data-layer]").forEach(n => n.classList.toggle("off", !state.layers[n.dataset.layer]));
+  if (!state.layers.peripheral && ITEMS[state.pinned] && ITEMS[state.pinned].type === "marker") state.pinned = null;
+  if (!state.layers.front && state.pinned === "front") state.pinned = null;
+}
+
+function highlight(id) {
+  const sel = ITEMS._sel, free = ITEMS._selFree;
+  sel.replaceChildren(); free.replaceChildren();
+  const it = ITEMS[id];
+  if (!it) return;
+  if (it.type === "region") el("path", { d: polyD(it.poly), class: "sel-shape" }, sel);
+  else if (it.type === "front") el("path", { d: lineD(FRONT), class: "sel-line" }, sel);
+  else if (it.kind === "ring") el("circle", { cx: it.at[0], cy: it.at[1], r: it.r + 5, class: "sel-shape" }, free);
+  else el("path", { d: it.d, class: "sel-line" }, free);
+}
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const SIDE_COLOR = { coalition: "var(--coal)", order: "var(--order)", contested: "var(--contested)" };
+
+function renderDetail(id) {
+  const it = ITEMS[id] || OVERVIEW;
+  const isOverview = !ITEMS[id];
+  let h = "<h2>" + (isOverview ? "Overview" : it.type === "marker" ? "Peripheral marker" : it.type === "front" ? "Front" : "Region") + "</h2>";
+  h += "<h3>" + esc(it.name) + "</h3><div class=\"tags\">";
+  h += "<span class=\"tag " + it.status + "\">" + it.status + "</span>";
+  if (it.control) {
+    const bg = SIDE_COLOR[it.side];
+    h += bg ? "<span class=\"tag side\" style=\"background:" + bg + "\">" + esc(it.control) + "</span>" : "<span class=\"tag\">" + esc(it.control) + "</span>";
+  }
+  h += "</div>";
+  if (it.facts && it.facts.length) h += "<dl class=\"facts\">" + it.facts.map(f => "<dt>" + esc(f[0]) + "</dt><dd>" + esc(f[1]) + "</dd>").join("") + "</dl>";
+  h += "<div class=\"body\">" + it.body.map(p => "<p>" + esc(p) + "</p>").join("") + "</div>";
+  if (isOverview) {
+    h += "<div class=\"lg-title\">Downstream, not blocking</div><ul class=\"list\">" + it.downstream.map(d => "<li>" + esc(d) + "</li>").join("") + "</ul>";
+    h += "<p class=\"hint\">Hover a region to preview it. Click, or press Enter on a focused region, to pin it here.</p>";
+  } else {
+    h += "<button type=\"button\" id=\"clear\">Back to overview</button>";
+  }
+  h += "<div class=\"src\">" + esc(META.source) + " · draft " + META.sectionDraft + " content</div>";
+  const box = document.getElementById("detail");
+  box.innerHTML = h;
+  const c = document.getElementById("clear");
+  if (c) c.addEventListener("click", () => { state.pinned = null; state.hovered = null; update(); });
+}
+
+function update() {
+  applyLayers();
+  const id = state.hovered || state.pinned;
+  renderDetail(id);
+  highlight(id);
+  document.querySelectorAll("#region-chips .chip-btn").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.id === state.pinned)));
+}
+
+function buildControls() {
+  const chips = document.getElementById("region-chips");
+  [...REGIONS, { id: "front", name: "The front", side: null }].forEach(r => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip-btn"; b.dataset.id = r.id; b.setAttribute("aria-pressed", "false");
+    const k = r.id === "front" ? "var(--front)" : SIDE_COLOR[r.side];
+    b.innerHTML = "<span class=\"k\" style=\"background:" + k + "\"></span>" + esc(r.name);
+    b.addEventListener("click", () => { if (r.id === "front" && !state.layers.front) state.layers.front = true; pin(r.id); });
+    b.addEventListener("mouseenter", () => { state.hovered = r.id; update(); });
+    b.addEventListener("mouseleave", () => { state.hovered = null; update(); });
+    chips.appendChild(b);
+  });
+
+  const box = document.getElementById("layers");
+  const groups = [...new Set(LAYERS.map(l => l.group))];
+  box.style.display = "grid"; box.style.gap = "8px";
+  groups.forEach(g => {
+    const wrap = document.createElement("div");
+    wrap.className = "layer-group";
+    wrap.innerHTML = "<div class=\"lg-title\">" + esc(g) + "</div>";
+    LAYERS.filter(l => l.group === g).forEach(l => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "layer"; b.id = "layer-" + l.id;
+      b.innerHTML = "<span class=\"box\" aria-hidden=\"true\"></span><span class=\"sw\" style=\"background:" + l.swatch + "\"></span>"
+        + "<span>" + esc(l.label) + "</span>"
+        + "<span class=\"st" + (l.status === "indicative" ? " ind" : "") + "\">" + (l.status ? l.status + " · " : "") + "<span class=\"stt\"></span></span>";
+      b.addEventListener("click", () => { state.layers[l.id] = !state.layers[l.id]; update(); });
+      wrap.appendChild(b);
+    });
+    box.appendChild(wrap);
+  });
+
+  // Legend: swatches drawn with the same SVG classes as the map.
+  const rows = [
+    ["Coalition safe zone", s => rectSw(s, "t-coalition")],
+    ["Order operational range", s => rectSw(s, "t-order")],
+    ["Order-claimed, thinly administered", s => rectSw(s, "t-order-thin")],
+    ["Contested corridor (depletion zone)", s => { rectSw(s, "contested-fill"); }],
+    ["Vein surfacing: high / moderate / low", s => { [0, 12, 24].forEach((x, i) => el("rect", { x, y: 2, width: 10, height: 12, class: "vein-fill", opacity: [0.85, 0.55, 0.35][i] }, s)); }],
+    ["Depth gradient: layer shallows to the west and south", s => el("rect", { x: 0, y: 2, width: 34, height: 12, fill: "url(#lg-dg)" }, s)],
+    ["Order sea access (north and east coasts)", s => el("path", { d: "M2,8 L32,8", class: "access" }, s)],
+    ["Front (inner edge of corridor)", s => el("path", { d: "M2,8 L32,8", class: "front" }, s)],
+    ["SW enclave settlement", s => { el("circle", { cx: 17, cy: 8, r: 6, class: "enclave-ring" }, s); el("circle", { cx: 17, cy: 8, r: 2.5, class: "enclave-dot" }, s); }],
+    ["Range: Vein-intense / moderate / poor (indicative)", s => { el("path", { d: chevron(6, 13, 5, 9), class: "mtn mtn-intense" }, s); el("path", { d: chevron(17, 13, 5, 9), class: "mtn mtn-moderate" }, s); el("path", { d: chevron(28, 13, 5, 9), class: "mtn mtn-poor" }, s); }],
+    ["Rift axis · shield edge · river (indicative)", s => { el("path", { d: "M1,4 L11,4", class: "f-rift" }, s); el("path", { d: "M12,8 L22,8", class: "f-shield" }, s); el("path", { d: "M23,12 L33,12", class: "f-river" }, s); }],
+    ["D014 peripheral marker (indicative)", s => el("circle", { cx: 17, cy: 8, r: 6, class: "periph-ring" }, s)]
+  ];
+  const lg = document.getElementById("legend");
+  rows.forEach(([txt, draw]) => {
+    const r = document.createElement("div"); r.className = "lrow";
+    const s = el("svg", { viewBox: "0 0 34 16", "aria-hidden": "true" });
+    if (txt.startsWith("Depth")) {
+      const g = el("linearGradient", { id: "lg-dg", x1: 0, y1: 0, x2: 1, y2: 0 }, el("defs", {}, s));
+      el("stop", { offset: "0%", class: "depth-stop", "stop-opacity": .7 }, g);
+      el("stop", { offset: "100%", class: "depth-stop", "stop-opacity": 0 }, g);
+    }
+    draw(s);
+    const t = document.createElement("span"); t.textContent = txt;
+    r.append(s, t); lg.appendChild(r);
+  });
+  const un = document.createElement("div");
+  un.className = "hint";
+  un.textContent = "Unplaced D014 types: " + PERIPHERAL_UNPLACED.join(" · ") + ". Markers anchor only where WORLD.md names a location.";
+  lg.appendChild(un);
+}
+function rectSw(s, cls) { el("rect", { x: 0, y: 2, width: 34, height: 12, class: "land" }, s); el("rect", { x: 0, y: 2, width: 34, height: 12, class: cls }, s); }
+
+document.addEventListener("keydown", e => { if (e.key === "Escape" && (state.pinned || state.hovered)) { state.pinned = null; state.hovered = null; update(); } });
+
+build();
+buildControls();
+update();
+</script>
 </body>
 </html>
