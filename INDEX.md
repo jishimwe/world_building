@@ -7,7 +7,7 @@
 
 | File | Purpose | State |
 |------|---------|-------|
-| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 74 |
+| [[WORLD]] | Canonical prose document. Edit directly with user approval. | Draft 77 |
 | `decisions.json` | Structured registry of all decisions — open, in-progress, decided. | Current |
 | [[GAME_DESIGN]] | Game design concerns as future audit checklist. Not active blockers. | Current |
 | [[working/MATERIALS_BASELINE\|MATERIALS_BASELINE]] | Canonical material reference — full profiles for all story-present materials. WORLD.md links out to it rather than absorbing it. | Current |
@@ -59,7 +59,7 @@
 
 ## Decisions
 
-### Decided (26)
+### Decided (28)
 
 | ID   | Title                                                                                                                                                                      |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -124,6 +124,9 @@
 **1. Daily life — ordinary people on each side (D023)**
 Coalition daily life relationship to the Vein is underdeveloped relative to the Order. Closes the Dune asymmetry before geography or story structure work.
 
+**2. Inter-war conflict history (D039)**
+Unblocked by D013 and D022. Three wars plus small conflicts (+1760–1970); territorial, political and atrocity outcomes feed the D022 registry.
+
 **3. Bloodline consolidation mechanism (D020)**
 Unblocked by D016. Resolve before character work involving Order founding families.
 
@@ -132,6 +135,9 @@ Least developed Order branch. Resolve alongside or after D020 and before charact
 
 **5. Gas-phase substrate and biological barrier (D036)**
 Resolve before writing personal-scale gas-phase substrate into active use or developing military doctrine for personal apparatus.
+
+**6. Vein overexposure — external presentation (D038)**
+Resolve before writing scenes where overexposure is witnessed.
 
 ---
 
