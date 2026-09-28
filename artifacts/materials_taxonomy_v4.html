@@ -1,327 +1,955 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Materials taxonomy — Vein world</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vein Materials Taxonomy</title>
 <style>
-body{font-family:system-ui,sans-serif;padding:1.5rem;background:white;color:#1a1a1a}
+/* Layout: a single assay ledger. Control strip on top, then grouped material rows with two ordinal meters each; rows expand into full profiles. */
+:root{
+  --bg:#F3F5F4; --surface:#FFFFFF; --surface-2:#E9EEEC; --fg:#15201D; --fg-2:#3C4945; --muted:#5E6B67;
+  --line:#D3DCD8; --track:#DCE3E0; --cond:#1D7563; --thr:#A94B24; --accent:#1D7563; --accent-ink:#FFFFFF;
+  --focus:#1D7563; --warn-bg:#F6E7DF; --warn-fg:#7A3314;
+  --f-display:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Charter,Georgia,serif;
+  --f-body:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-data:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --r:6px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1312; --surface:#151C1A; --surface-2:#1C2523; --fg:#E3EBE8; --fg-2:#B4C1BD; --muted:#8C9A96;
+    --line:#29332F; --track:#2A3431; --cond:#4DC0A3; --thr:#E3875B; --accent:#4DC0A3; --accent-ink:#0B1412;
+    --focus:#7FD8C1; --warn-bg:#3A2219; --warn-fg:#F2B597; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1312; --surface:#151C1A; --surface-2:#1C2523; --fg:#E3EBE8; --fg-2:#B4C1BD; --muted:#8C9A96;
+  --line:#29332F; --track:#2A3431; --cond:#4DC0A3; --thr:#E3875B; --accent:#4DC0A3; --accent-ink:#0B1412;
+  --focus:#7FD8C1; --warn-bg:#3A2219; --warn-fg:#F2B597; color-scheme:dark;
+}
 *{box-sizing:border-box}
-input[type=search]{flex:1;min-width:140px;font-size:12px;padding:4px 8px;border:0.5px solid #B4B2A9;border-radius:6px;background:white;color:#1a1a1a}
-input[type=search]:focus{outline:none;border-color:#888780}
-.top{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
-.fb{font-size:11px;padding:2px 9px;border-radius:4px;border:0.5px solid #B4B2A9;background:transparent;cursor:pointer;color:#5F5E5A;white-space:nowrap}
-.fb.on{background:#F1EFE8;color:#1a1a1a;border-color:#888780}
-table{width:100%;border-collapse:collapse}
-th{font-size:11px;font-weight:500;color:#5F5E5A;text-align:left;padding:5px 8px;border-bottom:0.5px solid #B4B2A9;white-space:nowrap;user-select:none}
-td{padding:5px 8px;border-bottom:0.5px solid #D3D1C7;vertical-align:middle;font-size:12px}
-.mat-row{cursor:pointer}
-.mat-row:hover td{background:#F1EFE8}
-.story-row td{background:#F7F6F2}
-.story-row:hover td{background:#F1EFE8}
-.sec-row td{padding:8px 8px 3px;font-size:10px;font-weight:500;color:#888780;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;user-select:none}
-.sec-row:hover td{background:#F1EFE8}
-.era-note-row td{padding:4px 8px 4px 24px;font-size:11px;color:#888780;font-style:italic;border-bottom:0.5px dashed #D3D1C7}
-.detail-row td{padding:0;border-bottom:0.5px solid #B4B2A9}
-.detail-inner{padding:8px 12px 10px 24px;background:#F1EFE8;font-size:12px;line-height:1.6;color:#5F5E5A}
-.detail-inner b{font-weight:500;color:#1a1a1a}
-.vein-profile{margin-top:8px;padding:8px 10px;background:white;border-left:2px solid #1D9E75;border-radius:0 4px 4px 0}
-.vein-profile-title{font-size:10px;font-weight:500;color:#0F6E56;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
-.vein-profile p{margin:3px 0;font-size:12px;color:#5F5E5A}
-.vein-profile b{color:#1a1a1a}
-.era-pill{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:3px;white-space:nowrap}
-.ep-stone{background:#D3D1C7;color:#444441}
-.ep-bronze{background:#FAC775;color:#633806}
-.ep-iron{background:#F0997B;color:#712B13}
-.ep-ind{background:#85B7EB;color:#0C447C}
-.ep-elec{background:#AFA9EC;color:#26215C}
-.ep-nuc{background:#9FE1CB;color:#085041}
-.ep-sil{background:#C0DD97;color:#27500A}
-.ep-front{background:#F4C0D1;color:#72243E}
-.ep-vein{background:#2C2C2A;color:#D3D1C7}
-.cbar{display:flex;align-items:center;gap:6px;min-width:110px}
-.cbar-track{flex:1;height:5px;border-radius:3px;background:#D3D1C7;position:relative}
-.cbar-fill{height:5px;border-radius:3px;position:absolute;left:0;top:0}
-.cbar-label{font-size:11px;white-space:nowrap;min-width:52px}
-.name-cell{font-weight:500;color:#1a1a1a}
-.name-dim{color:#5F5E5A;font-weight:400}
-.toggle{font-size:10px;margin-right:4px;display:inline-block;transition:transform .15s;color:#888780}
-.sec-toggle{font-size:10px;margin-right:4px;color:#888780}
-.story-badge{font-size:9px;font-weight:500;padding:1px 5px;border-radius:3px;background:#1D9E75;color:#E1F5EE;margin-left:4px;vertical-align:middle}
-.new-badge{font-size:9px;font-weight:500;padding:1px 5px;border-radius:3px;background:#0F6E56;color:#E1F5EE;margin-left:4px}
-.decided-badge{font-size:9px;font-weight:500;padding:1px 5px;border-radius:3px;background:#E6F1FB;color:#0C447C;margin-left:4px;vertical-align:middle}
-.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px;font-size:11px;color:#5F5E5A}
-.leg{display:flex;align-items:center;gap:5px}
-.leg-dot{width:8px;height:8px;border-radius:50%}
-h1{font-size:15px;font-weight:500;margin:0 0 4px;color:#1a1a1a}
-.subtitle{font-size:11px;color:#888780;margin:0 0 16px}
-@media(prefers-color-scheme:dark){
-  body{background:#1a1a1a;color:#e0e0e0}
-  input[type=search]{background:#2C2C2A;color:#e0e0e0;border-color:#444441}
-  .fb{color:#888780;border-color:#444441}
-  .fb.on{background:#2C2C2A;color:#e0e0e0;border-color:#5F5E5A}
-  .mat-row:hover td,.sec-row:hover td{background:#2C2C2A}
-  .story-row td{background:#242422}
-  .story-row:hover td{background:#2C2C2A}
-  .detail-inner{background:#2C2C2A;color:#888780}
-  .detail-inner b{color:#e0e0e0}
-  .vein-profile{background:#1a1a1a;border-color:#1D9E75}
-  .vein-profile p{color:#888780}
-  .vein-profile b{color:#e0e0e0}
-  .name-cell{color:#e0e0e0}
-  .name-dim{color:#888780}
-  .cbar-track{background:#444441}
-  h1{color:#e0e0e0}
-  .legend{color:#888780}
-  .decided-badge{background:#042C53;color:#85B7EB}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 var(--f-body)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:24px 48px}
+@media (min-width:700px){.wrap{padding-inline:28px}}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+button,input{font:inherit;color:inherit}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* header */
+header.top{display:grid;gap:6px;margin-bottom:18px}
+.eyebrow{font:600 11px/1.3 var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.eyebrow .dec{color:var(--accent)}
+h1{font:600 clamp(26px,4vw,34px)/1.1 var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+.lede{margin:0;max-width:68ch;color:var(--fg-2)}
+.src{margin:0;font-size:12.5px;color:var(--muted)}
+.src code{font-family:var(--f-data);font-size:12px;color:var(--fg-2)}
+.theme-btn{margin-left:auto;background:none;border:1px solid var(--line);border-radius:999px;padding:2px 10px;font:500 11px/1.6 var(--f-data);color:var(--muted);cursor:pointer;letter-spacing:.04em;text-transform:none}
+
+/* key */
+.key{display:grid;gap:10px 28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-bottom:14px;font-size:12.5px;color:var(--fg-2)}
+.key h2{font:600 11px/1.3 var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 6px}
+.scale{display:flex;flex-wrap:wrap;gap:2px 0;font-family:var(--f-data);font-size:11.5px}
+.scale span+span::before{content:"\203A";margin:0 5px;color:var(--muted)}
+.key p{margin:6px 0 0}
+.sw{display:inline-block;width:22px;height:8px;border-radius:2px;vertical-align:middle;margin-right:4px}
+.sw.c{background:var(--cond)} .sw.t{background:var(--thr)}
+.sw.h{background:repeating-linear-gradient(135deg,var(--cond) 0 2px,transparent 2px 4px);box-shadow:inset 0 0 0 1px var(--cond)}
+.invariants{margin:0;padding-left:1.1em}
+.invariants li{margin:2px 0}
+
+details.fw{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);margin-bottom:18px}
+details.fw>summary{cursor:pointer;padding:10px 14px;font:600 12px/1.3 var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-2)}
+.fw-body{display:grid;gap:14px 28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));padding:0 14px 14px;font-size:13px;color:var(--fg-2)}
+.fw-body h3{font:600 15px/1.3 var(--f-display);margin:0 0 4px;color:var(--fg)}
+.fw-body p{margin:4px 0}
+.fw-body ol{margin:4px 0;padding-left:1.3em;font-family:var(--f-data);font-size:12px}
+
+/* controls */
+.controls{display:grid;gap:10px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.searchrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.search{flex:1 1 220px;min-width:0;position:relative}
+.search input{width:100%;padding:8px 10px 8px 32px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);font-size:14px}
+.search svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;fill:none;stroke:var(--muted);stroke-width:2}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:var(--r);padding:7px 11px;font-size:12.5px;cursor:pointer;color:var(--fg-2);white-space:nowrap}
+.btn:hover{border-color:var(--muted);color:var(--fg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chips .lbl{font:600 10.5px/1 var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-right:4px;min-width:62px}
+.chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--fg-2)}
+.chip:hover{border-color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.count{font:500 12px/1.3 var(--f-data);color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* compare */
+.compare{border:1px solid var(--accent);border-radius:var(--r);background:var(--surface);margin:12px 0 18px;padding:12px 14px}
+.compare-head{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.compare-head h2{font:600 17px/1.2 var(--f-display);margin:0}
+.compare-hint{font-size:12px;color:var(--muted)}
+.cmp-scroll{overflow-x:auto}
+.cmp-table{border-collapse:collapse;width:100%;min-width:520px;font-size:12.5px}
+.cmp-table th,.cmp-table td{text-align:left;vertical-align:top;padding:7px 10px;border-top:1px solid var(--line)}
+.cmp-table thead th{border-top:0;font:600 15px/1.25 var(--f-display);color:var(--fg)}
+.cmp-table tbody th{font:600 10.5px/1.4 var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);width:9.5rem;white-space:nowrap}
+.cmp-table td{color:var(--fg-2)}
+
+/* table-like list */
+.colhead,.row{display:grid;grid-template-columns:minmax(0,2.1fr) 7.2rem minmax(8.5rem,1.15fr) minmax(8.5rem,1.15fr) minmax(0,1.55fr) 5.6rem;gap:14px;align-items:center}
+.colhead{padding:8px 10px 6px;font:600 10.5px/1.3 var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.colhead span:last-child{text-align:right}
+section.grp{margin-top:18px}
+.grp-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:0 10px 6px;border-bottom:1px solid var(--line)}
+.grp-head h2{font:600 18px/1.25 var(--f-display);margin:0}
+.grp-head .n{font:500 11.5px/1 var(--f-data);color:var(--muted);font-variant-numeric:tabular-nums}
+.grp-intro{margin:6px 10px 4px;max-width:90ch;font-size:12.5px;color:var(--muted)}
+.mat{border-bottom:1px solid var(--line)}
+.mat.past .nm{color:var(--muted)}
+.row{padding:9px 10px;cursor:pointer}
+.row:hover{background:var(--surface-2)}
+.mat.open>.row{background:var(--surface-2)}
+.nm-btn{display:flex;gap:8px;align-items:flex-start;background:none;border:0;padding:0;text-align:left;cursor:pointer;min-width:0}
+.chev{flex:none;width:10px;height:10px;margin-top:5px;fill:var(--muted);transition:transform .15s}
+.mat.open .chev{transform:rotate(90deg)}
+.nm{font-weight:600;font-size:14px;color:var(--fg);overflow-wrap:anywhere}
+.badges{display:inline-flex;flex-wrap:wrap;gap:4px;margin-left:6px;vertical-align:1px}
+.bdg{font:600 9.5px/1 var(--f-data);text-transform:uppercase;letter-spacing:.06em;padding:3px 5px;border-radius:3px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.bdg.full{border-color:var(--accent);color:var(--accent)}
+.bdg.past{border-style:dashed}
+.bdg.art{background:var(--warn-bg);color:var(--warn-fg);border-color:transparent}
+.era{font:500 11.5px/1.3 var(--f-data);color:var(--fg-2)}
+.func{font-size:12.5px;color:var(--fg-2);min-width:0}
+.cmp{display:flex;gap:6px;justify-content:flex-end;align-items:center;font-size:11.5px;color:var(--muted);cursor:pointer;white-space:nowrap}
+.cmp input{width:15px;height:15px;accent-color:var(--accent);margin:0;cursor:pointer}
+.cmp input:disabled+span{opacity:.45}
+.mobile-lbl{display:none}
+
+/* meters */
+.m{display:grid;gap:4px;min-width:0}
+.meter{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;height:8px}
+.seg{background:var(--track)}
+.seg:first-child{border-radius:2px 0 0 2px}.seg:last-child{border-radius:0 2px 2px 0}
+.m.c .seg.on{background:var(--cond)}
+.m.t .seg.on{background:var(--thr)}
+.m.c.q .seg.on{background:repeating-linear-gradient(135deg,var(--cond) 0 2px,transparent 2px 4px);box-shadow:inset 0 0 0 1px var(--cond)}
+.m.c .seg.on:last-of-type,.m.t .seg.on:last-of-type{}
+.mlabel{font:500 11.5px/1.2 var(--f-data);color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mlabel em{font-style:normal;color:var(--muted)}
+.meter.na .seg{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+
+/* detail */
+.detail{padding:4px 10px 16px 28px;background:var(--surface-2)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:8px 20px;margin:0 0 10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.facts div{min-width:0}
+.facts dt{font:600 10px/1.3 var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-size:12.5px;color:var(--fg)}
+.summary{margin:0 0 10px;max-width:78ch;color:var(--fg-2)}
+.prof{display:grid;gap:8px;max-width:84ch}
+.prof h3{font:600 10.5px/1.3 var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin:4px 0 0}
+.prof p{margin:0;color:var(--fg-2)}
+.prof b{color:var(--fg);font-weight:600}
+.srcline{margin:12px 0 0;font:500 11px/1.4 var(--f-data);color:var(--muted)}
+
+.empty{padding:28px 10px;color:var(--muted);text-align:center}
+.future{margin-top:28px;padding:12px 14px;border:1px dashed var(--line);border-radius:var(--r)}
+.future h2{font:600 17px/1.25 var(--f-display);margin:0 0 4px}
+.future p.note{margin:0 0 8px;font-size:12.5px;color:var(--muted)}
+.future dl{margin:0;display:grid;gap:8px}
+.future dt{font:600 11px/1.3 var(--f-data);text-transform:uppercase;letter-spacing:.06em;color:var(--fg-2)}
+.future dd{margin:2px 0 0;font-size:12.5px;color:var(--fg-2);max-width:90ch}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:860px){
+  .colhead{display:none}
+  .row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"nm nm" "era cmp" "c t" "fn fn";gap:8px 14px}
+  .row>.nm-btn{grid-area:nm}.row>.era{grid-area:era}.row>.m.c{grid-area:c}.row>.m.t{grid-area:t}.row>.func{grid-area:fn}.row>.cmp{grid-area:cmp}
+  .mobile-lbl{display:block;font:600 9.5px/1 var(--f-data);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  .detail{padding-left:12px}
+  .chips .lbl{min-width:0;width:100%}
 }
 </style>
 </head>
 <body>
-<h1>Materials taxonomy — Vein world</h1>
-<p class="subtitle">Working reference · click any row to expand · sections collapse · search filters all columns · <span style="color:#0C447C;font-weight:500">decided</span> = Vein effect profile locked · <span style="color:#1a1a1a;font-weight:500">threshold scale:</span> <span style="color:#888780">very low → low → low-med → med → med-high → high → <b style="color:#1a1a1a">extreme</b></span> <span style="color:#888780">(extreme = unreachable at any story-present intensity)</span></p>
+<div class="wrap">
 
-<div class="legend">
-  <span class="leg"><span class="leg-dot" style="background:#085041"></span>high+</span>
-  <span class="leg"><span class="leg-dot" style="background:#1D9E75"></span>high</span>
-  <span class="leg"><span class="leg-dot" style="background:#EF9F27"></span>med</span>
-  <span class="leg"><span class="leg-dot" style="background:#534AB7"></span>damp</span>
-  <span class="leg"><span class="leg-dot" style="background:#185FA5"></span>surface</span>
-  <span class="leg"><span class="leg-dot" style="background:#888780"></span>low</span>
-  <span class="leg"><span class="leg-dot" style="background:#A32D2D"></span>low−</span>
+<header class="top">
+  <div class="eyebrow">
+    <span class="dec">D019 &middot; decided</span>
+    <span>Materials &amp; the Vein</span>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Colour theme: system">Theme: system</button>
+  </div>
+  <h1>Vein Materials Taxonomy</h1>
+  <p class="lede">Story-present materials and how each responds to the field: conductivity, state-change threshold, failure mode and apparatus role. The field moves matter along the energy continuum; the variety of effects comes from the variety of matter, not from the field doing different things.</p>
+  <p class="src">Reflects the canonical reference <a href="../working/MATERIALS_BASELINE.md"><code>working/MATERIALS_BASELINE.md</code></a> ([[working/MATERIALS_BASELINE|MATERIALS_BASELINE]]). Where this page and that file differ, the file wins.</p>
+</header>
+
+<div class="key" aria-label="Reading the meters">
+  <div>
+    <h2><span class="sw c" aria-hidden="true"></span>Conductivity</h2>
+    <div class="scale"><span>low&minus;</span><span>low</span><span>low-med</span><span>med</span><span>med+</span><span>med-high</span><span>high</span><span>high+</span></div>
+    <p>low&minus; = actively resists transmission (insulator). <span class="sw h" aria-hidden="true"></span>Hatched = qualified conduction: <em>thermal</em>, <em>surface</em>, <em>damp</em> (absorbs) or <em>directional</em>; the qualifier is always printed.</p>
+  </div>
+  <div>
+    <h2><span class="sw t" aria-hidden="true"></span>State-change threshold</h2>
+    <div class="scale"><span>near zero</span><span>very low</span><span>low</span><span>low-med</span><span>med</span><span>med-high</span><span>high</span><span>extreme</span></div>
+    <p>extreme = unreachable at any story-present intensity. Outlined empty meter = no bulk threshold, or varies.</p>
+  </div>
+  <div>
+    <h2>Invariants</h2>
+    <ul class="invariants">
+      <li>Metals conduct but do not store: conduction stops when the source is removed.</li>
+      <li>Bidirectional field-mechanical transduction comes only from asymmetric crystalline structure: the quartz family (weakly in beryl and dry bone). Every other material is one-way.</li>
+      <li>Matter form affects speed and efficiency; it does not unlock capability tiers.</li>
+    </ul>
+  </div>
 </div>
 
-<div class="top">
-  <input type="search" id="srch" placeholder="Search materials..." oninput="applyFilters()">
-  <button class="fb on" onclick="setFilter('all',this)">All</button>
-  <button class="fb" onclick="setFilter('story',this)">Story-present</button>
-  <button class="fb" onclick="setFilter('decided',this)">Decided</button>
-  <button class="fb" onclick="setFilter('vein',this)">Vein-specific</button>
-  <button class="fb" onclick="setFilter('cond',this)">Conductors</button>
-  <button class="fb" onclick="setFilter('ins',this)">Insulators</button>
+<details class="fw" id="frameworks">
+  <summary>Frameworks: insulators, transducers, Vein-adjacent phases</summary>
+  <div class="fw-body">
+    <div>
+      <h3>Insulation stack</h3>
+      <p>All low&minus; materials actively resist field transmission. They differ by failure mode and by insulation under working conditions.</p>
+      <p><b>Intact:</b></p>
+      <ol><li>Rubber (peak)</li><li>Granite</li><li>Porcelain</li><li>Terracotta</li><li>Tar / pitch</li></ol>
+      <p><b>Sustained working conditions:</b></p>
+      <ol><li>Granite</li><li>Porcelain</li><li>Terracotta</li><li>Rubber (degraded)</li><li>Tar / pitch</li></ol>
+      <p>Well-designed apparatus combines both orderings: granite and porcelain for sustained containment, rubber at joints.</p>
+    </div>
+    <div>
+      <h3>Transducers</h3>
+      <p>A bidirectional transducer converts between field energy and mechanical energy in both directions. Every other material is one-way: it conducts, insulates, absorbs or reads at the surface.</p>
+      <p>The property derives from asymmetric crystalline structure, the analogue of piezoelectricity. Quartz is the common version. Tourmaline is the rare, stronger version sought by the research frontier. Beryl shows the effect weakly. Dry bone shows it weakly, which ties into the attunement mechanism.</p>
+      <p>Uses: measurement (continuous, unlike threshold indicators), weak generation without attunement, synchronization, and deposit-local signalling ("two tuning forks on the same table").</p>
+    </div>
+    <div>
+      <h3>Vein-adjacent phases</h3>
+      <p>Research materials, not production materials. They exist only at Vein sites and revert when removed. Each solved one engineering problem and compressed several generations of normal development into one.</p>
+      <p>Site dependence is a permanent strategic-geography constraint: the best materials for working the resource exist only where the resource is.</p>
+      <p>The research frontier is searching for a stable material that does what the phases do without reverting. Success would mark the threshold between the Vein as located fuel and the Vein as distributed power.</p>
+    </div>
+  </div>
+</details>
+
+<div class="controls" role="search">
+  <div class="searchrow">
+    <label class="search" for="q">
+      <span class="sr">Search materials</span>
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l3.5 3.5"></path></svg>
+      <input id="q" type="search" placeholder="Search name, role, effect…  ( / )" autocomplete="off">
+    </label>
+    <button class="btn" id="expandAll" type="button">Expand all</button>
+    <button class="btn" id="collapseAll" type="button">Collapse all</button>
+    <span class="count" id="count" aria-live="polite"></span>
+  </div>
+  <div class="chips" id="secChips" role="group" aria-label="Filter by category"><span class="lbl">Category</span></div>
+  <div class="chips" id="roleChips" role="group" aria-label="Filter by role and status"><span class="lbl">Role</span></div>
 </div>
 
-<table><thead><tr>
-  <th style="width:44px"></th>
-  <th>Material</th>
-  <th style="width:72px">Era</th>
-  <th style="width:60px">Cat</th>
-  <th style="width:140px">Conductivity</th>
-  <th>Function</th>
-</tr></thead><tbody id="mt-body"></tbody></table>
+<section class="compare" id="compare" hidden aria-labelledby="cmpTitle">
+  <div class="compare-head">
+    <h2 id="cmpTitle">Compare</h2>
+    <span class="compare-hint" id="cmpHint"></span>
+    <button class="btn" id="cmpClear" type="button">Clear selection</button>
+  </div>
+  <div class="cmp-scroll" id="cmpBody"></div>
+</section>
+
+<div class="colhead" aria-hidden="true">
+  <span>Material</span><span>Era available</span><span>Conductivity</span><span>Threshold</span><span>Function</span><span>Compare</span>
+</div>
+<div id="list"></div>
+
+<section class="future" aria-labelledby="futTitle">
+  <h2 id="futTitle">Future materials</h2>
+  <p class="note">Approximation only. Not story-present; no effects assigned.</p>
+  <dl id="future"></dl>
+</section>
+
+</div>
 
 <script>
-const CVALS={'high+':1.0,'high+ (thermal)':1.0,'high':0.78,'med-high':0.62,'med+':0.54,'med':0.48,'med (damp)':0.42,'med (surface)':0.44,'low-med':0.32,'low':0.18,'low-':0.08,'tbd':null};
-const CCOLS={'high+':'#085041','high+ (thermal)':'#085041','high':'#1D9E75','med-high':'#5DCAA5','med+':'#BA9017','med':'#BA7517','med (damp)':'#534AB7','med (surface)':'#185FA5','low-med':'#B4B2A9','low':'#888780','low-':'#A32D2D','tbd':'#B4B2A9'};
-const CLABELS={'high+':'high+','high+ (thermal)':'high+','high':'high','med-high':'med-high','med+':'med+','med':'med','med (damp)':'damp','med (surface)':'surface','low-med':'low-med','low':'low','low-':'low−','tbd':'tbd'};
-const eraC={stone:'ep-stone',bronze:'ep-bronze',iron:'ep-iron',industrial:'ep-ind',electrical:'ep-elec',nuclear:'ep-nuc',silicon:'ep-sil',frontier:'ep-front',vein:'ep-vein'};
-const eraL={stone:'stone age',bronze:'bronze age',iron:'iron age',industrial:'early industrial',electrical:'electrical',nuclear:'nuclear',silicon:'silicon',frontier:'frontier',vein:'Vein-specific'};
+/* ================================================================
+   DATA — edit here. Source of truth: working/MATERIALS_BASELINE.md
+   cond: [level, qualifier|null]   level ∈ COND_SCALE
+   thr:  [level|null, text]        level ∈ THR_SCALE, null = no bulk threshold / varies
+   prof: 'full' = decided full profile in baseline
+         'brief' = baseline one-liner / fixed category entry
+         'none' = not in baseline (carried from earlier taxonomy)
+   p: profile fields (low, med, high, fail, geometry, stability, rank,
+      unlock, role, texture, note) — all optional
+   ================================================================ */
+const COND_SCALE = ['low-','low','low-med','med','med+','med-high','high','high+'];
+const THR_SCALE  = ['near zero','very low','low','low-med','med','med-high','high','extreme'];
 
-function condBar(c){
-  const v=CVALS[c]??0.18,col=CCOLS[c]||'#888780',lbl=CLABELS[c]||c;
-  return `<div class="cbar"><div class="cbar-track"><div class="cbar-fill" style="width:${Math.round(v*100)}%;background:${col}"></div></div><span class="cbar-label" style="color:${col};font-weight:500">${lbl}</span></div>`;
-}
+const ERAS = {
+  stone:'Stone age', bronze:'Bronze age', iron:'Iron age', industrial:'Early industrial',
+  electrical:'Electrical', vein:'Vein sites only'
+};
 
-function veinkProfile(v){
-  if(!v) return '';
-  let html='<div class="vein-profile"><div class="vein-profile-title">Vein effect profile</div>';
-  if(v.low) html+=`<p><b>Low intensity:</b> ${v.low}</p>`;
-  if(v.med) html+=`<p><b>Medium intensity:</b> ${v.med}</p>`;
-  if(v.high) html+=`<p><b>High intensity:</b> ${v.high}</p>`;
-  if(v.fail) html+=`<p><b>Failure mode:</b> ${v.fail}</p>`;
-  if(v.role) html+=`<p><b>Apparatus role:</b> ${v.role}</p>`;
-  if(v.texture) html+=`<p><b>Story texture:</b> ${v.texture}</p>`;
-  if(v.unlock) html+=`<p><b>Tech unlock:</b> ${v.unlock}</p>`;
-  if(v.note) html+=`<p><b>Note:</b> ${v.note}</p>`;
-  html+='</div>';
-  return html;
-}
-
-const data=[
-  {sec:'Stone & mineral'},
-  {n:'Flint / chert',cat:'stone',era:'stone',story:false,cond:'low',thresh:'high — fractures before thermal',notes:'Fracture pathway — chips and splinters under energy addition. Not a reliable insulator, fails catastrophically.',func:'Structural / hazard'},
-  {n:'Limestone / sandstone',cat:'stone',era:'stone',story:false,cond:'low',thresh:'med — porous, uneven',notes:'Porosity means field finds pathways through grain. Unreliable as insulator.',func:'Terrain'},
-  {n:'Granite',cat:'stone',era:'stone',story:true,cond:'low-',thresh:'high — dense, slow response',notes:'Dense crystalline structure actively resists field transmission. Coalition primary structural and building material.',func:'Structural insulator / containment',
-    vein:{fail:'Mechanical — cracks under physical stress from surrounding materials deforming under field load. Sudden along crack lines, not gradual. Holds indefinitely until a fracture propagates far enough to create a continuous pathway.',role:'Chamber walls, site-scale containment, physical structure of extraction infrastructure. Not workable into complex geometries — bulk containment only.',texture:'Old extraction chambers show use history in crack patterns. An experienced operator reads granite fracture lines the way a navigator reads rock strata — they show how many high-intensity operations the chamber has absorbed and where the next failure will propagate.'}},
-  {n:'Marble / calcite',cat:'stone',era:'iron',story:true,cond:'low',thresh:'med — cleaves predictably',notes:'Cleaves along predictable planes. Not a reliable insulator but more workable than granite.',func:'Structural'},
-  {n:'Obsidian',cat:'stone',era:'stone',story:true,cond:'low',thresh:'med-high — volcanic glass',notes:'More structurally ordered than flint, less thermally accessible than manufactured glass. Field response sits between the two.',func:'Tool material',isnew:true},
-  {n:'Clay (unfired)',cat:'stone',era:'stone',story:true,cond:'low',thresh:'med — water content buffers when wet',notes:'Wet clay buffers through water content. Dry clay friable — field finds grain pathways. Neither state reliable for apparatus.',func:'Site material',isnew:true},
-  {n:'Sulfur',cat:'stone',era:'stone',story:true,cond:'low',thresh:'very low — combustible near active field',notes:'Naturally occurring at geologically active sites. Near-zero combustion threshold near active field. Site hazard before it is ever a tool.',func:'Hazard / site material',isnew:true},
-
-  {sec:'Gems & crystalline minerals'},
-  {n:'Quartz / silicates',cat:'gem',era:'stone',story:true,cond:'low-med',thresh:'med-high',notes:'Ordered crystalline structure responds more uniformly than ordinary stone. Real-world piezoelectric — possible field-sensitivity analogue.',func:'Detection candidate / structural'},
-  {n:'Corundum (ruby / sapphire)',cat:'gem',era:'stone',story:true,cond:'low-med',thresh:'high — aluminum oxide, very hard',notes:'Harder than quartz. Trace elements give color; base structure governs field response. Color variation may produce measurable field response variation.',func:'Precision material'},
-  {n:'Beryl (emerald / aquamarine)',cat:'gem',era:'stone',story:true,cond:'low-med',thresh:'med-high',notes:'Beryllium aluminum silicate. Hexagonal crystal. Whether beryllium content makes this family distinct in field response is an open question.',func:'Precision material / open question'},
-  {n:'Carbonate gems (malachite etc.)',cat:'gem',era:'stone',story:true,cond:'low',thresh:'med',notes:'Carbon in compound form, not lattice. Forms near copper deposits — co-occurrence signals copper proximity.',func:'Indicator / co-location'},
-  {n:'Organic gems (amber, pearl)',cat:'gem',era:'stone',story:true,cond:'low',thresh:'low-med — biological origin',notes:'Field interacts more like organic tissue than stone. Amber may preserve field-state signatures from formation — open question.',func:'Open question'},
-  {n:'Pyrite / sulfides',cat:'gem',era:'stone',story:true,cond:'med',thresh:'med',notes:'Iron sulfide. Semi-conductive. Bridges stone and metal. Abundant near geologically active sites.',func:'Detection / bridge material'},
-  {n:'Diamond',cat:'gem',era:'stone',story:true,cond:'high+ (thermal)',thresh:'extreme — maximum density lattice',notes:'Pure carbon at maximum crystalline order. Extreme thermal conductivity. Resists state change more than any natural material. May be unknown as field material at story-present.',func:'Extreme case / future material'},
-
-  {sec:'Vein-adjacent phases'},
-  {n:'Silicate Vein-phase',cat:'vein',era:'vein',story:true,cond:'med',thresh:'low — pre-stressed lattice',notes:'Quartz-family compound in field-sustained high-energy phase. Reverts slowly when removed. Conducts at med — elevated from quartz baseline (low-med) because the field-sustained high-energy crystalline structure sits closer to the conduction threshold. Same composition as quartz, different phase, different behavior. This is the Vein-adjacent mineral principle in action.',func:'Containment lining',
-    vein:{unlock:'Containment that participates in the field circuit — a single lining material performs both containment and partial conduction simultaneously. Removes the foundational vessel design problem of early apparatus.',role:'Primary vessel lining at Vein sites. Not portable. Knowledge of configuration is portable; material is not.',note:'Demonstrated that dual-role materials are possible. The Coalition has been trying to replicate this in portable stable materials ever since. No stable equivalent exists at story-present.'}},
-  {n:'Oxide Vein-phase',cat:'vein',era:'vein',story:true,cond:'med-high',thresh:'low',notes:'Corundum-type in field-sustained phase. Near-metal conductivity as a mineral. Rarer than silicate phase.',func:'Active apparatus component',
-    vein:{unlock:'Non-metallic high conductivity — can be ground, shaped, coated, formed into geometries metal cannot achieve. Apparatus miniaturization and precision arrive before metalworking alone could produce them.',role:'Precision expression surfaces, instrument faces, complex internal geometries at Vein sites. What makes site apparatus look anachronistically precise.',note:'Demonstrated that high conductivity does not require metal. The semiconductor research path is downstream of this demonstration.'}},
-  {n:'Sulfide Vein-phase',cat:'vein',era:'vein',story:true,cond:'med',thresh:'low-med',notes:'Pyrite-type in field-sustained phase. Co-occurs with copper and iron ore.',func:'Bridge / co-discovery',
-    vein:{unlock:'The accidental entry point — found while mining for copper and iron, not while searching for field materials. Compresses the starting point of apparatus development.',role:'Secondary conduction and bridging at sites. Less precise than oxide phase, less stable than silicate. Historically significant as the first Vein-phase material the Coalition encountered.',note:'The sulfide phase discovery is probably the moment the development-period population first understood that Vein-dense ground produced materials with unusual properties — not just unusual substrate, but unusual rocks.'}},
-  {n:'Carbonate Vein-phase',cat:'vein',era:'vein',story:true,cond:'low-',thresh:'med',notes:'Least conductive of the family. Most stable — reverts slowest when removed.',func:'Passive containment',
-    vein:{unlock:'Self-reinforcing containment — the more intense the field inside, the better the wall resists it. Makes sustained high-intensity operation viable at an early stage.',role:'Vessel walls, chamber linings, sustained-operation containment at Vein sites. Most stable phase — components hold properties longest after removal.',note:'Demonstrated that dynamic insulation is achievable. The Coalition has no stable portable equivalent. Remains an open problem at the research frontier.'}},
-
-  {sec:'Carbon forms'},
-  {n:'Coal',cat:'carbon',era:'stone',story:true,cond:'low',thresh:'low — combustion before phase change',notes:'Combustion threshold very low near active field. Field interaction is via combustion risk, not conductivity.',func:'Fuel / hazard'},
-  {n:'Charcoal / carbon black',cat:'carbon',era:'stone',story:true,cond:'med (damp)',thresh:'med — amorphous, no ordered lattice',notes:'Absorbs rather than conducts. Field energy dissipates into porous lattice without directional expression. The only damping material in the taxonomy.',func:'Damping / absorption'},
-  {n:'Graphite',cat:'carbon',era:'industrial',story:true,cond:'med-high',thresh:'med',notes:'Conducts along layers, insulates across them — inherently directional field response. Points toward the semiconductor question.',func:'Directional conductor'},
-  {n:'Diamond',cat:'carbon',era:'stone',story:true,cond:'high+ (thermal)',thresh:'extreme',notes:'The carbon pair — charcoal and diamond — is the clearest illustration of why structure matters as much as composition.',func:'Extreme case / structural argument'},
-
-  {sec:'Metals — ferrous'},
-  {n:'Iron (wrought)',cat:'metal',era:'iron',story:true,cond:'high',thresh:'med — ~1540°C equiv.',notes:'Field conducts rapidly end-to-end. Structural deformation precedes liquefaction.',func:'Primary apparatus metal',
-    vein:{low:'Uniform warming along field path from contact to expression end. Sub-damaging — tool held at non-contact end becomes warm in hand. No visible color change.',med:'Warming becomes structural. Uneven expansion along field path produces stress at geometry changes — joints, welds, bends, thin cross-sections. Visible color change at expression end: dull red. A readable intensity gauge.',high:'Liquefaction begins at expression end while contact end may remain solid. Material simultaneously solid and liquid along its length. Useful for specific operations; catastrophically dangerous uncontrolled.',fail:'Gradual and readable. Iron gives warning through color change and visible deformation before catastrophic failure. Fails slowly enough to be managed by an attentive operator.',role:'Primary structural and conduction material. Most early Coalition apparatus iron-based. Replaced by steel in precision components but never fully displaced at infrastructure scale.',texture:'An iron component under sustained field exposure smells like a forge even when no fire is present. Operators learn to read iron color the way smiths do — black, dull red, bright red, orange map directly onto field intensity levels.'}},
-  {n:'Cast iron',cat:'metal',era:'industrial',story:true,cond:'high',thresh:'med-low — brittle, fractures first',notes:'Conducts well but fractures under rapid energy changes without deformation warning.',func:'Infrastructure only',
-    vein:{fail:'Catastrophic, no deformation warning. Fractures rather than deforms — skips the readable warning phase entirely. Never used for apparatus components subject to field surges.',role:'Infrastructure and housing only.'}},
-  {n:'Steel (carbon)',cat:'metal',era:'industrial',story:true,cond:'high',thresh:'med — more resilient than iron',notes:'Better energy tolerance, more uniform response through refined grain structure.',func:'Refined apparatus metal',
-    vein:{low:'Identical to iron at low intensity — same warmth, same gradual build, same color progression.',med:'Diverges from iron here. More uniform grain structure resists deformation longer. Same failure points as iron but higher threshold — geometry failures start later.',high:'Approaches liquefaction same as iron but requires more field input. Warning window similar in character to iron but starts later and lasts longer.',fail:'Gradual and readable, wider safe operating range than iron. Same character as iron, higher ceiling.',role:'Upgrade path from iron. Same operating logic, wider safe range. Transition from iron to steel in precision apparatus tracks with Coalition metallurgical advancement.'}},
-  {n:'Steel alloys',cat:'metal',era:'electrical',story:false,cond:'high',thresh:'varies by alloy',notes:'Not yet at story-present.',func:'Future precision material'},
-
-  {sec:'Metals — non-ferrous'},
-  {n:'Copper',cat:'metal',era:'bronze',story:true,cond:'high+',thresh:'low — ~1085°C equiv.',notes:'Highest conductivity of story-present metals. Field moves fastest, expresses most intensely at far end.',func:'Primary precision metal',
-    vein:{low:'Expression end warms faster and more intensely than iron for same field input. Response nearly immediate. Where iron gives warmth, copper gives heat.',med:'Expression end becomes concentrated point of intense heat rather than uniform warming. Copper focuses field expression rather than distributing it — energy arrives at specific location. The precision instrument behavior.',high:'Transition threshold approached faster than iron with compressed warning window. Color change from functional to near-transition is rapid — seconds not minutes. Liquid transition is clean: no deformation phase, expression end simply becomes liquid.',fail:'Fast and concentrated. Short readable window — seconds not minutes. Copper holds and then fails without the gradual deformation iron shows.',role:'Precision expression points, instrument tips, final delivery components. Paired with iron infrastructure. Most story-present apparatus is iron frame with copper terminals.',texture:'Copper apparatus components run hotter at the tip than iron at same field level. Copper component failing without warning is the most common cause of apparatus accidents at story-present.'}},
-  {n:'Bronze (copper-tin)',cat:'metal',era:'bronze',story:true,cond:'high',thresh:'low-med',notes:'Dampened copper — alloy reduces peak conductivity ~15-20%, marginally wider failure window.',func:'Early apparatus alloy',
-    vein:{note:'Behaves like dampened copper. Roughly 15-20% less intensity at expression end due to tin content. Slight deformation precedes melting — marginally more readable failure than pure copper. The development-period apparatus metal, used before reliable copper supply chains existed. Bronze components in apparatus are a legible sign of early manufacture.',role:'Historical apparatus metal. Transition from bronze to copper expression points tracks directly with Coalition metallurgical and supply chain development.'}},
-  {n:'Lead',cat:'metal',era:'iron',story:true,cond:'med',thresh:'very low — ~327°C equiv.',notes:'Rapid state transition under modest field. Phase change absorbs field energy — field fuse role.',func:'Field fuse / surge absorber',
-    vein:{low:'Transitions to liquid under modest field intensity. Transition visible and fast.',fail:'Absorptive — phase change consumes field energy rather than transmitting it. A lead component transitioning under overload absorbs excess energy into the phase transition, protecting adjacent components.',role:'Field fuse. Lead elements placed at vulnerable apparatus points transition under overload, consuming excess field energy before it reaches copper or iron components. Replacing a lead fuse is routine maintenance.',texture:'Experienced operators carry spare lead elements as standard kit — rods, discs, formed pieces. A pouch of lead components is as standard as any other apparatus tool.'}},
-  {n:'Tin',cat:'metal',era:'bronze',story:true,cond:'med',thresh:'low — ~232°C equiv.',notes:'Lowest transition threshold of any common story-present metal. Visible transition at modest field intensity.',func:'Field intensity indicator',
-    vein:{low:'Transitions to liquid at the lowest field intensity of any common metal. Transition visible and predictable.',role:'Built-in field intensity gauge. Tin elements placed at known positions transition first and visibly — the operator sees tin going liquid and knows exactly where the field is. Cheapest and most reliable measurement tool at story-present.',note:'Useless as structural or conduction material for exactly the reason it is valuable as an indicator.'}},
-  {n:'Mercury',cat:'metal',era:'industrial',story:true,cond:'med (surface)',thresh:'no bulk threshold — surface responds below state change',notes:'Surface behavior rather than bulk — field changes surface tension producing visible proportional directional responses without state change.',func:'Primary field-detection / measurement',
-    vein:{note:'Field interaction is entirely through surface behavior. Field intensity changes mercury surface tension — the electrocapillary analogue. Small field input, measurable surface deformation, surface IS the readout. Warm-arm and cold-arm manipulation produce distinguishable surface behaviors — mercury passively distinguishes field direction, which no other instrument material can do. Mercury vapor above liquid gives a second simultaneous readout and is an invisible toxic hazard — early apparatus work with mercury had a real physical cost.',role:'Primary field-detection and measurement material. Already in precision instruments at story-present; field-detection property exploited before it was understood.',texture:'A mercury instrument near active substrate behaves differently from the same instrument in an ordinary environment — the surface is too active, or strangely still, in ways that experienced operators learn to read before they can explain.'}},
-  {n:'Silver',cat:'metal',era:'iron',story:true,cond:'high+',thresh:'low',notes:'Near-copper conductivity. Does not corrode or degrade — field response stable over time.',func:'High-precision / stable apparatus',
-    vein:{note:'Near-identical field behavior to copper. The distinction is stability — silver does not corrode under chemical exposure or humidity, so a silver component behaves identically day one and year ten. Used where copper would degrade over time.',role:'High-precision apparatus components in high-humidity or chemically exposed environments. Where long-term behavioral consistency justifies the cost over copper.'}},
-  {n:'Gold',cat:'metal',era:'stone',story:true,cond:'high',thresh:'low',notes:'Fully non-corroding. Field response stable across all conditions encountered at story-present.',func:'Calibration / precision standards',
-    vein:{note:'Slightly lower peak conductivity than copper but fully non-corroding under any story-present conditions. A gold component behaves identically the first time and the thousandth time under any conditions. The calibration metal — the reference point everything else is measured against.',role:'Precision standards, critical junction points, calibration references. Rarity limits use to the most critical nodes of high-value apparatus.'}},
-  {n:'Zinc',cat:'metal',era:'industrial',story:true,cond:'med',thresh:'low — ~420°C equiv.',notes:'Low threshold. Galvanized iron creates composite field response — zinc layer transitions first, partially protecting iron beneath.',func:'Coating / accidental field protection',
-    vein:{note:'Galvanized iron composite response: zinc coat has lower transition threshold than iron. Under field overload the zinc transitions first, absorbing energy into phase change and partially protecting the iron core. Not as controlled as deliberate lead fuse, but real. The development-period population galvanized for corrosion resistance, not field protection — the field-protection property was an accidental discovery, probably attributed to the galvanizing process in general rather than to zinc specifically.',role:'Incidental field protection for iron infrastructure. Whether current-era Coalition has correctly identified the mechanism is an open question.'}},
-  {n:'Phosphorus',cat:'metal',era:'industrial',story:true,cond:'low',thresh:'near zero — spontaneous combustion amplified by field',notes:'White phosphorus glow amplified by field. Will-o-the-wisp as founding observation. Military hazard amplification. Structural argument mirror of carbon.',func:'Site indicator / hazard / structural argument',isnew:true,
-    vein:{low:'White phosphorus compounds near active substrate glow more intensely than ambient oxidation alone would produce. Cold light, no heat, no flame — field-accelerated oxidation making the chemiluminescence visible at a distance.',note:'Three distinct roles: (1) Passive site indicator — Vein sites with phosphorus in local geology are faintly luminescent at night. Strong candidate for the first observable signal the development-period population noticed before any framework for the Vein existed. (2) Military hazard — field energy amplifies white phosphorus combustion unpredictably. Coalition phosphorus munitions near Order-active practitioners are amplified. (3) Structural argument — white/red/black phosphorus mirrors the carbon argument exactly. Black phosphorus is semi-conductive, layered like graphite. Another route toward the semiconductor question.',role:'Site indicator, amplified military hazard, structural argument confirmation.'}},
-  {n:'Aluminum',cat:'metal',era:'electrical',story:false,cond:'high',thresh:'low-med',notes:'Not yet at story-present.',func:'Future apparatus material'},
-
-  {sec:'Ceramics & glass'},
-  {n:'Fired clay / terracotta',cat:'ceramic',era:'stone',story:true,cond:'low-',thresh:'high',notes:'Dense fired ceramic. Non-porous. Actively resists field transmission. Earliest reliable portable insulator.',func:'Primary early insulator',
-    vein:{fail:'Thermal — adjacent metal components running hot enough to affect the ceramic through ordinary heat transfer, not field transmission. Gradual and readable: color change, surface crazing, eventual spalling. Operator has advance warning.',role:'Component-scale insulation in early and field apparatus. Vessel bodies, component housings, junction insulation. Development-period population built first apparatus from this before porcelain was available.',note:'Lower ceiling than porcelain. Slightly porous compared to porcelain — field finds most porous paths first, producing uneven insulation over time at sustained medium intensity.'}},
-  {n:'Porcelain / stoneware',cat:'ceramic',era:'iron',story:true,cond:'low-',thresh:'high',notes:'Denser and more uniform than terracotta. Higher thermal failure ceiling.',func:'Refined containment ceramic',
-    vein:{fail:'Thermal — same character as terracotta but significantly higher ceiling. Heat that crazes terracotta leaves porcelain intact. More consistent insulation across component surface and service life.',role:'Preferred component insulation at story-present. Vessel bodies, precision housings, sustained-operation containment at component level. Pairs with granite at larger scale.',note:'Transition from terracotta to porcelain in apparatus is a legible marker of technical advancement. A porcelain-heavy apparatus is a later and more capable generation.'}},
-  {n:'Glass',cat:'ceramic',era:'iron',story:true,cond:'low',thresh:'med — liquid transition visible',notes:'Low conductivity but accessible liquid transition undermines reliable insulation.',func:'Field-state indicator'},
-  {n:'Brick / lime mortar',cat:'ceramic',era:'stone',story:true,cond:'low',thresh:'high',notes:'Mortar joints create field pathways. Unreliable as insulator.',func:'Site construction'},
-
-  {sec:'Biological materials'},
-  {n:'Bone (dry)',cat:'bio',era:'stone',story:true,cond:'low',thresh:'med-high — calcium phosphate mineral',notes:'Behaviorally closer to ceramic than living tissue once dry.',func:'Structural / healing context',isnew:true},
-  {n:'Blood',cat:'bio',era:'stone',story:true,cond:'med',thresh:'low',notes:'Carries both water and iron simultaneously — two simultaneous field pathways.',func:'Composite fluid — healing / combat',isnew:true},
-  {n:'Shell / chitin',cat:'bio',era:'stone',story:true,cond:'low',thresh:'med',notes:'Shell behaves like thin calcite. Chitin more like leather.',func:'Armor / tool material',isnew:true},
-
-  {sec:'Organic — structural'},
-  {n:'Wood (dry)',cat:'organic',era:'stone',story:true,cond:'low',thresh:'med — combustion before phase change',notes:'Fire risk near active substrate. Combustion disqualifies it as apparatus insulator.',func:'Construction / hazard'},
-  {n:'Wood (green / wet)',cat:'organic',era:'stone',story:true,cond:'low',thresh:'high — moisture buffers',notes:'Water content absorbs energy. Steam at high intensity.',func:'Temporary buffer'},
-  {n:'Leather / hide',cat:'organic',era:'stone',story:true,cond:'low',thresh:'med',notes:'Desiccates under energy removal. Degrades under sustained exposure.',func:'General material'},
-  {n:'Tar / pitch / bitumen',cat:'organic',era:'stone',story:true,cond:'low-',thresh:'low-med — softens before combustion',notes:'Pre-rubber sealant. Presence in apparatus is a legible sign of early or expedient manufacture.',func:'Pre-rubber sealant / early insulator',isnew:true,
-    vein:{fail:'Thermal/flow — lowest ceiling of all insulators. Softens and flows under heat from adjacent metal components well before terracotta or porcelain would be affected.',role:'Gap-filler and joint sealant in early and expedient apparatus. Fills spaces between better insulators rather than replacing them.',note:'Early apparatus had a specific predictable failure mode: joints leak as the operation runs longer and hotter. An apparatus with tar seals is either old or improvised.',texture:'Presence of tar seals is a legible sign of early manufacture, field repair, or expedient construction.'}},
-
-  {sec:'Organic — textile & fiber'},
-  {n:'Plant fiber (linen, cotton)',cat:'textile',era:'stone',story:true,cond:'low',thresh:'med',notes:'Burns before phase change.',func:'General / not apparatus'},
-  {n:'Wool / animal fiber',cat:'textile',era:'stone',story:true,cond:'low',thresh:'med',notes:'Moisture retention buffers field. Smolders.',func:'General'},
-  {n:'Rubber (natural)',cat:'textile',era:'industrial',story:true,cond:'low-',thresh:'low-med — softens under sustained exposure',notes:'Best flexible low- material. Only viable gasket and seal for joints requiring movement.',func:'Primary gasket / seal material',
-    vein:{fail:'Sustained degradation — slowly softens and loses insulating property under prolonged high-intensity exposure. Drifts from low- toward low over service life. Not a dramatic failure — a gradual drift.',role:'Primary joint sealant, gaskets, flexible connections. The only flexible low- material — no rigid material can seal a moving joint or conform to an irregular surface the way rubber does.',note:'Peak insulation value highest of any story-present material. Under sustained working conditions drops below ceramic. Right choice for short high-intensity operations; granite and porcelain for sustained.',texture:'Smell of degrading rubber is a reliable indicator apparatus has been running hard. Experienced operators check rubber seals first when diagnosing field leakage. Carry replacement seals as standard kit.'}},
-
-  {sec:'Fluids'},
-  {n:'Water (free)',cat:'fluid',era:'stone',story:true,cond:'med',thresh:'very low',notes:'1700x volume at liquid-gas transition. Primary pressure-engine fluid.',func:'Primary pressure fluid'},
-  {n:'Water (in tissue)',cat:'fluid',era:'stone',story:true,cond:'med',thresh:'low',notes:'Internal steam formation is the overexposure damage mechanism.',func:'Damage mechanism'},
-  {n:'Salt water / brine',cat:'fluid',era:'stone',story:true,cond:'med+',thresh:'very low',notes:'Salt ions increase field conductivity of water. Coastal and humid environments have more conductive ambient fluid.',func:'Modified water — environment-dependent',isnew:true},
-  {n:'Air / gas',cat:'fluid',era:'stone',story:true,cond:'low',thresh:'low — pressure differentials immediate',notes:'Combustion enabler. Concussive at high intensity.',func:'Pressure / combustion'},
-  {n:'Coal tar / early oil',cat:'fluid',era:'industrial',story:true,cond:'low',thresh:'low — combustible',notes:'Fuel hazard at Vein sites.',func:'Fuel hazard'},
-
-  {sec:'Composite & processed'},
-  {n:'Portland cement / concrete',cat:'composite',era:'industrial',story:true,cond:'low',thresh:'high',notes:'Water within cured concrete responds; matrix does not. Internal steam creates fracture risk from inside.',func:'Construction / internal fracture risk'},
-  {n:'Gunpowder / black powder',cat:'composite',era:'iron',story:true,cond:'low',thresh:'near zero — ignites',notes:'Combustion threshold essentially zero near active field. Shapes military doctrine entirely.',func:'Military hazard / doctrine'},
+const SECTIONS = [
+  {id:'stone',  name:'Stone & mineral'},
+  {id:'gem',    name:'Gems & crystalline minerals',
+   intro:`Transducer family: quartz (common), tourmaline (rare, stronger; described under quartz), beryl (weak). Diamond is listed under carbon forms.`},
+  {id:'vein',   name:'Vein-adjacent phases',
+   intro:`Research materials anchored to Vein sites. Each reverts when removed from field proximity. No stable portable equivalent exists at story-present.`},
+  {id:'carbon', name:'Carbon forms',
+   intro:`The structural argument: same element, different order. Charcoal absorbs, graphite conducts directionally, diamond conducts thermally at maximum order. Structure governs field behavior as much as composition.`},
+  {id:'ferrous',name:'Metals — ferrous',
+   intro:`Metals conduct but do not store: conduction stops when the source is removed, with no residual charge. Conduction is lossless with distance and degrades at geometric complexity: joints, bends, welds, thin cross-sections (D029).`},
+  {id:'nonferrous',name:'Metals — non-ferrous',
+   intro:`Same no-storage and geometry rules as ferrous metals. Most story-present apparatus is an iron frame with copper terminals, tin indicators and lead fuses.`},
+  {id:'ceramic',name:'Ceramics & glass'},
+  {id:'bio',    name:'Biological materials'},
+  {id:'organic',name:'Organic — structural'},
+  {id:'textile',name:'Organic — textile & fiber'},
+  {id:'fluid',  name:'Fluids',
+   intro:`Water is not a Vein material. It is a passive intermediary: present in soil, air and tissue, with ~1700× volume expansion at the liquid-to-gas transition.`},
+  {id:'composite',name:'Composite & processed'}
 ];
 
-const FUTURE_ERAS=[
-  {era:'electrical era',notes:'Aluminum (high conductivity, low density), tungsten (extreme threshold), synthetic rubber (more stable low−), bakelite/early plastics (stable low−). Alloy steels with targeted field-response properties.'},
-  {era:'nuclear / aerospace era',notes:'Titanium (high threshold). Rare earth / lanthanide elements — open question whether field response is anomalous. Uranium and radioactives — open question whether field interacts with nuclear binding energy or only atomic/molecular structure.'},
-  {era:'silicon era',notes:'Silicon, germanium, gallium — the semiconductor family. Key question: if field conductivity can be switched or modulated, this is a new category of apparatus capability. The material foundation of the fuel-to-electricity transition.'},
-  {era:'frontier',notes:'Graphene (endpoint of the carbon structural argument). Metamaterials (engineered structure without novel composition). Superconductors (zero field resistance analogue?). Programmable matter.'},
+const ROLES = {
+  conductor:'Conductor', insulator:'Insulator', transducer:'Transducer',
+  indicator:'Indicator / detection', hazard:'Hazard'
+};
+
+const MATERIALS = [
+  /* ---------- Stone & mineral ---------- */
+  {n:`Flint / chert`, sec:'stone', era:'stone', now:false, prof:'brief',
+   cond:['low',null], thr:['high',`high — fractures before thermal`],
+   func:`Edge tool / site hazard`, roles:['hazard'],
+   summary:`Energy addition drives fracture before any thermal effect — the field finds the same pathways a knapper does, producing sharp-edged fragments. No thermal pathway, no insulation property. Edge tool material and site hazard under high field intensity.`},
+
+  {n:`Limestone / sandstone`, sec:'stone', era:'stone', now:false, prof:'brief',
+   cond:['low',null], thr:['med',`med — porous, uneven`],
+   func:`Terrain`, roles:[],
+   summary:`Porosity means field energy finds grain pathways rather than being transmitted or resisted uniformly. Uneven, unpredictable response. Terrain material — no apparatus role.`},
+
+  {n:`Granite`, sec:'stone', era:'stone', now:true, prof:'full',
+   cond:['low-',null], thr:['high',`high — dense, slow response`],
+   func:`Site-scale containment / structure`, roles:['insulator'],
+   summary:`The Coalition's primary large-scale containment material. Dense crystalline structure actively resists field transmission uniformly across its mass — no grain pathways, no porosity. Reliable indefinitely under sustained operation as long as physical integrity holds.`,
+   p:{rank:`Second intact, first sustained`,
+      fail:`Mechanical — sudden along crack lines. When surrounding materials deform under field load (iron expanding, ceramic cracking from heat), the stresses transfer into granite and find existing fault lines. Insulation holds until a fracture propagates far enough to create a continuous pathway, then fails suddenly.`,
+      role:`Chamber walls, site-scale containment, the physical structure of extraction infrastructure. Not workable into complex geometries — bulk containment, not precision insulation.`,
+      texture:`Old extraction chambers show their use history in crack patterns. An experienced operator reads granite the way a navigator reads rock strata — the fracture lines show how many high-intensity operations the chamber has absorbed and where the next failure is likely to propagate.`}},
+
+  {n:`Marble / calcite`, sec:'stone', era:'iron', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med — cleaves predictably`],
+   func:`Structural / decorative`, roles:[],
+   summary:`Field energy addition produces predictable cleavage along crystallographic planes before thermal effects. More workable than granite but not a reliable insulator — cleaves rather than holds under field stress. Structural and decorative use only.`},
+
+  {n:`Obsidian`, sec:'stone', era:'stone', now:true, prof:'full',
+   cond:['low',null], thr:['med-high',`med-high — volcanic glass, more ordered than manufactured glass`],
+   func:`Directional field indicator`, roles:['indicator'],
+   summary:`Holds longer than glass under field exposure: volcanic formation produced a more uniform amorphous structure, so where glass softens at medium intensity, obsidian holds into the high range.`,
+   p:{med:`Micro-fractures develop along the sharpest edges first, before any bulk effect. Edges go dull in a pattern that maps the local field gradient — edges facing the highest-intensity direction fracture first.`,
+      note:`A directional indicator: not only how strong the field is but which way it is strongest. A blade near active substrate micro-fractures on the substrate-facing side before the opposite face shows any effect. The fracture pattern points.`,
+      role:`Directional field indicator at high intensity ranges where glass has already failed. Niche but irreplaceable in high-intensity work that needs directional information.`,
+      texture:`Obsidian tools recovered near Vein sites often show edge degradation that looks like heavy use but is not. Someone familiar with the pattern can tell field degradation from use wear. Obsidian from heavily worked sites is essentially never sharp along the substrate-facing edge.`}},
+
+  {n:`Clay (unfired)`, sec:'stone', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med — water content buffers when wet`],
+   func:`Site terrain / early construction`, roles:[],
+   summary:`Wet clay buffers field energy through water content — the same mechanism as green wood, temporary and unreliable. Dry clay is friable and the field finds grain pathways. Neither state has apparatus use; relevant as site terrain and early construction substrate.`},
+
+  {n:`Sulfur`, sec:'stone', era:'stone', now:true, prof:'none',
+   cond:['low',null], thr:['very low',`very low — combustible near active field`],
+   func:`Hazard / site material`, roles:['hazard'],
+   summary:`Naturally occurring at geologically active sites. Near-zero combustion threshold near active field. A site hazard before it is ever a tool.`},
+
+  {n:`Phosphorus`, sec:'stone', era:'industrial', now:true, prof:'full',
+   cond:['low',null], thr:['near zero',`near zero (white) — spontaneous combustion amplified by field`],
+   func:`Site indicator / hazard / structural argument`, roles:['indicator','hazard'],
+   summary:`Forms: white (reactive, dangerous), red (stable), black (semi-conductive, frontier — not story-present). Conductivity low for white and red; semi-conductive potential in black.`,
+   p:{low:`White phosphorus near active substrate glows more intensely than ambient oxidation alone would produce. Cold light, no heat, no flame — field-accelerated oxidation. Existing chemistry amplified by field presence, not a new mechanism.`,
+      note:`<b>Discovery path.</b> Vein sites with phosphorus in local geology are faintly luminescent at night, visible at a distance, needing no instruments and no attunement. Strong candidate for the first signal the development-period population noticed (not yet committed). <b>Military hazard.</b> White phosphorus weapons exist at story-present (early industrial / inter-war band). Field energy near active substrate or Order practitioners amplifies combustion unpredictably; Coalition phosphorus munitions near Order-active positions amplify themselves, and Order practitioners near Coalition phosphorus stores face a threat conventional doctrine does not cover. <b>Structural argument.</b> White → red → black mirrors the carbon argument. Black phosphorus is semi-conductive and layered like graphite — another route toward the semiconductor question and the fuel-to-electricity transition.`,
+      role:`Site indicator, amplified military hazard, structural argument confirmation.`}},
+
+  /* ---------- Gems & crystalline ---------- */
+  {n:`Quartz / silicates`, sec:'gem', era:'stone', now:true, prof:'full',
+   cond:['low-med',null], thr:['med-high',`med-high`],
+   func:`Bidirectional transducer / precision measurement`, roles:['transducer','indicator'],
+   summary:`Bidirectional field-mechanical transducer. Present everywhere — in sand, in granite, in most rock formations — so the development-period population was interacting with the field through quartz tools and quartz-rich stone long before they understood it.`,
+   p:{low:`Vibrates at very low amplitude — imperceptible to touch, below hearing. A non-attuned person holding a quartz tool near active substrate feels nothing unusual.`,
+      med:`Vibration becomes audible as a faint resonance with no apparent source. Its frequency is characteristic of the deposit's current field intensity. Operators read it as continuous environmental information.`,
+      high:`Vibration becomes physically forceful. Quartz instruments may crack along crystalline planes from the resonance itself — fracture without physical impact.`,
+      note:`<b>Reverse direction.</b> Mechanical stress on quartz near active substrate perturbs the field: striking an instrument, grinding quartz-rich stone, walking on quartz-bearing ground near a deposit. Order practitioners on quartz-bearing terrain work with more ambient field noise than on clean rock. <b>Tourmaline</b> is the rarer, stronger version: stronger mechanical response at lower field intensity, more useful for detecting weak or depleted fields; sought by the research frontier once the quartz principle is established.`,
+      role:`Primary precision measurement material once the transducer property is understood — continuous intensity readings rather than threshold events. The first generation of Coalition measurement apparatus probably incorporated quartz accidentally before deliberately.`,
+      texture:`The hum of quartz near active substrate is one of the ambient sounds of a Coalition extraction site. New operators find it unsettling; experienced operators stop hearing it consciously and use pitch and volume as background intensity data.`}},
+
+  {n:`Corundum (ruby / sapphire)`, sec:'gem', era:'stone', now:true, prof:'brief',
+   cond:['low-med',null], thr:['high',`high — aluminum oxide, very hard`],
+   func:`Precision material candidate`, roles:[],
+   summary:`Harder and more ordered than quartz — field response more uniform than ordinary stone, higher threshold before any visible effect. Trace-element color variation may produce measurable response variation between ruby and sapphire; not yet established. Precision material candidate once that question is resolved.`},
+
+  {n:`Beryl (emerald / aquamarine)`, sec:'gem', era:'stone', now:true, prof:'brief',
+   cond:['low-med',null], thr:['med-high',`med-high`],
+   func:`Weak transducer / principle confirmation`, roles:['transducer'],
+   summary:`Hexagonal crystal structure gives weak transducer-family behavior — faint mechanical response to field energy, weaker than quartz, stronger than ordinary stone. Too weak to be a reliable detection material alone but consistent enough to confirm the transducer principle alongside quartz. Beryllium content remains an open question.`},
+
+  {n:`Carbonate gems (malachite etc.)`, sec:'gem', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med`],
+   func:`Copper prospecting indicator`, roles:[],
+   summary:`Carbon in compound form behaves like mineral, not like diamond — field response follows the stone category. Malachite co-occurs with copper deposits, making it a prospecting signal for copper rather than a field material.`},
+
+  {n:`Organic gems (amber, pearl)`, sec:'gem', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['low-med',`low-med — biological origin`],
+   func:`Open question`, roles:[],
+   summary:`Field interacts with both more like organic tissue than mineral — energy addition at low intensity stimulates rather than conducts; biological origin governs behavior. Whether amber preserves field-state signatures from its formation period is an open question.`},
+
+  {n:`Pyrite / sulfides`, sec:'gem', era:'stone', now:true, prof:'full',
+   cond:['med',null], thr:['med',`med`],
+   func:`Exposure recorder / ambient intensity indicator`, roles:['indicator'],
+   summary:`Iron sulfide, semi-conductive; bridges stone and metal. Abundant near geologically active sites. Field energy accelerates its oxidation — the same mechanism as phosphorus glow, slower and less dramatic.`,
+   p:{low:`Faint gold iridescence.`, med:`Deeper bronze and purple tarnish.`, high:`Rapid blackening.`,
+      note:`Tarnish rate and color progression map onto field intensity, so pyrite is a passive historical record as well as a current indicator: its tarnish pattern shows how long it has been exposed and at roughly what intensity.`,
+      role:`Passive exposure recorder and ambient intensity indicator. Not precise enough for calibration (tin and quartz serve that role) but useful for site assessment before instruments are deployed.`,
+      texture:`Heavily tarnished pyrite is a visual signature of worked Vein sites. Long-running infrastructure is surrounded by fully blackened pyrite; a site with fresh-gold pyrite is either new or recently cleaned.`}},
+
+  /* ---------- Vein-adjacent phases ---------- */
+  {n:`Silicate Vein-phase`, sec:'vein', era:'vein', now:true, prof:'full',
+   cond:['med',null], thr:['low',`low — pre-stressed lattice`],
+   func:`Containment lining (conducting)`, roles:['conductor'],
+   summary:`Quartz-family compound in a field-sustained high-energy phase. Same composition as quartz, different phase, different behavior: conducts at med, up from the quartz baseline of low-med.`,
+   p:{stability:`Reverts slowly when removed from field proximity.`,
+      unlock:`Combined containment and conduction in one material. Ordinary ceramics make a vessel a field dead zone; a silicate-phase lining is part of the field circuit, which keeps substrate active inside the container.`,
+      role:`Primary vessel lining at Vein sites. Not portable — the knowledge of configuration is portable, the material is not.`,
+      note:`Demonstrated that dual-role materials are possible. The Coalition has tried to replicate this in stable portable materials ever since. No stable equivalent exists at story-present.`}},
+
+  {n:`Oxide Vein-phase`, sec:'vein', era:'vein', now:true, prof:'full',
+   cond:['med-high',null], thr:['low',`low`],
+   func:`Precision surfaces / active apparatus`, roles:['conductor'],
+   summary:`Corundum-type mineral in field-sustained phase. Near-copper conductivity as a mineral rather than a metal. The most apparatus-relevant phase; rarer than silicate phase — not every site has it in workable quantities.`,
+   p:{stability:`Reverts when removed, faster than silicate phase.`,
+      unlock:`Non-metallic high conductivity. Can be ground, shaped, applied as coating, formed into thin films and geometries metalworking cannot produce. Precision and miniaturization arrive before metalworking alone could produce them.`,
+      role:`Precision expression surfaces, instrument faces, complex internal geometries at Vein sites. What makes early Coalition apparatus look anachronistically precise — mineral rather than metal, closer to manufactured than forged.`,
+      note:`Demonstrated that high conductivity does not require metal. The Coalition semiconductor research path (currently theoretical) is downstream of this. Black phosphorus and eventually silicon are the portable stable candidates.`}},
+
+  {n:`Sulfide Vein-phase`, sec:'vein', era:'vein', now:true, prof:'full',
+   cond:['med',null], thr:['low-med',`low-med`],
+   func:`Bridging conductor / historical entry point`, roles:['conductor'],
+   summary:`Pyrite-type mineral in field-sustained phase. Co-occurs with copper and iron ore.`,
+   p:{stability:`Reverts gradually, at a rate similar to silicate phase.`,
+      unlock:`The accidental entry point — found while mining copper and iron, not while searching for field materials. The Coalition had its first anomalous mineral before it had any framework for anomalous minerals.`,
+      role:`Secondary conduction and bridging at sites. Less precise than oxide phase, less stable than silicate. Current-era apparatus uses it where oxide phase is unavailable.`,
+      note:`Probably the moment the development-period population first understood that ground near substrate produced unusual rocks, not only unusual ecology and substrate behavior. Likely preceded the silicate and oxide discoveries by at least a generation.`}},
+
+  {n:`Carbonate Vein-phase`, sec:'vein', era:'vein', now:true, prof:'full',
+   cond:['low-',null], thr:['med',`med`],
+   func:`Self-reinforcing containment`, roles:['insulator'],
+   summary:`Least conductive of the four phases and the most stable. The ambient field conditions that sustain its high-energy phase also strengthen its insulating property: higher intensity inside the vessel means better insulation at the wall.`,
+   p:{stability:`Most stable of the four phases — holds its properties for days after removal from field proximity. Still reverts, only slower.`,
+      unlock:`Self-reinforcing containment. Made sustained high-intensity operation viable at an early stage; without it, early apparatus could only run briefly at high intensity before containment degraded.`,
+      role:`Vessel walls, chamber linings, sustained-operation containment at Vein sites.`,
+      note:`Demonstrated that dynamic insulation is achievable. Engineered ceramics approach static insulation; none approach dynamic insulation. An open problem at the research frontier.`}},
+
+  /* ---------- Carbon forms ---------- */
+  {n:`Coal`, sec:'carbon', era:'stone', now:true, prof:'none',
+   cond:['low',null], thr:['low',`low — combustion before phase change`],
+   func:`Fuel / hazard`, roles:['hazard'],
+   summary:`Combustion threshold very low near active field. Field interaction is through combustion risk, not conductivity.`},
+
+  {n:`Charcoal / carbon black`, sec:'carbon', era:'stone', now:true, prof:'none',
+   cond:['med','damp'], thr:['med',`med — amorphous, no ordered lattice`],
+   func:`Damping / absorption`, roles:[],
+   summary:`Absorbs rather than conducts. Field energy dissipates into the porous lattice without directional expression. The only damping material in the taxonomy; the amorphous end of the carbon argument.`},
+
+  {n:`Graphite`, sec:'carbon', era:'industrial', now:true, prof:'full',
+   cond:['med-high','directional'], thr:['med',`med`],
+   func:`Directional conductor / research material`, roles:['conductor'],
+   summary:`The middle term of the carbon argument. Conducts along its layers and insulates across them. Oriented parallel to the field path it conducts at med-high; rotated ninety degrees, closer to low. The change is continuous as orientation changes. No other material has a field response that depends on physical orientation.`,
+   p:{med:`Along the conductive axis, behaves like a moderate metal — consistent conductivity, some thermal expression at the far end. Across the insulating axis, almost nothing.`,
+      note:`The first hint of what semiconductors represent: conductivity as a variable, configurable property rather than a fixed one. Crude here — rotation is not a precise control — but the principle is present.`,
+      role:`Marginal at story-present. Known but not yet industrially refined; hard to work in controlled orientations. Useful in research contexts.`,
+      texture:`Researchers describe the orientation effect as uncanny. Rotating a graphite component and watching its field response change is one of the more convincing demonstrations that structure governs behavior.`}},
+
+  {n:`Diamond`, sec:'carbon', xsec:['gem'], era:'stone', now:true, prof:'full',
+   cond:['high+','thermal'], thr:['extreme',`extreme — maximum density lattice`],
+   func:`Structural argument / focusing (cut) / future research`, roles:['conductor'],
+   summary:`Same element as charcoal at maximum crystalline order, with field response at the opposite extreme. The proof case that structure governs field behavior as completely as composition.`,
+   p:{low:`Raw diamond: cubic structure with no preferred axis conducts rapidly and uniformly in all directions. At low and medium intensity it runs warm uniformly — no visible effect, no state change, no mechanical response.`,
+      high:`Threshold effectively unreachable. The energy required to push diamond toward its next state would destroy all surrounding material first. No practical failure mode under current apparatus conditions.`,
+      note:`<b>Cut diamond focuses.</b> Planar faces aligned with lattice planes concentrate and redirect field energy the way facets redirect light. The effect scales with cut precision. The only focusing material in the taxonomy. At story-present, cutting is jewelry-grade: good enough to demonstrate focusing, not precise enough to engineer it reliably. A poorly cut diamond diffuses like raw diamond.`,
+      role:`Structural argument endpoint, precision focusing material when cut, future research material.`,
+      texture:`Raw diamond near active substrate is underwhelming — it runs warm and nothing else. The discovery of cut-diamond focusing is probably a story-present research frontier event rather than established knowledge.`}},
+
+  /* ---------- Metals — ferrous ---------- */
+  {n:`Iron (wrought)`, sec:'ferrous', era:'iron', now:true, prof:'full',
+   cond:['high',null], thr:['med',`med (~1540°C equiv.)`],
+   func:`Primary apparatus metal`, roles:['conductor'],
+   summary:`Field conducts rapidly end to end; energy pushed into one end expresses at the other. The workhorse apparatus metal because it fails slowly enough for an attentive operator to manage.`,
+   p:{low:`Uniform warming along the field path from contact end to expression end. Sub-damaging — a tool held at the non-contact end becomes warm in the hand. Useful for delivering controlled heat through an iron structure. No visible color change.`,
+      med:`Warming becomes structural. Uneven expansion along the field path stresses geometry changes — joints, welds, bends, thin cross-sections — which become the first failure points. Dull red at the expression end, indistinguishable from ordinary heat: a readable intensity gauge.`,
+      high:`Rapid approach to threshold. Liquefaction begins at the expression end while the contact end may remain solid — the material is simultaneously solid and liquid along its length. Useful for specific operations; catastrophically dangerous uncontrolled.`,
+      fail:`Gradual and readable. Color change and visible deformation give warning before catastrophic failure.`,
+      geometry:`Conduction degrades at geometric complexity, not with distance. A straight run carries field energy cleanly at any practical apparatus length; joints, bends, welds and thin sections are where intensity drops and failure initiates.`,
+      role:`Primary structural and conduction material. Most early Coalition apparatus is iron-based. Replaced by steel in precision components, never fully displaced at infrastructure scale.`,
+      texture:`An iron component under sustained exposure smells like a forge with no fire present. The expression end is always the hot end. Operators read iron color as smiths do: black, dull red, bright red and orange map onto field intensity.`}},
+
+  {n:`Cast iron`, sec:'ferrous', era:'industrial', now:true, prof:'full',
+   cond:['high',null], thr:['low-med',`med-low — brittle, fractures first`],
+   func:`Infrastructure and housing only`, roles:['conductor'],
+   summary:`Conducts well but brittle — fractures rather than deforms under field stress.`,
+   p:{fail:`Catastrophic, no deformation warning. Skips the readable warning phase entirely.`,
+      role:`Infrastructure and housing only. Never used for apparatus components subject to field surges.`}},
+
+  {n:`Steel (carbon)`, sec:'ferrous', era:'industrial', now:true, prof:'full',
+   cond:['high',null], thr:['med',`med — higher than iron, more resilient`],
+   func:`Refined apparatus metal`, roles:['conductor'],
+   summary:`Same operating logic as iron with a wider safe range. More uniform grain structure resists deformation longer.`,
+   p:{low:`Conducts identically to iron — same warmth, same gradual build, same color progression.`,
+      med:`Diverges from iron. Geometry failure points (bends, welds, thin sections) hold under field stress that would visibly stress iron.`,
+      high:`Approaches liquefaction the same way as iron but needs more field input to reach it.`,
+      fail:`Gradual and readable, same character and color progression as iron; the warning window starts later and lasts longer.`,
+      role:`Upgrade path from iron. The iron-to-steel transition in precision components tracks Coalition industrial metallurgy advancing on the normal track and bleeding into the Vein track.`}},
+
+  {n:`Steel alloys`, sec:'ferrous', era:'electrical', now:false, prof:'none',
+   cond:['high',null], thr:[null,`varies by alloy`],
+   func:`Future precision material`, roles:['conductor'],
+   summary:`Not yet at story-present.`},
+
+  /* ---------- Metals — non-ferrous ---------- */
+  {n:`Copper`, sec:'nonferrous', era:'bronze', now:true, prof:'full',
+   cond:['high+',null], thr:['low',`low (~1085°C equiv.)`],
+   func:`Primary precision metal`, roles:['conductor'],
+   summary:`Highest conductivity of the story-present metals. Field moves fastest and expresses most intensely at the far end. Supply chain control over copper is apparatus supply chain control.`,
+   p:{low:`Expression end warms faster and more intensely than iron for the same input; response nearly immediate. Where iron gives warmth, copper gives heat. Already useful for precision heat delivery.`,
+      med:`Expression end becomes a concentrated point of intense heat. Copper focuses field expression rather than distributing it. The trade-off: the expression point runs hotter than the equivalent iron component and needs more careful management.`,
+      high:`Threshold approached faster than iron with a compressed warning window — seconds rather than minutes. The liquid transition is clean: no deformation phase; the expression end simply becomes liquid.`,
+      fail:`Fast and concentrated. Copper does not deform gracefully — it holds and then fails.`,
+      geometry:`Same geometry-dependence as iron. Higher conductivity amplifies it: a geometry fault in a copper run produces a more intense hotspot than the same fault in iron.`,
+      role:`Precision expression points, instrument tips, final delivery components. Paired with iron infrastructure: iron carries the field along the structure, copper delivers it at the target.`,
+      texture:`Copper components run hotter at the tip than iron at the same field level; operators feel the difference through insulated handles. A copper component failing without warning is the most common cause of apparatus accidents at story-present.`}},
+
+  {n:`Bronze (copper-tin)`, sec:'nonferrous', era:'bronze', now:true, prof:'full',
+   cond:['high',null], thr:['low-med',`low-med`],
+   func:`Development-period apparatus alloy`, roles:['conductor'],
+   summary:`A dampened copper: roughly 15–20% less intensity at the expression end because tin disrupts the copper lattice. The concentration effect is present but softer.`,
+   p:{fail:`Marginally more readable than copper. Slight deformation precedes melting, a brief visible warning pure copper does not give.`,
+      role:`The development-period apparatus metal, available before reliable copper supply chains. The bronze-to-copper transition in expression points tracks metallurgical and supply chain development.`,
+      texture:`Bronze components in old or field apparatus are a legible sign of early manufacture.`}},
+
+  {n:`Lead`, sec:'nonferrous', era:'iron', now:true, prof:'full',
+   cond:['med',null], thr:['very low',`very low (~327°C equiv.)`],
+   func:`Field fuse / surge absorber`, roles:['conductor'],
+   summary:`Transitions to liquid at low field intensity, slightly above tin. The phase change itself consumes field energy rather than transmitting it.`,
+   p:{fail:`Absorptive. A lead component transitioning under overload absorbs the excess into the phase transition, protecting adjacent components. Sacrificial and replaceable.`,
+      role:`Field fuse. Lead elements at vulnerable points transition under overload before excess energy reaches copper or iron. Replacing a lead fuse is routine maintenance; replacing an unprotected copper expression point that failed is not.`,
+      texture:`Experienced operators carry spare lead elements — rods, discs, formed pieces — as standard kit.`}},
+
+  {n:`Tin`, sec:'nonferrous', era:'bronze', now:true, prof:'full',
+   cond:['med',null], thr:['low',`low (~232°C equiv.) — lowest of any common story-present metal`],
+   func:`Field intensity indicator`, roles:['indicator'],
+   summary:`Transitions to liquid at the lowest field intensity of any common metal. Useless as structural or conduction material for exactly that reason; uniquely valuable as an indicator.`,
+   p:{fail:`Visible, predictable, non-catastrophic.`,
+      role:`Built-in intensity gauge. Tin elements at known positions transition first and visibly; the operator sees tin going liquid and knows where the field is, before iron or copper approach their own thresholds. The cheapest and most reliable measurement tool at story-present.`}},
+
+  {n:`Mercury`, sec:'nonferrous', era:'industrial', now:true, prof:'full',
+   cond:['med','surface'], thr:[null,`none — surface responds below state change; no bulk threshold`],
+   func:`Primary field detection / measurement`, roles:['indicator'],
+   summary:`Does not conduct field energy through its bulk. Field intensity changes surface tension, producing visible, proportional, directional deformation without state change or bulk thermal effect. The surface is the readout.`,
+   p:{note:`<b>Directional.</b> Warm-register field addition and cold-register removal produce distinguishable surface behaviors. Mercury passively differentiates the two directions of field manipulation, which no other instrument material does — an instrument near a practitioner or active apparatus reads direction as well as intensity. <b>Vapor.</b> Vapor concentration above the surface scales with field intensity: a second simultaneous readout, and an invisible toxic hazard. Early open-instrument work had a real physical cost before the connection was understood. Current practice uses contained instruments in most precision contexts; open-surface readout persists in expedient and old field apparatus.`,
+      role:`Primary field-detection and measurement material at story-present, in use across Coalition extraction infrastructure. Exploited before it was understood. Irreplaceable for detecting field source orientation, which no threshold indicator (tin, lead) or transducer (quartz) provides.`,
+      texture:`Near active substrate the surface is too active, or strangely still, in ways operators learn to read before they can explain. New operators describe the instruments as "alive". Long-serving operators stop seeing mercury and start seeing field.`}},
+
+  {n:`Silver`, sec:'nonferrous', era:'iron', now:true, prof:'full',
+   cond:['high+',null], thr:['low',`low`],
+   func:`High-precision stable apparatus`, roles:['conductor'],
+   summary:`Near-identical field behavior to copper. The distinction is stability: silver does not corrode under chemical exposure or humidity, so a component behaves the same on day one and year ten.`,
+   p:{fail:`Fast, concentrated — same character as copper.`,
+      role:`Where copper would degrade: high humidity, chemical exposure, apparatus that cannot be regularly serviced. Rarer and more expensive than copper; reserved for components where long-term consistency justifies the cost.`}},
+
+  {n:`Gold`, sec:'nonferrous', era:'stone', now:true, prof:'full',
+   cond:['high',null], thr:['low',`low`],
+   func:`Calibration / precision standards`, roles:['conductor'],
+   summary:`Slightly lower peak conductivity than copper; fully non-corroding under any story-present condition. The calibration metal — the reference point everything else is measured against.`,
+   p:{fail:`Fast, concentrated — slightly less intense than copper.`,
+      role:`Precision standards, critical junction points, calibration references. Cost limits it to the most critical nodes of high-value apparatus.`}},
+
+  {n:`Zinc`, sec:'nonferrous', era:'industrial', now:true, prof:'full',
+   cond:['med',null], thr:['low',`low (~420°C equiv.)`],
+   func:`Galvanizing coat / incidental field protection`, roles:['conductor'],
+   summary:`Unremarkable alone. Its significance is in combination with iron.`,
+   p:{fail:`Transitional — the zinc layer fails first and the iron beneath is protected.`,
+      note:`<b>Galvanized iron.</b> The zinc coat reaches its state change before the iron. Under overload the zinc transitions first, absorbing energy into the phase change and partially protecting the iron core. Less controlled than a lead fuse, but real. <b>History.</b> The development-period population galvanized for corrosion resistance and noticed galvanized components lasted longer under apparatus conditions without knowing why — probably credited to galvanizing in general rather than to zinc.`,
+      role:`Incidental field protection for iron infrastructure. Whether the current-era Coalition has correctly identified the mechanism is an open question.`}},
+
+  {n:`Aluminum`, sec:'nonferrous', era:'electrical', now:false, prof:'none',
+   cond:['high',null], thr:['low-med',`low-med`],
+   func:`Future apparatus material`, roles:['conductor'],
+   summary:`Not yet at story-present.`},
+
+  /* ---------- Ceramics & glass ---------- */
+  {n:`Fired clay / terracotta`, sec:'ceramic', era:'stone', now:true, prof:'full',
+   cond:['low-',null], thr:['high',`high`],
+   func:`Earliest portable insulator`, roles:['insulator'],
+   summary:`Available at stone age, workable into any shape, consistent enough for apparatus use. Porous compared to porcelain: the field finds the most porous paths first, producing uneven insulation over time at sustained medium intensity.`,
+   p:{rank:`Fourth intact, third sustained`,
+      fail:`Thermal — adjacent metal running hot affects the ceramic by ordinary heat transfer, not field transmission. Gradual and readable: color change, surface crazing, eventual spalling.`,
+      role:`Component-scale insulation in early and field apparatus: vessel bodies, component housings, junction insulation. The development-period population's first apparatus used it before porcelain was available.`}},
+
+  {n:`Porcelain / stoneware`, sec:'ceramic', era:'iron', now:true, prof:'full',
+   cond:['low-',null], thr:['high',`high`],
+   func:`Preferred component insulation`, roles:['insulator'],
+   summary:`Refined terracotta: denser, less porous, more uniform, with a significantly higher thermal failure ceiling. Requires better kilns, placing it at iron age.`,
+   p:{rank:`Third intact, second sustained`,
+      fail:`Thermal — same character as terracotta, higher ceiling. Heat that crazes terracotta leaves porcelain intact.`,
+      role:`Preferred component insulation at story-present: vessel bodies, precision housings, sustained containment at component level. Pairs with granite at larger scale.`,
+      texture:`The terracotta-to-porcelain transition is a legible marker of technical advancement. A porcelain-heavy apparatus is a later, more capable generation.`}},
+
+  {n:`Glass`, sec:'ceramic', era:'iron', now:true, prof:'full',
+   cond:['low',null], thr:['med',`med — liquid transition visible`],
+   func:`Field gradient indicator`, roles:['indicator'],
+   summary:`Progressive visible failure works as an intensity gauge and a spatial field map.`,
+   p:{low:`Nothing visible. Intact glass confirms local intensity is below medium — negative evidence is information.`,
+      med:`First effect at the thinnest cross-sections: slight softening of sharp edges, loss of optical clarity at the thinnest point. The warning phase.`,
+      high:`Visible flow begins at the thinnest point and propagates toward thicker sections. Glass fails first where exposure is highest, so the failure pattern maps the field gradient.`,
+      role:`Passive gradient indicator. More informative than tin (which only shows threshold crossing); less sensitive than quartz (which responds continuously).`,
+      texture:`Glass that has been through a high-intensity operation shows it: slightly rounded edges, a faint sag at the thinnest point. New glass is perfectly sharp; worked glass is subtly not.`}},
+
+  {n:`Brick / lime mortar`, sec:'ceramic', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['high',`high`],
+   func:`Site construction`, roles:[],
+   summary:`Composite: brick faces resist transmission while mortar joints create pathways. The field finds the joints. Unreliable as insulator wherever joint density is high. A known weakness in Coalition extraction chamber construction, partly solved at older sites by replacing mortar with porcelain grout.`},
+
+  /* ---------- Biological ---------- */
+  {n:`Bone (dry)`, sec:'bio', era:'stone', now:true, prof:'full',
+   cond:['low',null], thr:['med-high',`med-high — calcium phosphate mineral`],
+   func:`No apparatus role / attunement mechanism`, roles:['transducer'],
+   summary:`Piezoelectric: dry bone near active substrate vibrates faintly, weaker than quartz because it is less crystallographically ordered. Behaviorally closer to ceramic than living tissue once dry.`,
+   p:{note:`<b>Attunement.</b> Neurological structures are the interpreter; skeletal and connective tissue are part of the antenna. An attuned practitioner's body resonates with the field structurally. Non-attuned people have the same piezoelectric bone but no neurological coupling to read it; weak latent attunement may be partial coupling (vague unease, resonance, unexplained fatigue near active substrate). <b>Damage.</b> Severe overexposure may produce structural damage beyond loss of neurological sensitivity — a refactor target for WORLD.md, an expansion rather than a contradiction.`,
+      role:`None. Its significance is what it implies about the biology of attunement.`,
+      texture:`At high intensity an attuned practitioner may feel literal vibration in the bones alongside field perception. The neurological sense is trained, precise, directional; the physical resonance is crude, omnidirectional, overwhelming at extremes.`}},
+
+  {n:`Blood`, sec:'bio', era:'stone', now:true, prof:'full',
+   cond:['med',null], thr:['low',`low`],
+   func:`Composite fluid — healing / combat`, roles:[],
+   summary:`The only fluid with two simultaneous field pathways: water (water model, low threshold, steam under overdriving) and iron in hemoglobin (metal conduction model). The two interact.`,
+   p:{low:`Water pathway dominates. Blood warms; damage, if any, is the internal-steam mechanism of water in tissue.`,
+      med:`Iron pathway becomes significant. Field energy conducted through hemoglobin can alter the iron's chemical state and its oxygen-carrying function — damage distinct from thermal overdriving.`,
+      note:`<b>Healing and combat.</b> Green-register healing at low intensity works through the water pathway. Past the point where water dominates, the iron pathway activates and the practitioner starts affecting hemoglobin directly. The line between healing and an unusual internal injury is an intensity threshold experienced practitioners feel for and novices may not know exists. <b>Overexposure.</b> Both pathways act on the practitioner's own blood (refactor flag for WORLD.md overexposure descriptions).`}},
+
+  {n:`Shell / chitin`, sec:'bio', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med`],
+   func:`Armor / tool material`, roles:[],
+   summary:`Shell (calcium carbonate) responds like thin calcite — cleaves predictably, no reliable insulation. Chitin (protein polymer) responds more like leather — degrades under sustained exposure. Their field behavior matters for anyone wearing or using them near active substrate.`},
+
+  /* ---------- Organic — structural ---------- */
+  {n:`Wood (dry)`, sec:'organic', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med — combustion before phase change`],
+   func:`Construction at distance / hazard`, roles:['hazard'],
+   summary:`Low conductivity, but combustion is reached before any structural phase change — fire risk near active substrate at medium intensity. Not an insulator because the combustion failure mode is catastrophic and unpredictable.`},
+
+  {n:`Wood (green / wet)`, sec:'organic', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['high',`high — moisture buffers`],
+   func:`Temporary buffer`, roles:[],
+   summary:`Water content absorbs field energy and buffers response. Exploitable short-term as a field barrier; unreliable under sustained exposure as steam formation weakens structure and the wood dries.`},
+
+  {n:`Leather / hide`, sec:'organic', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med`],
+   func:`Operator clothing and equipment`, roles:[],
+   summary:`Degrades under sustained exposure: desiccation under energy removal, surface damage under energy addition. Not apparatus material. Leather degrades faster in working conditions than in ordinary use.`},
+
+  {n:`Tar / pitch / bitumen`, sec:'organic', era:'stone', now:true, prof:'full',
+   cond:['low-',null], thr:['low-med',`low-med — softens before combustion`],
+   func:`Pre-rubber sealant`, roles:['insulator'],
+   summary:`Naturally occurring; used for waterproofing and adhesion long before its field properties were understood. The first apparatus joints were sealed with tar because that was what sealed things. The insulation was accidental.`,
+   p:{rank:`Fifth intact, fifth sustained`,
+      fail:`Thermal / flow — lowest ceiling of all insulators. Softens and flows under heat from adjacent metal well before terracotta or porcelain are affected. Tar-sealed joints leak as an operation runs longer and hotter.`,
+      role:`Gap-filler and joint sealant in early and expedient apparatus. Fills the spaces between better insulators rather than replacing them.`,
+      texture:`An apparatus with tar seals is either old or improvised: early manufacture, field repair, or expedient construction.`}},
+
+  /* ---------- Organic — textile & fiber ---------- */
+  {n:`Plant fiber (linen, cotton)`, sec:'textile', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med`],
+   func:`Low-exposure clothing / not apparatus`, roles:[],
+   summary:`Combustion threshold reached before any other field effect. Insulates only at very low intensity. Burns predictably and quickly near medium-intensity field.`},
+
+  {n:`Wool / animal fiber`, sec:'textile', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['med',`med`],
+   func:`Low-exposure clothing`, roles:[],
+   summary:`Moisture retention buffers the field slightly longer than plant fiber — smolders rather than combusting cleanly, giving marginally more warning. Same functional limit: clothing at low field intensity only.`},
+
+  {n:`Rubber (natural)`, sec:'textile', era:'industrial', now:true, prof:'full',
+   cond:['low-',null], thr:['low-med',`low-med — softens under sustained exposure`],
+   func:`Primary gasket / seal material`, roles:['insulator'],
+   summary:`Peak insulation value of any story-present material; the field finds no pathway through intact rubber. The only flexible low− material — no rigid insulator can seal a moving joint or conform to an irregular surface.`,
+   p:{rank:`First intact, fourth sustained`,
+      fail:`Sustained degradation. Prolonged high-intensity exposure softens the matrix; insulation drifts from low− toward low, flexibility becomes limpness, eventually the seal fails. Finite service life that operators track and replace proactively.`,
+      role:`Joint sealant, gaskets, flexible connections. Right choice for short high-intensity operations; granite and porcelain for sustained. Natural rubber supply is geographically constrained — a Coalition logistics concern.`,
+      texture:`The smell of degrading rubber means apparatus has been running hard. Operators check rubber seals first when diagnosing field leakage and carry replacements as standard kit.`}},
+
+  /* ---------- Fluids ---------- */
+  {n:`Water (free)`, sec:'fluid', era:'stone', now:true, prof:'brief',
+   cond:['med',null], thr:['very low',`very low`],
+   func:`Primary pressure-engine fluid`, roles:[],
+   summary:`~1700× volume at the liquid-to-gas transition; energy removal produces ice. Present everywhere — soil, humidity, tissue — and an efficient intermediary for energy effects at scale. A passive intermediary, not a Vein material.`},
+
+  {n:`Water (in tissue)`, sec:'fluid', era:'stone', now:true, prof:'brief',
+   cond:['med',null], thr:['low',`low`],
+   func:`Overexposure damage mechanism`, roles:[],
+   summary:`Same transition physics as free water, constrained by cellular structure: the volume expansion at the liquid-to-gas transition damages living tissue from inside. The primary mechanism of overexposure tissue damage. See Blood for the additional iron pathway.`},
+
+  {n:`Salt water / brine`, sec:'fluid', era:'stone', now:true, prof:'full',
+   cond:['med+',null], thr:['very low',`very low`],
+   func:`Environmental field amplifier`, roles:[],
+   summary:`Dissolved salt makes water more responsive to field energy. Scales with salinity: fresh water at med, brackish at med+, concentrated brine approaching the lower end of high.`,
+   p:{note:`<b>Environment.</b> Sea water, sweat, tears, blood serum and coastal soil moisture are all saline to varying degrees. Near the sea, the ambient fluid in air, ground and skin is more conductive, raising both capability ceiling and ambient hazard. <b>Tactics.</b> Coastal and humid terrain amplifies field effects relative to dry inland terrain for both sides; neither side's doctrine was written for the other's environment, so cross-terrain engagements produce surprises.`,
+      role:`Not a construction material. An environmental variable: apparatus calibrated inland behaves differently on the coast. Known problem at story-present with no clean solution beyond recalibration.`,
+      texture:`Apparatus feels more responsive and volatile at coastal sites. New operators in coastal conditions who were not warned are the source of a specific category of accident.`}},
+
+  {n:`Air / gas`, sec:'fluid', era:'stone', now:true, prof:'brief',
+   cond:['low',null], thr:['low',`low — pressure differentials immediate`],
+   func:`Pressure / combustion`, roles:[],
+   summary:`Localized energy addition produces pressure differentials immediately — airflow, then concussive effects at high intensity. Combustion enabler when fuel is present. Wind near active sites is affected by field-induced pressure gradients.`},
+
+  {n:`Coal tar / early oil`, sec:'fluid', era:'industrial', now:true, prof:'brief',
+   cond:['low',null], thr:['low',`low — combustible`],
+   func:`Ambient fuel hazard`, roles:['hazard'],
+   summary:`Very low combustion threshold near active field — same hazard category as gunpowder but slower to ignite and harder to extinguish once lit. Not a field material in any useful sense.`},
+
+  /* ---------- Composite & processed ---------- */
+  {n:`Portland cement / concrete`, sec:'composite', era:'industrial', now:true, prof:'brief',
+   cond:['low',null], thr:['high',`high`],
+   func:`Construction / internal fracture risk`, roles:['hazard'],
+   summary:`Matrix resists transmission while water trapped in cured concrete responds normally. Internal steam at medium-to-high intensity fractures the matrix from inside without visible external warning — a non-obvious failure mode for Coalition structures near active field.`},
+
+  {n:`Gunpowder / black powder`, sec:'composite', era:'iron', now:true, prof:'brief',
+   cond:['low',null], thr:['near zero',`near zero — ignites`],
+   func:`Military hazard / doctrine`, roles:['hazard'],
+   summary:`Ignites from ambient field energy at intensities that leave other materials unaffected. Coalition forces cannot safely use powder weapons near Order-active practitioners; Order practitioners near Coalition powder stores have an obvious tactical option. The mutual constraint is one of the defining features of how this war is fought.`}
 ];
 
-let curFilter='all', expanded=new Set(), collapsed=new Set();
-function secId(s){return 'sec_'+s.replace(/[^a-z]/gi,'_')}
-function applyFilters(){render(document.getElementById('srch').value.toLowerCase().trim())}
-function setFilter(f,btn){curFilter=f;document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');applyFilters()}
-function toggleRow(id){expanded.has(id)?expanded.delete(id):expanded.add(id);applyFilters()}
-function toggleSec(sid){collapsed.has(sid)?collapsed.delete(sid):collapsed.add(sid);applyFilters()}
-function matches(r,q){return !q||(r.n+r.cat+r.era+(r.notes||'')+(r.func||'')).toLowerCase().includes(q)}
-function passesFilter(r){
-  if(curFilter==='all') return true;
-  if(curFilter==='story') return r.story;
-  if(curFilter==='decided') return !!r.vein;
-  if(curFilter==='vein') return r.cat==='vein';
-  if(curFilter==='cond') return r.cond&&!r.cond.startsWith('low')&&r.cond!=='tbd';
-  if(curFilter==='ins') return r.cond==='low-';
+const FUTURE = [
+  {era:`Electrical era`, notes:`Aluminum (high conductivity, low density), tungsten (extreme threshold), synthetic rubber (more stable low−), bakelite / early plastics (stable low−). Alloy steels with targeted field-response properties.`},
+  {era:`Nuclear / aerospace era`, notes:`Titanium (high threshold). Rare earth / lanthanide elements — open question whether field response is anomalous. Uranium and radioactives — open question whether the field interacts with nuclear binding energy or only atomic and molecular structure.`},
+  {era:`Silicon era`, notes:`Silicon, germanium, gallium — the semiconductor family. If field conductivity can be switched or modulated, this is a new category of apparatus capability and the material foundation of the fuel-to-electricity transition.`},
+  {era:`Frontier`, notes:`Graphene (endpoint of the carbon argument). Metamaterials (engineered structure without novel composition). Superconductors (zero field resistance analogue?). Black phosphorus. Programmable matter.`}
+];
+
+/* ================================================================
+   RENDERING
+   ================================================================ */
+const PROFILE_FIELDS = [
+  ['low','Low intensity'],['med','Medium intensity'],['high','High intensity'],
+  ['fail','Failure mode'],['geometry','Geometry (D029)'],['unlock','Tech unlock'],
+  ['role','Apparatus role'],['note','Notes'],['texture','Story texture']
+];
+const PROF_LABEL = {full:'Full profile', brief:'One-liner', none:'Not in baseline'};
+const $ = s => document.querySelector(s);
+const slug = s => s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+MATERIALS.forEach(m => { m.id = 'm-' + slug(m.n); });
+
+const state = { q:'', sec:'all', role:'all', open:new Set(), cmp:[] };
+const MAX_CMP = 3;
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+const condText = m => m.cond[0].replace('low-','low−') + (m.cond[1] ? ' (' + m.cond[1] + ')' : '');
+
+function meter(kind, m){
+  const isC = kind === 'c';
+  const scale = isC ? COND_SCALE : THR_SCALE;
+  const lvl = isC ? m.cond[0] : m.thr[0];
+  const q = isC ? m.cond[1] : null;
+  const idx = lvl == null ? -1 : scale.indexOf(lvl);
+  const name = isC ? 'Conductivity' : 'State-change threshold';
+  const shown = lvl == null ? (m.thr[1].startsWith('varies') ? 'varies' : 'none') : lvl.replace('low-','low−');
+  const aria = idx < 0 ? `${name}: ${shown}` : `${name}: ${shown}${q ? ', ' + q : ''}, step ${idx+1} of 8`;
+  let segs = '';
+  for (let i = 0; i < 8; i++) segs += `<span class="seg${i <= idx ? ' on' : ''}"></span>`;
+  return `<div class="m ${kind}${q ? ' q' : ''}"><span class="mobile-lbl">${isC ? 'Conductivity' : 'Threshold'}</span>` +
+    `<div class="meter${idx < 0 ? ' na' : ''}" role="img" aria-label="${esc(aria)}">${segs}</div>` +
+    `<span class="mlabel" aria-hidden="true">${esc(shown)}${q ? ` <em>${esc(q)}</em>` : ''}</span></div>`;
+}
+
+function haystack(m){
+  const p = m.p ? Object.values(m.p).join(' ') : '';
+  const secs = [m.sec].concat(m.xsec || []).map(id => SECTIONS.find(s => s.id === id).name).join(' ');
+  return (m.n + ' ' + m.func + ' ' + m.summary + ' ' + p + ' ' + ERAS[m.era] + ' ' + secs + ' ' +
+          condText(m) + ' ' + m.thr[1] + ' ' + (m.roles || []).join(' ')).toLowerCase().replace(/<[^>]+>/g,'');
+}
+MATERIALS.forEach(m => { m.hay = haystack(m); });
+
+function passes(m){
+  if (state.sec !== 'all' && m.sec !== state.sec && !(m.xsec || []).includes(state.sec)) return false;
+  if (state.role === 'now' && !m.now) return false;
+  if (state.role === 'full' && m.prof !== 'full') return false;
+  if (ROLES[state.role] && !(m.roles || []).includes(state.role)) return false;
+  if (state.q) { for (const w of state.q.split(/\s+/)) if (w && !m.hay.includes(w)) return false; }
   return true;
 }
 
-function render(q=''){
-  const body=document.getElementById('mt-body');
-  body.innerHTML='';
-  let curSec='';
-  data.forEach(r=>{
-    if(r.sec){
-      curSec=r.sec;
-      const sid=secId(r.sec);
-      const isC=collapsed.has(sid);
-      if(curFilter==='all'&&!q){
-        const tr=document.createElement('tr');
-        tr.className='sec-row';
-        tr.innerHTML=`<td colspan="6"><span class="sec-toggle">${isC?'▶':'▼'}</span>${r.sec}</td>`;
-        tr.onclick=()=>toggleSec(sid);
-        body.appendChild(tr);
-      }
-      return;
-    }
-    const sid=secId(curSec);
-    if(collapsed.has(sid)&&curFilter==='all'&&!q) return;
-    if(!passesFilter(r)) return;
-    if(!matches(r,q)) return;
-    const id='row_'+r.n.replace(/[^a-z0-9]/gi,'_');
-    const isExp=expanded.has(id);
-    const tr=document.createElement('tr');
-    tr.className='mat-row'+(r.story?' story-row':'');
-    const badges=(r.story?'<span class="story-badge">now</span>':'')+(r.isnew?'<span class="new-badge">new</span>':'')+(r.vein?'<span class="decided-badge">decided</span>':'');
-    tr.innerHTML=`
-      <td style="text-align:center"><span class="toggle" style="transform:${isExp?'rotate(90deg)':'none'};display:inline-block">▶</span></td>
-      <td class="${r.story?'name-cell':'name-dim'}">${r.n}${badges}</td>
-      <td><span class="era-pill ${eraC[r.era]||'ep-stone'}">${eraL[r.era]||r.era}</span></td>
-      <td style="font-size:11px;color:#888780">${r.cat}</td>
-      <td>${condBar(r.cond||'tbd')}</td>
-      <td style="color:#5F5E5A;font-size:12px">${r.func||'—'}</td>
-    `;
-    tr.onclick=()=>toggleRow(id);
-    body.appendChild(tr);
-    if(isExp){
-      const dt=document.createElement('tr');
-      dt.className='detail-row';
-      dt.innerHTML=`<td colspan="6"><div class="detail-inner"><b>Threshold:</b> ${r.thresh||'—'}<br><b>Notes:</b> ${r.notes||'—'}${veinkProfile(r.vein)}</div></td>`;
-      body.appendChild(dt);
-    }
-  });
-  if(curFilter==='all'&&!q){
-    const hdr=document.createElement('tr');
-    hdr.className='sec-row';
-    hdr.innerHTML=`<td colspan="6"><span class="sec-toggle">—</span>Future materials (approximation — no effects assigned)</td>`;
-    body.appendChild(hdr);
-    FUTURE_ERAS.forEach(fe=>{
-      const tr=document.createElement('tr');
-      tr.className='era-note-row';
-      tr.innerHTML=`<td colspan="6"><b>${fe.era}:</b> ${fe.notes}</td>`;
-      body.appendChild(tr);
-    });
+function detailHTML(m){
+  const facts = [
+    ['Conductivity', condText(m)],
+    ['Threshold', m.thr[1]],
+    ['Available from', ERAS[m.era] + (m.now ? '' : ' — not story-present')],
+  ];
+  if (m.p && m.p.stability) facts.push(['Stability', m.p.stability]);
+  if (m.p && m.p.rank) facts.push(['Insulation rank', m.p.rank]);
+  if (m.roles && m.roles.length) facts.push(['Roles', m.roles.map(r => ROLES[r]).join(', ')]);
+  let h = `<dl class="facts">${facts.map(([k,v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`;
+  h += `<p class="summary">${esc(m.summary)}</p>`;
+  if (m.p){
+    h += '<div class="prof">';
+    for (const [k,label] of PROFILE_FIELDS) if (m.p[k]) h += `<h3>${label}</h3><p>${m.p[k]}</p>`;
+    h += '</div>';
   }
+  const src = m.prof === 'full' ? 'MATERIALS_BASELINE — decided full profile'
+            : m.prof === 'brief' ? 'MATERIALS_BASELINE — one-liner / fixed category entry'
+            : 'Not in MATERIALS_BASELINE — carried from the earlier taxonomy';
+  h += `<p class="srcline">Source: ${src}</p>`;
+  return h;
 }
+
+function rowHTML(m){
+  const open = state.open.has(m.id);
+  const sel = state.cmp.includes(m.id);
+  const full = state.cmp.length >= MAX_CMP && !sel;
+  const badges = [];
+  if (m.prof === 'full') badges.push('<span class="bdg full">Decided</span>');
+  if (m.prof === 'none') badges.push('<span class="bdg art" title="No entry in MATERIALS_BASELINE">Unprofiled</span>');
+  if (!m.now) badges.push('<span class="bdg past">Not yet</span>');
+  return `<article class="mat${open ? ' open' : ''}${m.now ? '' : ' past'}" data-id="${m.id}">
+    <div class="row">
+      <button class="nm-btn" type="button" aria-expanded="${open}" aria-controls="${m.id}-d">
+        <svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1l4 4-4 4z"></path></svg>
+        <span><span class="nm">${esc(m.n)}</span><span class="badges">${badges.join('')}</span></span>
+      </button>
+      <span class="era">${esc(ERAS[m.era])}</span>
+      ${meter('c', m)}
+      ${meter('t', m)}
+      <span class="func">${esc(m.func)}</span>
+      <label class="cmp"><input type="checkbox" id="cmp-${m.id}" data-cmp="${m.id}"${sel ? ' checked' : ''}${full ? ' disabled' : ''}><span>Compare</span></label>
+    </div>
+    <div class="detail" id="${m.id}-d"${open ? '' : ' hidden'}>${open ? detailHTML(m) : ''}</div>
+  </article>`;
+}
+
+function render(){
+  const list = $('#list');
+  let html = '', shown = 0;
+  for (const s of SECTIONS){
+    const items = MATERIALS.filter(m => (m.sec === s.id || (state.sec === s.id && (m.xsec || []).includes(s.id))) && passes(m));
+    if (!items.length) continue;
+    shown += items.length;
+    html += `<section class="grp" aria-labelledby="g-${s.id}"><div class="grp-head"><h2 id="g-${s.id}">${esc(s.name)}</h2><span class="n">${items.length}</span></div>`;
+    if (s.intro && !state.q) html += `<p class="grp-intro">${esc(s.intro)}</p>`;
+    html += items.map(rowHTML).join('') + '</section>';
+  }
+  list.innerHTML = html || '<p class="empty">No materials match. Clear the search or pick another filter.</p>';
+  $('#count').textContent = `${shown} of ${MATERIALS.length} materials`;
+  renderCompare();
+}
+
+function renderCompare(){
+  const box = $('#compare');
+  const ms = state.cmp.map(id => MATERIALS.find(m => m.id === id));
+  if (!ms.length){ box.hidden = true; return; }
+  box.hidden = false;
+  $('#cmpHint').textContent = ms.length < 2 ? 'Select one or two more materials.' : `${ms.length} of ${MAX_CMP} selected`;
+  const rows = [
+    ['Conductivity', m => meter('c', m)],
+    ['Threshold', m => meter('t', m) + `<div>${esc(m.thr[1])}</div>`],
+    ['Available from', m => esc(ERAS[m.era]) + (m.now ? '' : ' (not story-present)')],
+    ['Function', m => esc(m.func)],
+    ['Failure mode', m => m.p && m.p.fail ? m.p.fail : '—'],
+    ['Stability', m => m.p && m.p.stability ? esc(m.p.stability) : '—'],
+    ['Insulation rank', m => m.p && m.p.rank ? esc(m.p.rank) : '—'],
+    ['Apparatus role', m => m.p && m.p.role ? m.p.role : '—'],
+    ['Summary', m => esc(m.summary)],
+    ['Source', m => PROF_LABEL[m.prof]]
+  ];
+  $('#cmpBody').innerHTML = `<table class="cmp-table"><thead><tr><th scope="col"><span class="sr">Property</span></th>${ms.map(m => `<th scope="col">${esc(m.n)}</th>`).join('')}</tr></thead><tbody>` +
+    rows.map(([k,f]) => `<tr><th scope="row">${k}</th>${ms.map(m => `<td>${f(m)}</td>`).join('')}</tr>`).join('') + '</tbody></table>';
+}
+
+function chips(){
+  const sc = $('#secChips');
+  [{id:'all',name:'All'}].concat(SECTIONS).forEach(s => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.sec = s.id; b.textContent = s.name;
+    b.setAttribute('aria-pressed', String(state.sec === s.id));
+    sc.appendChild(b);
+  });
+  const rc = $('#roleChips');
+  [['all','Any'],['now','Story-present'],['full','Decided full profile']].concat(Object.entries(ROLES)).forEach(([id,name]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.dataset.role = id; b.textContent = name;
+    b.setAttribute('aria-pressed', String(state.role === id));
+    rc.appendChild(b);
+  });
+}
+
+function toggleOpen(id){
+  state.open.has(id) ? state.open.delete(id) : state.open.add(id);
+  const art = document.querySelector(`.mat[data-id="${id}"]`);
+  if (!art) return;
+  const open = state.open.has(id);
+  art.classList.toggle('open', open);
+  art.querySelector('.nm-btn').setAttribute('aria-expanded', String(open));
+  const d = art.querySelector('.detail');
+  d.innerHTML = open ? detailHTML(MATERIALS.find(m => m.id === id)) : '';
+  d.hidden = !open;
+}
+
+/* events */
+$('#q').addEventListener('input', e => { state.q = e.target.value.toLowerCase().trim(); render(); });
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT'){ e.preventDefault(); $('#q').focus(); }
+});
+$('#secChips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  state.sec = b.dataset.sec;
+  document.querySelectorAll('#secChips .chip').forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+  render();
+});
+$('#roleChips').addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  state.role = b.dataset.role;
+  document.querySelectorAll('#roleChips .chip').forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+  render();
+});
+$('#list').addEventListener('click', e => {
+  if (e.target.closest('.cmp')) return;
+  const btn = e.target.closest('.nm-btn');
+  const row = e.target.closest('.row');
+  if (btn || row){ toggleOpen((btn || row).closest('.mat').dataset.id); }
+});
+$('#list').addEventListener('change', e => {
+  const id = e.target.dataset.cmp; if (!id) return;
+  if (e.target.checked){ if (state.cmp.length < MAX_CMP) state.cmp.push(id); }
+  else state.cmp = state.cmp.filter(x => x !== id);
+  const full = state.cmp.length >= MAX_CMP;
+  document.querySelectorAll('[data-cmp]').forEach(i => { i.disabled = full && !state.cmp.includes(i.dataset.cmp); });
+  renderCompare();
+});
+$('#cmpClear').addEventListener('click', () => { state.cmp = []; render(); });
+$('#expandAll').addEventListener('click', () => {
+  document.querySelectorAll('.mat').forEach(a => { if (!state.open.has(a.dataset.id)) toggleOpen(a.dataset.id); });
+});
+$('#collapseAll').addEventListener('click', () => { [...state.open].forEach(toggleOpen); });
+
+/* theme toggle: system -> light -> dark */
+(function(){
+  const btn = $('#themeBtn'); const order = ['system','light','dark'];
+  let t = 'system';
+  try { t = localStorage.getItem('vmt-theme') || 'system'; } catch(_){}
+  const apply = () => {
+    if (t === 'system') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', t);
+    btn.textContent = 'Theme: ' + t; btn.setAttribute('aria-label', 'Colour theme: ' + t + '. Activate to change.');
+  };
+  btn.addEventListener('click', () => {
+    t = order[(order.indexOf(t) + 1) % 3]; apply();
+    try { localStorage.setItem('vmt-theme', t); } catch(_){}
+  });
+  apply();
+})();
+
+$('#future').innerHTML = FUTURE.map(f => `<div><dt>${esc(f.era)}</dt><dd>${esc(f.notes)}</dd></div>`).join('');
+chips();
 render();
 </script>
 </body>
