@@ -32,6 +32,8 @@ Working documents either graduate to WORLD.md (content merged in, file removed) 
 - `artifacts/coalition_political_compass.html` — Political compass visualization
 - `artifacts/coalition_capability_arc_v2.html` — Capability arc grid
 - `artifacts/refinement_profile_builder.html` — Radar tool with presets
+- `artifacts/continent_geography_workshop.html` — D013 continent map with toggleable layers
+- `artifacts/atrocity_timeline_v1.html` — D022 atrocity timeline (both factions, decided/proposed)
 
 ## Key invariants (never contradict)
 

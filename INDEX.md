@@ -15,6 +15,8 @@
 | `artifacts/coalition_capability_arc_v2.html` | Arc grid with axis coupling marked per cell. | Working |
 | `artifacts/refinement_profile_builder.html` | Interactive radar tool, eight presets, axis sliders, profile interpretation. | Working |
 | `artifacts/coalition_political_compass.html` | Coalition political compass visualization. | Working |
+| `artifacts/continent_geography_workshop.html` | D013 continent map — climate, territory, Vein layer, front, indicative D014 markers. | Working |
+| `artifacts/atrocity_timeline_v1.html` | D022 atrocity timeline — both factions, decided/proposed events. Needs D039 content. | Working |
 | [[WORLDBUILDING_RULES]] | Worldbuilding quality checklist — Vein system laws, faction parity, narrative utility test, failure modes. Run against decisions and new content. | Current |
 | [[REFERENCES]] | Tonal and structural references — game, non-game, cross-media. Threads at the top are the most load-bearing worldbuilding constraints. | Current |
 

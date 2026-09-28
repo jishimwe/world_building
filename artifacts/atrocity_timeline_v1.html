@@ -60,7 +60,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px;
 <body>
 
 <h1>Atrocity Timeline</h1>
-<p class="sub">~2100 years. Height = intensity (1–5). Piecewise scale — recent eras expanded. Click to inspect.</p>
+<p class="sub">~2000 years. Height = intensity (1–5). Piecewise scale — recent eras expanded. Click to inspect.</p>
 
 <div class="legend">
   <div class="leg"><div class="legbox" style="background:#c4922a"></div>Order</div>
@@ -109,11 +109,11 @@ const NS = 'http://www.w3.org/2000/svg';
 // Piecewise year → x  (compresses 2000-year Order history; expands recent eras)
 // Zone A: 0–1700  →  0–380px   (18% for 1700 years)
 // Zone B: 1700–1970 → 380–1820px  (55% for 270 years: liberation + post-partition)
-// Zone C: 1970–2100 → 1820–2600px (30% for 130 years: current war)
+// Zone C: 1970–2010 → 1820–2600px (30% for the current war; present ≈ 2000, axis ends 2010)
 function xOf(yr) {
   if (yr <= 1700) return (yr / 1700) * 380;
   if (yr <= 1970) return 380 + ((yr - 1700) / 270) * 1440;
-  return 1820 + ((yr - 1970) / 130) * 780;
+  return 1820 + ((yr - 1970) / 40) * 780;
 }
 
 // ── content data ─────────────────────────────────────────────────────────────
@@ -130,7 +130,7 @@ const ERAS = [
   { name: 'Pre-Conflict',     s: 1600, e: 1700, fill: '#888',    op: .04 },
   { name: 'Liberation War',   s: 1700, e: 1760, fill: '#cc4030', op: .12 },
   { name: 'Post-Partition',   s: 1760, e: 1970, fill: '#4070cc', op: .05 },
-  { name: 'Current War',      s: 1970, e: 2100, fill: '#cc7830', op: .11 },
+  { name: 'Current War',      s: 1970, e: 2010, fill: '#cc7830', op: .11 },
 ];
 
 const YTICKS = [0, 500, 1000, 1500, 1700, 1750, 1800, 1900, 2000];
@@ -138,9 +138,9 @@ const YTICKS = [0, 500, 1000, 1500, 1700, 1750, 1800, 1900, 2000];
 const EVENTS = [
   {
     id: 'founding',    faction: 'order',
-    ys: 0,    ye: 10,
+    ys: 0,    ye: 100,
     name: 'Founding Catastrophe',
-    type: 'Multi-site exotic state disaster — period, not event',
+    type: 'Multi-site exotic state disaster — period, not event (span indicative; WORLD.md gives no duration)',
     intensity: 5, status: 'decided',
     own: 'The Founding Lesson',   other: '—',
     desc: 'A period of cascading failures across independent actors — deliberate pushes by practitioners intoxicated by newly discovered power, and communities experimenting without adequate theory (ignorant of interaction effects). Victims: everyone in affected regions. Consequences: famines, displacement, plagues, desertification, extreme climate. Residual: geological scarring of Vein expression in affected zones; biological residue in survivor descendants; exotic-state knowledge sealed in religious archives; dead attunement zones; long-tail field exposure still presenting as disease. The religious arm\'s founding authority derives from custody of this event.',
@@ -192,7 +192,7 @@ const EVENTS = [
   },
   {
     id: 'verification',faction: 'coalition',
-    ys: 1762, ye: 2100,
+    ys: 1762, ye: 2010,
     name: 'Verification / Structural Suppression',
     type: 'Founding-era removal → permanent ambient suppression',
     intensity: 4, status: 'decided', ongoing: true,
