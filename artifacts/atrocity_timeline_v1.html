@@ -2,139 +2,258 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Atrocity Timeline</title>
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: system-ui, -apple-system, sans-serif; background: #111116; color: #b0b0be; padding: 22px 26px; }
+/* Layout: one horizontal time strip (Order above the axis, Coalition below), filters above it, pinned detail panel and event table below. */
+:root {
+  --bg: #eef0f3;
+  --surface: #fbfbfc;
+  --ink: #1c2029;
+  --ink-2: #464d5b;
+  --muted: #737b8a;
+  --rule: #d6dae1;
+  --grid: #e6e9ee;
+  --era-calm: #e9ecf0;
+  --era-war: #e7dcd6;
+  --order: #b07318;
+  --coal: #2f6cc0;
+  --focus: #1c2029;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-data: ui-monospace, "SF Mono", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121419; --surface: #181b21; --ink: #e4e6eb; --ink-2: #aab0bc; --muted: #7c8392;
+    --rule: #2b303a; --grid: #20242c; --era-calm: #1c2027; --era-war: #2a2023;
+    --order: #bf8430; --coal: #5089d6; --focus: #e4e6eb; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121419; --surface: #181b21; --ink: #e4e6eb; --ink-2: #aab0bc; --muted: #7c8392;
+  --rule: #2b303a; --grid: #20242c; --era-calm: #1c2027; --era-war: #2a2023;
+  --order: #bf8430; --coal: #5089d6; --focus: #e4e6eb; color-scheme: dark;
+}
 
-h1 { font-size: 11px; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; color: #555; margin-bottom: 4px; }
-.sub { font-size: 11px; color: #3a3a4a; margin-bottom: 16px; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 14px/1.5 var(--font-body);
+  padding: 24px 16px 40px;
+}
+.page { max-width: 1180px; margin: 0 auto; display: grid; gap: 18px; min-width: 0; }
 
-.legend { display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap; }
-.leg { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #444; }
-.legbox { width: 18px; height: 7px; border-radius: 1px; }
+header { display: grid; gap: 6px; }
+.eyebrow { font: 600 11px/1.4 var(--font-data); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font: 600 28px/1.15 var(--font-display); margin: 0; text-wrap: balance; }
+.sub { margin: 0; color: var(--ink-2); max-width: 68ch; }
 
-.controls { display: flex; gap: 5px; margin-bottom: 14px; align-items: center; flex-wrap: wrap; }
-.ctrl-lbl { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: #333; }
-.btn { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border: 1px solid #1e1e28; background: transparent; color: #444; cursor: pointer; border-radius: 1px; }
-.btn:hover { border-color: #333; color: #666; }
-.btn.on { border-color: #484855; color: #aaa; background: #161620; }
+/* controls */
+.controls { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; }
+.ctrl { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ctrl-lbl { font: 600 10.5px/1 var(--font-data); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; background: var(--surface); }
+.seg button {
+  font: 500 12.5px/1 var(--font-body); color: var(--ink-2); background: transparent; border: 0;
+  padding: 7px 11px; cursor: pointer; border-right: 1px solid var(--rule);
+}
+.seg button:last-child { border-right: 0; }
+.seg button:hover { color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+select, .chk input { accent-color: var(--ink); }
+select { font: 500 12.5px var(--font-body); color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 5px 8px; }
+.chk { display: inline-flex; gap: 6px; align-items: center; font-size: 12.5px; color: var(--ink-2); cursor: pointer; }
+button:focus-visible, select:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
-.tl-wrap { overflow-x: auto; border: 1px solid #1e1e28; }
-svg#tl { display: block; }
+/* legend */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12.5px; color: var(--ink-2); }
+.leg { display: inline-flex; align-items: center; gap: 7px; }
+.leg svg { flex: none; display: block; }
+.leg-sep { width: 1px; align-self: stretch; background: var(--rule); }
 
-/* detail panel */
-#det { margin-top: 12px; border: 1px solid #1e1e28; background: #0c0c12; padding: 16px 18px; min-height: 130px; }
-.det-empty { font-size: 11px; color: #2a2a38; font-style: italic; }
-.det-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 10px; }
-.det-name { font-size: 13px; color: #b0b0be; }
-.det-tag { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 7px; border-radius: 1px; white-space: nowrap; flex-shrink: 0; }
-.det-tag.order { color: #c4922a; border: 1px solid #2c1e08; }
-.det-tag.coalition { color: #4a86d8; border: 1px solid #08182c; }
-.det-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px 14px; margin-bottom: 10px; }
-.det-f label { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: #2a2a38; display: block; margin-bottom: 2px; }
-.det-f p { font-size: 10px; color: #666; line-height: 1.4; }
-.det-desc { font-size: 10px; color: #505060; line-height: 1.65; border-top: 1px solid #161622; padding-top: 10px; }
-.int-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid #161622; }
-.int-row .rl { font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: #2a2a38; white-space: nowrap; }
-input[type=range] { flex: 1; height: 3px; cursor: pointer; outline: none; border: none; -webkit-appearance: none; background: #1e1e2c; border-radius: 1px; }
-input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; cursor: pointer; }
-.int-v { font-size: 16px; min-width: 22px; text-align: center; }
-.int-d { font-size: 9px; color: #2a2a40; min-width: 180px; }
-.stat-row { display: flex; gap: 4px; margin-top: 8px; align-items: center; }
-.sbtn { font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border: 1px solid #1a1a24; background: transparent; color: #2a2a38; cursor: pointer; border-radius: 1px; }
-.sbtn:hover { border-color: #333; color: #555; }
-.sbtn.on.decided  { color: #5a9a5a; border-color: #1a2c1a; }
-.sbtn.on.proposed { color: #9a7828; border-color: #2c2010; }
-.sbtn.on.open     { color: #555; border-color: #252535; }
+/* timeline */
+.tl-card { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; min-width: 0; }
+.tl-wrap { overflow-x: auto; overscroll-behavior-x: contain; }
+svg#tl { display: block; font-family: var(--font-body); }
+.tl-foot { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 8px 12px; border-top: 1px solid var(--rule); font-size: 12px; color: var(--muted); }
 
-/* tooltip */
-#tip { position: fixed; background: #0e0e16; border: 1px solid #1e1e28; padding: 8px 11px; font-size: 10px; max-width: 240px; pointer-events: none; z-index: 999; display: none; line-height: 1.5; }
-#tip.on { display: block; }
-#tn { font-size: 11px; color: #888; margin-bottom: 2px; }
-#tm { font-size: 9px; color: #333; margin-bottom: 4px; }
-#td { font-size: 9px; color: #484858; }
+.ev { cursor: pointer; outline: none; }
+.ev:focus-visible .ev-sel, .ev.is-sel .ev-sel { stroke: var(--focus); }
+.ev:hover .ev-body { filter: brightness(1.08); }
+.ev-lbl { font-size: 11.5px; fill: var(--ink-2); }
+.ev.is-sel .ev-lbl { fill: var(--ink); font-weight: 600; }
+.leader { stroke: var(--muted); stroke-width: 1; }
+.ph { cursor: pointer; }
+.ph-box { fill: url(#ph-hatch); stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 6 5; }
+.ph.is-sel .ph-box, .ph:focus-visible .ph-box { stroke: var(--focus); stroke-width: 2; }
+
+/* detail */
+.lower { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .lower { grid-template-columns: minmax(0, 1fr); } }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; min-width: 0; display: grid; gap: 14px; }
+.det-head { display: grid; gap: 6px; }
+.det-name { font: 600 21px/1.2 var(--font-display); margin: 0; text-wrap: balance; }
+.det-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: 600 10.5px/1 var(--font-data); letter-spacing: .06em; text-transform: uppercase; padding: 5px 7px; border-radius: 4px; border: 1px solid var(--rule); color: var(--ink-2); white-space: nowrap; }
+.chip.fac { display: inline-flex; gap: 6px; align-items: center; }
+.chip.fac i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; }
+.chip.decided { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.chip.proposed { border-style: dashed; }
+.chip.open { border-style: dotted; }
+.chip.adj { color: var(--ink); border-color: var(--ink); }
+dl.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px 18px; margin: 0; }
+.fields div { min-width: 0; }
+.fields dt { font: 600 10.5px/1.3 var(--font-data); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.fields dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.num { font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+.det-desc { margin: 0; color: var(--ink-2); line-height: 1.65; max-width: 70ch; border-top: 1px solid var(--rule); padding-top: 12px; }
+.meter { display: inline-flex; gap: 3px; vertical-align: middle; margin-right: 8px; }
+.meter i { width: 10px; height: 10px; border-radius: 2px; background: var(--grid); border: 1px solid var(--rule); }
+.meter i.on { background: var(--ink-2); border-color: var(--ink-2); }
+
+.workshop { border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 10px; }
+.workshop .ctrl-lbl { display: block; }
+.ws-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+.ws-note { font-size: 12px; color: var(--muted); margin: 0; }
+.linkbtn { font: 500 12.5px var(--font-body); background: none; border: 0; padding: 0; color: var(--ink); text-decoration: underline; cursor: pointer; }
+
+/* table */
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th { font: 600 10.5px/1.3 var(--font-data); letter-spacing: .07em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 0 8px 8px; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+tr.row { cursor: pointer; }
+tr.row:hover td { background: var(--bg); }
+tr.row.is-sel td { background: var(--bg); font-weight: 600; }
+tr.row.dim td { color: var(--muted); }
+td .sw { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 6px; }
+.tbl-title { font: 600 15px/1.3 var(--font-display); margin: 0; }
+
+#tip {
+  position: fixed; z-index: 10; pointer-events: none; max-width: 260px;
+  background: var(--surface); color: var(--ink); border: 1px solid var(--rule); border-radius: 6px;
+  padding: 8px 10px; font-size: 12px; line-height: 1.45; box-shadow: 0 4px 14px rgba(0,0,0,.14);
+}
+#tip b { display: block; font-size: 12.5px; }
+#tip span { color: var(--muted); font-family: var(--font-data); font-size: 11px; }
+
+@media (prefers-reduced-motion: no-preference) { .tl-wrap { scroll-behavior: smooth; } }
+@media (max-width: 520px) { h1 { font-size: 23px; } .panel { padding: 14px; } }
 </style>
 </head>
 <body>
+<div class="page">
 
-<h1>Atrocity Timeline</h1>
-<p class="sub">~2000 years. Height = intensity (1–5). Piecewise scale — recent eras expanded. Click to inspect.</p>
+  <header>
+    <div class="eyebrow">D022 · decided · reflects WORLD.md draft 77</div>
+    <h1>Atrocity Timeline</h1>
+    <p class="sub">Registered atrocities by both factions across ~2000 years. Bar height is intensity (1–5); Order above the axis, Coalition below. Years count from the Order's founding (+0). The time scale is piecewise: recent eras are expanded.</p>
+  </header>
 
-<div class="legend">
-  <div class="leg"><div class="legbox" style="background:#c4922a"></div>Order</div>
-  <div class="leg"><div class="legbox" style="background:#4a86d8"></div>Coalition</div>
-  <div class="leg"><div class="legbox" style="background:#666;opacity:.9"></div>Decided</div>
-  <div class="leg"><div class="legbox" style="border:1px dashed #555;background:transparent"></div>Proposed</div>
-  <div class="leg"><div class="legbox" style="background:repeating-linear-gradient(55deg,#555 0,#555 3px,transparent 3px,transparent 7px)"></div>Recurring</div>
+  <div class="controls" role="group" aria-label="Filters">
+    <div class="ctrl"><span class="ctrl-lbl" id="lbl-fac">Faction</span>
+      <div class="seg" id="f-faction" aria-labelledby="lbl-fac">
+        <button type="button" data-v="all" aria-pressed="true">Both</button>
+        <button type="button" data-v="order" aria-pressed="false">Order</button>
+        <button type="button" data-v="coalition" aria-pressed="false">Coalition</button>
+      </div>
+    </div>
+    <div class="ctrl"><span class="ctrl-lbl" id="lbl-st">Status</span>
+      <div class="seg" id="f-status" aria-labelledby="lbl-st">
+        <button type="button" data-v="all" aria-pressed="true">All</button>
+        <button type="button" data-v="decided" aria-pressed="false">Decided</button>
+        <button type="button" data-v="proposed" aria-pressed="false">Proposed</button>
+      </div>
+    </div>
+    <div class="ctrl"><label class="ctrl-lbl" for="f-min">Min intensity</label>
+      <select id="f-min"></select>
+    </div>
+    <label class="chk" for="f-rec"><input type="checkbox" id="f-rec"> Recurring / ongoing only</label>
+  </div>
+
+  <div class="legend" id="legend" aria-label="Legend"></div>
+
+  <div class="tl-card">
+    <div class="tl-wrap" id="tl-wrap">
+      <svg id="tl" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Atrocity timeline chart"></svg>
+    </div>
+    <div class="tl-foot">
+      <span id="count"></span>
+      <span>Click, tap, or focus a bar (Tab, then ← →) to inspect. Scroll sideways on narrow screens.</span>
+    </div>
+  </div>
+
+  <div class="lower">
+    <section class="panel" id="det" aria-live="polite"></section>
+    <section class="panel">
+      <h2 class="tbl-title">Registry</h2>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Event</th><th>Years</th><th>Int.</th><th>Status</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
 </div>
 
-<div class="controls">
-  <span class="ctrl-lbl">Show</span>
-  <button class="btn on" data-f="all">All</button>
-  <button class="btn" data-f="order">Order</button>
-  <button class="btn" data-f="coalition">Coalition</button>
-  <button class="btn" data-f="decided">Decided</button>
-  <button class="btn" data-f="high">Intensity ≥ 4</button>
-</div>
-
-<div class="tl-wrap">
-  <svg id="tl" width="2600" height="520" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="hp-order" patternUnits="userSpaceOnUse" width="9" height="9" patternTransform="rotate(50)">
-        <line x1="0" y1="0" x2="0" y2="9" stroke="rgba(0,0,0,0.35)" stroke-width="4.5"/>
-      </pattern>
-      <pattern id="hp-coal" patternUnits="userSpaceOnUse" width="9" height="9" patternTransform="rotate(50)">
-        <line x1="0" y1="0" x2="0" y2="9" stroke="rgba(0,0,0,0.35)" stroke-width="4.5"/>
-      </pattern>
-    </defs>
-  </svg>
-</div>
-
-<div id="det"><p class="det-empty">Click an event to inspect details and adjust intensity.</p></div>
-
-<div id="tip">
-  <div id="tn"></div>
-  <div id="tm"></div>
-  <div id="td"></div>
-</div>
+<div id="tip" hidden></div>
 
 <script>
-// ── constants ────────────────────────────────────────────────────────────────
-const W = 2600, H = 520, CY = 248;
-const IU = 40; // px per intensity unit
-const NS = 'http://www.w3.org/2000/svg';
+// ════════════════════════════════════════════════════════════════════════════
+// DATA — edit here. Everything below renders from these constants.
+// To register a D039 event: add one object to EVENTS (same shape as the others).
+// ════════════════════════════════════════════════════════════════════════════
 
-// Piecewise year → x  (compresses 2000-year Order history; expands recent eras)
-// Zone A: 0–1700  →  0–380px   (18% for 1700 years)
-// Zone B: 1700–1970 → 380–1820px  (55% for 270 years: liberation + post-partition)
-// Zone C: 1970–2010 → 1820–2600px (30% for the current war; present ≈ 2000, axis ends 2010)
-function xOf(yr) {
-  if (yr <= 1700) return (yr / 1700) * 380;
-  if (yr <= 1970) return 380 + ((yr - 1700) / 270) * 1440;
-  return 1820 + ((yr - 1970) / 40) * 780;
-}
+// Piecewise time scale: each segment maps a year range onto a pixel width.
+const SCALE = [
+  { s: 0,    e: 1700, px: 380  },  // Order's long arc, compressed
+  { s: 1700, e: 1970, px: 1440 },  // liberation war + post-partition
+  { s: 1970, e: 2010, px: 780  },  // current war; present ≈ +2000, axis ends +2010
+];
 
-// ── content data ─────────────────────────────────────────────────────────────
-const IL = {
+const PRESENT = 2000;
+
+const TICKS = [0, 500, 1000, 1500, 1700, 1750, 1760, 1800, 1900, 1970, 2000];
+
+const INTENSITY = {
   1: 'Minor — localized, few direct victims',
   2: 'Moderate — regional, documented casualties',
   3: 'Significant — population-level impact',
   4: 'Major — defining historical wound',
-  5: 'Civilizational — epoch-defining, mythologized'
+  5: 'Civilizational — epoch-defining, mythologized',
 };
 
+// tone: 'war' eras get a warmer tint
 const ERAS = [
-  { name: 'Order Dominance',  s: 0,    e: 1600, fill: '#c47820', op: .06 },
-  { name: 'Pre-Conflict',     s: 1600, e: 1700, fill: '#888',    op: .04 },
-  { name: 'Liberation War',   s: 1700, e: 1760, fill: '#cc4030', op: .12 },
-  { name: 'Post-Partition',   s: 1760, e: 1970, fill: '#4070cc', op: .05 },
-  { name: 'Current War',      s: 1970, e: 2010, fill: '#cc7830', op: .11 },
+  { name: 'Order Dominance', s: 0,    e: 1600, tone: 'calm' },
+  { name: 'Pre-Conflict',    s: 1600, e: 1700, tone: 'calm' },
+  { name: 'Liberation War',  s: 1700, e: 1760, tone: 'war'  },
+  { name: 'Post-Partition',  s: 1760, e: 1970, tone: 'calm' },
+  { name: 'Current War',     s: 1970, e: 2010, tone: 'war'  },
 ];
 
-const YTICKS = [0, 500, 1000, 1500, 1700, 1750, 1800, 1900, 2000];
+// Open decisions that will add events to a known span. Drawn as empty dashed bands.
+const PLACEHOLDERS = [
+  {
+    id: 'd039', decision: 'D039', s: 1760, e: 1970,
+    label: 'D039 open — three wars + smaller conflicts, not yet decided',
+    title: 'Inter-war conflict history (+1760–1970)',
+    desc: 'Three significant wars and recurring smaller conflicts occurred in the 210 years between the liberation war partition and the current war. What were the major territorial, political, and atrocity outcomes of each? Which changed the border, which produced internal faction realignments, and did any generate atrocities worth registering in the D022 registry?',
+    note: 'No events registered. Depends on D013 (geography) and D022.',
+  },
+];
 
+const FACTIONS = {
+  order:     { label: 'Order',     full: 'The Attuned Order',   color: 'var(--order)' },
+  coalition: { label: 'Coalition', full: 'The Forge Coalition', color: 'var(--coal)'  },
+};
+
+// Event shape: id, faction, ys, ye, name, type, intensity (1–5), status ('decided'|'proposed'|'open'),
+// recurring?, ongoing?, own (perpetrator's name for it), other (the other faction's name), desc.
 const EVENTS = [
   {
     id: 'founding',    faction: 'order',
@@ -219,192 +338,397 @@ const EVENTS = [
   },
 ];
 
-// ── state ────────────────────────────────────────────────────────────────────
-let sel = null;
-let filt = 'all';
+// ════════════════════════════════════════════════════════════════════════════
+// RENDERING — no content below this line.
+// ════════════════════════════════════════════════════════════════════════════
+const NS = 'http://www.w3.org/2000/svg';
+const IU = 40;              // px per intensity unit
+const ROW = 15;             // label row height
+const ERA_ROWS = 2, LBL_ROWS = 3;
+const TOP = 8 + ERA_ROWS * ROW;
+const CY = TOP + LBL_ROWS * ROW + 12 + 5 * IU;
+const AXIS_Y = CY + 5 * IU + 12 + LBL_ROWS * ROW + 4;
+const H = AXIS_Y + 44;
+const W = SCALE.reduce((a, z) => a + z.px, 0);
+const STATUS_OPACITY = { decided: 0.92, proposed: 0.42, open: 0.2 };
 
-function shouldShow(ev) {
-  if (filt === 'order'     && ev.faction !== 'order')    return false;
-  if (filt === 'coalition' && ev.faction !== 'coalition') return false;
-  if (filt === 'decided'   && ev.status  !== 'decided')  return false;
-  if (filt === 'high'      && ev.intensity < 4)           return false;
+function xOf(yr) {
+  let x0 = 0;
+  for (const z of SCALE) {
+    if (yr <= z.e) return x0 + (Math.max(yr, z.s) - z.s) / (z.e - z.s) * z.px;
+    x0 += z.px;
+  }
+  return W;
+}
+const yr = y => `+${y}`;
+const span = ev => ev.ye !== ev.ys ? `${yr(ev.ys)} – ${yr(ev.ye)}` : yr(ev.ys);
+
+// workshop overrides (in memory only; nothing persists)
+const work = {};
+const cur = ev => ({ ...ev, ...(work[ev.id] || {}) });
+const isAdjusted = ev => !!work[ev.id] && (work[ev.id].intensity !== undefined && work[ev.id].intensity !== ev.intensity || work[ev.id].status !== undefined && work[ev.id].status !== ev.status);
+
+const state = { faction: 'all', status: 'all', min: 1, rec: false, sel: 'suppression' };
+
+function visible(ev) {
+  const e = cur(ev);
+  if (state.faction !== 'all' && e.faction !== state.faction) return false;
+  if (state.status !== 'all' && e.status !== state.status) return false;
+  if (e.intensity < state.min) return false;
+  if (state.rec && !(e.recurring || e.ongoing)) return false;
   return true;
 }
 
-// ── SVG builder ──────────────────────────────────────────────────────────────
-function el(tag, attrs, txt) {
-  const e = document.createElementNS(NS, tag);
-  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
-  if (txt !== undefined) e.textContent = txt;
-  return e;
+function el(tag, attrs = {}, txt) {
+  const n = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) if (v !== undefined && v !== null) n.setAttribute(k, v);
+  if (txt !== undefined) n.textContent = txt;
+  return n;
 }
 
-function build() {
+function defs() {
+  const d = el('defs');
+  // recurring hatch: surface-colored stripes laid over the faction fill
+  const hp = el('pattern', { id: 'hatch', patternUnits: 'userSpaceOnUse', width: 7, height: 7, patternTransform: 'rotate(45)' });
+  hp.appendChild(el('rect', { x: 0, y: 0, width: 3, height: 7, style: 'fill: var(--surface); fill-opacity: .6' }));
+  d.appendChild(hp);
+  // placeholder hatch: faint ink stripes
+  const ph = el('pattern', { id: 'ph-hatch', patternUnits: 'userSpaceOnUse', width: 10, height: 10, patternTransform: 'rotate(-45)' });
+  ph.appendChild(el('rect', { x: 0, y: 0, width: 1, height: 10, style: 'fill: var(--muted); fill-opacity: .28' }));
+  d.appendChild(ph);
+  // ongoing fade: bar fades out over its last third
+  const g = el('linearGradient', { id: 'fade-g', x1: 0, y1: 0, x2: 1, y2: 0 });
+  g.appendChild(el('stop', { offset: '0', 'stop-color': '#fff', 'stop-opacity': 1 }));
+  g.appendChild(el('stop', { offset: '.62', 'stop-color': '#fff', 'stop-opacity': 1 }));
+  g.appendChild(el('stop', { offset: '1', 'stop-color': '#fff', 'stop-opacity': .12 }));
+  d.appendChild(g);
+  const m = el('mask', { id: 'fade', maskContentUnits: 'objectBoundingBox' });
+  m.appendChild(el('rect', { x: 0, y: 0, width: 1, height: 1, fill: 'url(#fade-g)' }));
+  d.appendChild(m);
+  return d;
+}
+
+// draw one event mark (shared by chart and legend swatches)
+function mark(parent, e, x, y, w, h) {
+  const color = FACTIONS[e.faction].color;
+  const body = el('g', { class: 'ev-body', mask: e.ongoing ? 'url(#fade)' : null });
+  body.appendChild(el('rect', { x, y, width: w, height: h, rx: 2,
+    style: `fill: ${color}; fill-opacity: ${STATUS_OPACITY[e.status] ?? .4}` }));
+  if (e.recurring) body.appendChild(el('rect', { x, y, width: w, height: h, rx: 2, fill: 'url(#hatch)' }));
+  // proposed/open: dashed outline in faction color; decided: solid edge
+  body.appendChild(el('rect', { x: x + .75, y: y + .75, width: Math.max(0, w - 1.5), height: Math.max(0, h - 1.5), rx: 2,
+    style: `fill: none; stroke: ${color}; stroke-width: 1.5; ${e.status === 'decided' ? '' : 'stroke-dasharray: 4 3;'}` }));
+  parent.appendChild(body);
+}
+
+// greedy row packing for labels
+function pack(items, rows) {
+  const ends = Array(rows).fill(-Infinity);
+  for (const it of items) {
+    let r = ends.findIndex(end => it.x >= end + 10);
+    if (r === -1) r = ends.indexOf(Math.min(...ends));
+    it.row = r; ends[r] = it.x + it.w;
+  }
+}
+function measure(svg, txt, size) {
+  const t = el('text', { 'font-size': size, x: -9999, y: -9999 }, txt);
+  svg.appendChild(t); const w = t.getComputedTextLength(); t.remove(); return w;
+}
+
+function renderChart() {
   const svg = document.getElementById('tl');
+  svg.replaceChildren();
+  svg.setAttribute('width', W); svg.setAttribute('height', H);
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.appendChild(defs());
+  svg.appendChild(el('rect', { x: 0, y: 0, width: W, height: H, style: 'fill: var(--surface)' }));
 
-  // Keep defs, remove everything else
-  [...svg.children].forEach(c => { if (c.tagName !== 'defs') c.remove(); });
-  // Clear any accumulated linearGradient defs from previous builds
-  const defs = svg.querySelector('defs');
-  [...defs.children].forEach(c => { if (c.tagName === 'linearGradient') c.remove(); });
+  // eras
+  const eraLbls = ERAS.map(er => ({ er, x: xOf(er.s) + 5, w: measure(svg, er.name.toUpperCase(), 10) + 8 }));
+  pack(eraLbls, ERA_ROWS);
+  ERAS.forEach(er => svg.appendChild(el('rect', { x: xOf(er.s), y: 0, width: xOf(er.e) - xOf(er.s), height: AXIS_Y,
+    style: `fill: var(${er.tone === 'war' ? '--era-war' : '--era-calm'}); fill-opacity: .7` })));
+  eraLbls.forEach(l => svg.appendChild(el('text', { x: l.x, y: 16 + l.row * ROW, 'font-size': 10, 'letter-spacing': 1,
+    'font-weight': 600, style: 'fill: var(--muted)' }, l.er.name.toUpperCase())));
 
-  // ── background ──
-  svg.appendChild(el('rect', { x:0, y:0, width:W, height:H, fill:'#0c0c12' }));
-
-  // ── era bands ──
-  ERAS.forEach(era => {
-    const x1 = xOf(era.s), x2 = xOf(era.e);
-    svg.appendChild(el('rect', { x:x1, y:0, width:x2-x1, height:H, fill:era.fill, opacity:era.op }));
-    const lbl = el('text', { x:x1+5, y:14, 'font-size':8, 'font-family':'system-ui', fill:'#2a2a3a', 'letter-spacing':0.7 }, era.name.toUpperCase());
-    svg.appendChild(lbl);
+  // intensity gridlines + labels at each scale segment start
+  for (let i = 1; i <= 5; i++) {
+    [CY - i * IU, CY + i * IU].forEach(y => svg.appendChild(el('line', { x1: 0, x2: W, y1: y, y2: y, style: 'stroke: var(--grid); stroke-width: 1' })));
+  }
+  let sx = 0;
+  SCALE.forEach(z => {
+    for (let i = 1; i <= 5; i++) {
+      [CY - i * IU, CY + i * IU].forEach(y => svg.appendChild(el('text', { x: sx + 4, y: y + 11, 'font-size': 9.5, style: 'fill: var(--muted); font-family: var(--font-data)' }, i)));
+    }
+    svg.appendChild(el('text', { x: sx + 18, y: CY - 5 * IU + 11, 'font-size': 10, 'font-weight': 600, 'letter-spacing': 1.5, style: 'fill: var(--order)' }, 'ORDER ↑'));
+    svg.appendChild(el('text', { x: sx + 18, y: CY + 5 * IU - 3, 'font-size': 10, 'font-weight': 600, 'letter-spacing': 1.5, style: 'fill: var(--coal)' }, 'COALITION ↓'));
+    sx += z.px;
   });
 
-  // ── zone boundary markers ──
-  [1700, 1970].forEach(yr => {
-    svg.appendChild(el('line', { x1:xOf(yr), y1:0, x2:xOf(yr), y2:H, stroke:'#181824', 'stroke-width':1, 'stroke-dasharray':'3 5' }));
+  // scale breaks
+  sx = 0;
+  SCALE.forEach((z, i) => {
+    if (i > 0) svg.appendChild(el('line', { x1: sx, x2: sx, y1: 0, y2: H, style: 'stroke: var(--muted); stroke-width: 1; stroke-dasharray: 2 4' }));
+    const perC = Math.round(z.px / (z.e - z.s) * 100);
+    svg.appendChild(el('text', { x: sx + 6, y: H - 8, 'font-size': 10.5, style: 'fill: var(--muted); font-family: var(--font-data)' },
+      `${yr(z.s)}–${yr(z.e)} · ${perC} px per century`));
+    sx += z.px;
   });
 
-  // ── center line ──
-  svg.appendChild(el('line', { x1:0, y1:CY, x2:W, y2:CY, stroke:'#2a2a3c', 'stroke-width':1 }));
-
-  // ── faction labels ──
-  svg.appendChild(el('text', { x:5, y:CY-64, 'font-size':8.5, 'font-family':'system-ui', fill:'#3a2e18', 'letter-spacing':2 }, 'ORDER'));
-  svg.appendChild(el('text', { x:5, y:CY+78, 'font-size':8.5, 'font-family':'system-ui', fill:'#182038', 'letter-spacing':2 }, 'COALITION'));
-
-  // ── year ticks & labels ──
-  YTICKS.forEach(yr => {
-    const x = xOf(yr);
-    svg.appendChild(el('line', { x1:x, y1:CY-5, x2:x, y2:CY+5, stroke:'#2a2a3c', 'stroke-width':1 }));
-    svg.appendChild(el('text', { x:x, y:CY+17, 'font-size':7.5, 'text-anchor':'middle', 'font-family':'system-ui', fill:'#2e2e40' }, yr===0?'Yr.0':`+${yr}`));
-  });
-
-  // ── events ──
-  EVENTS.forEach(ev => {
-    if (!shouldShow(ev)) return;
-
-    const color  = ev.faction === 'order' ? '#c4922a' : '#4a86d8';
-    const x      = xOf(ev.ys);
-    const xe     = xOf(ev.ye);
-    const w      = Math.max(18, xe - x);
-    const h      = ev.intensity * IU;
-    const rectY  = ev.faction === 'order' ? CY - h : CY + 1;
-    const opBase = ev.status === 'decided' ? 0.95 : ev.status === 'proposed' ? 0.65 : 0.28;
-
-    const g = document.createElementNS(NS, 'g');
-    g.style.cursor = 'pointer';
-
-    // main fill
-    g.appendChild(el('rect', { x, y:rectY, width:w, height:h, fill:color, opacity:opBase, rx:1 }));
-
-    // recurring stripe overlay
-    if (ev.recurring) {
-      const pid = `hp-${ev.faction === 'order' ? 'order' : 'coal'}`;
-      g.appendChild(el('rect', { x, y:rectY, width:w, height:h, fill:`url(#${pid})`, opacity:0.55, rx:1 }));
-    }
-
-    // ongoing: right-edge fade
-    if (ev.ongoing) {
-      const gid = `fade-${ev.id}`;
-      const grad = el('linearGradient', { id:gid, x1:'0%', y1:'0%', x2:'100%', y2:'0%' });
-      grad.appendChild(el('stop', { offset:'0%',   'stop-color':'#0c0c12', 'stop-opacity':'0' }));
-      grad.appendChild(el('stop', { offset:'65%',  'stop-color':'#0c0c12', 'stop-opacity':'0' }));
-      grad.appendChild(el('stop', { offset:'100%', 'stop-color':'#0c0c12', 'stop-opacity':'0.75' }));
-      defs.appendChild(grad);
-      g.appendChild(el('rect', { x, y:rectY, width:w, height:h, fill:`url(#${gid})`, rx:1 }));
-    }
-
-    // selected outline
-    if (sel?.id === ev.id) {
-      g.appendChild(el('rect', { x:x-2, y:rectY-2, width:w+4, height:h+4, fill:'none', stroke:'rgba(255,255,255,0.35)', 'stroke-width':1.5, rx:2 }));
-    }
-
-    // name label
-    g.appendChild(el('text', {
-      x: x + 3,
-      y: ev.faction === 'order' ? rectY - 4 : rectY + h + 11,
-      'font-size': 8.5, 'font-family': 'system-ui',
-      fill: 'rgba(255,255,255,0.38)', 'pointer-events': 'none'
-    }, ev.name));
-
-    // intensity tick marks on left edge
-    for (let i = 1; i < ev.intensity; i++) {
-      const ty = ev.faction === 'order' ? rectY + i * IU : rectY + h - i * IU;
-      g.appendChild(el('line', { x1:x, y1:ty, x2:x+6, y2:ty, stroke:'rgba(255,255,255,0.15)', 'stroke-width':1 }));
-    }
-
-    g.addEventListener('click',       () => { sel = ev; build(); renderDet(ev); });
-    g.addEventListener('mouseenter',  e  => showTip(ev, e));
-    g.addEventListener('mousemove',   e  => moveTip(e));
-    g.addEventListener('mouseleave',  ()  => hideTip());
-
+  // placeholders (open decisions)
+  PLACEHOLDERS.forEach(p => {
+    const x1 = xOf(p.s), x2 = xOf(p.e), top = CY - 5 * IU;
+    const g = el('g', { class: 'ph' + (state.sel === p.id ? ' is-sel' : ''), tabindex: 0, role: 'button',
+      'aria-label': `${p.label}. ${yr(p.s)} to ${yr(p.e)}.` , 'data-id': p.id });
+    g.appendChild(el('rect', { class: 'ph-box', x: x1 + 3, y: top, width: x2 - x1 - 6, height: 5 * IU - 6, rx: 4 }));
+    const cx = (x1 + x2) / 2, cy = top + 5 * IU / 2;
+    g.appendChild(el('text', { x: cx, y: cy - 10, 'text-anchor': 'middle', 'font-size': 12, 'font-weight': 700, 'letter-spacing': 1.5, style: 'fill: var(--ink-2); font-family: var(--font-data)' }, `${p.decision} OPEN · ${yr(p.s)}–${yr(p.e)}`));
+    g.appendChild(el('text', { x: cx, y: cy + 10, 'text-anchor': 'middle', 'font-size': 13, style: 'fill: var(--ink-2)' }, p.label));
+    g.appendChild(el('text', { x: cx, y: cy + 28, 'text-anchor': 'middle', 'font-size': 11.5, style: 'fill: var(--muted)' }, p.note));
+    bind(g, p.id);
     svg.appendChild(g);
   });
-}
 
-// ── tooltip ──────────────────────────────────────────────────────────────────
-const TIP = document.getElementById('tip');
-function showTip(ev, e) {
-  document.getElementById('tn').textContent = ev.name;
-  document.getElementById('tm').textContent =
-    `${ev.faction.toUpperCase()} · +${ev.ys}–+${ev.ye} · Intensity ${ev.intensity}/5 · ${ev.status}`;
-  document.getElementById('td').textContent = ev.desc.substring(0, 100) + '…';
-  TIP.classList.add('on');
-  moveTip(e);
-}
-function moveTip(e) { TIP.style.left = (e.clientX+14)+'px'; TIP.style.top = (e.clientY-6)+'px'; }
-function hideTip()  { TIP.classList.remove('on'); }
+  // present marker
+  const px = xOf(PRESENT);
+  svg.appendChild(el('line', { x1: px, x2: px, y1: TOP, y2: AXIS_Y, style: 'stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 1 3' }));
 
-// ── detail panel ─────────────────────────────────────────────────────────────
-function renderDet(ev) {
-  const p = document.getElementById('det');
-  const color = ev.faction === 'order' ? '#c4922a' : '#4a86d8';
-  p.innerHTML = `
-    <div class="det-top">
-      <div class="det-name">${ev.name}</div>
-      <div class="det-tag ${ev.faction}">${ev.faction==='order'?'The Attuned Order':'The Forge Coalition'}</div>
-    </div>
-    <div class="det-grid">
-      <div class="det-f"><label>Period</label><p>+${ev.ys}${ev.ye!==ev.ys?' – +'+ev.ye:''}${ev.ongoing?' (ongoing)':''}</p></div>
-      <div class="det-f"><label>Type</label><p>${ev.type}</p></div>
-      <div class="det-f"><label>Own faction's name</label><p>${ev.own}</p></div>
-      <div class="det-f"><label>Other faction's name</label><p>${ev.other||'—'}</p></div>
-    </div>
-    <div class="det-desc">${ev.desc}</div>
-    <div class="int-row">
-      <span class="rl">Intensity</span>
-      <input type="range" min="1" max="5" step="1" value="${ev.intensity}" id="isl" style="accent-color:${color}">
-      <div class="int-v" id="iv" style="color:${color}">${ev.intensity}</div>
-      <div class="int-d" id="id">${IL[ev.intensity]}</div>
-    </div>
-    <div class="stat-row">
-      <span class="ctrl-lbl">Status</span>
-      <button class="sbtn decided  ${ev.status==='decided'  ?'on':''}" data-s="decided" >Decided</button>
-      <button class="sbtn proposed ${ev.status==='proposed' ?'on':''}" data-s="proposed">Proposed</button>
-      <button class="sbtn open     ${ev.status==='open'     ?'on':''}" data-s="open"    >Open</button>
-    </div>
-  `;
-  document.getElementById('isl').addEventListener('input', function() {
-    ev.intensity = +this.value;
-    document.getElementById('iv').textContent = ev.intensity;
-    document.getElementById('id').textContent = IL[ev.intensity];
-    build();
+  // axis
+  svg.appendChild(el('line', { x1: 0, x2: W, y1: CY, y2: CY, style: 'stroke: var(--ink-2); stroke-width: 1.2' }));
+  svg.appendChild(el('line', { x1: 0, x2: W, y1: AXIS_Y, y2: AXIS_Y, style: 'stroke: var(--rule); stroke-width: 1' }));
+  TICKS.forEach(t => {
+    const x = xOf(t);
+    svg.appendChild(el('line', { x1: x, x2: x, y1: AXIS_Y, y2: AXIS_Y + 5, style: 'stroke: var(--muted); stroke-width: 1' }));
+    svg.appendChild(el('line', { x1: x, x2: x, y1: CY - 4, y2: CY + 4, style: 'stroke: var(--ink-2); stroke-width: 1' }));
+    svg.appendChild(el('text', { x: t === 0 ? x + 2 : x, y: AXIS_Y + 17, 'text-anchor': t === 0 ? 'start' : 'middle', 'font-size': 10.5,
+      style: 'fill: var(--ink-2); font-family: var(--font-data)' }, t === PRESENT ? `${yr(t)} (present)` : yr(t)));
   });
-  p.querySelectorAll('.sbtn').forEach(b =>
-    b.addEventListener('click', () => { ev.status = b.dataset.s; build(); renderDet(ev); })
-  );
+
+  // events: widest first so narrower bars paint on top
+  const evs = EVENTS.filter(visible).map(cur)
+    .map(e => { const x = xOf(e.ys); return { e, x, w: Math.max(18, xOf(e.ye) - x), h: e.intensity * IU }; })
+    .sort((a, b) => b.w - a.w);
+
+  // label packing per side, in time order
+  ['order', 'coalition'].forEach(f => {
+    const side = evs.filter(v => v.e.faction === f).sort((a, b) => a.x - b.x)
+      .map(v => Object.assign(v, { lw: measure(svg, v.e.name, 11.5) }));
+    pack(side.map(v => ({ x: v.x, w: v.lw, ref: v })).map(o => { o.ref._o = o; return o; }), LBL_ROWS);
+    side.forEach(v => v.row = v._o.row);
+  });
+
+  evs.forEach(v => {
+    const e = v.e, up = e.faction === 'order';
+    const y = up ? CY - v.h : CY;
+    const g = el('g', { class: 'ev' + (state.sel === e.id ? ' is-sel' : ''), tabindex: 0, role: 'button', 'data-id': e.id,
+      'aria-label': `${e.name}. ${FACTIONS[e.faction].label}. ${span(e)}. Intensity ${e.intensity} of 5. ${e.status}${e.recurring ? ', recurring' : ''}${e.ongoing ? ', ongoing' : ''}.` });
+    // surface ring separates overlapping bars
+    g.appendChild(el('rect', { x: v.x - 1, y: y - (up ? 1 : 0), width: v.w + 2, height: v.h + 1, rx: 3, style: 'fill: var(--surface)' }));
+    mark(g, e, v.x, up ? y : y + 1, v.w, v.h - 1);
+    g.appendChild(el('rect', { class: 'ev-sel', x: v.x - 3, y: (up ? y : y + 1) - 3, width: v.w + 6, height: v.h + 5, rx: 4, style: 'fill: none; stroke-width: 2' }));
+    // label in gutter + leader
+    const ly = up ? CY - 5 * IU - 12 - v.row * ROW : CY + 5 * IU + 22 + v.row * ROW;
+    const lx = v.x + 3;
+    g.appendChild(el('line', { class: 'leader', x1: lx, x2: lx, y1: up ? ly + 3 : ly - 11, y2: up ? y - 1 : y + v.h + 1 }));
+    g.appendChild(el('rect', { x: lx - 2, y: ly - 11, width: v.lw + 8, height: 14, style: 'fill: var(--surface); fill-opacity: .85' }));
+    g.appendChild(el('text', { class: 'ev-lbl', x: lx + 2, y: ly }, e.name));
+    bind(g, e.id);
+    svg.appendChild(g);
+  });
+
+  const n = EVENTS.filter(visible).length;
+  document.getElementById('count').textContent = `${n} of ${EVENTS.length} events shown · ${PLACEHOLDERS.length} open span${PLACEHOLDERS.length === 1 ? '' : 's'}`;
 }
 
-// ── filters ──────────────────────────────────────────────────────────────────
-document.querySelectorAll('.btn[data-f]').forEach(b =>
-  b.addEventListener('click', () => {
-    filt = b.dataset.f;
-    document.querySelectorAll('.btn[data-f]').forEach(x => x.classList.remove('on'));
-    b.classList.add('on');
-    build();
-  })
-);
+// ── interaction ─────────────────────────────────────────────────────────────
+const TIP = document.getElementById('tip');
+function bind(g, id) {
+  g.addEventListener('click', () => select(id, false));
+  g.addEventListener('keydown', ev => {
+    if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(id, false); }
+    if (ev.key === 'ArrowRight' || ev.key === 'ArrowLeft') { ev.preventDefault(); step(id, ev.key === 'ArrowRight' ? 1 : -1); }
+  });
+  g.addEventListener('mouseenter', ev => showTip(id, ev));
+  g.addEventListener('mousemove', moveTip);
+  g.addEventListener('mouseleave', () => { TIP.hidden = true; });
+}
+function navOrder() {
+  const items = EVENTS.filter(visible).map(e => ({ id: e.id, s: e.ys, f: e.faction === 'order' ? 0 : 1 }))
+    .concat(PLACEHOLDERS.map(p => ({ id: p.id, s: p.s, f: 2 })));
+  return items.sort((a, b) => a.s - b.s || a.f - b.f).map(i => i.id);
+}
+function step(id, dir) {
+  const ids = navOrder(); const i = ids.indexOf(id);
+  const next = ids[Math.min(ids.length - 1, Math.max(0, i + dir))];
+  select(next, true);
+  const n = document.querySelector(`#tl [data-id="${next}"]`); if (n) n.focus({ preventScroll: true });
+}
+function showTip(id, ev) {
+  const e = EVENTS.find(x => x.id === id), p = PLACEHOLDERS.find(x => x.id === id);
+  TIP.replaceChildren();
+  const b = document.createElement('b'), s = document.createElement('span');
+  if (e) { const c = cur(e); b.textContent = c.name; s.textContent = `${FACTIONS[c.faction].label} · ${span(c)} · int ${c.intensity} · ${c.status}`; }
+  else { b.textContent = p.title; s.textContent = `${p.decision} open · ${yr(p.s)} – ${yr(p.e)}`; }
+  TIP.append(b, s); TIP.hidden = false; moveTip(ev);
+}
+function moveTip(ev) {
+  const r = TIP.getBoundingClientRect();
+  let x = ev.clientX + 14, y = ev.clientY + 14;
+  if (x + r.width > innerWidth - 8) x = ev.clientX - r.width - 14;
+  if (y + r.height > innerHeight - 8) y = ev.clientY - r.height - 14;
+  TIP.style.left = x + 'px'; TIP.style.top = y + 'px';
+}
+function select(id, scroll) {
+  state.sel = id;
+  renderAll();
+  if (scroll) {
+    const wrap = document.getElementById('tl-wrap');
+    const e = EVENTS.find(x => x.id === id), p = PLACEHOLDERS.find(x => x.id === id);
+    const x = xOf(e ? e.ys : p.s);
+    if (x < wrap.scrollLeft + 20 || x > wrap.scrollLeft + wrap.clientWidth - 120) wrap.scrollLeft = Math.max(0, x - wrap.clientWidth / 3);
+  }
+}
 
-build();
+// ── detail panel ────────────────────────────────────────────────────────────
+function h(tag, props = {}, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(props)) {
+    if (k === 'class') n.className = v; else if (k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else if (v !== undefined && v !== null && v !== false) n.setAttribute(k, v);
+  }
+  kids.flat().forEach(c => c != null && n.append(c));
+  return n;
+}
+const field = (label, ...val) => h('div', {}, h('dt', {}, label), h('dd', {}, ...val));
+const meter = n => h('span', { class: 'meter', 'aria-hidden': 'true' }, [1, 2, 3, 4, 5].map(i => h('i', { class: i <= n ? 'on' : '' })));
+
+function renderDetail() {
+  const det = document.getElementById('det');
+  det.replaceChildren();
+  const p = PLACEHOLDERS.find(x => x.id === state.sel);
+  if (p) {
+    det.append(
+      h('div', { class: 'det-head' },
+        h('div', { class: 'det-chips' }, h('span', { class: 'chip open' }, `${p.decision} · open`)),
+        h('h2', { class: 'det-name' }, p.title)),
+      h('dl', { class: 'fields' },
+        field('Years', h('span', { class: 'num' }, `${yr(p.s)} – ${yr(p.e)}`)),
+        field('Registered events', 'None'),
+        field('Placeholder', p.label)),
+      h('p', { class: 'det-desc' }, p.desc),
+      h('p', { class: 'ws-note' }, p.note));
+    return;
+  }
+  const base = EVENTS.find(x => x.id === state.sel);
+  if (!base) { det.append(h('p', { class: 'ws-note' }, 'Select an event on the timeline or in the registry.')); return; }
+  const e = cur(base), F = FACTIONS[e.faction];
+  const otherF = FACTIONS[e.faction === 'order' ? 'coalition' : 'order'];
+  const pattern = e.recurring ? 'Recurring' : e.ongoing ? 'Ongoing' : 'Discrete';
+
+  det.append(
+    h('div', { class: 'det-head' },
+      h('div', { class: 'det-chips' },
+        h('span', { class: 'chip fac' }, h('i', { style: `background:${F.color}` }), F.full),
+        h('span', { class: `chip ${e.status}` }, e.status),
+        pattern !== 'Discrete' ? h('span', { class: 'chip' }, pattern) : null,
+        isAdjusted(base) ? h('span', { class: 'chip adj' }, 'Adjusted') : null),
+      h('h2', { class: 'det-name' }, e.name)),
+    h('dl', { class: 'fields' },
+      field('Years', h('span', { class: 'num' }, span(e) + (e.ongoing ? ' (ongoing)' : ''))),
+      field('Intensity', meter(e.intensity), h('span', { class: 'num' }, `${e.intensity}/5 `), h('br'), INTENSITY[e.intensity]),
+      field('Type', e.type),
+      field(`${F.label} name (perpetrator)`, e.own),
+      field(`${otherF.label} name`, e.other || '—')),
+    h('p', { class: 'det-desc' }, e.desc),
+    workshop(base, e));
+}
+
+function workshop(base, e) {
+  const setW = (k, v) => { work[base.id] = { ...(work[base.id] || {}), [k]: v }; renderAll(); };
+  const segBtns = (vals, curV, k, fmt) => h('div', { class: 'seg' },
+    vals.map(v => h('button', { type: 'button', 'aria-pressed': String(v === curV), onclick: () => setW(k, v) }, fmt ? fmt(v) : v)));
+  const anyAdj = EVENTS.some(isAdjusted);
+  return h('div', { class: 'workshop' },
+    h('span', { class: 'ctrl-lbl' }, 'Workshop — try a different value (not saved)'),
+    h('div', { class: 'ws-row' },
+      h('span', { class: 'ctrl-lbl', id: 'ws-int' }, 'Intensity'),
+      segBtns([1, 2, 3, 4, 5], e.intensity, 'intensity'),
+      h('span', { class: 'ctrl-lbl' }, 'Status'),
+      segBtns(['decided', 'proposed', 'open'], e.status, 'status', s => s[0].toUpperCase() + s.slice(1))),
+    isAdjusted(base)
+      ? h('p', { class: 'ws-note' }, `Registered value: intensity ${base.intensity}, ${base.status}. `,
+          h('button', { class: 'linkbtn', type: 'button', onclick: () => { delete work[base.id]; renderAll(); } }, 'Reset this event'),
+          ' · ',
+          h('button', { class: 'linkbtn', type: 'button', onclick: () => { for (const k in work) delete work[k]; renderAll(); } }, 'Reset all'))
+      : h('p', { class: 'ws-note' }, anyAdj ? 'Other events have workshop adjustments. Reload to discard all.' : 'Adjustments redraw the chart and are discarded on reload. The registry in decisions.json is unaffected.'));
+}
+
+// ── registry table ──────────────────────────────────────────────────────────
+function renderTable() {
+  const tb = document.getElementById('tbody');
+  tb.replaceChildren();
+  const rows = EVENTS.map(b => ({ b, e: cur(b) })).map(r => ({ ...r, s: r.b.ys, id: r.b.id }))
+    .concat(PLACEHOLDERS.map(p => ({ p, s: p.s, id: p.id })))
+    .sort((a, b) => a.s - b.s || (a.e && b.e ? (a.e.faction === 'order' ? -1 : 1) : 0));
+  rows.forEach(r => {
+    const tr = h('tr', { class: 'row' + (state.sel === r.id ? ' is-sel' : '') + (r.e && !visible(r.b) ? ' dim' : ''), tabindex: 0,
+      onclick: () => select(r.id, true), onkeydown: ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(r.id, true); } } });
+    if (r.p) {
+      tr.append(h('td', {}, h('span', { class: 'sw', style: 'border:1px dashed var(--muted)' }), `${r.p.decision} open span`),
+        h('td', { class: 'num' }, `${yr(r.p.s)}–${yr(r.p.e)}`), h('td', { class: 'num' }, '—'), h('td', {}, 'open'));
+    } else {
+      const e = r.e;
+      tr.append(h('td', {}, h('span', { class: 'sw', style: `background:${FACTIONS[e.faction].color}` }), e.name, isAdjusted(r.b) ? ' *' : ''),
+        h('td', { class: 'num' }, `${yr(e.ys)}–${yr(e.ye)}`),
+        h('td', { class: 'num' }, e.intensity),
+        h('td', {}, e.status + (e.recurring ? ' · rec.' : e.ongoing ? ' · ong.' : '')));
+    }
+    tb.append(tr);
+  });
+}
+
+// ── legend & filters ────────────────────────────────────────────────────────
+function swatch(e) {
+  const s = el('svg', { width: 30, height: 14, viewBox: '0 0 30 14', 'aria-hidden': 'true' });
+  mark(s, e, 1, 1, 28, 12);
+  return s;
+}
+function renderLegend() {
+  const L = document.getElementById('legend');
+  // swatches reference #hatch / #fade / #ph-hatch, which the chart's <defs> supply (same document)
+  const item = (sw, text) => h('span', { class: 'leg' }, sw, text);
+  const base = { faction: 'order', status: 'decided' };
+  L.replaceChildren(
+    item(swatch({ ...base }), 'Order'),
+    item(swatch({ ...base, faction: 'coalition' }), 'Coalition'),
+    h('span', { class: 'leg-sep' }),
+    item(swatch({ faction: 'coalition', status: 'decided' }), 'Decided (solid)'),
+    item(swatch({ faction: 'coalition', status: 'proposed' }), 'Proposed (lighter, dashed)'),
+    item(swatch({ faction: 'coalition', status: 'decided', recurring: true }), 'Recurring (hatched)'),
+    item(swatch({ faction: 'coalition', status: 'decided', ongoing: true }), 'Ongoing (fades out)'),
+    item((() => { const s = el('svg', { width: 30, height: 14, 'aria-hidden': 'true' });
+      s.appendChild(el('rect', { x: 1, y: 1, width: 28, height: 12, rx: 2, class: 'ph-box' })); return s; })(), 'Open decision span'));
+}
+
+function segFilter(id, key, cast = v => v) {
+  const box = document.getElementById(id);
+  box.addEventListener('click', ev => {
+    const b = ev.target.closest('button'); if (!b) return;
+    state[key] = cast(b.dataset.v);
+    box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    renderAll();
+  });
+}
+segFilter('f-faction', 'faction');
+segFilter('f-status', 'status');
+const fmin = document.getElementById('f-min');
+[1, 2, 3, 4, 5].forEach(i => fmin.append(h('option', { value: i }, i === 1 ? 'Any (1+)' : `${i}+`)));
+fmin.addEventListener('change', () => { state.min = +fmin.value; renderAll(); });
+document.getElementById('f-rec').addEventListener('change', ev => { state.rec = ev.target.checked; renderAll(); });
+
+function renderAll() { renderChart(); renderDetail(); renderTable(); }
+renderLegend();
+renderAll();
 </script>
 </body>
 </html>
